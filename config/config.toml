@@ -1,6 +1,0 @@
-baseURL = "http://eggception.de"
-copyright = "Julian Smolka"
-languageCode = "en-us"
-theme = "hello-friend"
-title = "jsmolka"
-paginate = 5

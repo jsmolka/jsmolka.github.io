@@ -1,0 +1,6 @@
+baseURL = "/"
+title = "jsmolka"
+theme = "hello-friend"
+copyright = "Julian Smolka"
+languageCode = "en-us"
+paginate = 5
