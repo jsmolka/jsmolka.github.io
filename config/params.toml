@@ -1,0 +1,16 @@
+# Metadata mostly used in document's head
+description = "Homepage and blog by Julian Smolka"
+keywords = "homepage, blog, computer, science, development, programming, emulation"
+homeSubtitle = "Computer Science Student"
+
+# Directory name of your blog content (default is `content/posts`)
+contentTypeName = "posts"
+defaultTheme = "dark"
+
+[logo]
+  logoText = "throw eggception"
+  logoHomeLink = "/"
+
+[[social]]
+  name = "github"
+  url  = "https://github.com/jsmolka"

@@ -1,0 +1,9 @@
+[[main]]
+  identifier = "about"
+  name       = "About"
+  url        = "/about"
+
+[[main]]
+  identifier = "posts"
+  name       = "Posts"
+  url        = "/posts"
