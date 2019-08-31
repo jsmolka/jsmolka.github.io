@@ -4,6 +4,6 @@
   url        = "/about"
 
 [[main]]
-  identifier = "posts"
-  name       = "Posts"
-  url        = "/posts"
+  identifier = "emulation"
+  name       = "Emulation"
+  url        = "/emulation"

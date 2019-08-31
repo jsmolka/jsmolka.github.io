@@ -1,11 +1,16 @@
-# Metadata mostly used in document's head
+# Metadata
 description = "Homepage and blog by Julian Smolka"
 keywords = "homepage, blog, computer, science, development, programming, emulation"
 homeSubtitle = "Computer Science Student"
 
-# Directory name of your blog content (default is `content/posts`)
+# Content
 contentTypeName = "posts"
 defaultTheme = "dark"
+
+# Datetime formats
+dateFormatSingle = "2006-01-02"
+dateFormatList = "2006-01-02"
+dateformNumTime = "2006-01-02"
 
 [logo]
   logoText = "throw eggception"
