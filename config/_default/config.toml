@@ -1,5 +1,5 @@
-baseURL = "/"
-title = "jsmolka"
+baseURL = "eggception.de"
+title = "eggception"
 theme = "hello-friend"
 copyright = "Julian Smolka"
 languageCode = "en-us"
