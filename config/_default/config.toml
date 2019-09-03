@@ -1,4 +1,4 @@
-baseURL = "eggception.de"
+baseURL = "/"
 title = "eggception"
 theme = "hello-friend"
 copyright = "Julian Smolka"
