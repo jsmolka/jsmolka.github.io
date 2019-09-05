@@ -1,6 +1,6 @@
-baseURL = "/"
-title = "eggception"
-theme = "hello-friend"
-copyright = "Julian Smolka"
+baseURL      = "/"
+title        = "eggception"
+theme        = "hello-friend"
+copyright    = "Julian Smolka"
 languageCode = "en-us"
-paginate = 5
+paginate     = 5

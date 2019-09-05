@@ -1,9 +1,9 @@
 [[main]]
-  identifier = "about"
-  name       = "About"
-  url        = "/about"
+identifier = "about"
+name       = "About"
+url        = "/about"
 
 [[main]]
-  identifier = "emulation"
-  name       = "Emulation"
-  url        = "/emulation"
+identifier = "emulation"
+name       = "Emulation"
+url        = "/emulation"
