@@ -3,4 +3,5 @@ title        = "eggception"
 theme        = "hello-friend"
 copyright    = "Julian Smolka"
 languageCode = "en-us"
+disableKinds = ["RSS"]
 paginate     = 5
