@@ -1,7 +1,7 @@
 # Metadata
 description  = "Homepage and blog by Julian Smolka"
 keywords     = "homepage, blog, computer, science, development, programming, emulation"
-homeSubtitle = "Computer Science Student"
+homeSubtitle = "Computer Science Entity"
 
 # Content
 contentTypeName = "posts"

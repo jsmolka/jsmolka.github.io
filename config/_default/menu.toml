@@ -6,4 +6,4 @@ url        = "/about"
 [[main]]
 identifier = "emulation"
 name       = "Emulation"
-url        = "/emulation"
+url        = "/tags/emulation"
