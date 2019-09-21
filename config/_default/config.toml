@@ -1,6 +1,6 @@
 baseURL      = "/"
 title        = "eggception"
-theme        = "hello-friend"
+theme        = "hello-friend-ng"
 copyright    = "Julian Smolka"
 languageCode = "en-us"
 disableKinds = ["RSS"]
