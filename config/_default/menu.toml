@@ -4,6 +4,6 @@ name       = "About"
 url        = "/about"
 
 [[main]]
-identifier = "emulation"
-name       = "Emulation"
-url        = "/tags/emulation"
+identifier = "eggvance"
+name       = "eggvance"
+url        = "/eggvance"

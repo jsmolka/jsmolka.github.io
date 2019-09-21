@@ -7,7 +7,6 @@ tags:
     - emulation
     - progress-report
 ---
-
 At the end of last year I finished my introduction project to C++. Since then, I read a couple of books about the language and I really started to like it. Finishing my previous project also meant looking for a new one. The idea of creating a GBA emulator originated in a C++ class where one of my fellow students asked if the emulator I was playing on was the project for the class. I said no but the idea got stuck in my head. After writing a basic [Chip-8](https://github.com/jsmolka/sandbox-cpp/tree/master/chip8) emulator and a less than half finished [GB](https://github.com/jsmolka/egg-gb) emulator, I moved on to the GBA because that's what I really wanted to do. Now, exactly seven months after the initial commit, I feel like the emulator in a state that is worth writing about.
 
 <div style="display: flex; justify-content: space-evenly">
