@@ -12,11 +12,11 @@ At the end of last year I finished my introduction project to C++. Since then, I
 <div style="display: flex; justify-content: space-evenly">
     <figure style="width: 45%">
         <img src="/img/pokemon_emerald.png">
-        <figcaption>Fig. 1 - Pokemon Emerald</figcaption>
+        <figcaption>Figure 1 - Pokemon Emerald</figcaption>
     </figure>
     <figure style="width: 45%">
         <img src="/img/yoshis_island.png">
-        <figcaption>Fig. 2 - Yoshi's Island</figcaption>
+        <figcaption>Figure 2 - Yoshi's Island</figcaption>
     </figure>
 </div>
 
@@ -29,11 +29,11 @@ After three months I finally had a working and relatively robust CPU implementat
 <div style="display: flex; justify-content: space-evenly">
     <figure style="width: 45%">
         <img src="/img/tonc_sbb_aff.png">
-        <figcaption>Fig. 3 - Affine tiled background</figcaption>
+        <figcaption>Figure 3 - Affine tiled background</figcaption>
     </figure>
     <figure style="width: 45%">
         <img src="/img/tonc_obj_aff.png">
-        <figcaption>Fig. 4 - Affine sprite</figcaption>
+        <figcaption>Figure 4 - Affine sprite</figcaption>
     </figure>
 </div>
 
