@@ -57,7 +57,7 @@ The last thing I did was clean up the memory interface. I implemented things lik
 - 07/08/19: Displays all tonc demos
 - 17/08/19: Runs Pokemon Emerald
 
-### Some Games
+### Some Working Games
 
 - Advance Wars
 - Castlevania - Aria of Sorrow
