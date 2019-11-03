@@ -111,6 +111,6 @@ Timing an emulator can be quite hard. If the frame has been rendered early, ther
 
 Using components of the C++ STL would result in inaccuracies which accumlate over time. Luckily I found an [answer](https://stackoverflow.com/a/41862592) on stackoverflow which solves this problem with platform specific code. Using this as a base for the high resolution clock in my emulator resulted in consistent frames per second which tend to stay in the range 59.7 - 59.8 all the time.
 
-### Summary
+### Conclusion
 
 Aside from the things talked about in this progress report there are many small bug fixes and accuracy improvements. The overall performance of the emulator has been increased by a fair bit. My next goal is creating the first release version with compiled Windows binaries. This means adding an editable configuration file and fixing several bugs in games.

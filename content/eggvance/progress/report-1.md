@@ -69,6 +69,6 @@ The last thing I did was clean up the memory interface. I implemented things lik
 - Super Mario Advance 3 - Yoshi's Island
 - The Legend of Zelda - A Link To The Past & Four Swords
 
-### Summary
+### Conclusion
 
 All of this progress sounds great. Sadly you can't hear it because there is no audio implementation just yet. That's the last thing I'll do. Before that I need to improve accuracy and performance (it's not bad but I could be better) of the emulator. This report will serve as a baseline and I'll make more of those with specific progress information in the future.
