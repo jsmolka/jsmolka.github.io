@@ -64,8 +64,13 @@ Running mGBA's [test suite](https://github.com/mgba-emu/suite) made be realize f
 #define CARRY_ADD(op1, op2) op2 > 0xFFFFFFFF - op1
 #define CARRY_SUB(op1, op2) op2 <= op1
 
-#define OVERFLOW_ADD(op1, op2, res) SIGN(op1) == SIGN(op2) && SIGN(res) != SIGN(op1)
-#define OVERFLOW_SUB(op1, op2, res) SIGN(op1) != SIGN(op2) && SIGN(res) == SIGN(op2)
+#define OVERFLOW_ADD(op1, op2, res)  \
+    SIGN(op1) == SIGN(op2) &&        \
+    SIGN(res) != SIGN(op1)
+
+#define OVERFLOW_SUB(op1, op2, res)  \
+    SIGN(op1) != SIGN(op2) &&        \
+    SIGN(res) == SIGN(op2)
 ```
 
 The macros shown above can be used to set flags of the CPSR (Current Program Status Register). They work perfectly fine for simple add and subtract operations.
@@ -122,7 +127,7 @@ Changing the argument types of the `add` function from 32-bit to 64-bit integers
 ### Config
 One thing is really wanted to have in the first release version was a customizable config. In terms of format I decided to go with [TOML](https://github.com/toml-lang/toml) because I really like its general structure and clarity. The config allows the user freely configure keyboard and controller mappings for general input and shortcuts like fullscreen and different emulation speeds. A snippet of the general options is shown below and the full version can be found on [GitHub](https://github.com/jsmolka/eggvance/blob/f2a1e0311e5467b3b91fa69b6ab4a7ddc292f525/eggvance/eggvance.toml).
 
-```
+```toml
 [general]
 # Relative or absolute BIOS file.
 bios_file = "bios.bin"
