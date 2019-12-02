@@ -1,6 +1,6 @@
 # Metadata
-description  = "Homepage and blog by Julian Smolka"
-keywords     = "homepage, blog, computer, science, development, programming, emulation"
+description  = "Homepage by Julian Smolka"
+keywords     = "computer science, programming, emulation"
 homeSubtitle = "Computer Science Entity"
 
 # Content
@@ -13,7 +13,7 @@ dateFormatList   = "2006-01-02"
 dateformNumTime  = "2006-01-02"
 
 [logo]
-logoText     = "throw eggception"
+logoText     = "eggception"
 logoHomeLink = "/"
 
 [[social]]
