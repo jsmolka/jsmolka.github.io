@@ -1,124 +1,346 @@
-/* PrismJS 1.17.1
-https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript */
-/**
- * prism.js tomorrow night eighties for JavaScript, CoffeeScript, CSS and HTML
- * Based on https://github.com/chriskempson/tomorrow-theme
- * @author Rose Pritchard
- */
+// Merged themes
+// https://github.com/PrismJS/prism-themes/blob/master/themes/prism-material-light.css
+// https://github.com/AGMStudio/prism-theme-one-dark/blob/master/prism-onedark.css
 
 code[class*="language-"],
 pre[class*="language-"] {
-	color: #ccc;
-	background: none;
-	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-	font-size: 1em;
-	text-align: left;
-	white-space: pre;
-	word-spacing: normal;
-	word-break: normal;
-	word-wrap: normal;
-	line-height: 1.5;
+  color: darken(#90a4ae, 8%);
+  background: darken(#fafafa, 1%);
+  font-family: Consolas, Monaco, monospace;
 
-	-moz-tab-size: 4;
-	-o-tab-size: 4;
-	tab-size: 4;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  font-size: 1em;
+  line-height: 1.5em;
 
-	-webkit-hyphens: none;
-	-moz-hyphens: none;
-	-ms-hyphens: none;
-	hyphens: none;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+
+  .dark-theme & {
+    color: #ABB2BF;
+    background: lighten(#292a2d, 2%);
+    font-family: Consolas, Monaco, monospace;
+
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    font-size: 1em;
+    line-height: 1.5em;
+  
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
 }
 
-/* Code blocks */
-pre[class*="language-"] {
-	padding: 1em;
-	margin: .5em 0;
-	overflow: auto;
+code[class*="language-"]::-moz-selection,
+pre[class*="language-"]::-moz-selection,
+code[class*="language-"] ::-moz-selection,
+pre[class*="language-"] ::-moz-selection {
+  background: #cceae7; 
+
+  .dark-theme & {
+    background: #383e49;
+  }
 }
 
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-	background: #292a2d;
+code[class*="language-"]::selection,
+pre[class*="language-"]::selection,
+code[class*="language-"] ::selection,
+pre[class*="language-"] ::selection {
+  background: #cceae7;
+
+  .dark-theme & {
+    background: #9aa2b1;
+  }
 }
 
-/* Inline code */
 :not(pre) > code[class*="language-"] {
-	padding: .1em;
-	border-radius: .3em;
-	white-space: normal;
+  padding: 0.1em;
+  border-radius: 0.3em;
+  white-space: normal;
 }
 
-.token.comment,
-.token.block-comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-	color: #999;
+pre[class*="language-"] {
+  overflow: auto;
+  position: relative;
+  margin: 0.5em 0;
+  padding: 1.25em 1em;
 }
 
-.token.punctuation {
-	color: #ccc;
+[class*="language-"] .namespace {
+  opacity: 0.7;
 }
 
-.token.tag,
-.token.attr-name,
-.token.namespace,
-.token.deleted {
-	color: #e2777a;
+.token.atrule {
+  color: #7c4dff;
+
+  .dark-theme & {
+    color: #c678dd;
+  }
 }
 
-.token.function-name {
-	color: #6196cc;
+.token.attr-name {
+  color: #39adb5;
+
+  .dark-theme & {
+    color: #d19a66;
+  }
 }
 
-.token.boolean,
-.token.number,
-.token.function {
-	color: #f08d49;
+.token.attr-value {
+  color: #f6a434;
 }
 
-.token.property,
-.token.class-name,
-.token.constant,
-.token.symbol {
-	color: #f8c555;
+.token.attribute {
+  color: #f6a434;
 }
 
-.token.selector,
-.token.important,
-.token.atrule,
-.token.keyword,
+.token.boolean {
+  color: #7c4dff;
+
+  .dark-theme & {
+    color: #d19a66;
+  }
+}
+
 .token.builtin {
-	color: #cc99cd;
+  color: #39adb5;
+
+  .dark-theme & {
+    color: #98c379
+  }
 }
 
-.token.string,
-.token.char,
-.token.attr-value,
-.token.regex,
-.token.variable {
-	color: #7ec699;
+.token.cdata {
+  color: #39adb5;
+
+  .dark-theme & {
+    color: #5C6370;
+  }
 }
 
-.token.operator,
-.token.entity,
-.token.url {
-	color: #67cdcc;
+.token.char {
+  color: #39adb5;
+
+  .dark-theme & {
+    color: #98c379
+  }
 }
 
-.token.important,
-.token.bold {
-	font-weight: bold;
+.token.class {
+  color: #39adb5;
 }
-.token.italic {
-	font-style: italic;
+
+.token.class-name {
+  color: #6182b8;
+}
+
+.token.comment {
+  color: #aabfc9;
+
+  .dark-theme & {
+    color: #5C6370;
+  }
+}
+
+.token.constant {
+  color: #7c4dff;
+
+  .dark-theme & {
+    color: #d19a66;
+  }
+}
+
+.token.deleted {
+  color: #e53935;
+
+  .dark-theme & {
+    color: #d19a66;
+  }
+}
+
+.token.doctype {
+  color: #aabfc9;
+
+  .dark-theme & {
+    color: #5C6370;
+  }
 }
 
 .token.entity {
-	cursor: help;
+  color: #e53935;
+
+  .dark-theme & {
+    color: #56b6c2;
+  }
+}
+
+.token.function {
+  color: #7c4dff;
+
+  .dark-theme & {
+    color: #61afef;
+  }
+}
+
+.token.hexcode {
+  color: #f76d47;
+}
+
+.token.id {
+  color: #7c4dff;
+  font-weight: bold;
+}
+
+.token.important {
+  color: #7c4dff;
+  font-weight: bold;
+
+      
+  .dark-theme & {
+    color: #c678dd;
+    font-weight: bold;
+  }
 }
 
 .token.inserted {
-	color: green;
+  color: #39adb5;
+
+  .dark-theme & {
+    color: #98c379
+  }
 }
 
+.token.keyword {
+  color: #7c4dff;
+
+  .dark-theme & {
+    color: #c678dd;
+  }
+}
+
+.token.number {
+  color: #f76d47;
+
+  .dark-theme & {
+    color: #d19a66;
+  }
+}
+
+.token.operator {
+  color: #39adb5;
+
+  .dark-theme & {
+    color: #56b6c2;
+  }
+}
+
+.token.prolog {
+  color: #aabfc9;
+
+  .dark-theme & {
+    color: #5C6370;
+  }
+}
+
+.token.property {
+  color: #39adb5;
+
+  .dark-theme & {
+    color: #d19a66;
+  }
+}
+
+.token.pseudo-class {
+  color: #f6a434;
+}
+
+.token.pseudo-element {
+  color: #f6a434;
+}
+
+.token.punctuation {
+  color: #39adb5;
+
+  .dark-theme & {
+    color: #abb2bf;
+  }
+}
+
+.token.regex {
+  color: #6182b8;
+
+      
+  .dark-theme & {
+    color: #c678dd;
+  }
+}
+
+.token.selector {
+  color: #e53935;
+
+  .dark-theme & {
+    color: #e06c75;
+  }
+}
+
+.token.string {
+  color: #f6a434;
+
+  .dark-theme & {
+    color: #98c379
+  }
+}
+
+.token.symbol {
+  color: #7c4dff;
+
+  .dark-theme & {
+    color: #d19a66;
+  }
+}
+
+.token.tag {
+  color: #e53935;
+
+  .dark-theme & {
+    color: #e06c75;
+  }
+}
+
+.token.unit {
+  color: #f76d47;
+}
+
+.token.url {
+  color: #e53935;
+
+  .dark-theme & {
+    color: #56b6c2;
+  }
+}
+
+.token.variable {
+  color: #e53935;
+    
+  .dark-theme & {
+    color: #c678dd;
+  }
+}
