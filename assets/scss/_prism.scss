@@ -4,8 +4,8 @@
 
 code[class*="language-"],
 pre[class*="language-"] {
-  color: darken(#90a4ae, 8%);
-  background: darken(#fafafa, 1%);
+  color: #8197a3;
+  background: #f8f8f8;
   font-family: Consolas, Monaco, monospace;
 
   text-align: left;
@@ -26,8 +26,8 @@ pre[class*="language-"] {
   hyphens: none;
 
   .dark-theme & {
-    color: #ABB2BF;
-    background: lighten(#292a2d, 2%);
+    color: #abb2bf;
+    background: #2b2c2f;
     font-family: Consolas, Monaco, monospace;
 
     text-align: left;
@@ -67,7 +67,7 @@ pre[class*="language-"] ::selection {
   background: #cceae7;
 
   .dark-theme & {
-    background: #9aa2b1;
+    background: #383e49;
   }
 }
 
