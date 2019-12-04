@@ -1,7 +1,8 @@
-baseURL      = "/"
-title        = "eggception"
-theme        = "hello-friend-ng"
-copyright    = "Julian Smolka"
-languageCode = "en-us"
-disableKinds = ["RSS"]
-paginate     = 5
+baseURL         = "/"
+title           = "eggception"
+theme           = "hello-friend-ng"
+copyright       = "Julian Smolka"
+languageCode    = "en-us"
+disableKinds    = ["RSS"]
+paginate        = 5
+googleAnalytics = "UA-153991522-1"
