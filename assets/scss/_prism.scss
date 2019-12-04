@@ -1,11 +1,11 @@
-// Merged themes
+// Merged themes with some color changes
 // https://github.com/PrismJS/prism-themes/blob/master/themes/prism-material-light.css
 // https://github.com/AGMStudio/prism-theme-one-dark/blob/master/prism-onedark.css
 
 code[class*="language-"],
 pre[class*="language-"] {
-  color: #8197a3;
-  background: #f8f8f8;
+  color: #8298a3;
+  background: #f6f6f6;
   font-family: Consolas, Monaco, monospace;
 
   text-align: left;
@@ -27,39 +27,14 @@ pre[class*="language-"] {
 
   .dark-theme & {
     color: #abb2bf;
-    background: #2b2c2f;
-    font-family: Consolas, Monaco, monospace;
-
-    text-align: left;
-    white-space: pre;
-    word-spacing: normal;
-    word-break: normal;
-    word-wrap: normal;
-    font-size: 1em;
-    line-height: 1.5em;
-  
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4;
-
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
-    hyphens: none;
+    background: #2d2e31;
   }
 }
 
 code[class*="language-"]::-moz-selection,
 pre[class*="language-"]::-moz-selection,
 code[class*="language-"] ::-moz-selection,
-pre[class*="language-"] ::-moz-selection {
-  background: #cceae7; 
-
-  .dark-theme & {
-    background: #383e49;
-  }
-}
-
+pre[class*="language-"] ::-moz-selection,
 code[class*="language-"]::selection,
 pre[class*="language-"]::selection,
 code[class*="language-"] ::selection,
