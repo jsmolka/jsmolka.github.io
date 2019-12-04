@@ -1,9 +1,0 @@
-[[main]]
-identifier = "about"
-name       = "About"
-url        = "/about"
-
-[[main]]
-identifier = "eggvance"
-name       = "eggvance"
-url        = "/eggvance"
