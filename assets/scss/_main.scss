@@ -290,7 +290,6 @@ hr {
   }
 }
 
-// Accessibility
 .screen-reader-text {
   border: 0;
   clip: rect(1px, 1px, 1px, 1px);
@@ -323,4 +322,32 @@ hr {
   top: 5px;
   width: auto;
   z-index: 100000;
+}
+
+::-webkit-scrollbar {    
+  width: 8px;
+  height: 8px;
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+
+  &:hover {
+    background: #a8a8a8;
+  }
+}
+
+.dark-theme::-webkit-scrollbar {    
+  width: 8px;
+  height: 8px;
+  background: #212020;
+}
+
+.dark-theme::-webkit-scrollbar-thumb {
+  background: #888;
+
+  &:hover {
+    background: #dcdcdc;
+  }
 }
