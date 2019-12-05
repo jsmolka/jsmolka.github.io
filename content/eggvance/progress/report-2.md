@@ -2,6 +2,7 @@
 title: "Progress Report #2"
 date: 2019-09-30
 draft: false
+type: posts
 tags:
     - eggvance
     - emulation

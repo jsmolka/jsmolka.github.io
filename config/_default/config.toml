@@ -13,14 +13,14 @@ googleAnalytics = "UA-153991522-1"
   description  = "Homepage by Julian Smolka"
   keywords     = "computer science, programming, emulation"
   homeSubtitle = ""
+  defaultTheme = "dark"
 
-  contentTypeName = "posts"
-  defaultTheme    = "dark"
-
-  dateform        = "Jan 2, 2006"
-  dateformShort   = "Jan 2"
+  dateform        = "2006-01-02"
+  dateformShort   = "2006-01-02"
   dateformNum     = "2006-01-02"
-  dateformNumTime = "2006-01-02 15:04 -0700"
+  dateformNumTime = "2006-01-02"
+
+  disableReadOtherPosts = true
 
   [params.logo]
   logoText     = "eggception"
