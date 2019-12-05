@@ -28,53 +28,32 @@ case 1:
 
 The code snippet above shows the parts of the PPU which contribute to rendering the Pokémon Emerald title screen. The used backgrounds and their rendering functions are dependent on the selected video mode found in the DISPCNT register. The produced layers can be seen in figures 1 to 4.
 
-<div style="display: flex; justify-content: space-evenly">
-    <figure style="width: 45%">
-        <img src="/img/collapse_bg0.png">
-        <figcaption>Figure 1 - Background layer 0</figcaption>
-    </figure>
-    <figure style="width: 45%">
-        <img src="/img/collapse_bg1.png">
-        <figcaption>Figure 2 - Background layer 1</figcaption>
-    </figure>
-</div>
+{{<figures>}}
+  {{<figure src="/img/collapse_bg0.png" caption="Figure 1 - Background layer 0" class="figure-left">}}
+  {{<figure src="/img/collapse_bg1.png" caption="Figure 2 - Background layer 1" class="figure-right">}}
+{{</figures>}}
 
-<div style="display: flex; justify-content: space-evenly">
-    <figure style="width: 45%">
-        <img src="/img/collapse_bg2.png">
-        <figcaption>Figure 3 - Background layer 2</figcaption>
-    </figure>
-    <figure style="width: 45%">
-        <img src="/img/collapse_obj.png">
-        <figcaption>Figure 4 - Object layer</figcaption>
-    </figure>
-</div>
+{{<figures>}}
+  {{<figure src="/img/collapse_bg2.png" caption="Figure 3 - Background layer 2" class="figure-left">}}
+  {{<figure src="/img/collapse_obj.png" caption="Figure 4 - Object layer" class="figure-right">}}
+{{</figures>}}
 
 One of the most challenging aspects of emulating the PPU is combining the different layers into the final scene. That's what the `collapse` function is doing. The process itself is rather straightforward for simple scenes. Just loop over the layers from highest to lowest priority and use the first opaque pixel you find. It gets much harder when dealing with effects like windows and color blending which need to look at multiple layers at the same time. An example for color blending can be found in figure 5.
 
-<div style="display: flex; justify-content: space-evenly">
-    <figure style="width: 45%">
-        <img src="/img/collapse_blend.png">
-        <figcaption>Figure 5 - Blending backgrounds 0 and 1</figcaption>
-    </figure>
-    <figure style="width: 45%">
-        <img src="/img/pokemon_emerald.png">
-        <figcaption>Figure 6 - Final scene</figcaption>
-    </figure>
-</div>
+{{<figures>}}
+  {{<figure src="/img/collapse_blend.png" caption="Figure 5 - Blending backgrounds 0 and 1" class="figure-left">}}
+  {{<figure src="/img/pokemon_emerald.png" caption="Figure 6 - Final scene" class="figure-right">}}
+{{</figures>}}
 
 The previous version of the collapser ate an unnecessarily high amount of CPU time and was one of the things that definitely needed to be reworked. The new one is heavily templated ([GitHub](https://github.com/jsmolka/eggvance/blob/d89f078a1ecf74c98837cc26b8f9ee2c6a1980f5/eggvance/src/ppu/collapse.inl)) and improved performance by roughly 30-35% in total. It also fixed several bugs that had something to do with object windows.
 
 ### Forced Blank
 
-Even though the GBA uses an LCD display, its hardware behaves like a CRT (Cathode Ray Tube). In those displays the electron beam has to return to the start of the next line after drawing the current one. This time period is called horizontal blank (or H-Blank). Once the whole frame has been drawn the beam has to return to the beginning of the frame which is called vertical blank (or V-Blank). A visual representation of this process can be found in figure 7 (with line numbers of the classic Game Boy).
+Even though the GBA uses an LCD display, its hardware behaves like a CRT (Cathode Ray Tube). In those displays the electron beam has to return to the start of the next line after drawing the current one. This time period is called horizontal blank (or H-Blank). Once the whole frame has been drawn the beam has to return to the beginning of the frame which is called vertical blank (or V-Blank). A visual representation of this process can be found in figure 7 (with line numbers of the classic Game Boy, <a href="http://imrannazar.com/GameBoy-Emulation-in-JavaScript:-GPU-Timings">source</a>).
 
-<div style="display: flex; justify-content: space-evenly">
-    <figure style="width: 45%">
-        <img src="/img/blanking_intervals.png">
-        <figcaption>Figure 7: Blanking intervals (<a href=http://imrannazar.com/GameBoy-Emulation-in-JavaScript:-GPU-Timings">source</a>)</figcaption>
-    </figure>
-</div>
+{{<figures>}}
+  {{<figure src="/img/blanking_intervals.png" caption="Figure 7: Blanking intervals" class="figure-half">}}
+{{</figures>}}
 
 Most of the game logic and graphics processing is done during V-Blank because some of the memory areas are not accessible while the line is being drawn. Examples for that are VRAM, palette RAM and OAM. Forcing a blank draws a white line and allows access to the restricted memory areas. This can be used for quickly setting up the game. Emulating this effect requires filling the current scanline with white pixels (access limitations are not emulated yet). The code should be pretty self-explanatory.
 

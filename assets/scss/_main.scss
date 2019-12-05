@@ -139,6 +139,38 @@ figure {
   }
 }
 
+.figures {
+  display: flex;
+  justify-content: space-evenly;
+
+  img {
+    width: 100%;
+  }
+}
+
+.figure-full {
+  width: 100%;
+}
+
+.figure-half {
+  width: 50%;
+}
+
+.figure-left {
+  width: 100%;
+  margin: 25px 10px 25px 0;
+}
+
+.figure-center {
+  width: 100%;
+  margin: 25px 10px;
+}
+
+.figure-right {
+  width: 100%;     
+  margin: 25px 0 25px 10px;
+}
+
 table {
   table-layout: fixed;
   border-collapse: collapse;
