@@ -15,8 +15,8 @@ googleAnalytics = "UA-153991522-1"
   homeSubtitle = ""
   defaultTheme = "dark"
 
-  dateform        = "2006-01-02"
-  dateformShort   = "2006-01-02"
+  dateform        = "Jan 2, 2006"
+  dateformShort   = "Jan 2"
   dateformNum     = "2006-01-02"
   dateformNumTime = "2006-01-02"
 
