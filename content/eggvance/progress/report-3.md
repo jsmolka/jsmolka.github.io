@@ -3,10 +3,6 @@ title: "Progress Report #3"
 date: 2019-11-03
 draft: false
 type: posts
-tags:
-    - eggvance
-    - emulation
-    - progress-report
 ---
 This month in an average emulator: a complete rewrite. That’s what happens when you aren’t satisfied with your project and you have a whole month of spare time. Some parts have been reused but almost every area has been improved to some extent, accuracy and performance-wise.
 

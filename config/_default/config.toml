@@ -4,7 +4,7 @@ theme        = "hello-friend-ng"
 copyright    = "Julian Smolka"
 languageCode = "en-us"
 
-disableKinds    = ["RSS"]
+disableKinds    = ["RSS", "taxonomy", "taxonomyTerm"]
 customCSS       = []
 customJS        = []
 googleAnalytics = "UA-153991522-1"

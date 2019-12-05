@@ -3,10 +3,6 @@ title: "Progress Report #2"
 date: 2019-09-30
 draft: false
 type: posts
-tags:
-    - eggvance
-    - emulation
-    - progress-report
 ---
 One month has passed since the last update and I'm back with another progress report. This month I've focused on improving the accuracy and the performance of the pixel processing unit (PPU). Its main purpose is converting the data stored inside memory, like VRAM and OAM (Object Attribute Memory), into pixels you can see on the screen.
 
