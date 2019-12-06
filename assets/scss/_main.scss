@@ -87,88 +87,52 @@ a {
 img {
   display: block;
   max-width: 100%;
-
-  &.left {
-    margin-right: auto;
-  }
-
-  &.center {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  &.right {
-    margin-left: auto;
-  }
 }
 
 figure {
-  display: table;
   max-width: 100%;
   margin: 25px 0;
-
-  &.left {
-    margin-right: auto;
-  }
-
-  &.center {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  &.right {
-    margin-left: auto;
-  }
 
   figcaption {
     font-size: 14px;
     margin-top: 5px;
-    opacity: .8;
-
-    &.left {
-      text-align: left;
-    }
-
-    &.center {
-      text-align: center;
-    }
-
-    &.right {
-      text-align: right;
-    }
+    opacity: 0.8;
   }
 }
 
 .figures {
   display: flex;
+  max-width: 100%;
   justify-content: space-evenly;
 
-  img {
-    width: 100%;
+  .figure {
+    img {
+      width: 100%;
+    }
+
+    &.half {
+      width: 50%;
+    }
+  
+    &.full {
+      width: 100%;
+    }
+  
+    &.left {
+      margin-left: 0;
+      margin-right: 10px;
+    }
+  
+    &.center {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  
+    &.right {
+      margin-left: 10px;
+      margin-right: 0;
+    }
   }
-}
-
-.figure-full {
-  width: 100%;
-}
-
-.figure-half {
-  width: 50%;
-}
-
-.figure-left {
-  width: 100%;
-  margin: 25px 10px 25px 0;
-}
-
-.figure-center {
-  width: 100%;
-  margin: 25px 10px;
-}
-
-.figure-right {
-  width: 100%;     
-  margin: 25px 0 25px 10px;
 }
 
 table {

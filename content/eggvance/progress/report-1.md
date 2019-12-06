@@ -9,8 +9,8 @@ At the end of last year I finished my introduction project to C++. Since then, I
 After writing a basic [Chip-8](https://github.com/jsmolka/sandbox-cpp/tree/master/chip8) emulator and a less than half finished [GB](https://github.com/jsmolka/egg-gb) emulator, I moved on to the GBA because that's what I really wanted to do. Now, exactly seven months after the initial commit, I feel like the emulator in a state that is worth writing about.
 
 {{<figures>}}
-  {{<figure src="/img/pokemon_emerald.png" caption="Figure 1 - Pokemon Emerald" class="figure-left">}}
-  {{<figure src="/img/yoshis_island.png" caption="Figure 2 - Yoshi's Island" class="figure-right">}}
+  {{<figure src="/img/pokemon_emerald.png" caption="Figure 1 - Pokemon Emerald" class="full left">}}
+  {{<figure src="/img/yoshis_island.png" caption="Figure 2 - Yoshi's Island" class="full right">}}
 {{</figures>}}
 
 ### Early Steps
@@ -20,8 +20,8 @@ The first thing I did was implement the CPU, an ARM7TDMI to the precise, which t
 After three months I finally had a working and relatively robust CPU implementation (missing things like hardware and software interrupts). It was time to implement some of the graphics. The GBA uses up to four different background and object (Nintendos word for sprite) layers with various priorities. GBATEK can be used for gathering information but due to its nature of being a reference document it is lacking visual examples and detailed explanations. That’s why I went along TONC’s GBA programming tutorials and reverse engineered all the given examples for graphics, effects, timers, interrupts and DMA.
 
 {{<figures>}}
-  {{<figure src="/img/tonc_sbb_aff.png" caption="Figure 3 - Affine tiled background" class="figure-left">}}
-  {{<figure src="/img/tonc_obj_aff.png" caption="Figure 4 - Affine sprite" class="figure-right">}}
+  {{<figure src="/img/tonc_sbb_aff.png" caption="Figure 3 - Affine tiled background" class="full left">}}
+  {{<figure src="/img/tonc_obj_aff.png" caption="Figure 4 - Affine sprite" class="full right">}}
 {{</figures>}}
 
 The last thing I did was clean up the memory interface. I implemented things like bus widths, memory mirroring and read / write only registers. This actually fixed some of the bugs I had and allowed me to play through Pokemon Emerald. A precondition for playing through a whole game was implementing cartridge backup types like SRAM, EEPROM and Flash. Finding out which save type to use and wrapping my head around how they all work took some time but I managed to figure it out.

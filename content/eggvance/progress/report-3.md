@@ -10,7 +10,7 @@ This month in an average emulator: a complete rewrite. That’s what happens whe
 The GBA's processor can execute either 16-bit Thumb or 32-bit Arm instructions. The most significant byte (see figure 1) of a Thumb instruction is sufficient for figuring out its format. The entire least significant and parts of the most significant byte are used to encode things like flags, registers and immediate values.
 
 {{<figures>}}
-  {{<figure src="/img/thumb_format.png" caption="Figure 1 - Thumb format (extract)" class="figure-full">}}
+  {{<figure src="/img/thumb_format.png" caption="Figure 1 - Thumb format (extract)" class="full">}}
 {{</figures>}}
 
 In the previous version of the emulator decoding and executing an instruction were two separate steps. First a static array of enumerations was used to identify the instruction format and then a switch-case executed the matching function. This approach can be optimized by storing template function pointers inside the array. Flags, registers and immediate values which occur inside the ten (extended from eight) most significant bits can be passed as template parameters and are therefore optimized by the compiler.
@@ -36,8 +36,8 @@ std::array<void(ARM::*)(u16), 1024> ARM::instr_thumb =
 At some point in development the emulator was able to boot every tested game apart from the Sonic Advance titles. Resolving issues like this usually involves running my emulator against established emulators like No$GBA (which has an awesome debug version). After two hours of comparing I ended up noticing that a different value of the register RCNT (which is used for multiplayer functionality) caused a chain of events which led to the screen shown in figure 2.
 
 {{<figures>}}
-  {{<figure src="/img/sonic_bug.png" caption="Figure 2 - Uninitialized RCNT" class="figure-left">}}
-  {{<figure src="/img/sonic.png" caption="Figure 3 - Initalized RCNT" class="figure-right">}}
+  {{<figure src="/img/sonic_bug.png" caption="Figure 2 - Uninitialized RCNT" class="full left">}}
+  {{<figure src="/img/sonic.png" caption="Figure 3 - Initalized RCNT" class="full right">}}
 {{</figures>}}
 
 Source of this problem was not running the BIOS first and directly jumping inside the ROM. Apart from showing the animated intro, the BIOS also initializes registers like RCNT, DISPCNT and KEYINPUT to their default values. RCNT is currently not used in the emulator and was forgotten when setting registers to their post-BIOS values. Running the BIOS could've spared me those hours but that isn't something I usually do during development.
@@ -102,8 +102,8 @@ u32 ARM::adc(u64 op1, u64 op2, bool flags)
 Changing the argument types of the `add` function from 32-bit to 64-bit integers fixed some of the bugs, but not all. Comparing my results to the expected results made me realize that the carry flag is only taken into consideration for carry detection and completely ignored for overflow detection. The code above shows my final `adc` function (note the usage of `opc`).
 
 {{<figures>}}
-  {{<figure src="/img/carry_pre.png" caption="Figure 4 - Carry tests pre fix" class="figure-left">}}
-  {{<figure src="/img/carry_post.png" caption="Figure 5 - Carry tests post fix" class="figure-right">}}
+  {{<figure src="/img/carry_pre.png" caption="Figure 4 - Carry tests pre fix" class="full left">}}
+  {{<figure src="/img/carry_post.png" caption="Figure 5 - Carry tests post fix" class="full right">}}
 {{</figures>}}
 
 ### Config
@@ -127,6 +127,6 @@ deadzone = 16000
 That's all for this progress report. A Windows build for the latest version can be found [here](https://github.com/jsmolka/eggvance/releases). I used profile guided optimization to squeeze out the last drop of performance (most games can be played at 10x the normal speed). Of course the current version is not perfect and bug free, audio is still missing and there are crashes and visual bugs in a few games like DOOM II.
 
 {{<figures>}}
-  {{<figure src="/img/doom_swr1.png" caption="Figure 6 - DOOM Software Renderer 1" class="figure-left">}}
-  {{<figure src="/img/doom_swr2.png" caption="Figure 7 - DOOM Software Renderer 2" class="figure-right">}}
+  {{<figure src="/img/doom_swr1.png" caption="Figure 6 - DOOM Software Renderer 1" class="full left">}}
+  {{<figure src="/img/doom_swr2.png" caption="Figure 7 - DOOM Software Renderer 2" class="full right">}}
 {{</figures>}}
