@@ -4,31 +4,52 @@ date: 2019-11-03
 draft: false
 type: posts
 ---
-This month in an average emulator: a complete rewrite. That’s what happens when you aren’t satisfied with your project and you have a whole month of spare time. Some parts have been reused but almost every area has been improved to some extent, accuracy and performance-wise.
+This month in an average emulator - a complete rewrite. That's what happens when you aren't satisfied with your project and you have a whole month of spare time. Some parts have been reused but almost every area has been improved to some extent, accuracy and performance-wise.
 
 ### Optimizing Instruction Execution
-The GBA's processor can execute either 16-bit Thumb or 32-bit Arm instructions. The most significant byte (see figure 1) of a Thumb instruction is sufficient for figuring out its format. The entire least significant and parts of the most significant byte are used to encode things like flags, registers and immediate values.
+
+The GBA's processor can execute either 16-bit Thumb or 32-bit ARM instructions. Each instruction has a different number of fixed and variable bits. Fixed bits provide information about the used format while variable bits are used to encode parameters like registers, flags and immediate values. As a result of having 16 additional bits, ARM instructions tend to be much more complex and versatile in their nature. 
 
 {{<figures>}}
-  {{<figure src="/img/thumb_format.png" caption="Figure 1 - Thumb format (extract)" class="full">}}
+  {{<figure src="/img/thumb_format.png" caption="Figure 1 - Thumb format" class="full">}}
 {{</figures>}}
 
-In the previous version of the emulator decoding and executing an instruction were two separate steps. First a static array of enumerations was used to identify the instruction format and then a switch-case executed the matching function. This approach can be optimized by storing template function pointers inside the array. Flags, registers and immediate values which occur inside the ten (extended from eight) most significant bits can be passed as template parameters and are therefore optimized by the compiler.
+Figure 1 shows a small subset of the 19 possible Thumb instruction formats. When looking at them as a whole you will notice that they can be decoded by using the most significant 8 bits. In the previous version of the emulator decoding and executing an instruction where two separate steps. First a static array of enumerations was used to identify the instruction format and then a switch-case executed the matching instruction handler.
 
 ```cpp
-std::array<void(ARM::*)(u16), 1024> ARM::instr_thumb =
-{
-    &ARM::Thumb_MoveShiftedRegister<0, 0>,
-    &ARM::Thumb_MoveShiftedRegister<1, 0>,
-    &ARM::Thumb_MoveShiftedRegister<2, 0>,
-    &ARM::Thumb_MoveShiftedRegister<3, 0>,
-    &ARM::Thumb_MoveShiftedRegister<4, 0>,
-    &ARM::Thumb_MoveShiftedRegister<5, 0>,
-    &ARM::Thumb_MoveShiftedRegister<6, 0>,
-    &ARM::Thumb_MoveShiftedRegister<7, 0>,
-    &ARM::Thumb_MoveShiftedRegister<8, 0>,
-    &ARM::Thumb_MoveShiftedRegister<9, 0>,
+enum class ThumbFormat {
+  MoveShiftedRegister,
+  // ...  
+};
+
+static ThumbFormat lut[256] = {
+  // ...
+};
+
+void ARM::executeThumb(u16 instr) {
+  switch (lut[instr >> 8]) {
+    case ThumbFormat::MoveShiftedRegister:
+      Thumb_MoveShiftedRegister(instr);
+      break;
     // ...
+  }
+}
+```
+
+This approach can be optimized by storing template function pointers inside the array. Flags, registers and immediate values which occur inside the 10 (extended from 8) most significant bits can be passed as template parameters and are therefore optimized by the compiler. Doing this also eliminates the necessity to extract these values later in the instruction handler.
+
+```cpp
+void(ARM::*)(u16) ARM::instr_thumb[1024] = {
+  &ARM::Thumb_MoveShiftedRegister<0, 0>,
+  &ARM::Thumb_MoveShiftedRegister<1, 0>,
+  &ARM::Thumb_MoveShiftedRegister<2, 0>,
+  &ARM::Thumb_MoveShiftedRegister<3, 0>,
+  &ARM::Thumb_MoveShiftedRegister<4, 0>,
+  // ...
+}
+
+void ARM::executeThumb(u16 instr) {
+  (this->*instr_thumb[instr >> 6])(instr);
 }
 ```
 
