@@ -54,14 +54,14 @@ void ARM::executeThumb(u16 instr) {
 ```
 
 ### Initializing (Unused) Registers
-At some point in development the emulator was able to boot every tested game apart from the Sonic Advance titles. Resolving issues like this usually involves running my emulator against established emulators like No$GBA (which has an awesome debug version). After two hours of comparing I ended up noticing that a different value of the register RCNT (which is used for multiplayer functionality) caused a chain of events which led to the screen shown in figure 2.
+At some point in development the emulator was able to boot every tested game apart from the Sonic Advance titles. Resolving issues like this usually involves running my emulator against established ones like No$GBA. After two hours of comparing I ended up noticing that a different value of the RCNT register, which is used for multiplayer functionality, caused a chain of events leading to the screen shown in figure 2.
 
 {{<figures>}}
-  {{<figure src="/img/sonic_bug.png" caption="Figure 2 - Uninitialized RCNT" class="full left">}}
+  {{<figure src="/img/sonic_rcnt.png" caption="Figure 2 - Uninitialized RCNT" class="full left">}}
   {{<figure src="/img/sonic.png" caption="Figure 3 - Initalized RCNT" class="full right">}}
 {{</figures>}}
 
-Source of this problem was not running the BIOS first and directly jumping inside the ROM. Apart from showing the animated intro, the BIOS also initializes registers like RCNT, DISPCNT and KEYINPUT to their default values. RCNT is currently not used in the emulator and was forgotten when setting registers to their post-BIOS values. Running the BIOS could've spared me those hours but that isn't something I usually do during development.
+This problem was caused by skipping the BIOS and directly jumping inside the ROM. Apart from showing the animated intro sequence, the BIOS also initializes registers like RCNT and DISPCNT to their default value. I knew about this and properly initialized all implemented registers to their post-BIOS state, but RCNT is not, and probably never will be, used in my emulator and was therefore left untouched. Doing a test run with the BIOS could've saved me a couple of hours but that's something I usually don't do during development.
 
 ### Fixing Arithmetic Operations
 Running mGBA's [test suite](https://github.com/mgba-emu/suite) made be realize flaws in my carry / overflow detection mechanism for arithmetic operations, which caused sprite flickering bugs in games like Mario Kart. The basic add, subtract and reverse subtract operations were doing fine, but their "[operation] with carry" counterparts resulted in a wrong carry or overflow flag. I found a nice [website](http://teaching.idallen.com/dat2343/10f/notes/040_overflow.txt) which explains overflow detection for basic addition and subtraction.
