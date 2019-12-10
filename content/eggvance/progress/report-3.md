@@ -67,64 +67,67 @@ This problem was caused by skipping the BIOS and directly jumping inside the ROM
 Running mGBA's [test suite](https://github.com/mgba-emu/suite) made be realize flaws in my carry / overflow detection mechanism for arithmetic operations, which caused sprite flickering bugs in games like Mario Kart. The basic add, subtract and reverse subtract operations were doing fine, but their "[operation] with carry" counterparts resulted in a wrong carry or overflow flag. I found a nice [website](http://teaching.idallen.com/dat2343/10f/notes/040_overflow.txt) which explains overflow detection for basic addition and subtraction.
 
 ```cpp
-#define ZERO(x) x == 0
-#define SIGN(x) x >> 31
+int zero(u32 value) {
+  return value == 0;
+}
 
-#define CARRY_ADD(op1, op2) op2 > 0xFFFFFFFF - op1
-#define CARRY_SUB(op1, op2) op2 <= op1
+int sign(u32 value) {
+  return value >> 31;
+}
 
-#define OVERFLOW_ADD(op1, op2, res)  \
-    SIGN(op1) == SIGN(op2) &&        \
-    SIGN(res) != SIGN(op1)
+int carryAdd(u64 op1, u64 op2) {
+  return (op1 + op2) > 0xFFFF'FFFF;
+}
 
-#define OVERFLOW_SUB(op1, op2, res)  \
-    SIGN(op1) != SIGN(op2) &&        \
-    SIGN(res) == SIGN(op2)
-```
-
-The macros shown above can be used to set flags of the CPSR (Current Program Status Register). They work perfectly fine for simple add and subtract operations.
-
-```cpp
-u32 ARM::add(u32 op1, u32 op2, bool flags)
-{
-    u32 result = op1 + op2;
-
-    if (flags)
-    {
-        cpsr.z = ZERO(result);
-        cpsr.n = SIGN(result);
-        cpsr.c = CARRY_ADD(op1, op2);
-        cpsr.v = OVERFLOW_ADD(op1, op2, result);
-    }
-    return result;
+int overflowAdd(u32 op1, u32 op2, u32 res) {
+  return sign(op1) == sign(op2)
+    && sign(op1) != sign(res);
 }
 ```
 
-I used the function above for addition with and without carry. It worked most of the time (I thought all the time) and didn't cause any major bugs in the tested games. Now imagine adding the carry to a value of `0xFFFF'FFFF`. It overflows if the carry is set, and we pass `0` to the `add` function which produces the correct result but calculates wrong carry and overflow flags for certain operands.
+The functions above can be used to set the zero, negative, carry and overflow flags of the CPU's status register. Please note that the arguments of the `carryAdd` function are 64-bit values to prevent 32-bit overflow and narrowing conversions. A simple example for their usage is the `add` function shown below.
 
 ```cpp
-u32 ARM::adc(u64 op1, u64 op2, bool flags)
-{
-    u64 opc = op2 + cpsr.c;
+u32 ARM::add(u32 op1, u32 op2, bool flags) {
+  u32 res = op1 + op2;
 
-    u32 result = static_cast<u32>(op1 + opc);
+  if (flags) {
+    cpsr.z = zero(res);
+    cpsr.n = sign(res);
+    cpsr.c = carryAdd(op1, op2);
+    cpsr.v = overflowAdd(op1, op2, res);
+  }
+  return res;
+}
 
-    if (flags)
-    {
-        cpsr.z = ZERO(result);
-        cpsr.n = SIGN(result);
-        cpsr.c = CARRY_ADD(op1, opc);
-        cpsr.v = OVERFLOW_ADD(op1, op2, result);
-    }
-    return result;
+u32 ARM::adc(u32 op1, u32 op2, bool flags) {
+  // Wrong, op2 might overflow to 0
+  return add(op1, op2 + cpsr.c, flags);
 }
 ```
 
-Changing the argument types of the `add` function from 32-bit to 64-bit integers fixed some of the bugs, but not all. Comparing my results to the expected results made me realize that the carry flag is only taken into consideration for carry detection and completely ignored for overflow detection. The code above shows my final `adc` function (note the usage of `opc`).
+The old version of add with carry simply added the carry flag of the status register to the second operand and then called the `add` function. This worked as expected and didn't produce any major bugs in the tested games. At least that's what I've thought. Imagine passing the maximum 32-bit value to the function and then adding the carry flag. The value overflows and the flags are calculated with the wrong operands. The result itself will be fine because we just care about the lower 32 bits anyway.
+
+```cpp
+u32 ARM::adc(u32 op1, u32 op2, bool flags) {
+  u64 opc = static_cast<u64>(op2) + cpsr.c;
+  u32 res = static_cast<u32>(op1 + opc);
+
+  if (flags) {
+    cpsr.z = zero(res);
+    cpsr.n = sign(res);
+    cpsr.c = carryAdd(op1, opc);
+    cpsr.v = overflowAdd(op1, op2, res);
+  }
+  return res;
+}
+```
+
+Using a 64-bit integer to store the second operand with added carry was the first improvement over the standard `add` function. Sadly this didn't fix all the problems. Comparing my results to the expected results of the mGBA test suite made me realize that the carry flag is only taken into consideration for carry detection and is completely ignored for overflow detection. The code above shows my final `adc` function (note the usage of `opc`).
 
 {{<figures>}}
-  {{<figure src="/img/carry_pre.png" caption="Figure 4 - Carry tests pre fix" class="full left">}}
-  {{<figure src="/img/carry_post.png" caption="Figure 5 - Carry tests post fix" class="full right">}}
+  {{<figure src="/img/carry_tests_fail.png" caption="Figure 4 - Carry tests fail" class="full left">}}
+  {{<figure src="/img/carry_tests_succeed.png" caption="Figure 5 - Carry tests succeed" class="full right">}}
 {{</figures>}}
 
 ### Config
