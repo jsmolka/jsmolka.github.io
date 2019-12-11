@@ -106,7 +106,7 @@ u32 ARM::adc(u32 op1, u32 op2, bool flags) {
 }
 ```
 
-The old version of add with carry simply added the carry flag of the status register to the second operand and then called the `add` function. This worked as expected and didn't produce any major bugs in the tested games. At least that's what I've thought. Imagine passing the maximum 32-bit value to the function and then adding the carry flag. The value overflows and the flags are calculated with the wrong operands. The result itself will be fine because we just care about the lower 32 bits anyway.
+The old version of add with carry simply added the carry flag of the status register to the second operand and then called the `add` function. This worked as expected and didn't produce any major bugs in the tested games. At least that's what I've thought. Imagine passing the maximum 32-bit value to the function and then adding the carry. The value overflows and the flags are calculated with the wrong operands. The result itself will be fine because we just care about the lower 32 bits anyway.
 
 ```cpp
 u32 ARM::adc(u32 op1, u32 op2, bool flags) {
@@ -127,7 +127,7 @@ Using a 64-bit integer to store the second operand with added carry was the firs
 
 {{<figures>}}
   {{<figure src="/img/carry_tests_fail.png" caption="Figure 4 - Carry tests fail" class="full left">}}
-  {{<figure src="/img/carry_tests_succeed.png" caption="Figure 5 - Carry tests succeed" class="full right">}}
+  {{<figure src="/img/carry_tests_pass.png" caption="Figure 5 - Carry tests pass" class="full right">}}
 {{</figures>}}
 
 ### Config
@@ -139,8 +139,8 @@ One thing is really wanted to have in the first release version was a customizab
 bios_file = "bios.bin"
 # Skips the BIOS intro.
 bios_skip = false
-# Relative or absolute save directory.
-# An empty value stores save files next to the ROM.
+# Relative or absolute save directory. An empty
+# value stores save files next to the ROM.
 save_dir = ""
 # Controller deadzone.
 deadzone = 16000
@@ -148,9 +148,9 @@ deadzone = 16000
 
 ### Conclusion
 
-That's all for this progress report. A Windows build for the latest version can be found [here](https://github.com/jsmolka/eggvance/releases). I used profile guided optimization to squeeze out the last drop of performance (most games can be played at 10x the normal speed). Of course the current version is not perfect and bug free, audio is still missing and there are crashes and visual bugs in a few games like DOOM II.
+That's all for this progress report. A Windows build for the latest version can be found on [GitHub](https://github.com/jsmolka/eggvance/releases). I used profile guided optimization to squeeze out the last drop of performance (most games can be played at 10x the normal speed). Of course the current version is not perfect and bug free, audio is still missing and there are crashes and visual bugs in a few games like DOOM II.
 
 {{<figures>}}
-  {{<figure src="/img/doom_swr1.png" caption="Figure 6 - DOOM Software Renderer 1" class="full left">}}
-  {{<figure src="/img/doom_swr2.png" caption="Figure 7 - DOOM Software Renderer 2" class="full right">}}
+  {{<figure src="/img/doom_bug_1.png" caption="Figure 6 - DOOM II bug 1" class="full left">}}
+  {{<figure src="/img/doom_bug_2.png" caption="Figure 7 - DOOM II bug 2" class="full right">}}
 {{</figures>}}
