@@ -6,7 +6,7 @@ type: posts
 ---
 At the end of last year I finished my introduction project to C++. Since then, I read a couple of books about the language and I really started to like it. Finishing my previous project also meant looking for a new one. The idea of creating a GBA emulator originated in a C++ class where one of my fellow students asked if the emulator I was playing on was the project for the class. I said no but the idea got stuck in my head (thanks Robert). 
 
-After writing a basic [Chip-8](https://github.com/jsmolka/sandbox-cpp/tree/master/chip8) emulator and a less than half finished [GB](https://github.com/jsmolka/egg-gb) emulator, I moved on to the GBA because that's what I really wanted to do. Now, exactly seven months after the initial commit, I feel like the emulator in a state that is worth writing about.
+After writing a basic [Chip-8](https://github.com/jsmolka/sandbox-cpp/tree/master/chip8) emulator and a less than half finished [GB](https://github.com/jsmolka/egg-gb) emulator, I moved on to the GBA because that's what I really wanted to do. Now, exactly seven months after the initial commit, I feel like the emulator is in a state that is worth talking about.
 
 {{<figures>}}
   {{<figure src="/img/pokemon_emerald.png" caption="Figure 1 - Pokemon Emerald" class="full left">}}
@@ -15,16 +15,29 @@ After writing a basic [Chip-8](https://github.com/jsmolka/sandbox-cpp/tree/maste
 
 ### Early Steps
 
-The first thing I did was implement the CPU, an ARM7TDMI to the precise, which took me a couple months. My main sources for this were the official ARM datasheet and [GBATEK](https://problemkaputt.de/gbatek.htm). The most important thing I did during all that time was writing CPU tests which covered pretty much all common and uncommon cases (at one point my repository consisted of around 30% assembly). This turned out to be a great decision because I could rely on my CPU implementation when debugging errors of any type. The tests have only failed me once so far and I hope it stays that way.
+The first thing I did was implement the CPU, an ARM7TDMI to the precise, which took me a couple months. My main sources for this were the official ARM datasheet and [GBATEK](https://problemkaputt.de/gbatek.htm). The most important thing I did during all that time was to write CPU tests which cover pretty much all common and most of the edge cases. This turned out to be a great time investment because I could rely on my CPU implementation when debugging problems related to other parts of the emulator. The code below shows a simple test for the ARM multiply instruction.
 
-After three months I finally had a working and relatively robust CPU implementation (missing things like hardware and software interrupts). It was time to implement some of the graphics. The GBA uses up to four different background and object (Nintendos word for sprite) layers with various priorities. GBATEK can be used for gathering information but due to its nature of being a reference document it is lacking visual examples and detailed explanations. That’s why I went along TONC’s GBA programming tutorials and reverse engineered all the given examples for graphics, effects, timers, interrupts and DMA.
+```asm
+t300:                    ; test 300
+    mov     r0, 4        ; r0 = 4
+    mov     r1, 8        ; r1 = 8
+    mul     r0, r0, r1   ; r0 *= r1
+    cmp     r0, 32       ; r0 == 32?
+    bne     f300         ; exit if false
+    beq     t301         ; next test if true
+
+f300:
+    failed  300
+```
+
+Three months after the initial commit I had a more or less reliable CPU implementation. It was still missing some crucial things like hardware and software interrupts, but those weren’t important for the upcoming goal - implementing graphics. Understanding how they work just by going through GBATEK was near impossible due to its nature of being a reference document. As a result of that I went along TONC’s GBA programming tutorials and reverse engineered all the given examples for graphics, effects, timers, interrupts and DMA (Direct Memory Access). The figures below show examples for affine backgrounds and sprites. Both use matrix transformations to alter the scene shown on the screen.
 
 {{<figures>}}
   {{<figure src="/img/tonc_sbb_aff.png" caption="Figure 3 - Affine tiled background" class="full left">}}
   {{<figure src="/img/tonc_obj_aff.png" caption="Figure 4 - Affine sprite" class="full right">}}
 {{</figures>}}
 
-The last thing I did was clean up the memory interface. I implemented things like bus widths, memory mirroring and read / write only registers. This actually fixed some of the bugs I had and allowed me to play through Pokemon Emerald. A precondition for playing through a whole game was implementing cartridge backup types like SRAM, EEPROM and Flash. Finding out which save type to use and wrapping my head around how they all work took some time but I managed to figure it out.
+The last thing I did was clean up the memory interface. I implemented things like bus widths, memory mirroring and read / write only registers. This actually fixed some of the bugs I had and allowed me to play through Pokémon Emerald. A precondition for playing through a whole game was implementing cartridge backup types like SRAM, EEPROM and Flash. Finding out which save type to use and wrapping my head around how they all work took some time but I managed to figure it out.
 
 
 ### Milestones
@@ -40,7 +53,7 @@ The last thing I did was clean up the memory interface. I implemented things lik
 - 14/07/19: Runs Kirby - Nightmare In Dreamland
 - 16/07/19: Displays the BIOS
 - 07/08/19: Displays all tonc demos
-- 17/08/19: Runs Pokemon Emerald
+- 17/08/19: Runs Pokémon Emerald
 
 ### Some Working Games
 
@@ -49,8 +62,8 @@ The last thing I did was clean up the memory interface. I implemented things lik
 - Mario Kart - Super Circuit
 - Mega Man Zero
 - Metroid Fusion
-- Pokemon - Emerald
-- Pokemon Mystery Dungeon - Red Rescue Team
+- Pokémon - Emerald
+- Pokémon Mystery Dungeon - Red Rescue Team
 - Super Mario Advance 3 - Yoshi's Island
 - The Legend of Zelda - A Link To The Past & Four Swords
 
