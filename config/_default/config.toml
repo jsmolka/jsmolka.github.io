@@ -37,6 +37,11 @@ googleAnalytics = "UA-153991522-1"
   url        = "/about"
 
   [[menu.main]]
+  identifier = "blog"
+  name       = "Blog"
+  url        = "/blog"
+
+  [[menu.main]]
   identifier = "eggvance"
   name       = "eggvance"
   url        = "/eggvance"
