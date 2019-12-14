@@ -53,10 +53,10 @@ pre[class*="language-"] ::selection {
 }
 
 pre[class*="language-"] {
-  overflow: auto;
-  position: relative;
   margin: 0.5em 0;
   padding: 1.25em 1em;
+  overflow: auto;
+  position: relative;
 }
 
 [class*="language-"] .namespace {
@@ -65,7 +65,7 @@ pre[class*="language-"] {
 
 .token.atrule {
   color: #7c4dff;
-
+  
   .dark-theme & {
     color: #c678dd;
   }
@@ -73,7 +73,7 @@ pre[class*="language-"] {
 
 .token.attr-name {
   color: #39adb5;
-
+  
   .dark-theme & {
     color: #d19a66;
   }
@@ -81,15 +81,23 @@ pre[class*="language-"] {
 
 .token.attr-value {
   color: #f6a434;
+  
+  .dark-theme & {
+    color: #98c379;
+  }
 }
 
 .token.attribute {
   color: #f6a434;
+  
+  .dark-theme & {
+    color: #98c379;
+  }
 }
 
 .token.boolean {
   color: #7c4dff;
-
+  
   .dark-theme & {
     color: #d19a66;
   }
@@ -97,15 +105,15 @@ pre[class*="language-"] {
 
 .token.builtin {
   color: #39adb5;
-
+  
   .dark-theme & {
-    color: #98c379
+    color: #98c379;
   }
 }
 
 .token.cdata {
   color: #39adb5;
-
+  
   .dark-theme & {
     color: #5C6370;
   }
@@ -113,31 +121,39 @@ pre[class*="language-"] {
 
 .token.char {
   color: #39adb5;
-
+  
   .dark-theme & {
-    color: #98c379
+    color: #98c379;
   }
 }
 
 .token.class {
   color: #39adb5;
+  
+  .dark-theme & {
+    color: #d19a66;
+  }
 }
 
 .token.class-name {
   color: #6182b8;
+  
+  .dark-theme & {
+    color: #e6c07b;
+  }
 }
 
 .token.comment {
   color: #aabfc9;
-
+  
   .dark-theme & {
-    color: #5C6370;
+    color: #5c6370;
   }
 }
 
 .token.constant {
   color: #7c4dff;
-
+  
   .dark-theme & {
     color: #d19a66;
   }
@@ -145,7 +161,7 @@ pre[class*="language-"] {
 
 .token.deleted {
   color: #e53935;
-
+  
   .dark-theme & {
     color: #d19a66;
   }
@@ -153,23 +169,23 @@ pre[class*="language-"] {
 
 .token.doctype {
   color: #aabfc9;
-
+  
   .dark-theme & {
-    color: #5C6370;
+    color: #5c6370;
   }
 }
 
 .token.entity {
   color: #e53935;
-
+  
   .dark-theme & {
-    color: #56b6c2;
+    color: #5c6370;
   }
 }
 
 .token.function {
   color: #7c4dff;
-
+  
   .dark-theme & {
     color: #61afef;
   }
@@ -177,35 +193,41 @@ pre[class*="language-"] {
 
 .token.hexcode {
   color: #f76d47;
+  
+  .dark-theme & {
+    color: #d19a66;
+  }
 }
 
 .token.id {
   color: #7c4dff;
   font-weight: bold;
+  
+  .dark-theme & {
+    color: #c678dd;
+  }
 }
 
 .token.important {
   color: #7c4dff;
   font-weight: bold;
-
-      
+  
   .dark-theme & {
     color: #c678dd;
-    font-weight: bold;
   }
 }
 
 .token.inserted {
   color: #39adb5;
-
+  
   .dark-theme & {
-    color: #98c379
+    color: #98c379;
   }
 }
 
 .token.keyword {
   color: #7c4dff;
-
+  
   .dark-theme & {
     color: #c678dd;
   }
@@ -213,7 +235,7 @@ pre[class*="language-"] {
 
 .token.number {
   color: #f76d47;
-
+  
   .dark-theme & {
     color: #d19a66;
   }
@@ -221,7 +243,7 @@ pre[class*="language-"] {
 
 .token.operator {
   color: #39adb5;
-
+  
   .dark-theme & {
     color: #56b6c2;
   }
@@ -229,15 +251,15 @@ pre[class*="language-"] {
 
 .token.prolog {
   color: #aabfc9;
-
+  
   .dark-theme & {
-    color: #5C6370;
+    color: #5c6370;
   }
 }
 
 .token.property {
   color: #39adb5;
-
+  
   .dark-theme & {
     color: #d19a66;
   }
@@ -245,15 +267,23 @@ pre[class*="language-"] {
 
 .token.pseudo-class {
   color: #f6a434;
+  
+  .dark-theme & {
+    color: #98c379;
+  }
 }
 
 .token.pseudo-element {
   color: #f6a434;
+  
+  .dark-theme & {
+    color: #98c379;
+  }
 }
 
 .token.punctuation {
   color: #39adb5;
-
+  
   .dark-theme & {
     color: #abb2bf;
   }
@@ -261,8 +291,7 @@ pre[class*="language-"] {
 
 .token.regex {
   color: #6182b8;
-
-      
+  
   .dark-theme & {
     color: #c678dd;
   }
@@ -270,7 +299,7 @@ pre[class*="language-"] {
 
 .token.selector {
   color: #e53935;
-
+  
   .dark-theme & {
     color: #e06c75;
   }
@@ -278,15 +307,15 @@ pre[class*="language-"] {
 
 .token.string {
   color: #f6a434;
-
+  
   .dark-theme & {
-    color: #98c379
+    color: #98c379;
   }
 }
 
 .token.symbol {
   color: #7c4dff;
-
+  
   .dark-theme & {
     color: #d19a66;
   }
@@ -294,7 +323,7 @@ pre[class*="language-"] {
 
 .token.tag {
   color: #e53935;
-
+  
   .dark-theme & {
     color: #e06c75;
   }
@@ -302,11 +331,15 @@ pre[class*="language-"] {
 
 .token.unit {
   color: #f76d47;
+  
+  .dark-theme & {
+    color: #d19a66;
+  }
 }
 
 .token.url {
   color: #e53935;
-
+  
   .dark-theme & {
     color: #56b6c2;
   }
@@ -314,7 +347,7 @@ pre[class*="language-"] {
 
 .token.variable {
   color: #e53935;
-    
+  
   .dark-theme & {
     color: #c678dd;
   }

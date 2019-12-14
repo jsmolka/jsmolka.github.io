@@ -692,7 +692,7 @@ delete Prism.languages.c['boolean'];
 
 Prism.languages.cpp = Prism.languages.extend('c', {
   'class-name': {
-    pattern: /(\b(?:class|enum|struct)\s+)\w+/,
+    pattern: /(\b(?:enum class|class|enum|struct)\s+)\w+/,
     lookbehind: true
   },
   'keyword': /\b(?:u8|u16|u32|u64|s8|s16|s32|s64|alignas|alignof|asm|auto|bool|break|case|catch|char|char16_t|char32_t|class|compl|const|constexpr|const_cast|continue|decltype|default|delete|do|double|dynamic_cast|else|enum|explicit|export|extern|float|for|friend|goto|if|inline|int|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|long|mutable|namespace|new|noexcept|nullptr|operator|private|protected|public|register|reinterpret_cast|return|short|signed|sizeof|static|static_assert|static_cast|struct|switch|template|this|thread_local|throw|try|typedef|typeid|typename|union|unsigned|using|virtual|void|volatile|wchar_t|while)\b/,
@@ -711,6 +711,15 @@ Prism.languages.insertBefore('cpp', 'string', {
     greedy: true
   }
 });
+
+Prism.languages.armasm = {
+  'comment': {
+    pattern: /;.*/,
+    greedy: true
+  },
+  'keyword': /\b(?:r0|r1|r2|r3|r4|r5|r6|r7|r8|r9|r10|r11|r12|r13|r14|r15|pc|lr|sp|mov|mul|cmp|bne|beq)\b/,
+  'number': /\b0x[\da-f]+\b|(?:\b\d+\.?\d*|\B\.\d+)(?:e[+-]?\d+)?/i,
+};
 
 (function (Prism) {
 

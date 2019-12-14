@@ -1,7 +1,6 @@
 ---
 title: "Shinedown Concert"
 date: 2019-12-14
-draft: false
 type: posts
 ---
 

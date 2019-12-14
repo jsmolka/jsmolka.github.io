@@ -1,7 +1,6 @@
 ---
 title: "Progress Report #3"
 date: 2019-11-03
-draft: false
 type: posts
 ---
 
@@ -102,7 +101,7 @@ u32 ARM::add(u32 op1, u32 op2, bool flags) {
 }
 
 u32 ARM::adc(u32 op1, u32 op2, bool flags) {
-  // Wrong, op2 might overflow to 0
+  // Wrong - op2 might overflow
   return add(op1, op2 + cpsr.c, flags);
 }
 ```

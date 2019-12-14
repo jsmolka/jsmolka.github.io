@@ -5,8 +5,6 @@ copyright    = "Julian Smolka"
 languageCode = "en-us"
 
 disableKinds    = ["RSS", "taxonomy", "taxonomyTerm"]
-customCSS       = []
-customJS        = []
 googleAnalytics = "UA-153991522-1"
 
 [params]
