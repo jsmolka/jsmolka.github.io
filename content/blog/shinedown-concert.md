@@ -3,7 +3,6 @@ title: "Shinedown Concert"
 date: 2019-12-14
 type: posts
 ---
-
 Around a month ago I've attended a rock concert at Haus Auensee in Leipzig. I extended my work day by a couple of hours and then took a relaxed 25 minute walk to the location. The headliner of the concert was Alter Bridge with support acts by The Ravens Age and Shinedown.
 
 It felt weird that the only reason for me going to the event was the support act. I didn’t know much about the music of Alter Bridge or The Ravens Age apart from the few songs I listened to prior to the concert. Shinedown, however, is by far my favorite band and I know most their lyrics in and out. It was their first time playing in Leipzig and therefore an opportunity I couldn’t miss. I was a little scared that the support act wouldn’t get enough stage time but it ended up being well over an hour.
