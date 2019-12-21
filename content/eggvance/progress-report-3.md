@@ -6,7 +6,7 @@ type: posts
 This month in an average emulator - a complete rewrite. That's what happens when you aren't satisfied with your project and you have a whole month of spare time. Some parts have been reused but almost every area has been improved to some extent, accuracy and performance-wise.
 
 ### Optimizing Instruction Execution
-The GBA's processor can execute either 16-bit Thumb or 32-bit ARM instructions. Each instruction has a different number of fixed and variable bits. Fixed bits provide information about the used format while variable bits are used to encode parameters like registers, flags and immediate values. As a result of having 16 additional bits, ARM instructions tend to be much more complex and versatile in their nature. 
+The GBA's processor can execute either 16-bit Thumb or 32-bit ARM instructions. Each instruction has a different number of fixed and variable bits. Fixed bits provide information about the used format while variable bits are used to encode parameters like registers, flags and immediate values. As a result of having 16 additional bits, ARM instructions tend to be much more complex and versatile in their nature.
 
 {{<figures>}}
   {{<figure src="thumb-format.png" caption="Figure 1 - Thumb format" class="full">}}
@@ -17,7 +17,7 @@ Figure 1 shows a small subset of the 19 possible Thumb instruction formats. When
 ```cpp
 enum class ThumbFormat {
   MoveShiftedRegister,
-  // ...  
+  // ...
 };
 
 static ThumbFormat lut[256] = {
@@ -37,7 +37,7 @@ void ARM::executeThumb(u16 instr) {
 This approach can be optimized by storing template function pointers inside the array. Flags, registers and immediate values which occur inside the 10 (extended from 8) most significant bits can be passed as template parameters and are therefore optimized by the compiler. Doing this also eliminates the necessity to extract these values later in the instruction handler.
 
 ```cpp
-void(ARM::*)(u16) ARM::instr_thumb[1024] = {
+std::array<void(ARM::*)(u16), 1024> ARM::instr_thumb = {
   &ARM::Thumb_MoveShiftedRegister<0, 0>,
   &ARM::Thumb_MoveShiftedRegister<1, 0>,
   &ARM::Thumb_MoveShiftedRegister<2, 0>,
