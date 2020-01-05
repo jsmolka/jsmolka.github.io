@@ -34,7 +34,7 @@ void PPU::renderBgMode5(int bg) {
     int offset = sizeof(u16) * texture.offset(dims.w);
     // Read and mask (explained in next section) color
     backgrounds[bg][x] = mmu.vram.readHalfFast(
-      io.dispcnt.base_frame + offset) & COLOR_MASK;
+      io.dispcnt.base_frame + offset) & 0x7FF;
   }
 }
 ```
@@ -42,7 +42,28 @@ void PPU::renderBgMode5(int bg) {
 The fixed version of the renderer applies the `transform` function to the current pixel, which returns the coordinates inside the bitmap. Those are then used to determine the pixels color. The matrix used in the Yeti demo scales the bitmap by two and thus fills the entire screen. The black pixels on the right are caused by the game and not by the emulator.
 
 ### Color Masking
-<!-- Mother 3 -->
+The GBA uses the BGR555 format to encode colors and stores them in 16-bit units. Most colors are stored in the palette RAM which is a dedicated area in memory with a size of 0x400 bytes. It consists of two halves which are used to store background and sprite colors. The first color in each half can be used to draw transparent pixels. An obvious use case for this are sprites, which aren't always perfect squares. If a pixel has been marked as transparent, the next pixel in the drawing order will be displayed.
+
+{{<figures>}}
+  {{<figure src="safety-screen.png" caption="Figure 3 - Safety screen" class="full left">}}
+  {{<figure src="safety-screen-bug.png" caption="Figure 4 - Safety screen bug" class="full right">}}
+{{</figures>}}
+
+Since the drawing process is separated from combining the backgrounds and sprites into the final scene, transparent pixels must be marked as such. Luckily the most significant bit in each color doesn't carry information and can be used for this purpose. This means that transparent pixels are represented by the color 0x8000. This approach worked well until I booted the game Mother 3. Its intro screen uses 0x8000 to display white and messed up my whole system (figure 4).
+
+```cpp
+u16 Palette::colorBGOpaque(int index, int bank) {
+  return readHalfFast(0x20 * bank + 2 * index) & 0x7FF;
+}
+
+u16 Palette::colorBG(int index, int bank) {
+  return index == 0
+    ? TRANSPARENT
+    : colorBGOpaque(index, bank);
+}
+```
+
+This problem can be eliminated with a quite simple solution. Every color read from the palette needs to be masked with 0x7FFF in order to clear the most significant bit. This prevents confusing transparent pixels with malformed white pixels (figure 3).
 
 ### Sprite Address Limit
 <!-- Pokemon Series -->
@@ -53,8 +74,6 @@ The fixed version of the renderer applies the `transform` function to the curren
 ### Super Mario Bros. 6-6
 
 ### Linux Support
-
-### Replacement BIOS
 
 ### Conclusion
 <!-- Doom II? -->
