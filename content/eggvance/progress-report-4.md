@@ -34,7 +34,7 @@ void PPU::renderBgMode5(int bg) {
     int offset = sizeof(u16) * texture.offset(dims.w);
     // Read and mask (explained in next section) color
     backgrounds[bg][x] = mmu.vram.readHalfFast(
-      io.dispcnt.base_frame + offset) & 0x7FF;
+      io.dispcnt.base_frame + offset) & 0x7FFF;
   }
 }
 ```
@@ -53,7 +53,7 @@ Since the drawing process is separated from combining the backgrounds and sprite
 
 ```cpp
 u16 Palette::colorBGOpaque(int index, int bank) {
-  return readHalfFast(0x20 * bank + 2 * index) & 0x7FF;
+  return readHalfFast(0x20 * bank + 2 * index) & 0x7FFF;
 }
 
 u16 Palette::colorBG(int index, int bank) {
@@ -65,13 +65,29 @@ u16 Palette::colorBG(int index, int bank) {
 
 This problem can be eliminated with a quite simple solution. Every color read from the palette needs to be masked with 0x7FFF in order to clear the most significant bit. This prevents confusing transparent pixels with malformed white pixels (figure 3).
 
-### Sprite Address Limit
-<!-- Pokemon Series -->
+### Sprite Tile Restrictions
+
+This issue is another prime example for the 'most games don't use bitmaps, therefore I can't test them' category. If you compare both figures down below you will notice some strange, colorful pixels in the upper left corner of figure 6. Those are uninitialized sprites (or objects if you listen to Nintendo) which were wrongfully rendered by the emulator.
+
+{{<figures>}}
+  {{<figure src="pokemon-series.png" caption="Figure 5 - Pokémon series" class="full left">}}
+  {{<figure src="pokemon-series-bug.png" caption="Figure 6 - Pokémon series bug" class="full right">}}
+{{</figures>}}
+
+The cause of this problem is best described in Martin Korths [GBATEK](https://problemkaputt.de/gbatek.htm#lcdobjoverview), which is the most comprehensive and complete reference document for the GBA. This even holds up when comparing against Nintendos official programming manual.
+
+> OBJs are always combined of one or more 8x8 pixel Tiles (much like BG Tiles in BG Modes 0-2). However, OBJ Tiles are stored in a separate area in VRAM: 06010000-06017FFF (32 KBytes) in BG Mode 0-2, or 06014000-06017FFF (16 KBytes) in BG Mode 3-5. Depending on the size of the above area (16K or 32K), and on the OBJ color depth (4bit or 8bit), 256-1024 8x8 dots OBJ Tiles can be defined.
+
+The important part here is the one talking about tile address restrictions for different background modes. Bitmap modes (background modes 3 - 5) can't use as many sprite tiles as tiled backgrounds. This is due to the fact that some bitmap modes use multiple frames which occupy the first 0x4000 bytes of the sprite tile memory. The code below shows the calculation of a tile address followed by the necessary check.
+
+```cpp
+u32 addr = mmu.vram.mirror(entry.base_tile + size * tile.offset(tiles));
+if (addr < 0x1'4000 && io.dispcnt.isBitmap())
+    continue;
+```
 
 ### Register List Iterator
 <!-- 20% set by default -->
-
-### Super Mario Bros. 6-6
 
 ### Linux Support
 
