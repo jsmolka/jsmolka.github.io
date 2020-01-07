@@ -1,8 +1,7 @@
 ---
 title: "Progress Report #4"
-date: 2020-01-04
+date: 2020-01-07
 type: posts
-draft: true
 ---
 Hello there! It has been quite a while since the last progress report, two months to be exact. Development of the emulator has slowed down a little during that time because I started working as a JavaScript developer. Apart from cleaning up my codebase, I also fixed and implemented some things which might be of interest to some people.
 
@@ -86,10 +85,10 @@ if (addr < 0x1'4000 && io.dispcnt.isBitmap())
     continue;
 ```
 
-### Register List Iterator
-<!-- 20% set by default -->
-
-### Linux Support
-
 ### Conclusion
-<!-- Doom II? -->
+That's it with the changes worth writing about and even those were pretty meh. Most of the things I did during the last months were minor accuracy improvements and cleanups in the codebase. Even the DOOM II color problems have been fixed with a rather simple [commit](https://github.com/jsmolka/eggvance/commit/36e2cdd38e795d09a39594353e256b5b83fe9c47). Another important thing is the addition of [Linux](https://github.com/jsmolka/eggvance#linux) support. Removing Windows dependent code and writing a simple CMake file took more time than I'd like to admit.
+
+{{<figures>}}
+  {{<figure src="doom.png" caption="Figure 7 - DOOM II" class="full left">}}
+  {{<figure src="doom-bug-2.png" caption="Figure 8 - DOOM II bug" class="full right">}}
+{{</figures>}}
