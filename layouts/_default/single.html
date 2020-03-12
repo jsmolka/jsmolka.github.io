@@ -1,26 +1,6 @@
 {{ define "main" }}
-  <main class="post">
-
-    <article>
-      <h1 class="post-title"><a href="{{ .Permalink }}">{{ .Title | markdownify }}</a></h1>
-
-      {{- if .Params.toc }}
-        <hr />
-        <aside id="toc">
-        <div class="toc-title">{{ i18n "tableOfContents" }}</div>
-          {{ .TableOfContents }}
-        </aside>
-        <hr />
-      {{- end }}
-
-      {{ with .Params.Cover }}
-        <img src="/img/{{ . }}" class="post-cover" />
-      {{ end }}
-
-      <div class="post-content">
-        {{ .Content }}
-      </div>
-    </article>
-
-  </main>
+<article class="text-gray-700 mx-4 sm:mx-12">
+    <h1 class="font-bold text-3xl text-gray-700">{{ .Title }}</h1>
+    {{ .Content }}
+</article>
 {{ end }}
