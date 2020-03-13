@@ -5,17 +5,15 @@
   "author": "Julian Smolka",
   "license": "MIT",
   "scripts": {
-    "dev": "hugo server -D --disableFastRender",
-    "prod": "hugo --gc"
+    "build": "hugo --gc",
+    "server": "hugo server -D --disableFastRender"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.1.0",
     "autoprefixer": "^9.7.4",
     "postcss": "^7.0.27",
     "postcss-cli": "^7.1.0",
+    "postcss-import": "^12.0.1",
     "tailwindcss": "^1.2.0"
-  },
-  "dependencies": {
-    "postcss-import": "^12.0.1"
   }
 }

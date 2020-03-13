@@ -1,16 +1,19 @@
 # jsmolka.github.io
 I might publish stuff here.
 
-# Setup
-Install `postcss-cli` and `autoprefixer` for Hugo Pipes.
+## Setup
+Install [Hugo](https://github.com/gohugoio/hugo) and the Hugo Pipes [requirements](https://gohugo.io/hugo-pipes/postcss/).
 
 ```
 npm install -g postcss-cli
 npm install -g autoprefixer
 ```
 
-# Development
-Run `npm run dev` to start the Hugo development server.
+Install node packages.
 
-# Build
-Run `npm run prod` to build the website.
+```
+npm install
+```
+
+## Build
+Run `npm run build` to build the website.
