@@ -1,0 +1,3 @@
+[submodule "icon"]
+  path = icon
+  url = https://github.com/jsmolka/icon
