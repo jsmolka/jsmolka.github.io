@@ -1,13 +1,6 @@
 {
   "name": "jsmolka.github.io",
-  "version": "1.0.0",
-  "description": "I might publish stuff here.",
   "author": "Julian Smolka",
-  "license": "MIT",
-  "scripts": {
-    "build": "hugo --gc",
-    "server": "hugo server -D --disableFastRender"
-  },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.1.0",
     "autoprefixer": "^9.7.4",

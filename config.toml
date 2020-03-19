@@ -1,4 +1,10 @@
-baseURL = "http://example.org/"
-languageCode = "en-us"
-title = "My New Hugo Site"
-staticDir = ["static", "icon/aseprite/web"]
+baseURL         = "/"
+title           = "eggception"
+copyright       = "Julian Smolka"
+languageCode    = "en-us"
+staticDir       = ["static", "icon/aseprite/web"]
+
+[params]
+  description = "Homepage and blog by Julian Smolka"
+  keywords    = "programming, emulation, eggvance"
+  themeColor  = "#ffffff"

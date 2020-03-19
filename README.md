@@ -1,7 +1,3 @@
-<div align="center">
-  <img alt="icon" height="128" src="https://raw.githubusercontent.com/jsmolka/icon/master/aseprite/bin/icon-512.png">
-</div>
-
 # jsmolka.github.io
 I might publish stuff here.
 
@@ -19,5 +15,8 @@ Install node packages.
 npm install
 ```
 
-## Build
-Run `npm run build` to build the website.
+Clone the submodules.
+
+```
+git submodule update --init
+```
