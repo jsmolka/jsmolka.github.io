@@ -2,4 +2,6 @@
 
 @import "tailwindcss/components";
 
+@import "assets/css/inter";
+
 @import "tailwindcss/utilities";
