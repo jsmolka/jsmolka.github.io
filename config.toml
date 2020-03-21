@@ -2,12 +2,13 @@ baseURL         = "/"
 title           = "eggception"
 copyright       = "Julian Smolka"
 languageCode    = "en-us"
-staticDir       = ["static", "icon/aseprite/web", "icon/aseprite/bin"]
+staticDir       = ["static", "icon/aseprite/web"]
+
+[author]
+  name = "Julian Smolka"
 
 [params]
-  description = "Homepage and blog by Julian Smolka"
-  keywords    = "programming, emulation, eggvance"
-  themeColor  = "#ffffff"
+  description = "The homepage of Julian Smolka"
 
 [menu]
   [[menu.main]]
