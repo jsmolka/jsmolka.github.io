@@ -16,7 +16,7 @@ module.exports = {
     require('postcss-import')({
       path: [ root ]
     }),
-    require('tailwindcss')(root + 'assets/css/tailwind.config.js'),
+    require('tailwindcss')(root + 'assets/scss/tailwind.config.js'),
     purgecss,
     require('autoprefixer')({
       grid: true

@@ -9,7 +9,11 @@ body {
 }
 
 .main a {
-  @apply underline transition duration-150 ease-in-out;
+  @apply underline;
+  @apply transition;
+  @apply duration-150;
+  @apply ease-in-out;
+
 }
 
 .main a:hover {
