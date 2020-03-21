@@ -1,7 +1,17 @@
-@import "tailwindcss/base";
+html {
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
 
-@import "tailwindcss/components";
+body {
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "calt", "tnum", "frac", "case", "rlig", "ss01";
+}
 
-@import "assets/css/inter";
+.main a {
+  @apply underline transition duration-150 ease-in-out;
+}
 
-@import "tailwindcss/utilities";
+.main a:hover {
+  @apply text-blue-500;
+}

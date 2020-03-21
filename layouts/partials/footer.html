@@ -1,1 +1,4 @@
-<footer />
+<footer class="flex flex-col sm:flex-row mx-auto p-10 font-medium text-center text-gray-600">
+  <span class="sm:px-4">&copy; {{ now.Format "2006" }}</span>
+  <span class="sm:px-4 sm:border-l sm:border-gray-600">{{ .Site.Copyright | safeHTML }}</span>
+</footer>

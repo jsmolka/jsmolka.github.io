@@ -1,8 +1,7 @@
-baseURL         = "/"
-title           = "eggception"
-copyright       = "Julian Smolka"
-languageCode    = "en-us"
-staticDir       = ["static", "icon/aseprite/web"]
+baseURL   = "/"
+title     = "eggception"
+copyright = "Julian Smolka"
+staticDir = ["static", "icon/aseprite/web"]
 
 [author]
   name = "Julian Smolka"

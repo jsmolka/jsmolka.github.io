@@ -15,9 +15,9 @@
 </title>
 
 {{ if .Site.IsServer }}
-  {{ $style := resources.Get "css/styles.css" | postCSS (dict "config" "./assets/css/postcss.config.js") }}
+  {{ $style := resources.Get "css/main.css" | postCSS (dict "config" "./assets/css/postcss.config.js") }}
   <link rel="stylesheet" href="{{ $style.Permalink }}">
 {{ else }}
-  {{ $style := resources.Get "css/styles.css" | postCSS (dict "config" "./assets/css/postcss.config.js") | minify | fingerprint }}
+  {{ $style := resources.Get "css/main.css" | postCSS (dict "config" "./assets/css/postcss.config.js") | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
 {{ end }}

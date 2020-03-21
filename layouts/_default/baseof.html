@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html class="font-body font-display antialiased" lang='{{ .Site.LanguageCode }}'>
+<html class="font-body font-display antialiased" lang="{{ .Site.Language }}">
   <head>
     {{- partial "head.html" . -}}
-    {{- partial "javascript.html" . -}}
   </head>
   <body class="flex flex-col min-h-screen">
     {{- partial "header.html" . -}}
-    <main class="flex-1 sm:mx-4 md:mx-12 lg:mx-24 mt-4 sm:mt-16">
-    {{- block "main" . }}{{- end }}
+
+    <main class="main max-w-screen-md m-auto p-4">
+      {{- block "main" . -}}{{ end }}
     </main>
-    {{- partial "footer.html" . -}}
+
+    {{ block "footer" . }}
+      {{- partial "footer.html" . -}}
+    {{ end }}
+
+    {{- partial "javascript.html" . -}}
   </body>
 </html>
