@@ -15,3 +15,7 @@ body {
 .main a:hover {
   @apply text-blue-500;
 }
+
+.no-hover:hover {
+  color: inherit !important;
+}

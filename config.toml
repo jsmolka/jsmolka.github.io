@@ -8,6 +8,7 @@ staticDir = ["static", "icon/aseprite/web"]
 
 [params]
   description = "The homepage of Julian Smolka"
+  github      = "jsmolka"
 
 [menu]
   [[menu.main]]
