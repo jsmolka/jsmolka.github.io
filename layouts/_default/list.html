@@ -1,8 +1,32 @@
 {{ define "main" }}
-{{ range .Pages }}
-  <article class="text-gray-700 mx-4 sm:mx-12 mb-4">
-      <h1 class="font-bold font-thin text-3xl text-gray-700"><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
-      {{ .Content }}
+  <article class="text-gray-800">
+    <h1 class="mb-5">{{ .Title }}</h1>
+
+    {{- if .Content }}
+      <div>{{ .Content }}</div>
+    {{- end }}
+
+    {{- range .Data.Pages.GroupByDate "2006" }}
+      <div class="block sm:flex mb-6">
+        <div class="opacity-75 text-3xl text-gray-700 mr-10">{{ .Key }}</div>
+
+        <ul class="w-full">
+          {{- range .Pages }}
+            <li class="py-3 border-b border-dashed border-gray-600">
+              <a class="flex justify-between" href="{{ .Permalink }}">
+                <span class="" >{{ .Title }}</span>
+                <span class="opacity-75">
+                  {{ if .Site.Params.dateformShort }}
+                      {{ .Date.Format .Site.Params.dateformShort }}
+                  {{ else }}
+                      {{ .Date.Format "Jan 2"}}
+                  {{ end }}
+                </span>
+              </a>
+            </li>
+          {{- end }}
+        </ul>
+      </div>
+    {{- end }}
   </article>
-{{ end }}
 {{ end }}

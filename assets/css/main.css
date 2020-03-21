@@ -1,7 +1,12 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
+@tailwind base;
+
+h1 {
+  @apply font-bold text-4xl text-gray-600;
+}
+
+@tailwind components;
 
 @import "assets/css/inter";
 @import "assets/css/styles";
 
-@import "tailwindcss/utilities";
+@tailwind utilities;

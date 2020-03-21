@@ -7,8 +7,12 @@ staticDir = ["static", "icon/aseprite/web"]
   name = "Julian Smolka"
 
 [params]
-  description = "The homepage of Julian Smolka"
-  github      = "jsmolka"
+  description     = "The homepage of Julian Smolka"
+  github          = "jsmolka"
+  dateform        = "Jan 2, 2006"
+  dateformShort   = "Jan 2"
+  dateformNum     = "2006-01-02"
+  dateformNumTime = "2006-01-02"
 
 [menu]
   [[menu.main]]
