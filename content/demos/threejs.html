@@ -1,0 +1,84 @@
+---
+title: "threejs"
+date: 2020-03-22
+author: "Julian Smolka"
+summary: "A simple threejs cube demo."
+type: customs
+---
+<div id="container" class="flex-1"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+<script>
+  function ready(callback) {
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+        setTimeout(callback, 1);
+    } else {
+        document.addEventListener("DOMContentLoaded", callback);
+    }
+  }
+
+  ready(function() {
+    let scene;
+    let camera;
+    let renderer;
+
+    const footer = document.getElementById('footer')
+    const container = document.getElementById('container');
+
+    const WIDTH = container.clientWidth;
+    const HEIGHT = container.clientHeight - footer.clientHeight;
+    const SPEED = 0.01;
+
+    function init() {
+      scene = new THREE.Scene();
+
+      initCube();
+      initCamera();
+      initRenderer();
+
+      container.appendChild(renderer.domElement);
+    }
+
+    function initCamera() {
+      camera = new THREE.PerspectiveCamera(70, WIDTH / HEIGHT, 1, 10);
+      camera.position.set(0, 3.5, 5);
+      camera.lookAt(scene.position);
+    }
+
+    function initRenderer() {
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setClearColor(0xFFFFFF, 1);
+      renderer.setSize(WIDTH, HEIGHT);
+    }
+
+    function initCube() {
+      cube = new THREE.Mesh(new THREE.CubeGeometry(2, 2, 2), new THREE.MeshNormalMaterial());
+      scene.add(cube);
+    }
+
+    function rotateCube() {
+      cube.rotation.x -= SPEED * 2;
+      cube.rotation.y -= SPEED;
+      cube.rotation.z -= SPEED * 3;
+    }
+
+    function render() {
+      requestAnimationFrame(render);
+      rotateCube();
+      renderer.render(scene, camera);
+    }
+
+    window.onresize = function() {
+      const width = container.clientWidth;
+      const height = container.clientHeight - footer.clientHeight;
+
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+
+      renderer.setSize(width, height);
+    };
+
+    init();
+    render();
+  });
+</script>
