@@ -1,8 +1,8 @@
 module.exports = {
   theme: {
     fontFamily: {
-      display: ['Inter', 'sans-serif'],
-      body: ['Inter', 'sans-serif']
+      display: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+      body: ['Inter', 'system-ui', '-apple-system', 'sans-serif']
     },
     extend: {}
   },

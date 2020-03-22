@@ -1,7 +1,8 @@
-baseURL   = "/"
-title     = "eggception"
-copyright = "Julian Smolka"
-staticDir = ["static", "icon/aseprite/web"]
+baseURL      = "/"
+title        = "eggception"
+copyright    = "Julian Smolka"
+staticDir    = ["static", "icon/aseprite/web"]
+disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
 
 [author]
   name = "Julian Smolka"

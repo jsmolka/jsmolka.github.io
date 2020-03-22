@@ -1,9 +1,9 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
+@tailwind base;
+@tailwind components;
 
-@import "assets/scss/_inter.scss";
-@import "assets/scss/_single.scss";
-@import "assets/scss/_single-posts.scss";
-@import "assets/scss/_styles.scss";
+@import "inter";
+@import "single";
+@import "single-posts";
+@import "styles";
 
-@import "tailwindcss/utilities";
+@tailwind utilities;

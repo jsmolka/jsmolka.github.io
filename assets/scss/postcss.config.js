@@ -17,9 +17,7 @@ module.exports = {
       path: [ root ]
     }),
     require('tailwindcss')(root + 'assets/scss/tailwind.config.js'),
-    purgecss,
-    require('autoprefixer')({
-      grid: true
-    })
+    require('autoprefixer'),
+    purgecss
   ]
 }

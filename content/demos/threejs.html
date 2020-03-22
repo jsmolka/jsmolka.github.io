@@ -10,10 +10,10 @@ type: customs
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
 <script>
   function ready(callback) {
-    if (document.readyState === "complete" || document.readyState === "interactive") {
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
         setTimeout(callback, 1);
     } else {
-        document.addEventListener("DOMContentLoaded", callback);
+        document.addEventListener('DOMContentLoaded', callback);
     }
   }
 
