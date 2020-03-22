@@ -5,5 +5,97 @@ html {
 
 body {
   text-rendering: optimizeLegibility;
-  font-feature-settings: "calt", "tnum", "frac", "case", "rlig", "ss01";
+  font-feature-settings: "calt" 0, "tnum", "frac", "case", "rlig", "ss01";
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+figure {
+  max-width: 100%;
+  margin: 25px 0;
+
+  figcaption {
+    font-size: 14px;
+    margin-top: 5px;
+    opacity: 0.8;
+  }
+}
+
+.figures {
+  display: flex;
+  max-width: 100%;
+  justify-content: center;
+
+  .figure {
+    img {
+      width: 100%;
+    }
+
+    &.half {
+      width: 50%;
+    }
+
+    &.full {
+      width: 100%;
+    }
+
+    &.left {
+      margin-left: 0;
+      margin-right: 10px;
+    }
+
+    &.center {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    &.right {
+      margin-left: 10px;
+      margin-right: 0;
+    }
+  }
+}
+
+ul, ol {
+  @apply p-0;
+  @apply ml-5;
+  @apply list-disc;
+}
+
+@screen sm {
+  ul, ol {
+    @apply ml-10;
+  }
+}
+
+blockquote {
+  @apply m-8;
+  @apply px-4;
+  @apply border-l-2;
+  @apply border-gray-600;
+
+  p:first-of-type {
+    @apply mt-0;
+  }
+
+  p:last-of-type {
+    @apply mb-0;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+
+  &:hover {
+    background: #a8a8a8;
+  }
 }
