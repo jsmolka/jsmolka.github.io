@@ -13,6 +13,19 @@ img {
   max-width: 100%;
 }
 
+table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 40px 0;
+  border-radius: 5px;
+}
+
+table, th, td {
+  border: 1px solid;
+  padding: 10px;
+}
+
 figure {
   max-width: 100%;
   margin: 25px 0;

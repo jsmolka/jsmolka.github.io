@@ -1,3 +1,3 @@
 @echo off
 
-hugo server -D --disableFastRender
+hugo server -D --disableFastRender --verbose

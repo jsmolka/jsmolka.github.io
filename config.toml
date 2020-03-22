@@ -1,9 +1,8 @@
-baseURL            = "/"
-title              = "eggception"
-copyright          = "Julian Smolka"
-staticDir          = ["static", "icon/aseprite/web"]
-disableKinds       = ["RSS", "taxonomy", "taxonomyTerm"]
-PygmentsCodeFences = false
+baseURL      = "/"
+title        = "eggception"
+copyright    = "Julian Smolka"
+staticDir    = ["static", "icon/aseprite/web"]
+disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
 
 [author]
   name = "Julian Smolka"
@@ -31,3 +30,11 @@ PygmentsCodeFences = false
   identifier = "eggvance"
   name       = "eggvance"
   url        = "/eggvance"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+  [markup.highlight]
+    codeFences = false
