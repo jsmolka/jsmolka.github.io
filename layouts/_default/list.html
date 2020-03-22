@@ -1,10 +1,6 @@
 {{ define "main" }}
   <article class="text-gray-800">
-    <h1 class="mb-5">{{ .Title }}</h1>
-
-    {{- if .Content }}
-      <div>{{ .Content }}</div>
-    {{- end }}
+    <h1 class="mb-5 font-bold text-4xl text-gray-600">{{ .Title }}</h1>
 
     {{- range .Data.Pages.GroupByDate "2006" }}
       <div class="block sm:flex mb-6">
@@ -17,9 +13,9 @@
                 <span class="" >{{ .Title }}</span>
                 <span class="opacity-75">
                   {{ if .Site.Params.dateformShort }}
-                      {{ .Date.Format .Site.Params.dateformShort }}
+                    {{ .Date.Format .Site.Params.dateformShort }}
                   {{ else }}
-                      {{ .Date.Format "Jan 2"}}
+                    {{ .Date.Format "Jan 2"}}
                   {{ end }}
                 </span>
               </a>

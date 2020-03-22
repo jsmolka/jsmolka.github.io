@@ -7,19 +7,3 @@ body {
   text-rendering: optimizeLegibility;
   font-feature-settings: "calt", "tnum", "frac", "case", "rlig", "ss01";
 }
-
-.main a {
-  @apply underline;
-  @apply transition;
-  @apply duration-150;
-  @apply ease-in-out;
-
-}
-
-.main a:hover {
-  @apply text-blue-500;
-}
-
-.no-hover:hover {
-  color: inherit !important;
-}
