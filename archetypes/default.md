@@ -1,8 +1,8 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
-date: {{ .Date }}
 author: "Julian Smolka"
 summary: ""
+date: {{ .Date }}
 draft: true
 ---
 

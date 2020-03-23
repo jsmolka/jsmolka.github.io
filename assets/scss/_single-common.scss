@@ -8,29 +8,12 @@
     @apply text-gray-600;
   }
 
-  h1 {
-    @apply text-4xl;
-  }
-
-  h2 {
-    @apply text-3xl;
-  }
-
-  h3 {
-    @apply text-2xl;
-  }
-
-  h4 {
-    @apply text-xl;
-  }
-
-  h5 {
-    @apply text-lg;
-  }
-
-  h6 {
-    @apply text-base;
-  }
+  h1 { @apply text-4xl;  }
+  h2 { @apply text-3xl;  }
+  h3 { @apply text-2xl;  }
+  h4 { @apply text-xl;   }
+  h5 { @apply text-lg;   }
+  h6 { @apply text-base; }
 
   p {
     @apply my-4;
@@ -45,6 +28,12 @@
     &:hover {
       @apply text-blue-500;
     }
+  }
+
+  figcaption {
+    @apply mt-1;
+    @apply text-sm;
+    @apply text-gray-600
   }
 
   ul, ol {
@@ -72,5 +61,18 @@
     p:last-of-type {
       @apply mb-0;
     }
+  }
+
+  table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 40px 0;
+    border-radius: 5px;
+  }
+
+  table, th, td {
+    border: 1px solid;
+    padding: 10px;
   }
 }
