@@ -5,7 +5,7 @@ html {
 
 body {
   text-rendering: optimizeLegibility;
-  font-feature-settings: "calt" 0, "tnum", "frac", "case", "rlig", "ss01";
+  font-feature-settings: "calt" 0, "case", "rlig", "ss03", "cv01", "cv02", "cv03", "cv04", "cv07";
 }
 
 img {
@@ -70,33 +70,6 @@ figure {
       margin-left: 10px;
       margin-right: 0;
     }
-  }
-}
-
-ul, ol {
-  @apply p-0;
-  @apply ml-5;
-  @apply list-disc;
-}
-
-@screen sm {
-  ul, ol {
-    @apply ml-10;
-  }
-}
-
-blockquote {
-  @apply m-8;
-  @apply px-4;
-  @apply border-l-2;
-  @apply border-gray-600;
-
-  p:first-of-type {
-    @apply mt-0;
-  }
-
-  p:last-of-type {
-    @apply mb-0;
   }
 }
 

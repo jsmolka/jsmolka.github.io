@@ -8,10 +8,7 @@
 
     {{- block "main" . -}}{{ end }}
 
-    {{ block "footer" . }}
-      {{- partial "footer.html" . -}}
-    {{ end }}
-
+    {{- partial "footer.html" . -}}
     {{- partial "javascript.html" . -}}
   </body>
 </html>
