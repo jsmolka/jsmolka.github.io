@@ -24,9 +24,9 @@
         </div>
         <div class="hidden sm:block">
           <div class="flex">
-            {{ range .Site.Menus.main }}
+            {{- range .Site.Menus.main }}
               <a href="{{ .URL | absURL }}" class="ml-1 px-3 py-2 text-gray-300 font-medium rounded-md hover:text-white hover:bg-gray-700 transition duration-150 ease-in-out">{{- .Name -}}</a>
-            {{ end }}
+            {{- end }}
           </div>
         </div>
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -44,9 +44,9 @@
     </div>
     <div :class="{ block: open, hidden: !open }" class="sm:hidden">
       <div class="px-2 pb-2">
-        {{ range .Site.Menus.main }}
+        {{- range .Site.Menus.main }}
           <a href="{{ .URL | absURL }}" class="block mb-1 px-3 py-2 text-gray-300 font-medium rounded-md hover:text-white hover:bg-gray-700 transition duration-150 ease-in-out">{{- .Name -}}</a>
-        {{ end }}
+        {{- end }}
       </div>
     </div>
   </nav>
