@@ -2,27 +2,33 @@
   <article class="text-gray-800">
     <h1 class="mb-4 font-bold text-4xl text-gray-600">{{ .Title }}</h1>
 
-    {{- range .Data.Pages.GroupByDate "2006" }}
-      <div class="block sm:flex mb-6">
-        <div class="opacity-75 text-3xl text-gray-700 mr-10">{{ .Key }}</div>
-
-        <ul class="w-full ml-0 list-none">
-          {{- range .Pages }}
-            <li class="py-3 border-b border-dashed border-gray-600">
-              <a class="flex justify-between" href="{{ .Permalink }}">
-                <span class="" >{{ .Title }}</span>
-                <span class="opacity-75">
-                  {{ if .Site.Params.dateformShort }}
-                    {{ .Date.Format .Site.Params.dateformShort }}
-                  {{ else }}
-                    {{ .Date.Format "Jan 2"}}
-                  {{ end }}
-                </span>
-              </a>
-            </li>
-          {{- end }}
-        </ul>
-      </div>
+    {{- if .Content }}
+      {{ .Content }}
     {{- end }}
+
+    <div class="mt-4">
+      {{- range .Data.Pages.GroupByDate "2006" }}
+        <div class="block sm:flex mb-6">
+          <div class="opacity-75 text-3xl text-gray-700 mr-10">{{ .Key }}</div>
+
+          <ul class="w-full ml-0 list-none">
+            {{- range .Pages }}
+              <li class="py-3 border-b border-dashed border-gray-600">
+                <a class="flex justify-between" href="{{ .Permalink }}">
+                  <span class="" >{{ .Title }}</span>
+                  <span class="opacity-75">
+                    {{ if .Site.Params.dateformShort }}
+                      {{ .Date.Format .Site.Params.dateformShort }}
+                    {{ else }}
+                      {{ .Date.Format "Jan 2"}}
+                    {{ end }}
+                  </span>
+                </a>
+              </li>
+            {{- end }}
+          </ul>
+        </div>
+      {{- end }}
+    </div>
   </article>
 {{ end }}
