@@ -4,7 +4,8 @@ const purgecss = process.env.HUGO_ENVIRONMENT === 'production'
   ? require('@fullhuman/postcss-purgecss')({
       content: [
         root + 'content/**/*.html',
-        root + 'layouts/**/*.html'
+        root + 'layouts/**/*.html',
+        root + 'assets/**/*.scss'
       ],
       defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
       fontFace: true
