@@ -1,9 +1,9 @@
 {{ if .Get "src" }}
-  <figure class="ml-6 first:ml-0 {{ with .Get "class" }}{{ . }}{{ end }}" >
-    <img class="w-full" src="/img/{{ .Get "src" | safeURL }}" {{ with .Get "caption" }} alt="{{ . }}" {{ end }} />
+  <figure class="ml-6 first:ml-0 {{- with .Get "class" -}}{{- . -}}{{- end -}}">
+    <img class="w-full" src="/img/{{- .Get "src" | safeURL -}}" {{- with .Get "caption" -}} alt="{{- . -}}" {{- end -}} />
 
-    {{ if .Get "caption" }}
-      <figcaption>{{ .Get "caption" }}</figcaption>
-    {{ end }}
+    {{- if .Get "caption" -}}
+      <figcaption>{{- .Get "caption" -}}</figcaption>
+    {{- end -}}
   </figure>
 {{ end }}

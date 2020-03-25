@@ -1,23 +1,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="author" content="{{ if .Params.author }}{{- .Params.author -}}{{ else }}{{ range .Site.Author }}{{- . -}} {{ end }}{{ end }}">
-<meta name="description" content="{{ if .IsHome }}{{- .Site.Params.description -}}{{ else }}{{- .Summary | plainify -}}{{ end }}">
-<link rel="canonical" href="{{ .Permalink }}" />
+<meta name="author" content="{{- if .Params.author -}}{{- .Params.author -}}{{- else -}}{{- range .Site.Author -}}{{- . -}} {{- end -}}{{- end -}}">
+<meta name="description" content="{{- if .IsHome -}}{{- .Site.Params.description -}}{{- else -}}{{- .Summary | plainify -}}{{- end -}}">
+<link rel="canonical" href="{{- .Permalink -}}">
 
 {{- partial "favicons.html" . -}}
 
 <title>
-  {{ if .IsHome }}
+  {{- if .IsHome -}}
     {{- $.Site.Title -}}
-  {{ else }}
+  {{- else -}}
     {{- .Title }} :: {{ $.Site.Title -}}
-  {{ end }}
+  {{- end -}}
 </title>
 
-{{ if .Site.IsServer }}
+{{- if .Site.IsServer -}}
   {{ $style := resources.Get "scss/main.scss" | resources.ToCSS | postCSS (dict "config" "assets/scss/postcss.config.js") }}
-  <link rel="stylesheet" href="{{ $style.Permalink }}">
-{{ else }}
+  <link rel="stylesheet" href="{{- $style.Permalink -}}">
+{{- else -}}
   {{ $style := resources.Get "scss/main.scss" | resources.ToCSS | postCSS (dict "config" "assets/scss/postcss.config.js") | minify | fingerprint }}
-  <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
-{{ end }}
+  <link rel="stylesheet" href="{{- $style.Permalink -}}" integrity="{{ $style.Data.Integrity }}">
+{{- end -}}
