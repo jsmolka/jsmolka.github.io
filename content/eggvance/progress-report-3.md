@@ -43,8 +43,6 @@ std::array<void(ARM::*)(u16), 1024> ARM::instr_thumb = {
   &ARM::Thumb_MoveShiftedRegister<0, 0>,
   &ARM::Thumb_MoveShiftedRegister<1, 0>,
   &ARM::Thumb_MoveShiftedRegister<2, 0>,
-  &ARM::Thumb_MoveShiftedRegister<3, 0>,
-  &ARM::Thumb_MoveShiftedRegister<4, 0>,
   // ...
 }
 
@@ -80,8 +78,7 @@ int carryAdd(u64 op1, u64 op2) {
 }
 
 int overflowAdd(u32 op1, u32 op2, u32 res) {
-  return sign(op1) == sign(op2)
-    && sign(op1) != sign(res);
+  return sign(op1) == sign(op2) && sign(op1) != sign(res);
 }
 ```
 
