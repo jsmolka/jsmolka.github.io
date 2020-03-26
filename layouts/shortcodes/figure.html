@@ -1,6 +1,6 @@
 {{ if .Get "src" }}
-  <figure class="ml-0 mt-6 sm:ml-6 sm:mt-0 first:ml-0 first:mt-0 {{- with .Get "class" -}}{{- . -}}{{- end -}}">
-    <img class="w-full" src="/img/{{- .Get "src" | safeURL -}}" {{- with .Get "caption" -}} alt="{{- . -}}" {{- end -}} />
+  <figure class="ml-0 mt-6 sm:ml-6 sm:mt-0 first:ml-0 first:mt-0 {{ with .Get "class" }}{{- . -}}{{ end }}">
+    <img class="w-full" src="/img/{{- .Get "src" | safeURL -}}" {{ with .Get "caption" }} alt="{{- . -}}" {{ end }}/>
 
     {{- if .Get "caption" -}}
       <figcaption>{{- .Get "caption" -}}</figcaption>
