@@ -3,6 +3,7 @@ const root = __dirname + '/../../';
 const purgecss = process.env.HUGO_ENVIRONMENT === 'production'
   ? require('@fullhuman/postcss-purgecss')({
       content: [
+        root + 'content/**/*.md',
         root + 'content/**/*.html',
         root + 'layouts/**/*.html',
         root + 'assets/**/*.scss'

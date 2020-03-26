@@ -50,7 +50,7 @@ The predecessor of the `collapse` function ate a sizable amount of CPU time and 
 Even though the GBA is using an LCD, its hardware behaves like a CRT (Cathode Ray Tube). In those displays the electron beam has to return to the start of the next line after finishing the previous one. This time period is called horizontal blank (or H-Blank). Once the whole frame has been drawn, the beam must return to the beginning of the frame which is called vertical blank (or V-Blank). A visual representation of this process can be found in figure 7 (with line numbers of the classic Game Boy, <a href="http://imrannazar.com/GameBoy-Emulation-in-JavaScript:-GPU-Timings">source</a>).
 
 {{<figures>}}
-  {{<figure src="blanking-intervals.png" caption="Figure 7: Blanking intervals" class="w-1/2">}}
+  {{<figure src="blanking-intervals.png" caption="Figure 7: Blanking intervals" class="w-full sm:w-1/2">}}
 {{</figures>}}
 
 Most of the game logic and graphics processing is done during the blanking intervals because they don't interfere with the scanline drawing process. Another reason is the fact that access to video memory outside of the blanking intervals is either restricted or has negative side effects, like reducing the total number of displayable objects. This restriction can be lifted by setting the "forced blank"-bit in the DISPCNT register, which causes a white line to be displayed. There isn't much to do emulation wise apart from filling the current scanline with white pixels.

@@ -4,7 +4,7 @@
       <div class="relative flex items-center justify-between h-16">
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex-shrink-0 px-2">
-            <a href="{{- .Site.BaseURL -}}">
+            <a href="{{ .Site.BaseURL }}">
               <svg class="block h-8 w-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 -0.5 16 16" shape-rendering="crispEdges">
                 <path stroke="#000000" d="M4 0h2M11 0h2M3 1h1M6 1h1M10 1h1M13 1h1M2 2h1M6 2h1M9 2h1M13 2h1M2 3h1M7 3h1M9 3h1M14 3h1M1 4h1M8 4h1M14 4h1M1 5h1M9 5h2M14 5h1M0 6h1M11 6h2M15 6h1M0 7h2M13 7h3M0 8h1M2 8h2M8 8h2M13 8h1M15 8h1M0 9h1M4 9h1M6 9h2M10 9h1M12 9h1M15 9h1M0 10h1M5 10h1M11 10h1M15 10h1M1 11h1M14 11h1M1 12h1M14 12h1M2 13h2M12 13h2M4 14h2M10 14h2M6 15h4" />
                 <path stroke="#25CAD4" d="M4 1h2M3 2h3M3 3h1M5 3h2M2 4h2M6 4h2M2 5h1M7 5h2M1 6h2M8 6h3M2 7h1M10 7h3M12 8h1" />
@@ -24,9 +24,9 @@
         </div>
         <div class="hidden sm:block">
           <div class="flex">
-            {{- range .Site.Menus.main -}}
-              <a href="{{- .URL | absURL -}}" class="ml-1 px-3 py-2 text-gray-300 font-medium rounded-md hover:text-white hover:bg-gray-700 transition duration-150 ease-in-out">{{- .Name -}}</a>
-            {{- end -}}
+            {{ range .Site.Menus.main }}
+              <a href="{{ .URL | absURL }}" class="ml-1 px-3 py-2 text-gray-300 font-medium rounded-md hover:text-white hover:bg-gray-700 transition duration-150 ease-in-out">{{ .Name }}</a>
+            {{ end }}
           </div>
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
@@ -44,9 +44,9 @@
     </div>
     <div :class="{ block: open, hidden: !open }" class="sm:hidden">
       <div class="px-2 pb-2">
-        {{- range .Site.Menus.main -}}
-          <a href="{{- .URL | absURL -}}" class="block mb-1 px-3 py-2 text-gray-300 font-medium rounded-md hover:text-white hover:bg-gray-700 transition duration-150 ease-in-out">{{- .Name -}}</a>
-        {{- end -}}
+        {{ range .Site.Menus.main }}
+          <a href="{{ .URL | absURL }}" class="block mb-1 px-3 py-2 text-gray-300 font-medium rounded-md hover:text-white hover:bg-gray-700 transition duration-150 ease-in-out">{{ .Name }}</a>
+        {{ end }}
       </div>
     </div>
   </nav>

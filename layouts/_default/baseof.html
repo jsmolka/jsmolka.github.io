@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html class="font-body antialiased" lang="{{- .Site.Language -}}">
+<html class="font-body antialiased" lang="{{ .Site.Language }}">
   <head>
-    {{- partial "head.html" . -}}
+    {{ partial "head.html" . }}
   </head>
   <body class="flex flex-col m-0 p-0 min-w-screen min-h-screen">
-    {{- partial "header.html" . -}}
+    {{ partial "header.html" . }}
 
     <main class="w-full max-w-screen-md m-auto p-4">
-      {{- block "main" . -}}{{- end -}}
+      {{ block "main" . }}
+      {{ end }}
     </main>
 
-    {{- partial "footer.html" . -}}
-    {{- partial "javascript.html" . -}}
+    {{ partial "footer.html" . }}
+    {{ partial "javascript.html" . }}
   </body>
 </html>
