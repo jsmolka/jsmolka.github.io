@@ -1,7 +1,6 @@
 baseURL      = "/"
 title        = "eggception"
 copyright    = "Julian Smolka"
-staticDir    = ["static", "icon/aseprite/web"]
 disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
 
 [author]
@@ -38,3 +37,16 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
 
   [markup.highlight]
     codeFences = false
+
+[module]
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+
+  [[module.mounts]]
+    source = "icon/aseprite/web"
+    target = "static"
+
+  [[module.mounts]]
+    source = "node_modules/three/build/three.min.js"
+    target = "static/js/three.min.js"
