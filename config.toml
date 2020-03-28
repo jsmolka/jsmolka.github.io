@@ -44,7 +44,7 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
     target = "static"
 
   [[module.mounts]]
-    source = "icon/aseprite/web"
+    source = "icon/web"
     target = "static"
 
   [[module.mounts]]

@@ -93,4 +93,22 @@
     @apply font-bold;
     @apply text-gray-600;
   }
+
+  a[href^="#fn:"] {
+    @apply no-underline;
+  }
+
+  a[href^="#fnref:"] {
+    @apply hidden;
+  }
+
+  .footnotes {
+    hr {
+      @apply hidden;
+    }
+
+    p {
+      @apply m-0;
+    }
+  }
 }
