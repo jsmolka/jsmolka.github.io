@@ -13,11 +13,82 @@ During the last months I have read the book Why We Sleep twice. Its author, [Mat
 
 Some of the most interesting sections in the book are not about sleep itself but a lack thereof. When talking to other people about the importance of sleep I found it difficult to remember facts about the negative impact of too little sleep on your overall health. This was my main motivation to read the book a second time and mark everything interesting and disturbing I come across. In this post I want to connect the facts stated with the studies they originated from.
 
+### Basics
+<!--
+Circadian rhythm
+https://www.cell.com/current-biology/fulltext/S0960-9822(06)02609-1?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0960982206026091%3Fshowall%3Dtrue
+-->
+
+- REM / NREM sleep, what are they, what is their purpose
+- sleep deprivation definition
+- sleep efficiency
+- sleep latency
+- circadian rhythm definition (latin circa-dien, approx. 24h)
+- chronotype
+
+### Circadian Misalignment
+<!-- https://www.pnas.org/content/113/10/E1402 -->
+<!-- https://link.springer.com/article/10.1007/s11739-018-1900-4 -->
+<!--
+http://www.medicine.mcgill.ca/epidemiology/hanley/communicationCommunicationCommunication/nejm199604043341416.pdf
+Major disasters, including the nuclear accident at Chernobyl, the Exxon Valdez oil
+spill, and the destruction of the space shuttle Challenger, have
+been linked to insufficient sleep, disrupted circadian rhythms,
+or both on the part of involved supervisors and staff.2,3
+ -->
+
+- circadian rhythm misalignments cause
+  - increase in systolic and diastolic blood pressure
+  - decreased heart rate during wake and increased heart rate during sleep periods
+  - reduce the sleep opportunity-associated dip in blood pressure and heart rate
+  - affect the 24h urinary epinephrine and norepinephrine excretion rates
+  - decrease markers of cardiac vagal modulation
+  - increased prevalence of CV disease in night workers versus day workers
+  - modest sleep deprivation / reduced sleep efficiency?
+
+### Daylight Saving Time
+Daylight saving time (DST) is a topical phenomenon to explore, having just woken up from a night with one less hour of sleep than usual. In his book, Walker devotes merely one paragraph to this topic and states that the rate of heart attacks (acute myocardial infarction, AMI) increases the day after the spring shift (transition to DST, losing one hour) and decreases the day following the autumn shift (transition from DST, gaining one hour) [^walker-wws-159]. Unfortunately he doesn't provide any concrete values or proof to back up his claims.
+
+The first important fact when talking about the negative effects of DST is the actual amount of sleep lost per night. A study in high school students has demonstrated that this value averages 32 minutes during the workweek while weekends remain unchanged. In addition, there were no statistically relevant changes in sleep efficiency or latency [^medina-dst]. A different study focused on workplace injuries arrived at 40 minutes of lost sleep per night [^barnes-dst].
+
+An article published in 2018 compared six papers and noticed a 4 to 29 percent increased risk of AMI during the first week of the spring shift. For the autumn shift, only one of the studies noticed a 44 percent increase of AMI cases compared to the 1 to 29 percent decrease in the remaining ones. The article concludes that there exists an association between DST and a modest increase of AMI occurrence during the spring shift [^manfredini-dst].
+
+Another study examined the German MONICA / KORA Myocardial Infarction Registry with a sample size of 25,499 cases of coronary deaths and non-fatal AMI in individuals aged 25 to 74. It arrives at similar results like the previous article. The rate of AMI increased by 11 percent in the week following the spring shift to DST and decreased by less than one percent in the week after the autumn shift in September [^kirchberger-dst].
+
+An article published in the New English Journal of Medicine analyzed 1,398,784 traffic accidents in Canada during the years 1991 and 1992. The accidents on Mondays before, immediately after and one week after a DST transition were used to observe the consequences of small changes in the amount of sleep on humans. The spring shift caused an 8 percent increase and the autumn shift a 6 percent decrease in accidents [^coren-dst]. Interesting is the slight increase in accidents on Mondays following a DST transition, regardless of losing or gaining one hour of sleep opportunity.
+
+{{<figures>}}
+ {{<figure src="sleep/dst-traffic-accidents.png" caption="Number of traffic accidents on the mondays before and after a DST transition" class="w-full sm:w-2/3">}}
+{{</figures>}}
+
+### Sleep Fragmentation
+<!-- Todo: correlation at best -->
+A study [^lim-sleep-fragmentation] published in 2013 took a group of 737 older adults without dementia and quantified their sleep fragmentation over a ten day period. The devices used to determine the severity of sleep fragmentation were actigraphs, small wristwatch-like accelerometers.
+
+Participants underwent structured annual evaluations which included nineteen neuropsychological tests to identify the development of Alzheimer's disease and to assess the rate of their cognitive decline. Over a six year period individuals with a high fragmentation of sleep (90th percentile) showed a 1.5 fold increase in risk of developing AD and a more rapid rate of cognitive decline.
+
+{{<figures>}}
+  {{<figure src="sleep/sleep-fragmentation-ad-probability.jpg" caption="Expected risk of developing AD for high (solid line, 90th percentile) and low (dotted line, 10th percentile) levels of sleep fragmentation">}}
+  {{<figure src="sleep/sleep-fragmentation-cognitive-decline.jpg" caption="Expected cognitive decline for high (solid line, 90th percentile) and low (dotted line, 10th percentile) levels of sleep fragmentation">}}
+{{</figures>}}
+
+The authors end their work with the following conclusion.
+
+> This work demonstrates an association between sleep fragmentation, cognitive decline, and the risk of subsequent AD. This raises the possibility that interventions to decrease sleep fragmentation may offer a potentially useful strategy for reducing the risk of AD and slowing cognitive decline in older individuals.
+
 <!-- Basics -->
 <!-- Discuss difference between REM and NREM sleep -->
 <!-- Define sleep deprivation P225, not insomnia -->
 <!-- Sleep efficiency -->
 
+### References
+[^walker-wws-159]: Matthew Walker - Why We Sleep, page 159
+[^manfredini-dst]: [R. Manfredini, F. Fabbian, A. De Giorgi, B. Zucchi, R. Cappadona, F. Signani, N. Katsiki, D.P. Mikhailidis. Daylight saving time and myocardial infarction: should we be worried? A review of the evidence](https://www.europeanreview.org/article/14306)
+[^kirchberger-dst]: [Kirchberger, I., Wolf, K., Heier, M. et al. Are daylight saving time transitions associated with changes in myocardial infarction incidence? Results from the German MONICA/KORA Myocardial Infarction Registry. BMC Public Health 15, 778 (2015)](https://bmcpublichealth.biomedcentral.com/articles/10.1186/s12889-015-2124-4)
+[^lim-sleep-fragmentation]: [Lim ASP; Kowgier M; Yu L; Buchman AS; Bennett DA. Sleep fragmentation and the risk of incident alzheimer's disease and cognitive decline in older persons. SLEEP 2013;36(7):1027-1032](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3669060/)
+[^coren-dst]: [Coren, S. Daylight savings time and traffic accidents. New England Journal of Medicine](http://www.medicine.mcgill.ca/epidemiology/hanley/communicationCommunicationCommunication/nejm199604043341416.pdf)
+[^medina-dst]: [Diana Medina, Matthew Ebben, PhD, Sara Milrad, BA, Brianna Atkinson, BA, Ana C. Krieger, MD, MPH. Adverse Effects of Daylight Saving Time on Adolescents' Sleep and Vigilance](https://jcsm.aasm.org/doi/10.5664/jcsm.4938#d3e609)
+[^barnes-dst]: [C. Barnes, D. Wagner. Changing to Daylight Saving Time Cuts Into Sleep and Increases Workplace Injuries](https://www.apa.org/pubs/journals/releases/apl9451317.pdf)
 
 <!--
 # P11
