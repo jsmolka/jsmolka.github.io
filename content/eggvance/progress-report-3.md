@@ -3,7 +3,7 @@ title: "Progress Report #3"
 author: "Julian Smolka"
 summary: "Progress report #3 of the eggvance GBA emulator."
 date: 2019-11-03
-type: posts
+type: post
 ---
 This month in an average emulator - a complete rewrite. That's what happens when you aren't satisfied with your project and you have a whole month of spare time. Some parts have been reused but almost every area has been improved to some extent, accuracy and performance-wise.
 

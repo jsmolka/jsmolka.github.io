@@ -3,7 +3,7 @@ title: "About Sleep"
 author: "Julian Smolka"
 summary: "Thoughts about the book Why We Sleep by Matthew Walker."
 date: 2020-03-27
-type: posts
+type: post
 draft: true
 ---
 

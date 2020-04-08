@@ -3,7 +3,7 @@ title: "Progress Report #4"
 author: "Julian Smolka"
 summary: "Progress report #4 of the eggvance GBA emulator."
 date: 2020-01-07
-type: posts
+type: post
 ---
 Hello there! It has been quite a while since the last progress report, two months to be exact. Development of the emulator has slowed down a little during that time because I started working as a JavaScript developer. Apart from cleaning up my codebase, I also fixed and implemented some things which might be of interest to some people.
 

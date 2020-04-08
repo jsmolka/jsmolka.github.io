@@ -3,7 +3,7 @@ title: "Progress Report #1"
 author: "Julian Smolka"
 summary: "Progress report #1 of the eggvance GBA emulator."
 date: 2019-08-31
-type: posts
+type: post
 ---
 At the end of last year I finished my introduction project to C++. Since then, I read a couple of books about the language and I really started to like it. Finishing my previous project also meant looking for a new one. The idea of creating a GBA emulator originated in a C++ class where one of my fellow students asked if the emulator I was playing on was the project for the class. I said no but the idea got stuck in my head (thanks Robert).
 

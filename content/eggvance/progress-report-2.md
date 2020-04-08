@@ -3,7 +3,7 @@ title: "Progress Report #2"
 author: "Julian Smolka"
 summary: "Progress report #2 of the eggvance GBA emulator."
 date: 2019-09-30
-type: posts
+type: post
 ---
 One month has passed since the last update and I'm back with another progress report. This month I've focused on improving the accuracy and the performance of the pixel processing unit (PPU). Its main purpose is converting the data stored inside memory, like VRAM and OAM (Object Attribute Memory), into pixels you can see on the screen.
 
