@@ -46,7 +46,3 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
   [[module.mounts]]
     source = "icon/web"
     target = "static"
-
-  [[module.mounts]]
-    source = "node_modules/three/build/three.min.js"
-    target = "static/js/three.min.js"
