@@ -20,3 +20,41 @@ body {
     @apply bg-gray-600;
   }
 }
+
+table {
+  @apply w-full;
+  @apply border-collapse;
+}
+
+table, th, td {
+  @apply p-2;
+  @apply border;
+  @apply border-gray-500;
+}
+
+th {
+  @apply font-bold;
+  @apply text-gray-600;
+}
+
+button {
+  @apply px-4;
+  @apply py-2;
+  @apply bg-white;
+  @apply text-gray-700;
+  @apply border;
+  @apply border-gray-500;
+  @apply shadow-sm;
+  @apply rounded-md;
+  @apply transition;
+  @apply ease-in-out;
+  @apply duration-150;
+
+  &:hover {
+    @apply bg-gray-100;
+  }
+
+  &:focus {
+    @apply outline-none;
+  }
+}
