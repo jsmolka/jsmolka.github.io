@@ -7,6 +7,12 @@ body {
   font-feature-settings: "calt" 0, "tnum", "case", "rlig", "cv01", "cv02", "cv03", "cv04", "cv07";
 }
 
+.index {
+  background: url("/img/codelines.svg");
+  background-size: center;
+  background-position: center;
+}
+
 ::-webkit-scrollbar {
   @apply w-2;
   @apply h-2;
