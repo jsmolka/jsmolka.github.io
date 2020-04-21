@@ -1,6 +1,6 @@
 {{ define "main" }}
-  <article class="w-full my-4 text-gray-800">
-    <h1 class="mb-4 font-bold text-4xl text-gray-600">{{ .Title }}</h1>
+  <article class="w-full my-4 text-dark-200">
+    <h1 class="mb-4 font-bold text-4xl text-dark-100">{{ .Title }}</h1>
 
     {{ if .Content }}
       {{ .Content }}
@@ -9,14 +9,14 @@
     <div class="mt-4">
       {{ range .Data.Pages.GroupByDate "2006" }}
         <div class="block sm:flex mb-6">
-          <div class="mr-10 text-3xl text-gray-600">{{ .Key }}</div>
+          <div class="mr-10 text-3xl text-dark-100">{{ .Key }}</div>
 
           <ul class="w-full">
             {{ range .Pages }}
-              <li class="py-3 border-b border-dashed border-gray-600">
+              <li class="py-3 border-b border-dashed border-dark-400">
                 <a class="flex justify-between" href="{{ .Permalink }}">
                   <span>{{ .Title }}</span>
-                  <span class="text-gray-600">
+                  <span class="text-dark-200">
                     {{ if .Site.Params.dateformShort }}
                       {{ .Date.Format .Site.Params.dateformShort }}
                     {{ else }}
