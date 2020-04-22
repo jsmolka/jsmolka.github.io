@@ -1,12 +1,12 @@
 ﻿---
 title: "WebAssembly Port"
 author: "Julian Smolka"
-summary: "The WebAssembly port of the eggvance GBA emulator."
+summary: "WebAssembly port of the eggvance GBA emulator."
 date: 2020-04-12
 type: custom
 ---
 <div class="single flex flex-col items-center" x-data="{ controls: false }">
-  <canvas id="canvas" class="w-full bg-dark-500" oncontextmenu="event.preventDefault()" style="max-height: 491px"></canvas>
+  <canvas id="canvas" class="w-full bg-dark-500"></canvas>
   <input id="rom-input" class="hidden" type="file" onchange="Module.loadRom()">
   <input id="backup-input" class="hidden" type="file" onchange="Module.loadBackup()">
   <div class="flex mt-4">
@@ -38,8 +38,8 @@ type: custom
   const inputRom = document.getElementById('rom-input');
   const inputBackup = document.getElementById('backup-input');
 
-  let fileId = 0;
   var Module = {
+    fileId: 0,
     canvas: document.getElementById('canvas'),
     preInit() {
       FS.writeFile('eggvance.toml', `
@@ -91,16 +91,16 @@ type: custom
     },
     loadRom() {
       this.loadFile(inputRom, data => {
-        fileId++;
-        FS.writeFile(`rom${fileId}.gba`, data);
-        this.eggvanceLoadRom(`rom${fileId}.gba`);
+        this.fileId++;
+        FS.writeFile(`rom${this.fileId}.gba`, data);
+        this.eggvanceLoadRom(`rom${this.fileId}.gba`);
       });
     },
     loadBackup(file) {
       this.loadFile(inputBackup, data => {
-        fileId++;
-        FS.writeFile(`rom${fileId}.sav`, data);
-        this.eggvanceLoadBackup(`rom${fileId}.sav`);
+        this.fileId++;
+        FS.writeFile(`rom${this.fileId}.sav`, data);
+        this.eggvanceLoadBackup(`rom${this.fileId}.sav`);
       });
     },
     loadDemo() {
@@ -111,12 +111,27 @@ type: custom
       request.onload = event => {
         const data = new Uint8Array(request.response);
 
-        fileId++;
-        FS.writeFile(`rom${fileId}.gba`, data);
-        this.eggvanceLoadRom(`rom${fileId}.gba`);
+        this.fileId++;
+        FS.writeFile(`rom${this.fileId}.gba`, data);
+        this.eggvanceLoadRom(`rom${this.fileId}.gba`);
       }
       request.send();
     }
   };
+
+  window.onload = () => {
+    const canvas = document.getElementById('canvas');
+    const width  = canvas.clientWidth;
+    const height = 2 * width / 3;
+
+    const style = document.createElement("style");
+    style.appendChild(document.createTextNode(`#canvas { width: ${width}px; height: ${height}px }`));
+    document.head.appendChild(style);
+
+    window.onresize = () => {
+      style.remove();
+      canvas.height = 2 * canvas.width / 3;
+    }
+  }
 </script>
 <script async src=/wasm/eggvance.js></script>
