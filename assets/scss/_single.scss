@@ -2,6 +2,7 @@
 
 .single {
   @extend .base;
+  @apply w-full;
 
   h1, h2, h3, h4, h5, h6 {
     @apply my-4;
@@ -34,13 +35,8 @@
   }
 
   table {
+    @apply w-full;
     @apply my-8;
-  }
-
-  blockquote {
-    @apply px-4;
-    @apply border-l-2;
-    @apply border-gray-400;
   }
 
   a[href^="#fnref:"] {
