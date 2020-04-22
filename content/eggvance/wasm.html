@@ -5,7 +5,7 @@ summary: "WebAssembly port of the eggvance GBA emulator."
 date: 2020-04-12
 type: custom
 ---
-<div class="single flex flex-col items-center" x-data="{ controls: false }">
+<div class="base flex flex-col items-center" x-data="{ controls: false }">
   <canvas id="canvas" class="w-full bg-dark-500"></canvas>
   <input id="rom-input" class="hidden" type="file" onchange="Module.loadRom()">
   <input id="backup-input" class="hidden" type="file" onchange="Module.loadBackup()">
@@ -13,7 +13,7 @@ type: custom
     <button class="btn mr-4" onclick="inputRom.click()">Load rom</button>
     <button class="btn mr-4" onclick="inputBackup.click()">Load save</button>
     <button class="btn mr-4" onclick="Module.loadDemo()">Load demo</button>
-    <button class="btn" @click="controls = !controls">Show controls</button>
+    <button class="btn" @click="controls = !controls" x-text="`${controls ? 'Hide' : 'Show'} controls`"/>
   </div>
   <div class="w-full mt-4" :class="{ hidden: !controls }">
   {{<markdown>}}
