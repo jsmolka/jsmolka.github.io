@@ -20,7 +20,7 @@
   figcaption {
     @apply mt-1;
     @apply text-sm;
-    @apply text-dark-300;
+    @apply text-dark-200;
   }
 
   ul {
@@ -49,6 +49,22 @@
   blockquote {
     @apply px-4;
     @apply border-l-2;
-    @apply border-gray-400;
+    @apply border-dark-400;
+  }
+
+  button {
+    @apply px-2;
+    @apply py-1;
+    @apply text-dark-100;
+    @apply bg-dark-700;
+    @apply rounded-sm;
+
+    &:hover {
+      @apply text-dark-300;
+    }
+
+    &:focus {
+      @apply outline-none;
+    }
   }
 }
