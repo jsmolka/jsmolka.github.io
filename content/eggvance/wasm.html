@@ -10,10 +10,10 @@ type: custom
   <input id="rom-input" class="hidden" type="file" onchange="Module.loadRom()">
   <input id="backup-input" class="hidden" type="file" onchange="Module.loadBackup()">
   <div class="flex mt-4">
-    <button class="btn mr-4" onclick="inputRom.click()">Load rom</button>
-    <button class="btn mr-4" onclick="inputBackup.click()">Load save</button>
-    <button class="btn mr-4" onclick="Module.loadDemo()">Load demo</button>
-    <button class="btn" @click="controls = !controls" x-text="`${controls ? 'Hide' : 'Show'} controls`"/>
+    <button class="mr-4" onclick="inputRom.click()">Load rom</button>
+    <button class="mr-4" onclick="inputBackup.click()">Load save</button>
+    <button class="mr-4" onclick="Module.loadDemo()">Load demo</button>
+    <button @click="controls = !controls" x-text="`${controls ? 'Hide' : 'Show'} controls`"/>
   </div>
   <div class="w-full mt-4" :class="{ hidden: !controls }">
   {{<markdown>}}
