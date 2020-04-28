@@ -22,12 +22,11 @@ pre[class*="language-"] {
 }
 
 :not(pre) > code {
-  @apply px-2;
-  @apply py-1;
   @apply rounded-sm;
   @apply bg-dark-600;
   @apply text-dark-200;
 
+  padding: 2px 4px;
   font-family: Consolas, Monaco, monospace;
 }
 
