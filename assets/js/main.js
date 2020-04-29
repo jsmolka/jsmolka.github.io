@@ -1,11 +1,11 @@
 function extendPrism() {
   Prism.languages.armasm = {
-    'comment': {
+    comment: {
       pattern: /;.*/,
       greedy: true
     },
-    'keyword': /\b(?:r0|r1|r2|r3|r4|r5|r6|r7|r8|r9|r10|r11|r12|r13|r14|r15|pc|lr|sp|mov|mul|cmp|bne|beq)\b/,
-    'number': /\b0x[\da-f]+\b|(?:\b\d+\.?\d*|\B\.\d+)(?:e[+-]?\d+)?/i,
+    keyword: /\b(?:r0|r1|r2|r3|r4|r5|r6|r7|r8|r9|r10|r11|r12|r13|r14|r15|pc|lr|sp|mov|mul|cmp|bne|beq)\b/,
+    number: /\b0x[\da-f]+\b|(?:\b\d+\.?\d*|\B\.\d+)(?:e[+-]?\d+)?/i
   };
 
   function extendRegex(regex, item) {
