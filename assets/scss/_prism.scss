@@ -34,148 +34,56 @@ pre[class*="language-"] {
   @apply opacity-75;
 }
 
-.token.atrule {
-    color: #c678dd;
+.token.cdata,
+.token.comment,
+.token.doctype,
+.token.prolog {
+	color: #636f88;
 }
 
-.token.attr-name {
-    color: #d19a66;
-}
-
-.token.attr-value {
-    color: #98c379;
-}
-
-.token.attribute {
-    color: #98c379;
-}
-
-.token.boolean {
-    color: #d19a66;
-}
-
-.token.builtin {
-    color: #98c379;
-}
-
-.token.cdata {
-    color: #5C6370;
-}
-
-.token.char {
-    color: #98c379;
-}
-
-.token.class {
-    color: #d19a66;
-}
-
-.token.class-name {
-    color: #e6c07b;
-}
-
-.token.comment {
-    color: #5c6370;
-}
-
-.token.constant {
-    color: #d19a66;
-}
-
-.token.deleted {
-    color: #d19a66;
-}
-
-.token.doctype {
-    color: #5c6370;
-}
-
-.token.entity {
-    color: #5c6370;
-}
-
-.token.function {
-    color: #61afef;
-}
-
-.token.hexcode {
-    color: #d19a66;
-}
-
-.token.id {
-  color: #7c4dff;
-    color: #c678dd;
-}
-
-.token.important {
-  color: #7c4dff;
-    color: #c678dd;
-}
-
-.token.inserted {
-    color: #98c379;
-}
-
-.token.keyword {
-    color: #c678dd;
+.language-css .token.string,
+.style .token.string,
+.token.boolean,
+.token.constant,
+.token.deleted,
+.token.entity,
+.token.keyword,
+.token.operator,
+.token.property,
+.token.punctuation,
+.token.symbol,
+.token.tag,
+.token.url,
+.token.variable {
+	color: #81a1c1;
 }
 
 .token.number {
-    color: #d19a66;
+	color: #b48ead;
 }
 
-.token.operator {
-    color: #56b6c2;
-}
-
-.token.prolog {
-    color: #5c6370;
-}
-
-.token.property {
-    color: #d19a66;
-}
-
-.token.pseudo-class {
-    color: #98c379;
-}
-
-.token.pseudo-element {
-    color: #98c379;
-}
-
-.token.punctuation {
-    color: #abb2bf;
-}
-
-.token.regex {
-    color: #c678dd;
-}
-
-.token.selector {
-    color: #e06c75;
-}
-
+.token.attr-name,
+.token.builtin,
+.token.char,
+.token.inserted,
+.token.selector,
 .token.string {
-    color: #98c379;
+	color: #a3be8c;
 }
 
-.token.symbol {
-    color: #d19a66;
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #88c0d0;
 }
 
-.token.tag {
-    color: #e06c75;
+.token.regex,
+.token.important {
+	color: #ebcb8b;
 }
 
-.token.unit {
-    color: #d19a66;
-}
-
-.token.url {
-    color: #56b6c2;
-}
-
-.token.variable {
-    color: #c678dd;
+.token.bold,
+.token.important {
+  @apply font-bold;
 }
