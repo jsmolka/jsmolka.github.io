@@ -13,7 +13,7 @@ It felt weird that the only reason for me going to the event was the support act
   {{<figure src="shinedown-concert.jpg">}}
 {{</figures>}}
 
-The concert itself was amazing. Brent Smith, the lead singer, mixed his almost studio like performance with some short and inspiring dialogs with the crowd. The chosen songs were among their best and a few were altered to something I’ve never heard before, such as a heavier version of Simple Man with everybody singing along. The songs I remember hearing are listed down below to prevent forgetting this awesome night.
+The concert itself was amazing. Brent Smith, the lead singer, mixed his almost studio like performance with some short and inspiring dialogs with the crowd. The chosen songs were among their best and a few were altered to something I’ve never heard before, such as a heavier version of Simple Man with everybody singing along (future me here, [this one](https://www.youtube.com/watch?v=8IF_aFuJ7MM)). The songs I remember hearing are listed down below to prevent forgetting this awesome night.
 
 - [Simple Man](https://www.youtube.com/watch?v=rgFQ6WmxdMs)
 - [Sound Of Madness](https://www.youtube.com/watch?v=WGt-8adyabk)

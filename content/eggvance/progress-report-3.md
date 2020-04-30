@@ -65,24 +65,12 @@ This problem was caused by skipping the BIOS and directly jumping inside the ROM
 Running mGBA's [test suite](https://github.com/mgba-emu/suite) made be realize flaws in my carry / overflow detection mechanism for arithmetic operations, which caused sprite flickering bugs in games like Mario Kart. The basic add, subtract and reverse subtract operations were doing fine, but their "[operation] with carry" counterparts resulted in a wrong carry or overflow flag. I found a nice [website](http://teaching.idallen.com/dat2343/10f/notes/040_overflow.txt) which explains overflow detection for basic addition and subtraction.
 
 ```cpp
-int zero(u32 value) {
-  return value == 0;
-}
-
-int sign(u32 value) {
-  return value >> 31;
-}
-
-int carryAdd(u64 op1, u64 op2) {
+bool carryAdd(u64 op1, u64 op2) {
   return (op1 + op2) > 0xFFFF'FFFF;
-}
-
-int overflowAdd(u32 op1, u32 op2, u32 res) {
-  return sign(op1) == sign(op2) && sign(op1) != sign(res);
 }
 ```
 
-The functions above can be used to set the zero, negative, carry and overflow flags of the CPU's status register. Please note that the arguments of the `carryAdd` function are 64-bit values to prevent 32-bit overflow and narrowing conversions. A simple example for their usage is the `add` function shown below.
+The function above can be used to check if the addition of two operands results in a carry. Please note that the arguments are 64-bit instead 32-bit integers to prevent overflow during addition or while creating the operand itself. An example for its usage can be seen in the `add` function.
 
 ```cpp
 u32 ARM::add(u32 op1, u32 op2, bool flags) {
