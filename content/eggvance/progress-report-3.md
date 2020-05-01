@@ -86,7 +86,7 @@ u32 ARM::add(u32 op1, u32 op2, bool flags) {
 }
 
 u32 ARM::adc(u32 op1, u32 op2, bool flags) {
-  // Wrong - op2 might overflow
+  // Wrong, op2 might overflow
   return add(op1, op2 + cpsr.c, flags);
 }
 ```

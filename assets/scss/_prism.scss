@@ -38,7 +38,7 @@ pre[class*="language-"] {
 .token.comment,
 .token.doctype,
 .token.prolog {
-	color: #636f88;
+  color: #636f88;
 }
 
 .language-css .token.string,
@@ -55,11 +55,11 @@ pre[class*="language-"] {
 .token.tag,
 .token.url,
 .token.variable {
-	color: #81a1c1;
+  color: #81a1c1;
 }
 
 .token.number {
-	color: #b48ead;
+  color: #b48ead;
 }
 
 .token.attr-name,
@@ -68,19 +68,19 @@ pre[class*="language-"] {
 .token.inserted,
 .token.selector,
 .token.string {
-	color: #a3be8c;
+  color: #a3be8c;
 }
 
 .token.atrule,
 .token.attr-value,
 .token.function,
 .token.class-name {
-	color: #88c0d0;
+  color: #88c0d0;
 }
 
 .token.regex,
 .token.important {
-	color: #ebcb8b;
+  color: #ebcb8b;
 }
 
 .token.bold,
