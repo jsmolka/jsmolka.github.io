@@ -16,19 +16,19 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
 
 [menu]
   [[menu.main]]
-  identifier = "about"
-  name       = "About"
-  url        = "/about"
+    identifier = "about"
+    name       = "About"
+    url        = "/about"
 
   [[menu.main]]
-  identifier = "blog"
-  name       = "Blog"
-  url        = "/blog"
+    identifier = "blog"
+    name       = "Blog"
+    url        = "/blog"
 
   [[menu.main]]
-  identifier = "eggvance"
-  name       = "eggvance"
-  url        = "/eggvance"
+    identifier = "eggvance"
+    name       = "eggvance"
+    url        = "/eggvance"
 
 [markup]
   [markup.goldmark]
