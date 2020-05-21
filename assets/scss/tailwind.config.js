@@ -21,14 +21,29 @@ module.exports = {
           800: '#131619',
           900: '#0D0F11'
         }
+      },
+      borderWidth: {
+        1: '1px'
       }
-    }
+    },
+    darkSelector: '.dark-mode'
   },
   variants: {
+    backgroundColor: [
+      'dark'
+    ],
+    borderColor: [
+      'dark'
+    ],
+    textColor: [
+      'dark'
+    ],
     margin: [
       'first',
       'responsive'
     ]
   },
-  plugins: []
+  plugins: [
+    require('tailwindcss-dark-mode')()
+  ]
 }

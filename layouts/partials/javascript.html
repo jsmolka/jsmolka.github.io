@@ -1,5 +1,6 @@
 {{ $main := resources.Get "js/main.js" }}
+{{ $theme := resources.Get "js/theme.js" }}
 {{ $prism := resources.Get "js/vendor/prism.js" }}
 {{ $alpine := resources.Get "js/vendor/alpine.js" }}
-{{ $script := slice $prism $alpine $main | resources.Concat "js/main.js" | resources.Minify }}
+{{ $script := slice $prism $alpine $main $theme | resources.Concat "js/main.js" | resources.Minify }}
 <script type="text/javascript" src="{{ $script.RelPermalink }}"></script>

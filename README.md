@@ -20,3 +20,6 @@ Clone the submodules.
 ```
 git submodule update --init
 ```
+
+## Credits
+The theme is based on [hello-friend-ng](https://github.com/rhazdon/hugo-theme-hello-friend-ng) and has been rewritten in [tailwindcss](https://github.com/tailwindcss/tailwindcss).
