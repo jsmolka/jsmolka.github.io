@@ -1,9 +1,17 @@
 .base {
-  @apply text-dark-200;
+  @apply text-light-800;
+
+  .dark-mode & {
+    @apply text-dark-200;
+  }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold;
-    @apply text-dark-100;
+    @apply text-light-900;
+
+    .dark-mode & {
+      @apply text-dark-100;
+    }
   }
 
   h1 { @apply text-4xl;  }
@@ -14,13 +22,16 @@
   h6 { @apply text-base; }
 
   a {
-    color: #88c0d0;
+    color: #81a1c1;
+
+    .dark-mode & {
+      color: #88c0d0;
+    }
   }
 
   figcaption {
     @apply mt-1;
     @apply text-sm;
-    @apply text-dark-200;
   }
 
   ul {
@@ -39,29 +50,50 @@
   table, th, td {
     @apply p-2;
     @apply border;
-    @apply border-dark-400;
+    @apply border-light-600;
+
+    .dark-mode & {
+      @apply border-dark-400;
+    }
   }
 
   th {
     @apply font-bold;
-    @apply text-dark-100;
+    @apply text-light-900;
+
+    .dark-mode & {
+      @apply text-dark-100;
+    }
   }
 
   blockquote {
     @apply px-4;
     @apply border-l-2;
-    @apply border-dark-400;
+    @apply border-light-500;
+
+    .dark-mode {
+      @apply border-dark-400;
+    }
   }
 
   button {
     @apply px-2;
     @apply py-1;
-    @apply text-dark-100;
-    @apply bg-dark-700;
     @apply rounded-sm;
+    @apply text-light-900;
+    @apply bg-light-300;
+
+    .dark-mode & {
+      @apply text-dark-100;
+      @apply bg-dark-700;
+    }
 
     &:hover {
-      @apply text-dark-300;
+      @apply text-light-600;
+
+      .dark-mode & {
+        @apply text-dark-300;
+      }
     }
 
     &:focus {

@@ -20,6 +20,17 @@ module.exports = {
           700: '#1A1D21',
           800: '#131619',
           900: '#0D0F11'
+        },
+        light: {
+          100: '#f5f5f5',
+          200: '#eeeeee',
+          300: '#e0e0e0',
+          400: '#bdbdbd',
+          500: '#9e9e9e',
+          600: '#757575',
+          700: '#616161',
+          800: '#424242',
+          900: '#212121',
         }
       },
       borderWidth: {
@@ -30,13 +41,19 @@ module.exports = {
   },
   variants: {
     backgroundColor: [
-      'dark'
+      'dark',
+      'dark-hover',
+      'hover'
     ],
     borderColor: [
-      'dark'
+      'dark',
+      'dark-hover',
+      'hover'
     ],
     textColor: [
-      'dark'
+      'dark',
+      'dark-hover',
+      'hover'
     ],
     margin: [
       'first',

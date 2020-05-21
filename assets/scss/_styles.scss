@@ -7,22 +7,28 @@ body {
   font-feature-settings: "calt" 0, "tnum", "case", "rlig", "cv01", "cv02", "cv03", "cv04", "cv07";
 }
 
-.codelines {
-  background: url("/img/codelines.svg");
-  background-size: center;
-  background-position: center;
-}
-
 ::-webkit-scrollbar {
   @apply w-2;
   @apply h-2;
-  @apply bg-dark-500;
+  @apply bg-white;
+
+  .dark-mode & {
+    @apply bg-dark-500;
+  }
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-dark-400;
+  @apply bg-light-400;
+
+  .dark-mode & {
+    @apply bg-dark-400;
+  }
 
   &:hover {
-    @apply bg-dark-300;
+    @apply bg-light-500;
+
+    .dark-mode & {
+      @apply bg-dark-300;
+    }
   }
 }

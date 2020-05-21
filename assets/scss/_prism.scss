@@ -2,6 +2,7 @@ code[class*="language-"],
 pre[class*="language-"] {
   @apply rounded-sm;
   @apply bg-dark-600;
+  @apply text-dark-200;
   @apply whitespace-pre;
 
   font-family: Consolas, Monaco, monospace;
@@ -23,8 +24,13 @@ pre[class*="language-"] {
 
 :not(pre) > code {
   @apply rounded-sm;
-  @apply bg-dark-600;
-  @apply text-dark-200;
+  @apply bg-light-100;
+  @apply text-light-800;
+
+  .dark-mode & {
+    @apply bg-dark-600;
+    @apply text-dark-200;
+  }
 
   padding: 2px 4px;
   font-family: Consolas, Monaco, monospace;

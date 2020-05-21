@@ -6,8 +6,8 @@ function updateMetaThemeColor() {
   meta.setAttribute(
     'content',
     html.classList.contains('dark-mode')
-      ? '#252627'
-      : '#fafafa'
+      ? '#24292E'
+      : '#f5f5f5'
   );
 }
 
