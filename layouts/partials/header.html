@@ -18,23 +18,23 @@
           <div class="h-6 ml-3 mr-4 border-l-1 border-light-900 dark:border-dark-100"></div>
           <button @click="toggleTheme()" class="inline-flex p-2 items-center justify-center hover:text-light-600 dark-hover:text-dark-300 focus:outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path transform="translate(1, 1)" d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22 3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7 13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+              <path transform="translate(1, 1)" d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22 3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7 13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z" />
             </svg>
           </button>
         </div>
         <div class="absolute inset-y-0 right-0 px-2 flex items-center sm:hidden">
           <button @click="toggleTheme()" class="inline-flex items-center justify-center p-2 hover:text-light-600 dark-hover:text-dark-300 focus:outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path transform="translate(1, 1)" d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22 3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7 13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+              <path transform="translate(1, 1)" d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22 3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7 13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z" />
             </svg>
           </button>
           <button @click="open = !open" class="inline-flex ml-2 items-center justify-center p-2 hover:text-light-600 dark-hover:text-dark-300 focus:outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line :class="{ 'hidden': open, 'inline-flex': !open }" x1="3" y1="12" x2="21" y2="12" />
-              <line :class="{ 'hidden': open, 'inline-flex': !open }" x1="3" y1="6" x2="21" y2="6" />
-              <line :class="{ 'hidden': open, 'inline-flex': !open }" x1="3" y1="18" x2="21" y2="18" />
-              <line :class="{ 'hidden': !open, 'inline-flex': open }" x1="18" y1="6" x2="6" y2="18" />
-              <line :class="{ 'hidden': !open, 'inline-flex': open }" x1="6" y1="6" x2="18" y2="18" />
+              <line :class="{ 'hidden':  open, 'inline-flex': !open }" x1=" 3" y1="12" x2="21" y2="12" />
+              <line :class="{ 'hidden':  open, 'inline-flex': !open }" x1=" 3" y1=" 6" x2="21" y2=" 6" />
+              <line :class="{ 'hidden':  open, 'inline-flex': !open }" x1=" 3" y1="18" x2="21" y2="18" />
+              <line :class="{ 'hidden': !open, 'inline-flex':  open }" x1="18" y1=" 6" x2=" 6" y2="18" />
+              <line :class="{ 'hidden': !open, 'inline-flex':  open }" x1=" 6" y1=" 6" x2="18" y2="18" />
             </svg>
           </button>
         </div>
@@ -43,7 +43,7 @@
     <div :class="{ block: open, hidden: !open }" class="sm:hidden">
       <div class="px-2 pb-2">
         {{ range .Site.Menus.main }}
-          <a href="{{ .URL | absURL }}" class="block mb-1 px-3 py-2 hover:text-dark-300">{{ .Name }}</a>
+          <a href="{{ .URL | absURL }}" class="block mb-1 px-3 py-2 hover:text-light-600 dark-hover:text-dark-300">{{ .Name }}</a>
         {{ end }}
       </div>
     </div>

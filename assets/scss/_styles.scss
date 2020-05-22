@@ -18,14 +18,14 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-light-400;
+  @apply bg-light-500;
 
   .dark-mode & {
     @apply bg-dark-400;
   }
 
   &:hover {
-    @apply bg-light-500;
+    @apply bg-light-600;
 
     .dark-mode & {
       @apply bg-dark-300;

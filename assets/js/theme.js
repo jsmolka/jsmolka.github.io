@@ -22,7 +22,7 @@ function toggleTheme() {
 function initTheme() {
   const theme = window.localStorage.getItem('theme');
 
-  html.classList.toggle('dark-mode', theme !== 'light');
+  html.classList.toggle('dark-mode', theme == null || theme === 'dark');
 
   updateMetaThemeColor();
 }
