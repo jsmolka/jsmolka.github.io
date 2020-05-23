@@ -1,4 +1,33 @@
-function extendPrism() {
+const html = document.getElementsByTagName('html')[0];
+
+function updateMetaThemeColor() {
+  const meta = document.querySelector('meta[name=theme-color]');
+
+  meta.setAttribute(
+    'content',
+    html.classList.contains('dark-mode')
+      ? '#24292E'
+      : '#f5f5f5'
+  );
+}
+
+function toggleTheme() {
+  const dark = html.classList.toggle('dark-mode');
+
+  window.localStorage.setItem('theme', dark ? 'dark' : 'light');
+
+  updateMetaThemeColor();
+}
+
+function initTheme() {
+  const theme = window.localStorage.getItem('theme');
+
+  html.classList.toggle('dark-mode', theme == null || theme === 'dark');
+
+  updateMetaThemeColor();
+}
+
+function initPrism() {
   Prism.languages.armasm = {
     comment: {
       pattern: /;.*/,
@@ -8,15 +37,10 @@ function extendPrism() {
     number: /\b0x[\da-f]+\b|(?:\b\d+\.?\d*|\B\.\d+)(?:e[+-]?\d+)?/i
   };
 
-  function extendRegex(regex, item) {
-    const items = regex.source.split('|');
-    items.splice(1, 0, item);
-
-    return new RegExp(items.join('|'));
-  }
-
-  Prism.languages.cpp.keyword = extendRegex(Prism.languages.cpp.keyword, 'u8|u16|u32|u64|s8|s16|s32|s64|uint');
-  Prism.languages.cpp['class-name'].pattern = extendRegex(Prism.languages.cpp['class-name'].pattern, 'enum class');
+  const keywords = Prism.languages.cpp.keyword.source.split('|');
+  keywords.splice(1, 0, 'u8|u16|u32|u64|s8|s16|s32|s64|uint');
+  Prism.languages.cpp.keyword = new RegExp(keywords.join('|'));
 }
 
-extendPrism();
+initTheme();
+initPrism();
