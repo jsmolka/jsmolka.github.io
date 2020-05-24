@@ -22,7 +22,7 @@
   h6 { @apply text-base; }
 
   a {
-    color: #81a1c1;
+    color: saturate(darken(#88c0d0, 10%), 10%);
 
     .dark-mode & {
       color: #88c0d0;

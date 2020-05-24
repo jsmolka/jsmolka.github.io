@@ -1,9 +1,14 @@
 code[class*="language-"],
 pre[class*="language-"] {
   @apply rounded-sm;
-  @apply bg-dark-600;
-  @apply text-dark-200;
   @apply whitespace-pre;
+  @apply bg-light-100;
+  @apply text-light-800;
+
+  .dark-mode & {
+    @apply bg-dark-600;
+    @apply text-dark-200;
+  }
 
   font-family: Consolas, Monaco, monospace;
 
@@ -11,6 +16,7 @@ pre[class*="language-"] {
   hyphens: none;
 
   .table {
+    // Override tailwind
     display: inline;
   }
 }
@@ -44,7 +50,11 @@ pre[class*="language-"] {
 .token.comment,
 .token.doctype,
 .token.prolog {
-  color: #636f88;
+  color: lighten(#636f88, 15%);
+
+  .dark-mode & {
+    color: #636f88;
+  }
 }
 
 .language-css .token.string,
@@ -61,11 +71,19 @@ pre[class*="language-"] {
 .token.tag,
 .token.url,
 .token.variable {
-  color: #81a1c1;
+  color: saturate(darken(#81a1c1, 10%), 10%);
+
+  .dark-mode & {
+    color: #81a1c1;
+  }
 }
 
 .token.number {
-  color: #b48ead;
+  color: saturate(#b48ead, 10%);
+
+  .dark-mode & {
+    color: #b48ead;
+  }
 }
 
 .token.attr-name,
@@ -74,14 +92,22 @@ pre[class*="language-"] {
 .token.inserted,
 .token.selector,
 .token.string {
-  color: #a3be8c;
+  color: saturate(darken(#a3be8c, 10%), 10%);
+
+  .dark-mode & {
+    color: #a3be8c;
+  }
 }
 
 .token.atrule,
 .token.attr-value,
 .token.function,
 .token.class-name {
-  color: #88c0d0;
+  color: saturate(darken(#88c0d0, 10%), 10%);
+
+  .dark-mode & {
+    color: #88c0d0;
+  }
 }
 
 .token.regex,
