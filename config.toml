@@ -1,5 +1,5 @@
 baseURL      = "/"
-title        = "eggception"
+title        = "eggcpt"
 copyright    = "Julian Smolka"
 disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
 
@@ -21,12 +21,12 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
     url  = "/about"
 
   [[menu.main]]
-    name = "Posts"
-    url  = "/posts"
+    name = "GBA"
+    url  = "/gba"
 
   [[menu.main]]
-    name = "eggvance"
-    url  = "/eggvance"
+    name = "Posts"
+    url  = "/posts"
 
 [markup]
   [markup.goldmark]

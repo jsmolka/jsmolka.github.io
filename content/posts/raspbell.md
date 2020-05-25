@@ -1,7 +1,7 @@
 ---
 title: "Raspbell"
 author: "Julian Smolka"
-summary: "Send doorbell alerts using a Pi 4 and a sound sensor."
+summary: "A little post about raspbell."
 date: 2020-05-23
 type: post
 ---

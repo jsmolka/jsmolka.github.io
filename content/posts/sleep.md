@@ -1,7 +1,7 @@
 ---
 title: "About Sleep"
 author: "Julian Smolka"
-summary: "Thoughts about the book Why We Sleep by Matthew Walker."
+summary: "Thoughts about Why We Sleep by Matthew Walker."
 date: 2020-03-27
 type: post
 draft: true

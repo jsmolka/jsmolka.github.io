@@ -1,6 +1,6 @@
 ---
 title: "Posts"
 author: "Julian Smolka"
-summary: "Posts about random things."
+summary: "Random posts."
 date: 2019-12-13
 ---
