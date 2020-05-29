@@ -21,8 +21,8 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
     url  = "/about"
 
   [[menu.main]]
-    name = "GBA"
-    url  = "/gba"
+    name = "eggvance"
+    url  = "/eggvance"
 
   [[menu.main]]
     name = "Posts"
