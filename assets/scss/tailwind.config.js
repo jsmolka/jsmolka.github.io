@@ -42,18 +42,16 @@ module.exports = {
   variants: {
     backgroundColor: [
       'dark',
-      'dark-hover',
       'hover'
     ],
     borderColor: [
       'dark',
-      'dark-hover',
       'hover'
     ],
     textColor: [
       'dark',
-      'dark-hover',
-      'hover'
+      'hover',
+      'focus'
     ],
     margin: [
       'first',
