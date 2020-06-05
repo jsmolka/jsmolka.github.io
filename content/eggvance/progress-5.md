@@ -9,15 +9,116 @@ draft: true
 Over four months have passed since the last progress report. During that period I invested a lot of time into cleaning up the current codebase, improving performance and adding some nice features. Unfortunately there were no fixes to broken games so please don't expect nice screenshots of before / after comparisons.
 
 ### State Dependent Dispatching
-During development I made some performance tradeoffs in favor of clean and readable code (writing clean code is still something I am struggling with). On the other hand I am also a performance junky so every frame per seconds counds and makes me feel better about the emulator.
+The first topic I want to talk about is something I call state dependent dispatching (even though dispatching is probably the wrong technical term for this situation). Emulators must handle lots of hardware states simultaneously in order to function correctly. Most of them can be changed by writing to an I/O registers or even during the execution of a single instruction. Examples for such state in GBA are the following:
 
-| Commit | Hash                                                                                            | Improvement           | Pokémon Emerald | Yoshi's Island |
-|--------|-------------------------------------------------------------------------------------------------|-----------------------|-----------------|----------------|
-| 441    | [368955c0](https://github.com/jsmolka/eggvance/commit/368955c02f911243aaf2b2e8dfc9ce9d849b8f93) | Baseline              | 432.1 fps       | 455.0 fps      |
-| 462    | [7007ab8a](https://github.com/jsmolka/eggvance/commit/7007ab8a2a9721cf47c437fb20d4f1e2e560fc43) | GPR class removed     | 460.8 fps       | 481.7 fps      |
-| 479    | [fc00b845](https://github.com/jsmolka/eggvance/commit/fc00b845df0963aca0ddfcf4598a5672ac930d8f) | Instruction templates | 489.4 fps       | 511.7 fps      |
-| 482    | [a3a8fca2](https://github.com/jsmolka/eggvance/commit/a3a8fca2c0ee01024668d77e817e05470b4eac94) | Basic dispatching     | 522.8 fps       | 542.1 fps      |
-| 483    | [326b4809](https://github.com/jsmolka/eggvance/commit/326b4809b398f051807a93b2bc4e9879fef60567) | Improved dispatching  | 556.9 fps       | 574.4 fps      |
+- Which state is the processor in?
+- Is the CPU halted until the next interrupt?
+- Has an interrupt been requested?
+- Are timers running?
+- Is DMA active?
+
+This amounts to five invariants which need to be checked before, while or after every executed instruction. The old implementation of my CPU used a nested if-else-chain to evaulate each state and act accordingly. This sounds quite reasonable until you realize that this is the hot path we are talking about. This is where I present to you the innermost CPU loop, the pit of hell and profilers worst nightmare (a shortened pseudo-code skeleton at least):
+
+```cpp
+void ARM::execute() {
+  if (dma) {
+    // Run DMA
+  } else {
+    if (halted) {
+      if (timers) {
+        // Run timers
+      } else {
+        // Zero cycles
+      }
+      return;
+    } else {
+      if (interrupted) {
+        // Handle interrupt
+      } else {
+        if (thumb) {
+          // Execute Thumb instruction
+        } else {
+          // Execute ARM instruction
+        }
+      }
+    }
+  }
+  if (timers) {
+    // Run timers
+  }
+}
+```
+
+It looks much worse than it actually is but you get the idea. Lots of different states require lots of if-else-statements. This results in code with lots of branches, something modern CPU don't like. Emulators are know for their bad branch prediction because the branches don't tend to follow a predictable pattern.
+
+So how can we get around this massive if-else-chain and transform it into something faster. Well, most of these state change rather infrequently and don't need constant re-evaluation. Therefore the easiest thing would be storing the current emulator state in a variable and then calling a dispatch function made for that specific state until it changes. This reduces the number of branches to almost zero.
+
+```cpp
+class ARM {
+  enum State {
+    kStateThumb = 1 << 0,  // Processor mode
+    kStateHalt  = 1 << 1,
+    kStateIrq   = 1 << 2,
+    kStateDma   = 1 << 3,
+    kStateTimer = 1 << 4
+  };
+
+  uint state;
+}
+```
+
+I will explain state dependent dispatching for the processor mode. There exists a specific `bx` instruction (speak branch and exchange) which allows the processor to change its mode. If the lowest bit in the target address is equal to one, the processor changes its mode to Thumb (16-bit). Otherwise it remains in ARM mode (32-bit). The example given below changes the `state` variable when switching from ARM to Thumb mode. If we want to change back from Thumb to ARM mode we need to clear this again.
+
+```cpp
+if (cpsr.t = addr & 0x1) {
+  // Change processor state to thumb
+  state |= kStateThumb;
+} else {
+  // No state changes
+}
+```
+
+Actions similar to this have to be done at all places which relate to states defined in the `State` enum. Once we have a functional `state` variable in place we can start thinking about writing a `dispatch` function which takes the state into consideration. The five different state require 32 different dispatch functions to be defined (in theory at least, the actual number would be lower). Here we can use C++'s templates to create an optimized dispatch function for each state case without writing more than one function.
+
+```cpp
+template<uint state>
+void ARM::dispatch() {
+  while (cycles > 0 && this->state == state) {
+    if (state & kStateThumb) {
+      // Execute Thumb instruction
+    } else {
+      // Execute ARM instruction
+    }
+  }
+}
+```
+
+The `state & kStateThumb` part of the function will be evaluated at compile time and has no runtime cost. All that's left to do is calling the correct dispatch function for the current `state`. Each `dispatch` function runs as long as the `state` remains the same and there are processor cycles to burn through.
+
+```cpp
+void ARM::run(int cycles) {
+  this->cycles += cycles;
+
+  while (cycles > 0) {
+    switch (state) {
+      case 0: dispatch<0>(); break;
+      case 1: dispatch<1>(); break;
+      case 2: dispatch<3>(); break;
+      // ...
+    }
+  }
+}
+```
+
+What would a performance post be without comparing numbers. I actually intended this one to be about multiple improvements had but I decided to focus on the most important thing. GPR class removal and instruction template LUTs aren't nearly as interesting and impactful as state dependent dispatching (the later has also been discussed in a [previous progress report]({{< ref "progress-3.md#optimizing-instruction-execution" >}})). Now look at this wonderful table.
+
+| Commit | Hash                                                                                            | Improvement                | Pokémon Emerald | Yoshi's Island |
+|--------|-------------------------------------------------------------------------------------------------|----------------------------|-----------------|----------------|
+| 441    | [368955c0](https://github.com/jsmolka/eggvance/commit/368955c02f911243aaf2b2e8dfc9ce9d849b8f93) | Baseline                   | 432.1 fps       | 455.0 fps      |
+| 462    | [7007ab8a](https://github.com/jsmolka/eggvance/commit/7007ab8a2a9721cf47c437fb20d4f1e2e560fc43) | GPR class removed          | 460.8 fps       | 481.7 fps      |
+| 479    | [fc00b845](https://github.com/jsmolka/eggvance/commit/fc00b845df0963aca0ddfcf4598a5672ac930d8f) | Instruction template LUTs  | 489.4 fps       | 511.7 fps      |
+| 482    | [a3a8fca2](https://github.com/jsmolka/eggvance/commit/a3a8fca2c0ee01024668d77e817e05470b4eac94) | Basic state dispatching    | 522.8 fps       | 542.1 fps      |
+| 483    | [326b4809](https://github.com/jsmolka/eggvance/commit/326b4809b398f051807a93b2bc4e9879fef60567) | Improved state dispatching | 556.9 fps       | 574.4 fps      |
 
 ### Efficient Bit Iteration
 The block data transfer instructions of the ARM7 encode their transferred registers in a binary register list (`rlist`). Each set bit in this list represents a register which needs to be transferred during execution. Take `0b0111` for example, which will transfer registers one to three but not register four.
@@ -60,7 +161,7 @@ In the end this whole section could be titled 'premature optimization'. Implemen
 ### Improving Tests
 The last part of this progress report is dedicated to my [GBA test suite](https://github.com/jsmolka/gba-suite). I developed most of it simultaneously with the eggvance CPU to ensure correctness. The whole thing is writting is pure assembly to have the maximum control over it. This was especially importing during the start where lots of instructions weren't implemented yet. At some point I move the suite into its own repository because it became its own project.
 
-Since then it resulted in some CPU edge case fixes in [mGBA](https://github.com/mgba-emu/mgba) and other open-source emulators. These poor developers had to work with a test suite which was meant for personal usage. It had no user interface at all and stores the number of the first failed test in a register. The only graphical things about it were a green screen on success and a red screen after failing a test. That's why I decided to add a minimal user interface.
+Since then it resulted in some CPU edge case fixes in [mGBA](https://github.com/mgba-emu/mgba) and other open-source emulators. These poor developers had to work with a test suite which was meant for personal usage. It had no user interface at all and stored the number of the first failed test in a register. The only graphical things about it were a green screen on success and a red screen after failing a test. That's why I decided to add a minimal user interface.
 
 ```cpp
 u8 glpyh[8] = {
@@ -106,3 +207,5 @@ With the all text rendering functions in place I was able to add a simple user i
 {{</figures>}}
 
 ### Conclusion
+- the whole thing became much longer than expected
+- committed the table in mid feb and now is june
