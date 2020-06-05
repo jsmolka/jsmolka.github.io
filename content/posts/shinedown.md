@@ -1,7 +1,7 @@
 ---
 title: "Shinedown Concert"
 author: "Julian Smolka"
-summary: "Thoughts about the Alter Bridge / Shinedown concert at Haus Auensee in Leipzig."
+summary: "A short post about the Alter Bridge / Shinedown concert at Haus Auensee in Leipzig."
 date: 2019-12-14
 type: post
 ---

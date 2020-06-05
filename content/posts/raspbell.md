@@ -1,7 +1,7 @@
 ---
 title: "Raspbell"
 author: "Julian Smolka"
-summary: "A little post about raspbell."
+summary: "A short post about raspbell."
 date: 2020-05-23
 type: post
 ---
