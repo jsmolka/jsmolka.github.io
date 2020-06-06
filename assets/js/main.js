@@ -1,5 +1,7 @@
 const html = document.getElementsByTagName('html')[0];
 
+let onThemeChanged = dark => {};
+
 function isDarkTheme() {
   return html.classList.contains("dark-mode");
 }
@@ -16,6 +18,7 @@ function toggleTheme() {
   window.localStorage.setItem('theme', dark ? 'dark' : 'light');
 
   updateMetaThemeColor(dark);
+  onThemeChanged(dark);
 
   return dark;
 }
