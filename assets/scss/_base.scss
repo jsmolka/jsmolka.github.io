@@ -80,19 +80,26 @@
     @apply px-2;
     @apply py-1;
     @apply rounded-sm;
-    @apply bg-light-200;
+    @apply bg-white;
     @apply text-light-800;
+    @apply border-light-200;
+    @apply border;
+    @apply rounded;
+    @apply shadow;
 
     .dark-mode & {
-      @apply bg-dark-700;
+      @apply bg-dark-500;
       @apply text-dark-200;
+      @apply border-dark-800;
+
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.35), 0 1px 2px 0 rgba(0, 0, 0, 0.29);
     }
 
     &:hover {
-      @apply text-light-600;
+      @apply bg-light-100;
 
       .dark-mode & {
-        @apply text-dark-300;
+        background: #31373d;
       }
     }
 

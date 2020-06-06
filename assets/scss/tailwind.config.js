@@ -22,7 +22,7 @@ module.exports = {
           900: '#0d0f11'
         },
         light: {
-          100: '#f5f5f5',
+          100: '#fafafa',
           200: '#eeeeee',
           300: '#e0e0e0',
           400: '#bdbdbd',
