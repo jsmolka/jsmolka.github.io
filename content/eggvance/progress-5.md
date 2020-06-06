@@ -2,22 +2,21 @@
 title: "Progress Report #5"
 author: "Julian Smolka"
 summary: "Progress report #5 of the eggvance emulator."
-date: 2020-05-11
+date: 2020-06-06
 type: post
-draft: true
 ---
-Over four months have passed since the last progress report. During that period I invested a lot of time into cleaning up the current codebase, improving performance and adding some nice features. Unfortunately there were no fixes to broken games so please don't expect nice screenshots of before / after comparisons.
+Over four months have passed since the last progress report. During that period I invested a lot of time into cleaning up the current codebase, improving performance and adding some nice features. Unfortunately, there were no notable fixes to broken games so please don't expect nice screenshots of before / after comparisons.
 
 ### State Dependent Dispatching
-The first topic I want to talk about is something I call state dependent dispatching (even though dispatching is probably the wrong technical term for this situation). Emulators must handle lots of hardware states simultaneously in order to function correctly. Most of them can be changed by writing to an I/O registers or even during the execution of a single instruction. Examples for such state in GBA are the following:
+The first topic I want to talk about is something I call 'state dependent dispatching' (even though dispatching is probably the wrong technical term for this situation). Emulators must handle lots of hardware states simultaneously in order to function correctly. Most of them can be changed by writing to an I/O registers or even during the execution of a single instruction. Examples for such states in GBA are:
 
-- Which state is the processor in?
+- Which mode is the processor in?
 - Is the CPU halted until the next interrupt?
 - Has an interrupt been requested?
 - Are timers running?
 - Is DMA active?
 
-This amounts to five invariants which need to be checked before, while or after every executed instruction. The old implementation of my CPU used a nested if-else-chain to evaulate each state and act accordingly. This sounds quite reasonable until you realize that this is the hot path we are talking about. This is where I present to you the innermost CPU loop, the pit of hell and profilers worst nightmare (a shortened pseudo-code skeleton at least):
+This amounts to five invariants which need to be checked before, while or after every executed instruction. The old CPU implementation used a nested if-else chain to evaluate each state and act accordingly. This sounds quite reasonable until you realize that this is the hot path we are talking about. This is where I present to you the innermost CPU loop, the pit of hell and profilers worst nightmare (a shortened pseudo-code skeleton at least):
 
 ```cpp
 void ARM::execute() {
@@ -26,9 +25,9 @@ void ARM::execute() {
   } else {
     if (halted) {
       if (timers) {
-        // Run timers
+        // Run timers until interrupt
       } else {
-        // Zero cycles
+        // Set cycles to zero
       }
       return;
     } else {
@@ -49,9 +48,9 @@ void ARM::execute() {
 }
 ```
 
-It looks much worse than it actually is but you get the idea. Lots of different states require lots of if-else-statements. This results in code with lots of branches, something modern CPU don't like. Emulators are know for their bad branch prediction because the branches don't tend to follow a predictable pattern.
+It looks much worse than it actually is but you get the idea. Lots of different states require lots of if-else statements. This results in code with many branches, something a modern CPU doesn't like. Emulators are know for their bad branch prediction because the branches don't tend to follow a predictable pattern. Adding more branches to each instructions just aggravates this problem.
 
-So how can we get around this massive if-else-chain and transform it into something faster. Well, most of these state change rather infrequently and don't need constant re-evaluation. Therefore the easiest thing would be storing the current emulator state in a variable and then calling a dispatch function made for that specific state until it changes. This reduces the number of branches to almost zero.
+So how can we get around this massive if-else chain and transform it into something faster. Well, most of these states change rather infrequently and don't need constant re-evaluation. Therefore the easiest thing would be storing the current emulator state in a variable and then calling a dispatch function made for that specific state until it changes. This reduces the number of branches to almost zero and reduced their runtime overhead to a minimum.
 
 ```cpp
 class ARM {
@@ -67,7 +66,7 @@ class ARM {
 }
 ```
 
-I will explain state dependent dispatching for the processor mode. There exists a specific `bx` instruction (speak branch and exchange) which allows the processor to change its mode. If the lowest bit in the target address is equal to one, the processor changes its mode to Thumb (16-bit). Otherwise it remains in ARM mode (32-bit). The example given below changes the `state` variable when switching from ARM to Thumb mode. If we want to change back from Thumb to ARM mode we need to clear this again.
+I will explain 'state dependent dispatching' for the processor mode. There exists a specific `bx` instruction (speak branch and exchange) which allows the processor to change its mode. If the lowest bit in the target address is equal to one, the processor changes its mode to Thumb (16-bit). Otherwise it remains in ARM mode (32-bit). The example given below changes the `state` variable when switching from ARM to Thumb mode. If we want to change back from Thumb to ARM mode we need to clear this flag again.
 
 ```cpp
 if (cpsr.t = addr & 0x1) {
@@ -78,7 +77,7 @@ if (cpsr.t = addr & 0x1) {
 }
 ```
 
-Actions similar to this have to be done at all places which relate to states defined in the `State` enum. Once we have a functional `state` variable in place we can start thinking about writing a `dispatch` function which takes the state into consideration. The five different state require 32 different dispatch functions to be defined (in theory at least, the actual number would be lower). Here we can use C++'s templates to create an optimized dispatch function for each state case without writing more than one function.
+Actions similar to this have to be done at all places which relate to states defined in the `State` enum. Once we have a functional `state` variable in place we can start thinking about writing a `dispatch` function which takes the state into consideration. The five different states require 32 different dispatch functions to be defined (in theory at least, the actual number would be lower). Here we can use C++'s templates to create an optimized dispatch function for each state case without writing more than one function (the current implementation looks like [this](https://github.com/jsmolka/eggvance/blob/5d36e1067d15bb0d611719d8d7022de567a0488b/eggvance/src/arm/arm.cpp#L69)).
 
 ```cpp
 template<uint state>
@@ -110,7 +109,7 @@ void ARM::run(int cycles) {
 }
 ```
 
-What would a performance post be without comparing numbers. I actually intended this one to be about multiple improvements had but I decided to focus on the most important thing. GPR class removal and instruction template LUTs aren't nearly as interesting and impactful as state dependent dispatching (the later has also been discussed in a [previous progress report]({{< ref "progress-3.md#optimizing-instruction-execution" >}})). Now look at this wonderful table.
+What would a performance post be without comparing numbers. I originally intended this one to be about multiple improvements but I decided to focus on the most important thing. GPR class removal and instruction template LUTs aren't nearly as interesting and impactful as 'state dependent dispatching' (the second one has also been discussed in a previous [progress report]({{<ref "progress-3.md#optimizing-instruction-execution">}})). Now take a step back and look at these wonderful results.
 
 | Commit | Hash                                                                                            | Improvement                | Pokémon Emerald | Yoshi's Island |
 |--------|-------------------------------------------------------------------------------------------------|----------------------------|-----------------|----------------|
@@ -146,7 +145,7 @@ for (; rlist != 0; rlist &= rlist - 1) {
 
 The optimized version might be confusion to people without a deeper understanding of bit operations. It starts with the same `rlist` like the naive variant and then uses `ctz` to count the trailing zeros (the ones on the right side) which happen to be the equal to the index of the lowest set bit. `ctz` can be represented by a single processor instruction on most architectures (like [bsf](https://www.felixcloutier.com/x86/bsf) on x86) and is very efficient. The loop expression `rlist &= rlist - 1` clears the lowest set bit after each iteration.
 
-This combination allows efficient and branchless bit iteration, at least if you ignore the loop itself. The whole thing can also be wrapped into C++ language constructors like a [custom iterator](https://github.com/jsmolka/eggvance/blob/9cae4676ed9927064c43a68cd178d265baf7e28b/eggvance/src/base/bits.h#L168) and a range-based for loop to make it look more appealing.
+This combination allows efficient and branchless bit iteration, at least if you ignore the loop itself. The whole thing can also be wrapped into C++ language constructs like a [custom iterator](https://github.com/jsmolka/eggvance/blob/9cae4676ed9927064c43a68cd178d265baf7e28b/eggvance/src/base/bits.h#L168) and a range-based for loop to make it look more appealing.
 
 ```cpp
 for (uint x : bits::iter(rlist)) {
@@ -157,6 +156,24 @@ for (uint x : bits::iter(rlist)) {
 In the end this whole section could be titled 'premature optimization'. Implementing efficient bit iteration had a minuscule performance impact on two of many processor instructions and the overall performance impact was barely (if at all) noticable. However it was fun to think about.
 
 ### Emscripten
+At some point during the last months porting the emulator to WebAssembly crossed my mind and hooked me for some days. Reading through the [emscripten](https://emscripten.org/index.html) documentation made me realize that there wasn't much left to do to port an SDL2 based application to WebAssembly. I had to remove some platform specific code (which is always a good thing) and add a modified `main` function. Compiling isn't much different compared to macOS and Linux which were working fine already.
+
+The included filesystem API is a nice abstraction around the fact that browsers don't have access to the filesystem without special permission by the user. It allows placing data in a buffer and then accessing it like a normal file from within the C++ code.
+
+```js
+function loadFile(input) {
+  const reader = new FileReader();
+  reader.onload = () => {
+    const data = new Uint8Array(reader.result);
+    FS.writeFile('rom.gba', data);
+  };
+  reader.readAsArrayBuffer(input.files[0]);
+}
+```
+
+All of this sounds nice until to have to figure out errors. The whole thing can be quite infuriating because debugging isn't an option and `emscripten` tends to throw cryptic error messages at you. I had to go through all commits to find the one which broke the emulator. It turned out to be the `std::filesystem::canonical` function which requires a file to exist or it throws an error.
+
+A demonstration can be found [here]({{<ref "wasm.html">}}).
 
 ### Improving Tests
 The last part of this progress report is dedicated to my [GBA test suite](https://github.com/jsmolka/gba-suite). I developed most of it simultaneously with the eggvance CPU to ensure correctness. The whole thing is writting is pure assembly to have the maximum control over it. This was especially importing during the start where lots of instructions weren't implemented yet. At some point I move the suite into its own repository because it became its own project.
@@ -207,5 +224,6 @@ With the all text rendering functions in place I was able to add a simple user i
 {{</figures>}}
 
 ### Conclusion
-- the whole thing became much longer than expected
-- committed the table in mid feb and now is june
+This whole thing took me much longer than expected. I committed the first draft of the performance table in mid-Feburary and I am finishing the conclusion in early June. Writing this progress report took much more time than I'd like to admit. Formulating text and walking other people through ideas has never been a strength of mine.
+
+Anyway, I hope to finish most of the cleanup sometime soon and then write another progress report once I'm ready to release version 0.2. I want it to be as stable and accurate as possible before I devote time to implement more advanced things like audio emulation and CPU prefetching.
