@@ -1,11 +1,11 @@
 {{ define "main" }}
   <div class="w-full my-4">
-    <div class="flex mb-4 text-sm text-light-500 dark:text-dark-400">
+    <div class="w-full flex mb-4 text-sm text-light-500 dark:text-dark-400">
       <svg class="my-auto mr-3 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="10" />
         <polyline points="12 6 12 12 16 14" />
       </svg>
-      <span>
+      <span class="w-full">
         {{ i18n "readingTime" .Page.ReadingTime }}
       </span>
     </div>

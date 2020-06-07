@@ -34,8 +34,9 @@
     }
   }
 
-  table {
+  .table-wrapper {
     @apply my-8;
+    @apply overflow-x-scroll;
   }
 
   a[href^="#fnref:"] {
