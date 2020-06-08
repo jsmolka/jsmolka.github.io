@@ -36,7 +36,7 @@
 
   .table-wrapper {
     @apply my-8;
-    @apply overflow-x-scroll;
+    @apply overflow-x-auto;
   }
 
   a[href^="#fnref:"] {
