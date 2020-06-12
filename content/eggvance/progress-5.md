@@ -178,7 +178,7 @@ All of this sounds nice until to have to figure out errors. The whole thing can 
 A demonstration can be found [here]({{<ref "wasm.html">}}).
 
 ### Improving Tests
-The last part of this progress report is dedicated to my [GBA test suite](https://github.com/jsmolka/gba-suite). I developed most of it simultaneously with the eggvance CPU to ensure correctness. The whole thing is writting is pure assembly to have the maximum control over it. This was especially importing during the start where lots of instructions weren't implemented yet. At some point I move the suite into its own repository because it became its own project.
+The last part of this progress report is dedicated to my [GBA test suite](https://github.com/jsmolka/gba-suite). I developed most of it simultaneously with the eggvance CPU to ensure correctness. The whole thing is writting is pure assembly to have the maximum control over it. This was especially important during the start where lots of instructions weren't implemented yet. At some point I move the suite into its own repository because it became its own project.
 
 Since then it resulted in some CPU edge case fixes in [mGBA](https://github.com/mgba-emu/mgba) and other open-source emulators. These poor developers had to work with a test suite which was meant for personal usage. It had no user interface at all and stored the number of the first failed test in a register. The only graphical things about it were a green screen on success and a red screen after failing a test. That's why I decided to add a minimal user interface.
 
@@ -226,6 +226,6 @@ With the all text rendering functions in place I was able to add a simple user i
 {{</figures>}}
 
 ### Conclusion
-This whole thing took me much longer than expected. I committed the first draft of the performance table in mid-Feburary and I am finishing the conclusion in early June. Writing this progress report took much more time than I'd like to admit. Formulating text and walking other people through ideas has never been a strength of mine.
+This whole thing took me much longer than expected. I committed the first draft of the performance table in mid-Feburary and I am finishing the conclusion in early June. Formulating text and walking other people through ideas has never been a strength of mine.
 
 Anyway, I hope to finish most of the cleanup sometime soon and then write another progress report once I'm ready to release version 0.2. I want it to be as stable and accurate as possible before I devote time to implement more advanced things like audio emulation and CPU prefetching.
