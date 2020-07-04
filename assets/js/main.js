@@ -45,5 +45,13 @@ function initPrism() {
   Prism.languages.cpp.keyword = new RegExp(keywords.join('|'));
 }
 
+function initHeader() {
+  const header = document.getElementById("header");
+  window.addEventListener('scroll', function() {
+    header.classList.toggle('header-shadow', window.scrollY > 0);
+  });
+}
+
 initTheme();
 initPrism();
+initHeader();

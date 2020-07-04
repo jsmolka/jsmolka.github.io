@@ -33,47 +33,57 @@ module.exports = {
           900: '#212121'
         },
         // Polar Night
-        nord0: "#2E3440",
-        nord1: "#3B4252",
-        nord2: "#434C5E",
-        nord3: "#4C566A",
+        "nord-0": "#2E3440",
+        "nord-1": "#3B4252",
+        "nord-2": "#434C5E",
+        "nord-3": "#4C566A",
         "polar-night-0": "#2E3440",
         "polar-night-1": "#3B4252",
         "polar-night-2": "#434C5E",
         "polar-night-3": "#4C566A",
 
         // Snow Storm
-        nord4: "#D8DEE9",
-        nord5: "#E5E9F0",
-        nord6: "#ECEFF4",
+        "nord-4": "#D8DEE9",
+        "nord-5": "#E5E9F0",
+        "nord-6": "#ECEFF4",
         "snow-storm-0": "#D8DEE9",
         "snow-storm-1": "#E5E9F0",
         "snow-storm-2": "#ECEFF4",
 
         // Frost
-        nord7: "#8FBCBB",
-        nord8: "#88C0D0",
-        nord9: "#81A1C1",
-        nord10: "#5E81AC",
+        "nord-7": "#8FBCBB",
+        "nord-8": "#88C0D0",
+        "nord-9": "#81A1C1",
+        "nord-10": "#5E81AC",
         "frost-0": "#8FBCBB",
         "frost-1": "#88C0D0",
         "frost-2": "#81A1C1",
         "frost-3": "#5E81AC",
 
         // Aurora
-        nord11: "#BF616A",
-        nord12: "#D08770",
-        nord13: "#EBCB8B",
-        nord14: "#A3BE8C",
-        nord15: "#B48EAD",
+        "nord-11": "#BF616A",
+        "nord-12": "#D08770",
+        "nord-13": "#EBCB8B",
+        "nord-14": "#A3BE8C",
+        "nord-15": "#B48EAD",
         "aurora-0": "#BF616A",
         "aurora-1": "#D08770",
         "aurora-2": "#EBCB8B",
         "aurora-3": "#A3BE8C",
-        "aurora-4": "#B48EAD"
+        "aurora-4": "#B48EAD",
+
+        // Base
+        "base-dark": "#242933",
+        "base-light": "#F2F4F8"
       },
       borderWidth: {
         1: '1px'
+      },
+      maxWidth: {
+        'screen-xl': '75em'
+      },
+      transitionProperty: {
+        'bg': 'background'
       }
     },
     darkSelector: '.dark-mode'
@@ -81,6 +91,7 @@ module.exports = {
   variants: {
     backgroundColor: [
       'dark',
+      'dark-hover',
       'hover'
     ],
     borderColor: [
@@ -94,6 +105,12 @@ module.exports = {
     ],
     margin: [
       'first',
+      'last',
+      'responsive'
+    ],
+    padding: [
+      'first',
+      'last',
       'responsive'
     ]
   },

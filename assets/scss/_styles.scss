@@ -1,3 +1,5 @@
+@import "nord";
+
 html {
   scroll-behavior: smooth;
 }
@@ -30,5 +32,14 @@ body {
     .dark-mode & {
       @apply bg-dark-300;
     }
+  }
+}
+
+.header-shadow {
+  box-shadow: rgba($snow-storm-0, 0.15) 0px 5px 10px 0px;
+  transition: box-shadow 250ms ease-in-out;
+
+  .dark-mode & {
+    box-shadow: rgba($polar-night-0, 0.15) 0px 5px 10px 0px;
   }
 }
