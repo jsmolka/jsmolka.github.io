@@ -1,16 +1,16 @@
 .base {
-  @apply text-light-800;
+  @apply text-polar-night-3;
 
   .dark-mode & {
-    @apply text-dark-200;
+    @apply text-snow-storm-2;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold;
-    @apply text-light-900;
+    @apply text-polar-night-2;
 
     .dark-mode & {
-      @apply text-dark-100;
+      @apply text-snow-storm-2;
     }
   }
 

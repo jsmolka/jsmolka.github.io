@@ -25,7 +25,7 @@
         <div class="items-center hidden sm:flex">
           <div class="flex items-center">
             {{ range .Site.Menus.main }}
-              <a href="{{ .URL | absURL }}" class="mx-2 first:ml-0 last:mr-0 px-2 py-1 font-medium rounded-md hover:bg-snow-storm-1 dark-hover:bg-polar-night-1 transition-bg duration-100 ease-in-out">{{ .Name }}</a>
+              <a href="{{ .URL | absURL }}" class="mx-2 first:ml-0 last:mr-0 px-2 py-1 text-lg rounded-md hover:bg-snow-storm-1 dark-hover:bg-polar-night-1 transition-bg duration-100 ease-in-out">{{ .Name }}</a>
             {{ end }}
           </div>
           <div class="ml-4">
@@ -81,7 +81,7 @@
     <div x-show="open" class="block sm:hidden">
       <div class="px-2 pb-2">
         {{ range .Site.Menus.main }}
-          <a href="{{ .URL | absURL }}" class="block my-2 first:mt-0 last:mb-0 px-3 py-2 rounded-md hover:bg-snow-storm-1 dark-hover:bg-polar-night-1 transition-bg duration-100 ease-in">{{ .Name }}</a>
+          <a href="{{ .URL | absURL }}" class="block my-2 first:mt-0 last:mb-0 px-3 py-2 text-lg rounded-md hover:bg-snow-storm-1 dark-hover:bg-polar-night-1 transition-bg duration-100 ease-in">{{ .Name }}</a>
         {{ end }}
       </div>
     </div>
