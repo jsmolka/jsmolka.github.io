@@ -40,7 +40,3 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
   [[module.mounts]]
     source = "icon/web"
     target = "static"
-
-  [[module.mounts]]
-    source = "icon/bin/icon-optimized.svg"
-    target = "static/icon.svg"
