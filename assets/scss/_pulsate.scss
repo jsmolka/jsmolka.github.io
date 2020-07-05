@@ -1,0 +1,18 @@
+$colors: #25CAD4 #00D4B0 #31CED8 #00DBB3 #3CD2DB #48D6DF;
+
+@for $index from 1 through length($colors) {
+  $color: nth($colors, $index);
+
+  @keyframes pulsate#{$index} {
+    0%{stroke: rgba($color, 100%)}
+    50%{stroke: rgba(darken($color, 15%), 100%)}
+    100%{stroke: rgba($color, 100%)}
+  }
+
+  .pulsate-#{$index} {
+    animation-name: pulsate#{$index};
+    animation-duration: 3s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+}
