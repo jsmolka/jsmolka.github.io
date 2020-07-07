@@ -1,7 +1,7 @@
 ---
 title: "Progress Report #2"
 author: "Julian Smolka"
-summary: "Progress report #2 of the eggvance emulator."
+summary: "The second progress report of the eggvance GBA emulator."
 date: 2019-09-30
 type: post
 ---

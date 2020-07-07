@@ -1,7 +1,10 @@
 {{ define "main" }}
-  <div class="w-full flex flex-col mb-4">
-    <h1 class="mb-8 text-center text-polar-night-2 dark:text-snow-storm-2 text-4xl font-bold">{{ .Title }}</h1>
-    <div class="w-11/12 mx-auto px-8 py-4 bg-white dark:bg-polar-night-0 rounded-lg shadow-lg">
+  <div class="w-full flex flex-col">
+    <div class="text-center text-polar-night-2 dark:text-snow-storm-2">
+      <h1 class="pt-6 text-4xl font-bold">{{ .Title }}</h1>
+      <h2 class="pt-3 pb-12 text-xl">{{ .Summary }}</h2>
+    </div>
+    <div class="w-full sm:w-11/12 mx-auto p-8 bg-white dark:bg-polar-night-0 rounded-lg shadow-md">
       <div class="single max-w-screen-md mx-auto">
         {{ .Content }}
       </div>
@@ -51,5 +54,4 @@
     </span>
   </div>
 </div> -->
-
 {{ end }}
