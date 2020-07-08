@@ -1,17 +1,25 @@
-.base {
+.text-normal {
   @apply text-polar-night-3;
 
   .dark-mode & {
     @apply text-snow-storm-2;
   }
+}
+
+.text-important {
+  @apply font-bold;
+  @apply text-polar-night-2;
+
+  .dark-mode & {
+    @apply text-snow-storm-2;
+  }
+}
+
+.base {
+  @extend .text-normal;
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold;
-    @apply text-polar-night-2;
-
-    .dark-mode & {
-      @apply text-snow-storm-2;
-    }
+    @extend .text-important;
   }
 
   h1 { @apply text-4xl;  }
@@ -22,11 +30,7 @@
   h6 { @apply text-base; }
 
   a {
-    color: saturate(darken(#88c0d0, 10%), 10%);
-
-    .dark-mode & {
-      color: #88c0d0;
-    }
+    @apply text-frost-1;
   }
 
   figcaption {
@@ -34,13 +38,8 @@
     @apply text-sm;
   }
 
-  ul {
-    @apply list-disc;
-  }
-
-  ol {
-    @apply list-decimal;
-  }
+  ul { @apply list-disc; }
+  ol { @apply list-decimal; }
 
   table {
     @apply w-full;
@@ -50,56 +49,55 @@
   table, th, td {
     @apply p-2;
     @apply border;
-    @apply border-light-500;
+    @apply border-grey-dark;
 
     .dark-mode & {
-      @apply border-dark-400;
+      @apply border-grey-light;
     }
   }
 
   th {
-    @apply font-bold;
-    @apply text-light-900;
-
-    .dark-mode & {
-      @apply text-dark-100;
-    }
+    @extend .text-important;
   }
 
   blockquote {
     @apply px-4;
-    @apply border-l-2;
-    @apply border-light-500;
+    @apply text-grey-light;
+    @apply border-l-3;
+    @apply border-frost-3;
+    @apply border-opacity-60;
 
     .dark-mode {
-      @apply border-dark-400;
+      @apply text-grey-dark;
+      @apply border-frost-2;
     }
   }
 
   button {
+    @extend .text-normal;
+
     @apply px-2;
     @apply py-1;
-    @apply rounded-sm;
-    @apply bg-white;
-    @apply text-light-800;
-    @apply border-light-200;
+    @apply rounded-md;
+    @apply select-none;
     @apply border;
-    @apply rounded;
-    @apply shadow;
+    @apply border-polar-night-3;
+    @apply border-opacity-75;
+    @apply transition-colors;
+    @apply duration-200;
+    @apply ease-in-out;
 
     .dark-mode & {
-      @apply bg-dark-500;
-      @apply text-dark-200;
-      @apply border-dark-800;
-
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.35), 0 1px 2px 0 rgba(0, 0, 0, 0.29);
+      @apply border-polar-night-3;
     }
 
     &:hover {
-      @apply bg-light-100;
+      @apply text-frost-1;
+      @apply border-frost-1;
 
       .dark-mode & {
-        background: #31373d;
+        @apply text-frost-3;
+        @apply border-frost-3;
       }
     }
 

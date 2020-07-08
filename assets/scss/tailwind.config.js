@@ -81,13 +81,17 @@ module.exports = {
         "grey-light": "#7B88A1"
       },
       borderWidth: {
-        1: '1px'
+        1: '1px',
+        3: '3px'
       },
       maxWidth: {
         'screen-xl': '75em'
       },
       transitionProperty: {
-        'bg': 'background'
+        bg: 'background'
+      },
+      opacity: {
+        60: '0.6'
       }
     },
     darkSelector: '.dark-mode'
