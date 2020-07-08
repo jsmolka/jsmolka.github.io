@@ -9,6 +9,7 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
 [params]
   description     = "The homepage of Julian Smolka"
   github          = "jsmolka"
+  contentDir      = "https://github.com/jsmolka/jsmolka.github.io/tree/source/content"
   birthDate       = "1998-05-11"
   dateform        = "Jan 2, 2006"
   dateformShort   = "Jan 2"

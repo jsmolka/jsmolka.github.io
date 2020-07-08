@@ -74,7 +74,11 @@ module.exports = {
 
         // Base
         "base-dark": "#242933",
-        "base-light": "#F2F4F8"
+        "base-light": "#F2F4F8",
+
+        // Grey
+        "grey-dark": "#ABB9CF",
+        "grey-light": "#7B88A1"
       },
       borderWidth: {
         1: '1px'
