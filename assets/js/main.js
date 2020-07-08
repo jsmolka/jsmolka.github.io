@@ -9,7 +9,7 @@ function isDarkTheme() {
 function updateMetaThemeColor(dark) {
   const meta = document.querySelector('meta[name=theme-color]');
 
-  meta.setAttribute('content', dark ? '#24292E' : '#f5f5f5');
+  meta.setAttribute('content', dark ? '#242933' : '#F2F4F8');
 }
 
 function toggleTheme() {
@@ -25,7 +25,7 @@ function toggleTheme() {
 
 function initTheme() {
   const theme = window.localStorage.getItem('theme');
-  const dark = html.classList.toggle('dark-mode', theme == null || theme === 'dark');
+  const dark = html.classList.toggle('dark-mode', theme === 'dark');
 
   updateMetaThemeColor(dark);
 }
