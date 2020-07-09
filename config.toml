@@ -39,5 +39,5 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
     target = "static"
 
   [[module.mounts]]
-    source = "icon/web"
+    source = "icon/themes/nord/web"
     target = "static"
