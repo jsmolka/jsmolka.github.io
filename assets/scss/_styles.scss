@@ -12,34 +12,37 @@ body {
 ::-webkit-scrollbar {
   @apply w-2;
   @apply h-2;
-  @apply bg-white;
+  @apply bg-base-light;
 
   .dark-mode & {
-    @apply bg-dark-500;
+    @apply bg-base-dark;
   }
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-light-500;
+  background: $grey-light;
 
   .dark-mode & {
-    @apply bg-dark-400;
+    background: darken($grey-dark, 5%);
   }
 
   &:hover {
-    @apply bg-light-600;
+    background: lighten($grey-light, 5%);
 
     .dark-mode & {
-      @apply bg-dark-300;
+      background: $grey-dark;
     }
   }
 }
 
-.header-shadow {
-  box-shadow: rgba($snow-storm-0, 0.15) 0px 5px 10px 0px;
+.header-shadow-transition {
   transition: box-shadow 250ms ease-in-out;
+}
+
+.header-shadow {
+  box-shadow: rgba(mix($base-light, #000000, 85%), 0.15) 0px 5px 10px 0px;
 
   .dark-mode & {
-    box-shadow: rgba($polar-night-0, 0.15) 0px 5px 10px 0px;
+    box-shadow: rgba(mix($base-dark, #000000), 0.15) 0px 5px 10px 0px;
   }
 }
