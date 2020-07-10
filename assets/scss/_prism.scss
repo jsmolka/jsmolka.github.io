@@ -1,45 +1,55 @@
+@import "base";
+@import "mono";
+@import "nord";
+
+$code-dark: mix($base-dark, $polar-night-0);
+$code-light: mix($base-light, #ffffff);
+
+.font-mono {
+  @extend .text-normal;
+  @apply leading-relaxed;
+
+  font-size: 15px;
+  font-family: Mono, Consolas, Monaco, monospace;
+}
+
 code[class*="language-"],
 pre[class*="language-"] {
-  @apply rounded-sm;
+  @extend .font-mono;
+  @apply rounded-md;
   @apply whitespace-pre;
-  @apply bg-light-100;
-  @apply text-light-800;
 
-  .dark-mode & {
-    @apply bg-dark-600;
-    @apply text-dark-200;
-  }
-
-  font-family: Consolas, Monaco, monospace;
-
-  tab-size: 4;
+  background: $code-light;
   hyphens: none;
+  tab-size: 4;
 
   .table {
-    // Override tailwind
     display: inline;
+  }
+
+  .dark-mode & {
+    background: $code-dark;
   }
 }
 
 pre[class*="language-"] {
-  @apply p-4;
   @apply my-4;
+  @apply p-4;
   @apply relative;
+  @apply shadow-sm;
   @apply overflow-auto;
 }
 
 :not(pre) > code {
+  @extend .font-mono;
   @apply rounded-sm;
-  @apply bg-light-100;
-  @apply text-light-800;
-
-  .dark-mode & {
-    @apply bg-dark-600;
-    @apply text-dark-200;
-  }
 
   padding: 2px 4px;
-  font-family: Consolas, Monaco, monospace;
+  background: darken($code-light, 2.5%);
+
+  .dark-mode & {
+    background: darken($code-dark, 2.5%);
+  }
 }
 
 [class*="language-"] .namespace {
@@ -50,10 +60,12 @@ pre[class*="language-"] {
 .token.comment,
 .token.doctype,
 .token.prolog {
-  color: lighten(#636f88, 15%);
+  $comment: #636f88;
+
+  color: lighten($comment, 30%);
 
   .dark-mode & {
-    color: #636f88;
+    color: $comment;
   }
 }
 
@@ -71,18 +83,18 @@ pre[class*="language-"] {
 .token.tag,
 .token.url,
 .token.variable {
-  color: saturate(darken(#81a1c1, 10%), 10%);
+  color: saturate(darken($frost-2, 10%), 10%);
 
   .dark-mode & {
-    color: #81a1c1;
+    color: $frost-2;
   }
 }
 
 .token.number {
-  color: saturate(#b48ead, 10%);
+  color: saturate($aurora-4, 10%);
 
   .dark-mode & {
-    color: #b48ead;
+    color: $aurora-4;
   }
 }
 
@@ -92,10 +104,10 @@ pre[class*="language-"] {
 .token.inserted,
 .token.selector,
 .token.string {
-  color: saturate(darken(#a3be8c, 10%), 10%);
+  color: saturate(darken($aurora-3, 10%), 10%);
 
   .dark-mode & {
-    color: #a3be8c;
+    color: $aurora-3;
   }
 }
 
@@ -103,16 +115,16 @@ pre[class*="language-"] {
 .token.attr-value,
 .token.function,
 .token.class-name {
-  color: saturate(darken(#88c0d0, 10%), 10%);
+  color: saturate(darken($frost-1, 10%), 10%);
 
   .dark-mode & {
-    color: #88c0d0;
+    color: $frost-1;
   }
 }
 
 .token.regex,
 .token.important {
-  color: #ebcb8b;
+  color: $aurora-2;
 }
 
 .token.bold,
