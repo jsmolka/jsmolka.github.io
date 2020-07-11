@@ -1,13 +1,13 @@
 {{ define "main" }}
-  <div class="flex flex-col max-w-screen-xl m-auto">
+  <div class="flex flex-col max-w-screen-lg m-auto">
     <div class="text-center text-polar-night-2 dark:text-snow-storm-2">
       <h1 class="pt-6 text-4xl font-bold">{{ .Title }}</h1>
       <h2 class="pt-3 pb-12 text-xl">{{ .Summary }}</h2>
     </div>
-    <div class="w-full sm:w-11/12 mx-auto bg-white dark:bg-polar-night-0 rounded-lg shadow-md">
-      <article class="single px-8 pt-8 max-w-screen-md mx-auto">
+    <div class="w-full mx-auto bg-white dark:bg-polar-night-0 rounded-lg shadow-md">
+      <div class="single px-8 pt-8 max-w-screen-md mx-auto">
         {{ .Content }}
-      </article>
+      </div>
       <hr class="my-8 border-snow-storm-1 dark:border-polar-night-3">
       <div class="px-8 pb-8 flex justify-between text-sm text-grey-light dark:text-grey-dark">
         <div class="flex align-middle">
@@ -35,7 +35,7 @@
             {{ end }}
           </span>
         </div>
-        <a class="flex align-middle" href="{{ path.Join .Site.Params.ContentDir .File.Path }}" target="_blank">
+        <a class="flex align-middle" href="{{ path.Join .Site.Params.ContentUrl .File.Path }}" target="_blank">
           <svg class="my-auto mr-2 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />

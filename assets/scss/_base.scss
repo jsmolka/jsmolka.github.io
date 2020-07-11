@@ -77,25 +77,19 @@
     @extend .text-normal;
     @apply px-2;
     @apply py-1;
-    @apply rounded-md;
-    @apply select-none;
     @apply border;
     @apply border-polar-night-3;
-    @apply border-opacity-75;
+    @apply rounded-md;
     @apply transition-colors;
     @apply duration-200;
     @apply ease-in-out;
-
-    .dark-mode & {
-      @apply border-polar-night-3;
-    }
+    @apply select-none;
 
     &:hover {
-      @apply text-frost-1;
-      @apply border-frost-1;
+      @apply text-frost-2;
+      @apply border-frost-2;
 
       .dark-mode & {
-        @apply text-frost-3;
         @apply border-frost-3;
       }
     }

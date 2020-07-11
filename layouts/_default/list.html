@@ -1,19 +1,14 @@
 {{ define "main" }}
-  <article class="w-full max-w-screen-md mx-auto my-4 text-light-800 dark:text-dark-200">
-    <h1 class="mb-4 font-bold text-4xl text-light-900 dark:text-dark-100">{{ .Title }}</h1>
-
-    {{ if .Content }}
-      {{ .Content }}
-    {{ end }}
-
+  <div class="text-normal w-full max-w-screen-md mx-auto my-4">
+    <h1 class="text-important mb-4 font-bold text-4xl">{{ .Title }}</h1>
     <div class="mt-4">
       {{ range .Data.Pages.GroupByDate "2006" }}
         <div class="block sm:flex mb-6">
-          <div class="mr-10 text-3xl text-light-900 dark:text-dark-100">{{ .Key }}</div>
+          <div class="mr-10 text-3xl">{{ .Key }}</div>
 
           <ul class="w-full">
             {{ range .Pages }}
-              <li class="py-3 border-b border-dashed border-light-500 dark:border-dark-400">
+              <li class="py-3 border-b border-dashed border-grey-light dark:border-grey-dark">
                 <a class="flex justify-between" href="{{ .Permalink }}">
                   <span>{{ .Title }}</span>
                   <span>
@@ -30,5 +25,5 @@
         </div>
       {{ end }}
     </div>
-  </article>
+  </div>
 {{ end }}

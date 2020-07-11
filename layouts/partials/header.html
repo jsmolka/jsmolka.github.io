@@ -1,5 +1,5 @@
-<header id="header" class="header-shadow-transition w-full sticky top-0 z-10 select-none">
-  <nav x-data="{ open: false, dark: isDarkTheme() }" class="bg-base-light dark:bg-base-dark text-polar-night-3 dark:text-snow-storm-2">
+<header id="header" class="w-full sticky top-0 z-10 transition-shadow duration-200 ease-linear select-none">
+  <nav x-data="{ open: false, dark: isDarkTheme() }" class="text-normal bg-base-light dark:bg-base-dark">
     <div class="max-w-screen-xl mx-auto px-4">
       <div class="relative flex items-center justify-between h-16">
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
@@ -50,7 +50,7 @@
         <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
           <button @click="dark = toggleTheme()" class="inline-flex items-center justify-center p-2 rounded-md hover:bg-snow-storm-1 dark-hover:bg-polar-night-1 transition-bg duration-100 ease-in-out focus:outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" x-show="!dark" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path x-show="!dark" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
             </svg>
             <svg xmlns="http://www.w3.org/2000/svg" x-show="dark" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="5" />

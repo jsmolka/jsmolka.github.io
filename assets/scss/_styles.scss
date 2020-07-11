@@ -23,20 +23,16 @@ body {
   background: $grey-light;
 
   .dark-mode & {
-    background: darken($grey-dark, 5%);
+    background: darken($grey-dark, 15%);
   }
 
   &:hover {
-    background: lighten($grey-light, 5%);
+    background: darken($grey-light, 15%);
 
     .dark-mode & {
       background: $grey-dark;
     }
   }
-}
-
-.header-shadow-transition {
-  transition: box-shadow 250ms ease-in-out;
 }
 
 .header-shadow {
