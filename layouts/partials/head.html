@@ -10,14 +10,13 @@
   {{ if .IsHome }}
     {{ $.Site.Title }}
   {{ else }}
-    {{ .Title }} :: {{ $.Site.Title }}
+    {{ .Title }}
   {{ end }}
 </title>
 
+{{ $style := resources.Get "scss/main.scss" | resources.ToCSS "css/main.css" | postCSS (dict "config" "assets/scss/postcss.config.js") }}
 {{ if .Site.IsServer }}
-  {{ $style := resources.Get "scss/main.scss" | resources.ToCSS "css/main.css" | postCSS (dict "config" "assets/scss/postcss.config.js") }}
   <link rel="stylesheet" href="{{ $style.Permalink }}">
 {{ else }}
-  {{ $style := resources.Get "scss/main.scss" | resources.ToCSS "css/main.css" | postCSS (dict "config" "assets/scss/postcss.config.js") | minify }}
-  <link rel="stylesheet" href="{{ $style.Permalink }}">
+  <link rel="stylesheet" href="{{ ($style | minify).Permalink }}">
 {{ end }}

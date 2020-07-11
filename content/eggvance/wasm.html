@@ -3,10 +3,10 @@ title: "WebAssembly Port"
 author: "Julian Smolka"
 summary: "WebAssembly port of the eggvance emulator."
 date: 2020-04-12
-type: custom
+type: blank
 ---
-<div x-data="{ controls: false }" class="base flex flex-col items-center">
-  <canvas id="canvas" :class="{ 'w-full': true, 'bg-dark-500': isDarkTheme(), 'bg-white': !isDarkTheme() }"></canvas>
+<div x-data="{ controls: false }" class="base flex flex-col w-full max-w-screen-lg m-auto items-center">
+  <canvas id="canvas" :class="{ 'w-full': true, 'bg-base-dark': isDarkTheme(), 'bg-base-light': !isDarkTheme() }"></canvas>
   <input id="rom-input" class="hidden" type="file" onchange="Module.loadRom()">
   <input id="save-input" class="hidden" type="file" onchange="Module.loadSave()">
   <div class="flex mt-4">
@@ -132,8 +132,8 @@ type: custom
     },
     updateBackground(dark) {
       this.eggvanceSetBackground(dark
-        ? 0xff2b3137
-        : 0xffffffff
+        ? 0xff242933
+        : 0xfff2f4f8
       );
     }
   };

@@ -1,5 +1,9 @@
-{{ $main := resources.Get "js/main.js" }}
-{{ $prism := resources.Get "js/vendor/prism.js" }}
-{{ $alpine := resources.Get "js/vendor/alpine.js" }}
-{{ $script := slice $prism $alpine $main | resources.Concat "js/main.js" | resources.Minify }}
-<script type="text/javascript" src="{{ $script.RelPermalink }}"></script>
+{{ $script := slice (resources.Get "js/vendor/alpine.js") }}
+{{ $script := $script | append (resources.Get "js/vendor/prism.js") }}
+{{ $script := $script | append (resources.Get "js/main.js") }}
+{{ $script := $script | resources.Concat "js/main.js" }}
+{{ if .Site.IsServer }}
+  <script type="text/javascript" src="{{ $script.RelPermalink }}"></script>
+{{ else }}
+  <script type="text/javascript" src="{{ ($script | minify).RelPermalink }}"></script>
+{{ end }}

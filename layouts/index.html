@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <div class="mx-auto my-4 max-w-sm">
+  <div class="max-w-sm mx-auto my-4">
     <svg id="index-icon" class="hidden overflow-visible" version="1.1" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
       <rect x=" 4" y=" 0" width="1" height="1" fill="#000000" />
       <rect x=" 5" y=" 0" width="1" height="1" fill="#000000" />
@@ -197,6 +197,8 @@
       <rect x=" 9" y="15" width="1" height="1" fill="#000000" />
     </svg>
   </div>
-  {{ $script := slice (resources.Get "js/vendor/gsap.min.js") (resources.Get "js/index.js") | resources.Concat "js/index.js" | resources.Minify }}
+  {{ $script := slice (resources.Get "js/vendor/gsap.min.js") }}
+  {{ $script := $script | append (resources.Get "js/index.js") }}
+  {{ $script := $script | resources.Concat "js/index.js" | resources.Minify }}
   <script type="text/javascript" src="{{ $script.RelPermalink }}"></script>
 {{ end }}
