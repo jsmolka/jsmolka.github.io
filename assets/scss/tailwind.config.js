@@ -68,6 +68,12 @@ module.exports = {
       'dark',
       'hover'
     ],
+    borderRadius: [
+      'responsive'
+    ],
+    boxShadow: [
+      'responsive'
+    ],
     textColor: [
       'dark',
       'hover',
