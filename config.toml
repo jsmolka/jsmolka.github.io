@@ -27,6 +27,9 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
 
 [markup]
   [markup.goldmark]
+    [markup.goldmark.extensions]
+      typographer = false
+
     [markup.goldmark.renderer]
       unsafe = true
 
