@@ -30,12 +30,4 @@ function initTheme() {
   updateMetaThemeColor(dark);
 }
 
-function initHeader() {
-  const header = document.getElementById("header");
-  window.addEventListener('scroll', function() {
-    header.classList.toggle('header-shadow', window.scrollY > 0);
-  });
-}
-
 initTheme();
-initHeader();

@@ -6,7 +6,7 @@ date: 2020-04-12
 type: blank
 ---
 <div x-data="{ controls: false, dark: isDarkTheme() }" class="base flex flex-col w-full max-w-screen-lg m-auto p-4 items-center">
-  <canvas id="canvas" :class="{ 'w-full': true, 'bg-base-dark': dark, 'bg-base-light': !dark }"></canvas>
+  <canvas id="canvas" class="w-full" :class="{ 'bg-base-dark': dark, 'bg-base-light': !dark }"></canvas>
   <input id="rom-input" class="hidden" type="file" accept=".gba" onchange="Module.loadRom()">
   <input id="save-input" class="hidden" type="file" accept=".sav" onchange="Module.loadSave()">
   <div class="flex mt-4">

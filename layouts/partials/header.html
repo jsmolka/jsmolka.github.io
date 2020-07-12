@@ -1,4 +1,4 @@
-<header id="header" class="w-full sticky top-0 z-10 transition-shadow duration-200 ease-linear select-none">
+<header id="header" :class="{ 'header-shadow': scroll && !menu }" class="w-full sticky top-0 z-10 transition-shadow duration-200 ease-linear select-none">
   <nav class="text-normal bg-base-light dark:bg-base-dark">
     <div class="max-w-screen-xl mx-auto px-4">
       <div class="relative flex items-center justify-between h-16">
