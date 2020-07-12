@@ -1,9 +1,6 @@
-{{ $script := slice (resources.Get "js/vendor/alpine.js") }}
-{{ $script := $script | append (resources.Get "js/vendor/prism.js") }}
-{{ $script := $script | append (resources.Get "js/main.js") }}
-{{ $script := $script | resources.Concat "js/main.js" }}
-{{ if .Site.IsServer }}
-  <script type="text/javascript" src="{{ $script.RelPermalink }}"></script>
-{{ else }}
-  <script type="text/javascript" src="{{ ($script | minify).RelPermalink }}"></script>
+{{ $script := slice }}
+{{ range $path := .paths }}
+  {{ $script = $script | append (resources.Get $path) }}
 {{ end }}
+{{ $script := $script | resources.Concat .name }}
+<script type="text/javascript" src="{{ if .Site.IsServer }}{{ $script.RelPermalink }}{{ else }}{{ ($script | minify).RelPermalink }}{{ end }}"></script>

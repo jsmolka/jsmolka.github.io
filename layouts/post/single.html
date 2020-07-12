@@ -37,4 +37,5 @@
       </div>
     </div>
   </div>
+  {{ partial "javascript" (dict "context" . "paths" (slice "js/vendor/prism.js" "js/prism.js") "name" "js/prism.js") }}
 {{ end }}

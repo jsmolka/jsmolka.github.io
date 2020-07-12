@@ -4,19 +4,15 @@
 <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Summary | plainify }}{{ end }}">
 <link rel="canonical" href="{{ .Permalink }}">
 
-{{ partial "favicons.html" . }}
+{{ partial "favicons" . }}
 
 <title>
-  {{ if .IsHome }}
-    {{ $.Site.Title }}
-  {{ else }}
-    {{ .Title }}
-  {{ end }}
+  {{- if .IsHome -}}
+    {{- $.Site.Title -}}
+  {{- else -}}
+    {{- .Title -}}
+  {{- end -}}
 </title>
 
-{{ $style := resources.Get "scss/main.scss" | resources.ToCSS "css/main.css" | postCSS (dict "config" "assets/scss/postcss.config.js") }}
-{{ if .Site.IsServer }}
-  <link rel="stylesheet" href="{{ $style.Permalink }}">
-{{ else }}
-  <link rel="stylesheet" href="{{ ($style | minify).Permalink }}">
-{{ end }}
+{{ partial "style" . }}
+{{ partial "javascript" (dict "context" . "paths" (slice "js/vendor/alpine.js" "js/main.js") "name" "js/main.js") }}
