@@ -20,17 +20,17 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $grey-light;
+  background: darken($base-light, 15%);
 
   .dark-mode & {
-    background: darken($grey-dark, 15%);
+    background: lighten($base-dark, 15%);
   }
 
   &:hover {
-    background: darken($grey-light, 15%);
+    background: darken($base-light, 20%);
 
     .dark-mode & {
-      background: $grey-dark;
+      background: lighten($base-dark, 20%);
     }
   }
 }

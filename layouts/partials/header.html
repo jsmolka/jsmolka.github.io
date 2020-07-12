@@ -29,11 +29,11 @@
             {{ end }}
           </div>
           <div class="ml-4">
-            <button @click="isDarkTheme = toggleTheme()" class="inline-flex p-2 items-center justify-center rounded-md hover:bg-snow-storm-1 dark-hover:bg-polar-night-1 transition-bg duration-100 ease-in-out focus:outline-none">
-              <svg xmlns="http://www.w3.org/2000/svg" x-show="!isDarkTheme" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <button @click="dark = toggleTheme()" class="inline-flex p-2 items-center justify-center rounded-md hover:bg-snow-storm-1 dark-hover:bg-polar-night-1 transition-bg duration-100 ease-in-out focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" x-show="!dark" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
               </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" x-show="isDarkTheme" style="display: none" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" x-show="dark" style="display: none" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="5" />
                 <line x1="12" y1="1" x2="12" y2="3" />
                 <line x1="12" y1="21" x2="12" y2="23" />
@@ -48,11 +48,11 @@
           </div>
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
-          <button @click="isDarkTheme = toggleTheme()" class="inline-flex items-center justify-center p-2 rounded-md hover:bg-snow-storm-1 dark-hover:bg-polar-night-1 transition-bg duration-100 ease-in-out focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" x-show="!isDarkTheme" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <button @click="dark = toggleTheme()" class="inline-flex items-center justify-center p-2 rounded-md hover:bg-snow-storm-1 dark-hover:bg-polar-night-1 transition-bg duration-100 ease-in-out focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" x-show="!dark" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
             </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" x-show="isDarkTheme" style="display: none" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" x-show="dark" style="display: none" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="5" />
               <line x1="12" y1="1" x2="12" y2="3" />
               <line x1="12" y1="21" x2="12" y2="23" />
@@ -64,13 +64,13 @@
               <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
             </svg>
           </button>
-          <button @click="isMenuVisible = !isMenuVisible" class="inline-flex ml-4 items-center justify-center p-2 rounded-md hover:bg-snow-storm-1 dark-hover:bg-polar-night-1 transition-bg duration-100 ease-in-out focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" x-show="!isMenuVisible" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <button @click="menu = !menu" class="inline-flex ml-4 items-center justify-center p-2 rounded-md hover:bg-snow-storm-1 dark-hover:bg-polar-night-1 transition-bg duration-100 ease-in-out focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" x-show="!menu" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="3" y1="12" x2="21" y2="12" />
               <line x1="3" y1="6" x2="21" y2="6" />
               <line x1="3" y1="18" x2="21" y2="18" />
             </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" x-show="isMenuVisible" style="display: none" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" x-show="menu" style="display: none" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
@@ -78,7 +78,7 @@
         </div>
       </div>
     </div>
-    <div x-show="isMenuVisible" style="display: none" class="block sm:hidden px-2">
+    <div x-show="menu" style="display: none" class="block sm:hidden px-2">
       {{ range .Site.Menus.main }}
         <a href="{{ .URL | absURL }}" class="block mt-6 px-3 py-2 text-lg text-center rounded-md hover:bg-snow-storm-1 dark-hover:bg-polar-night-1 transition-bg duration-100 ease-in">{{ .Name }}</a>
       {{ end }}
