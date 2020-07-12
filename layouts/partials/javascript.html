@@ -3,4 +3,4 @@
   {{ $script = $script | append (resources.Get $path) }}
 {{ end }}
 {{ $script := $script | resources.Concat .name }}
-<script type="text/javascript" src="{{ if .Site.IsServer }}{{ $script.RelPermalink }}{{ else }}{{ ($script | minify).RelPermalink }}{{ end }}"></script>
+<script type="text/javascript" src="{{ if .Site.IsServer }}{{ $script.Permalink }}{{ else }}{{ ($script | minify).Permalink }}{{ end }}"></script>

@@ -4,6 +4,7 @@
 <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Summary | plainify }}{{ end }}">
 <link rel="canonical" href="{{ .Permalink }}">
 
+{{ partial "style" . }}
 {{ partial "favicons" . }}
 
 <title>
@@ -13,6 +14,3 @@
     {{- .Title -}}
   {{- end -}}
 </title>
-
-{{ partial "style" . }}
-{{ partial "javascript" (dict "context" . "paths" (slice "js/vendor/alpine.js" "js/main.js") "name" "js/main.js") }}

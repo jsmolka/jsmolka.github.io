@@ -3,10 +3,14 @@
   <head>
     {{ partial "head" . }}
   </head>
-  <body class="flex flex-col min-w-screen min-h-screen m-0 p-0 bg-base-light dark:bg-base-dark">
+  <body x-data="{ isMenuVisible: false, isDarkTheme: isDarkTheme() }" class="flex flex-col min-w-screen min-h-screen m-0 p-0 bg-base-light dark:bg-base-dark">
     {{ partial "header" . }}
 
-    {{ block "main" . }}
-    {{ end }}
+    <div x-show="!isMenuVisible" class="w-full">
+      {{ block "main" . }}
+      {{ end }}
+    </div>
+
+    {{ partial "javascript" (dict "context" . "paths" (slice "js/vendor/alpine.js" "js/main.js") "name" "js/main.js") }}
   </body>
 </html>
