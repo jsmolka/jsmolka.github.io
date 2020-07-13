@@ -80,14 +80,14 @@
     @apply border;
     @apply border-polar-night-3;
     @apply rounded-md;
-    @apply transition-colors;
-    @apply duration-200;
-    @apply ease-in-out;
     @apply select-none;
 
     &:hover {
       @apply text-frost-2;
       @apply border-frost-2;
+      @apply transition-colors;
+      @apply duration-200;
+      @apply ease-in-out;
 
       .dark-mode & {
         @apply border-frost-3;
