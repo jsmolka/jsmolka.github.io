@@ -3,7 +3,7 @@
   <head>
     {{ partial "head" . }}
   </head>
-  <body x-on:scroll.window="scroll = window.scrollY > 0" :class="{ 'overflow-y-hidden': menu }" class="flex flex-col w-screen h-screen m-0 p-0 bg-base-light dark:bg-base-dark">
+  <body x-on:scroll.window="scroll = window.scrollY > 0" :class="{ 'overflow-y-hidden': menu }" class="flex flex-col min-w-screen min-h-screen m-0 p-0 bg-base-light dark:bg-base-dark">
     {{ partial "header" . }}
 
     <div class="w-full m-auto">
