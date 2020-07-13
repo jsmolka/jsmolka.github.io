@@ -1,4 +1,4 @@
-<header id="header" :class="{ 'header-shadow': scroll && !menu }" class="w-full sticky top-0 z-10 transition-shadow duration-200 ease-linear select-none">
+<header id="header" :class="{ 'header-shadow': scroll && !menu, 'transition-shadow duration-200 ease-linear': transition }" class="w-full sticky top-0 z-10 select-none">
   <nav class="text-normal bg-base-light dark:bg-base-dark">
     <div class="max-w-screen-xl mx-auto px-4">
       <div class="relative flex items-center justify-between h-16">
@@ -29,7 +29,7 @@
             {{ end }}
           </div>
           <div class="ml-4">
-            <button @click="dark = toggleTheme()" class="inline-flex p-2 items-center justify-center rounded-md hover:bg-snow-storm-1 dark-hover:bg-polar-night-1 transition-bg duration-100 ease-in-out focus:outline-none">
+            <button @click="dark = toggleTheme(); transition = false; $nextTick(() => transition = true)" :class="{ 'transition-bg duration-100 ease-in-out': transition }" class="inline-flex p-2 items-center justify-center rounded-md hover:bg-snow-storm-1 dark-hover:bg-polar-night-1 focus:outline-none">
               <svg xmlns="http://www.w3.org/2000/svg" x-show="!dark" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
               </svg>
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
-          <button @click="dark = toggleTheme()" class="inline-flex items-center justify-center p-2 rounded-md hover:bg-snow-storm-1 dark-hover:bg-polar-night-1 transition-bg duration-100 ease-in-out focus:outline-none">
+          <button @click="dark = toggleTheme(); transition = false; $nextTick(() => transition = true)" :class="{ 'transition-bg duration-100 ease-in-out': transition }" class="inline-flex items-center justify-center p-2 rounded-md hover:bg-snow-storm-1 dark-hover:bg-polar-night-1 focus:outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" x-show="!dark" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
             </svg>
