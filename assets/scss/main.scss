@@ -11,3 +11,7 @@
 /* purgecss end ignore */
 
 @tailwind utilities;
+
+/* purgecss start ignore */
+@import "utilities";
+/* purgecss end ignore */

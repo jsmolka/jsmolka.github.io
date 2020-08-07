@@ -7,7 +7,7 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
   name = "Julian Smolka"
 
 [params]
-  description     = "Just another dark corner of the internet."
+  description     = "Another dark corner of the internet."
   contentUrl      = "https://github.com/jsmolka/jsmolka.github.io/tree/source/content"
   birthDate       = "1998-05-11"
   dateform        = "Jan 2, 2006"
