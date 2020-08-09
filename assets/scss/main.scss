@@ -1,17 +1,13 @@
 @tailwind base;
 @tailwind components;
 
-/* purgecss start ignore */
 @import "base";
 @import "glitch";
 @import "inter";
 @import "prism";
 @import "single";
 @import "styles";
-/* purgecss end ignore */
 
 @tailwind utilities;
 
-/* purgecss start ignore */
 @import "utilities";
-/* purgecss end ignore */

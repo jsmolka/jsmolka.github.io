@@ -8,8 +8,8 @@
       &:before, &:after {
         @apply absolute;
         @apply w-full;
-        @apply top-0;
-        @apply bg-dark-500;
+        @apply h-full;
+        @apply bg-dark-900;
         @apply overflow-hidden;
 
         content: attr(data-text);
@@ -33,12 +33,12 @@
       }
 
       &:before {
-        text-shadow: -$i+px 0 $red-hs-500;
+        text-shadow: -$i+px 0 $red-100;
         animation-name: glitch-animation-1;
       }
 
       &:after {
-        text-shadow: -$i+px 0 $blue-hs-500;
+        text-shadow: -$i+px 0 $blue-100;
         animation-name: glitch-animation-2;
       }
     }
