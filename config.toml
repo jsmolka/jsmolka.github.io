@@ -1,5 +1,5 @@
 baseURL      = "/"
-title        = "eggcpt"
+title        = "Index"
 copyright    = "Julian Smolka"
 disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
 
@@ -41,5 +41,5 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
     target = "static"
 
   [[module.mounts]]
-    source = "icon/themes/nord/web"
+    source = "icon/themes/glitch/web"
     target = "static"

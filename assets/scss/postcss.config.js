@@ -9,7 +9,6 @@ const purgecss = process.env.HUGO_ENVIRONMENT === 'production'
         root + 'assets/**/*.scss'
       ],
       defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
-      whitelist: [ 'dark-mode' ],
       fontFace: true
     })
   : null;

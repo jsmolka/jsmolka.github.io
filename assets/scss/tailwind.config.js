@@ -89,17 +89,13 @@ module.exports = {
       opacity: {
         60: '0.6'
       }
-    },
-    darkSelector: '.dark-mode'
+    }
   },
   variants: {
     backgroundColor: [
-      'dark',
-      'dark-hover',
       'hover'
     ],
     borderColor: [
-      'dark',
       'hover'
     ],
     borderRadius: [
@@ -109,7 +105,6 @@ module.exports = {
       'responsive'
     ],
     textColor: [
-      'dark',
       'hover',
       'focus'
     ],
@@ -123,8 +118,5 @@ module.exports = {
       'last',
       'responsive'
     ]
-  },
-  plugins: [
-    require('tailwindcss-dark-mode')()
-  ]
+  }
 }

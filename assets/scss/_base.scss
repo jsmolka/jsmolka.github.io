@@ -1,25 +1,16 @@
 .text-normal {
-  @apply text-polar-night-3;
-
-  .dark-mode & {
-    @apply text-snow-storm-2;
-  }
+  // Todo: search and delete
 }
 
 .text-important {
-  @apply font-bold;
-  @apply text-polar-night-2;
-
-  .dark-mode & {
-    @apply text-snow-storm-2;
-  }
+  // Todo: search and delete
 }
 
 .base {
-  @extend .text-normal;
+  @apply text-white;
 
   h1, h2, h3, h4, h5, h6 {
-    @extend .text-important;
+    @apply font-bold;
   }
 
   h1 { @apply text-4xl;  }
@@ -30,7 +21,7 @@
   h6 { @apply text-base; }
 
   a {
-    @apply text-frost-1;
+    @apply text-blue-300;
   }
 
   figcaption {
@@ -50,10 +41,6 @@
     @apply p-2;
     @apply border;
     @apply border-grey-dark;
-
-    .dark-mode & {
-      @apply border-grey-light;
-    }
   }
 
   th {
@@ -62,15 +49,10 @@
 
   blockquote {
     @apply px-4;
-    @apply text-grey-light;
+    @apply text-dark-100;
     @apply border-l-3;
-    @apply border-frost-3;
+    @apply border-dark-100;
     @apply border-opacity-60;
-
-    .dark-mode {
-      @apply text-grey-dark;
-      @apply border-frost-2;
-    }
   }
 
   button {
