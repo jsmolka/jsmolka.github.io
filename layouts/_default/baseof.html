@@ -4,7 +4,6 @@
     {{ partial "head" . }}
   </head>
   <body class="flex flex-col min-w-screen min-h-screen m-0 p-0 bg-dark-900">
-    <canvas class="z-60" width="504" height="144" style="width: 504px; height: 144px; left: 587px; position: fixed"></canvas>
     {{ partial "header" . }}
 
     <div class="w-full m-auto">
@@ -12,6 +11,6 @@
       {{ end }}
     </div>
 
-    {{ partial "javascript" (dict "context" . "paths" (slice "js/vendor/alpine.js" "js/theme.js") "name" "js/main.js") }}
+    {{ partial "javascript" (dict "context" . "paths" (slice "js/vendor/alpine.js") "name" "js/main.js") }}
   </body>
 </html>

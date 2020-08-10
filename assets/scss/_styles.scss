@@ -1,4 +1,4 @@
-@import "nord";
+@import "colors";
 
 html {
   scroll-behavior: smooth;
@@ -9,36 +9,87 @@ body {
   font-feature-settings: "calt" 0, "tnum", "case", "rlig", "cv01", "cv02", "cv03", "cv04", "cv07";
 }
 
+::selection {
+  @apply bg-blue-300;
+}
+
 ::-webkit-scrollbar {
   @apply w-2;
   @apply h-2;
-  @apply bg-base-light;
-
-  .dark-mode & {
-    @apply bg-base-dark;
-  }
+  @apply bg-dark-900;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: darken($base-light, 15%);
-
-  .dark-mode & {
-    background: lighten($base-dark, 15%);
-  }
+  @apply bg-dark-200;
 
   &:hover {
-    background: darken($base-light, 20%);
-
-    .dark-mode & {
-      background: lighten($base-dark, 20%);
-    }
+    @apply bg-dark-100;
   }
 }
 
-.header-shadow {
-  box-shadow: rgba(mix($base-light, #000000, 85%), 0.15) 0px 5px 10px 0px;
+.glitch {
+  @apply select-none;
+  @apply relative;
 
-  .dark-mode & {
-    box-shadow: rgba(mix($base-dark, #000000), 0.15) 0px 5px 10px 0px;
+  &:before, &:after {
+    @apply absolute;
+    @apply w-full;
+    @apply h-full;
+    @apply bg-dark-900;
+    @apply overflow-hidden;
+
+    content: attr(data-text);
+    left: 3px;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-direction: reverse-alternate;
+  }
+
+  @for $i from 1 through 2 {
+    @keyframes glitch-animation-#{$i} {
+      $steps: 20;
+      @for $j from 0 through $steps {
+        #{percentage($j * (1 / $steps))} {
+          clip: rect(random(150)+px, 9999px, random(150)+px, 0);
+        }
+      }
+    }
+  }
+
+  &:before {
+    text-shadow: -3px 0 $red-100;
+    animation-name: glitch-animation-1;
+  }
+
+  &:after {
+    text-shadow: -3px 0 $blue-100;
+    animation-name: glitch-animation-2;
+  }
+}
+
+.accented {
+  @apply relative;
+  @apply px-1;
+  @apply mx-1;
+}
+
+@variants hover {
+  .accent {
+    @apply text-dark-900;
+
+    &:after {
+      @apply absolute;
+      @apply h-full;
+      @apply bg-blue-300;
+
+      content: "";
+      left: -1px;
+      bottom: -1px;
+      width: 108%;
+      transform: skewX(-16deg) skewY(-2deg);
+      z-index: -1;
+    }
   }
 }
