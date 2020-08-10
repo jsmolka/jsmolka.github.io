@@ -33,48 +33,16 @@ module.exports = {
           900: '#007C77'
         },
         dark: {
-          100: '#414768',
-          200: '#3C415F',
-          300: '#363B57',
-          400: '#31354E',
-          500: '#2C3046',
-          600: '#262A3D',
-          700: '#212434',
-          800: '#1B1E2C',
+          100: '#A5A8BD',
+          200: '#9094A7',
+          300: '#7C7F91',
+          400: '#686B7B',
+          500: '#535665',
+          600: '#3F414F',
+          700: '#2A2D39',
+          800: '#20232E',
           900: '#161823'
-        },
-
-        // Polar Night
-        "polar-night-0": "#2e3440",
-        "polar-night-1": "#3b4252",
-        "polar-night-2": "#434c5e",
-        "polar-night-3": "#4c566a",
-
-        // Snow Storm
-        "snow-storm-0": "#d8dee9",
-        "snow-storm-1": "#e5e9f0",
-        "snow-storm-2": "#eceff4",
-
-        // Frost
-        "frost-0": "#8fbcbb",
-        "frost-1": "#88c0d0",
-        "frost-2": "#81a1c1",
-        "frost-3": "#5e81ac",
-
-        // Aurora
-        "aurora-0": "#bf616a",
-        "aurora-1": "#d08770",
-        "aurora-2": "#ebcb8b",
-        "aurora-3": "#a3be8c",
-        "aurora-4": "#b48ead",
-
-        // Base
-        "base-dark": "#242933",
-        "base-light": "#f2f4f8",
-
-        // Grey
-        "grey-dark": "#abb9cf",
-        "grey-light": "#7b88a1"
+        }
       },
       borderWidth: {
         1: '1px',

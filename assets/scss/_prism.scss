@@ -1,12 +1,7 @@
 @import "base";
 @import "mono";
-@import "nord";
-
-$code-dark: mix($base-dark, $polar-night-0);
-$code-light: mix($base-light, #ffffff);
 
 .font-mono {
-  @extend .text-normal;
   @apply leading-relaxed;
 
   font-size: 15px;
@@ -16,19 +11,14 @@ $code-light: mix($base-light, #ffffff);
 code[class*="language-"],
 pre[class*="language-"] {
   @extend .font-mono;
-  @apply rounded-md;
   @apply whitespace-pre;
+  @apply bg-dark-800;
 
-  background: $code-light;
   hyphens: none;
   tab-size: 4;
 
   .table {
     display: inline;
-  }
-
-  .dark-mode & {
-    background: $code-dark;
   }
 }
 
@@ -36,20 +26,14 @@ pre[class*="language-"] {
   @apply my-4;
   @apply p-4;
   @apply relative;
-  @apply shadow-sm;
   @apply overflow-auto;
 }
 
 :not(pre) > code {
   @extend .font-mono;
-  @apply rounded-sm;
+  @apply bg-dark-800;
 
   padding: 2px 4px;
-  background: darken($code-light, 2.5%);
-
-  .dark-mode & {
-    background: darken($code-dark, 2.5%);
-  }
 }
 
 [class*="language-"] .namespace {
@@ -60,13 +44,7 @@ pre[class*="language-"] {
 .token.comment,
 .token.doctype,
 .token.prolog {
-  $comment: #636f88;
-
-  color: lighten($comment, 30%);
-
-  .dark-mode & {
-    color: $comment;
-  }
+  color: #636f88;
 }
 
 .language-css .token.string,
@@ -83,19 +61,11 @@ pre[class*="language-"] {
 .token.tag,
 .token.url,
 .token.variable {
-  color: saturate(darken($frost-2, 10%), 10%);
-
-  .dark-mode & {
-    color: $frost-2;
-  }
+  color: #81a1c1;
 }
 
 .token.number {
-  color: saturate($aurora-4, 10%);
-
-  .dark-mode & {
-    color: $aurora-4;
-  }
+  color: #b48ead;
 }
 
 .token.attr-name,
@@ -104,27 +74,19 @@ pre[class*="language-"] {
 .token.inserted,
 .token.selector,
 .token.string {
-  color: saturate(darken($aurora-3, 10%), 10%);
-
-  .dark-mode & {
-    color: $aurora-3;
-  }
+  color: #a3be8c;
 }
 
 .token.atrule,
 .token.attr-value,
 .token.function,
 .token.class-name {
-  color: saturate(darken($frost-1, 10%), 10%);
-
-  .dark-mode & {
-    color: $frost-1;
-  }
+  color: #88c0d0;
 }
 
 .token.regex,
 .token.important {
-  color: $aurora-2;
+  color: #d08770;
 }
 
 .token.bold,

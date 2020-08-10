@@ -1,8 +1,6 @@
 {{ define "main" }}
-  <div class="w-full max-w-screen-md mx-auto my-4 px-4">
-    <div class="single">
-      <h1 class="glitch" data-text="{{ .Title }}">{{ .Title }}</h1>
-      {{ .Content }}
-    </div>
+  <div class="single w-full max-w-screen-md mx-auto my-4 px-4">
+    <h1 class="glitch" data-text="{{ .Title }}">{{ .Title }}</h1>
+    {{ .Content }}
   </div>
 {{ end }}

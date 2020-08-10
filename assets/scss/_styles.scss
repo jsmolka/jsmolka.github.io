@@ -28,8 +28,8 @@ body {
 }
 
 .glitch {
-  @apply select-none;
   @apply relative;
+  @apply select-none;
 
   &:before, &:after {
     @apply absolute;

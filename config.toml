@@ -1,5 +1,5 @@
 baseURL      = "/"
-title        = "Index"
+title        = "Another dark corner"
 copyright    = "Julian Smolka"
 disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
 
