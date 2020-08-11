@@ -9,11 +9,19 @@ type: blank
   <canvas id="canvas" class="w-full bg-dark-900"></canvas>
   <input id="rom-input" class="hidden" type="file" accept=".gba" onchange="Module.loadRom()">
   <input id="save-input" class="hidden" type="file" accept=".sav" onchange="Module.loadSave()">
-  <div class="flex mt-4">
-    <button class="mr-4" onclick="inputRom.click()">Load rom</button>
-    <button class="mr-4" onclick="inputSave.click()">Load save</button>
-    <button class="mr-4" onclick="Module.loadDemo()">Load demo</button>
-    <button @click="controls = !controls" x-text="`${controls ? 'Hide' : 'Show'} controls`"/>
+  <div class="flex max-w-screen-md mt-4">
+    <div class="pr-2">
+      <button onclick="inputRom.click()">Load rom</button>
+    </div>
+    <div class="px-2">
+      <button onclick="inputSave.click()">Load save</button>
+    </div>
+    <div class="px-2">
+      <button onclick="Module.loadDemo()">Load demo</button>
+    </div>
+    <div class="pl-2">
+      <button @click="controls = !controls" x-text="`${controls ? 'Hide' : 'Show'} controls`"/>
+    </div>
   </div>
   <div class="w-full max-w-screen-md mt-4" :class="{ hidden: !controls }">
   {{<markdown>}}

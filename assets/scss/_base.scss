@@ -1,3 +1,5 @@
+@import "styles";
+
 .base {
   @apply text-white;
 
@@ -48,20 +50,12 @@
   }
 
   button {
-    @apply px-2;
-    @apply py-1;
-    @apply text-white;
-    @apply border;
-    @apply border-white;
-    @apply rounded-md;
-    @apply select-none;
+    @extend .accented;
+    @apply p-1;
+    @apply font-bold;
 
     &:hover {
-      @apply text-white;
-      @apply border-white;
-      @apply transition-colors;
-      @apply duration-200;
-      @apply ease-in-out;
+      @extend .accent;
     }
 
     &:focus {
