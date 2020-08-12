@@ -1,11 +1,11 @@
 <header x-data="{ menu: false }" class="w-full sticky top-0 z-10 select-none">
-  <nav class="text-white text-lg font-bold bg-dark-900">
+  <nav class="text-lg font-bold bg-dark-900">
     <div class="max-w-screen-md mx-auto px-4">
       <div class="relative flex items-center justify-between h-16">
-        <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+        <div class="flex-1 flex items-center sm:items-stretch justify-center sm:justify-start">
           <div class="flex-shrink-0">
             <a href="{{ .Site.BaseURL }}">
-              <svg class="block h-8 px-2 w-auto" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 16 16" shape-rendering="crispEdges">
+              <svg class="block h-8 w-auto" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 16 16" shape-rendering="crispEdges">
                 <path stroke="#000000" d="M4 0h2M11 0h2M3 1h1M6 1h1M10 1h1M13 1h1M2 2h1M6 2h1M9 2h1M13 2h1M2 3h1M7 3h1M9 3h1M14 3h1M1 4h1M8 4h1M14 4h1M1 5h1M9 5h2M14 5h1M0 6h1M11 6h2M15 6h1M0 7h2M13 7h3M0 8h1M2 8h2M8 8h2M13 8h1M15 8h1M0 9h1M4 9h1M6 9h2M10 9h1M12 9h1M15 9h1M0 10h1M5 10h1M11 10h1M15 10h1M1 11h1M14 11h1M1 12h1M14 12h1M2 13h2M12 13h2M4 14h2M10 14h2M6 15h4" />
                 <path stroke="#00E5DD" d="M4 1h2M11 1h2M3 2h3M10 2h3M3 3h1M5 3h2M10 3h1M12 3h2M2 4h2M6 4h2M9 4h2M13 4h1M2 5h1M7 5h2M13 5h1M1 6h2M8 6h3M13 6h2M2 7h1M10 7h3M12 8h1" />
                 <path stroke="#00EBE3" d="M4 3h1M11 3h1M4 4h2M11 4h2M3 5h4M11 5h2M3 6h1M6 6h2M3 7h1M7 7h3M10 8h2M11 9h1" />
@@ -22,12 +22,12 @@
         </div>
         <div class="hidden sm:flex items-center">
           {{ range .Site.Menus.main }}
-            <div class="inline-block first:ml-0 last:mr-0 mx-2 z-10">
-              <a class="relative mx-1 p-1 hover:accent" href="{{ .URL | absURL }}">{{ .Name }}</a>
+            <div class="inline-block mx-3 first:ml-0 last:mr-0 z-10">
+              <a class="relative p-1 hover:accent" href="{{ .URL | absURL }}">{{ .Name }}</a>
             </div>
           {{ end }}
         </div>
-        <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
+        <div class="absolute sm:hidden inset-y-0 right-0 flex items-center">
           <button @click="menu = !menu" class="inline-flex ml-4 items-center justify-center p-2 focus:outline-none">
             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" x-show="!menu" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="3" y1="12" x2="21" y2="12" />
@@ -45,7 +45,7 @@
     <div x-show="menu" style="display: none" class="absolute sm:hidden top-16 z-10 px-2 w-screen bg-dark-900">
       {{ range .Site.Menus.main }}
         <div class="block mt-6 last:mb-6 px-3 py-2 text-center">
-          <a class="relative mx-1 p-1 hover:accent" href="{{ .URL | absURL }}">{{ .Name }}</a>
+          <a class="relative p-1 hover:accent" href="{{ .URL | absURL }}">{{ .Name }}</a>
         </div>
       {{ end }}
     </div>

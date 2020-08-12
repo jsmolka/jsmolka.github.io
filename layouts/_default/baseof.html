@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html class="font-body" lang="{{ .Site.Language }}">
+<html lang="{{ .Site.Language }}">
   <head>
     {{ partial "head" . }}
   </head>
-  <body class="flex flex-col min-w-screen min-h-screen m-0 p-0 bg-dark-900">
+  <body class="flex flex-col min-w-screen min-h-screen m-0 p-0 bg-dark-900 text-white font-body">
     {{ partial "header" . }}
 
     <div class="w-full m-auto">
@@ -11,6 +11,6 @@
       {{ end }}
     </div>
 
-    {{ partial "javascript" (dict "context" . "paths" (slice "js/vendor/alpine.js") "name" "js/main.js") }}
+    {{ partial "javascript" (dict "context" . "paths" (slice "js/vendor/alpine.js" "js/vendor/prism.js" "js/prism.js") "name" "js/main.js") }}
   </body>
 </html>

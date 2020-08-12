@@ -1,13 +1,12 @@
 {{ define "main" }}
-  <div class="w-full max-w-screen-md mx-auto my-4 px-4 text-white">
-    <h1 class="glitch mb-4 text-4xl font-bold" data-text="{{ .Title }}">{{ .Title }}</h1>
+  <div class="max-w-screen-md mx-auto my-4 px-4">
+    <div class="glitch text-4xl font-bold" data-text="{{ .Title }}">{{ .Title }}</div>
     <div class="mt-4">
       {{ range .Data.Pages.GroupByDate "2006" }}
-        <div class="block sm:flex mb-6" style="align-items: flex-start;">
-          <div class="flex mr-0 sm:mr-10 text-3xl font-bold">
-            <div class="relative mx-1 px-1 accent">{{ .Key }}</div>
+        <div class="block sm:flex mb-6 items-start">
+          <div class="flex ml-2 mr-0 sm:mr-10 text-3xl font-bold">
+            <div class="relative pl-1 accent">{{ .Key }}</div>
           </div>
-
           <ul class="w-full">
             {{ range .Pages }}
               <li class="py-3 border-b border-dashed border-dark-100">
