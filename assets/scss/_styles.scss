@@ -1,6 +1,8 @@
 @import "colors";
 
 body {
+  @apply antialiased;
+
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
   font-feature-settings: "calt" 0, "tnum", "case", "rlig", "cv01", "cv02", "cv03", "cv04", "cv07";

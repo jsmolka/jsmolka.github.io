@@ -1,8 +1,8 @@
 <header x-data="{ menu: false }" class="w-full sticky top-0 z-10 select-none">
   <nav class="text-lg font-bold bg-dark-900">
-    <div class="max-w-screen-md mx-auto px-4">
+    <div class="max-w-screen-md mx-auto px-2">
       <div class="relative flex items-center justify-between h-16">
-        <div class="flex-1 flex items-center sm:items-stretch justify-center sm:justify-start">
+        <div class="flex-1 flex items-center sm:items-stretch justify-center sm:justify-start pl-2">
           <div class="flex-shrink-0">
             <a href="{{ .Site.BaseURL }}">
               <svg class="block h-8 w-auto" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 16 16" shape-rendering="crispEdges">
@@ -20,15 +20,15 @@
             </a>
           </div>
         </div>
-        <div class="hidden sm:flex items-center">
+        <div class="hidden sm:flex items-center pr-1">
           {{ range .Site.Menus.main }}
             <div class="inline-block mx-3 first:ml-0 last:mr-0 z-10">
               <a class="relative p-1 hover:accent" href="{{ .URL | absURL }}">{{ .Name }}</a>
             </div>
           {{ end }}
         </div>
-        <div class="absolute sm:hidden inset-y-0 right-0 flex items-center">
-          <button @click="menu = !menu" class="inline-flex ml-4 items-center justify-center p-2 focus:outline-none">
+        <div class="absolute sm:hidden flex items-center inset-y-0 right-0">
+          <button @click="menu = !menu" class="inline-flex p-2 focus:outline-none">
             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" x-show="!menu" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="3" y1="12" x2="21" y2="12" />
               <line x1="3" y1="6" x2="21" y2="6" />
@@ -42,7 +42,7 @@
         </div>
       </div>
     </div>
-    <div x-show="menu" style="display: none" class="absolute sm:hidden top-16 z-10 px-2 w-screen bg-dark-900">
+    <div x-show="menu" style="display: none" class="absolute sm:hidden top-16 z-10 px-4 w-screen bg-dark-900">
       {{ range .Site.Menus.main }}
         <div class="block mt-6 last:mb-6 px-3 py-2 text-center">
           <a class="relative p-1 hover:accent" href="{{ .URL | absURL }}">{{ .Name }}</a>
