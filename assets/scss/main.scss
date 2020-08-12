@@ -1,8 +1,12 @@
 @tailwind base;
 @tailwind components;
 
-@import "base";
+@import "accent";
+@import "colors";
+@import "content";
+@import "glitch";
 @import "inter";
+@import "mono";
 @import "prism";
 @import "single";
 @import "styles";

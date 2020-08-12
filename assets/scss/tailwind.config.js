@@ -6,6 +6,12 @@ module.exports = {
         'system-ui',
         '-apple-system',
         'sans-serif'
+      ],
+      mono: [
+        '"JetBrains Mono"',
+        'Consolas',
+        'Monaco',
+        'monospace'
       ]
     },
     extend: {
@@ -48,11 +54,8 @@ module.exports = {
         1: '1px',
         3: '3px'
       },
-      maxWidth: {
-        'screen-xl': '75em'
-      },
-      transitionProperty: {
-        bg: 'background'
+      fontSize: {
+        code: '15px'
       },
       opacity: {
         60: '0.6'
@@ -60,22 +63,6 @@ module.exports = {
     }
   },
   variants: {
-    backgroundColor: [
-      'hover'
-    ],
-    borderColor: [
-      'hover'
-    ],
-    borderRadius: [
-      'responsive'
-    ],
-    boxShadow: [
-      'responsive'
-    ],
-    textColor: [
-      'hover',
-      'focus'
-    ],
     margin: [
       'first',
       'last',

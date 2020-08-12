@@ -5,7 +5,7 @@ summary: "WebAssembly port of the eggvance GBA emulator."
 date: 2020-04-12
 type: blank
 ---
-<div x-data="{ controls: false }" class="base flex flex-col w-full max-w-screen-xl m-auto p-4 items-center">
+<div x-data="{ controls: false }" class="content flex flex-col w-full max-w-screen-xl m-auto p-4 items-center">
   <canvas id="canvas" class="w-full bg-dark-900"></canvas>
   <input id="rom-input" class="hidden" type="file" accept=".gba" onchange="Module.loadRom()">
   <input id="save-input" class="hidden" type="file" accept=".sav" onchange="Module.loadSave()">

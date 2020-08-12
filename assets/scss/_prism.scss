@@ -1,21 +1,11 @@
-@import "base";
-@import "mono";
-
-.font-mono {
-  @apply leading-relaxed;
-
-  font-size: 15px;
-  font-family: 'JetBrains Mono', Consolas, Monaco, monospace;
-}
-
-code[class*="language-"],
-pre[class*="language-"] {
-  @extend .font-mono;
-  @apply whitespace-pre;
+pre[class*="language-"],
+code[class*="language-"] {
+  @apply font-mono;
+  @apply text-code;
+  @apply hypens-none;
   @apply bg-dark-800;
-
-  hyphens: none;
-  tab-size: 4;
+  @apply whitespace-pre;
+  @apply leading-relaxed;
 
   .table {
     display: inline;
@@ -30,8 +20,10 @@ pre[class*="language-"] {
 }
 
 :not(pre) > code {
-  @extend .font-mono;
+  @apply font-mono;
+  @apply text-code;
   @apply bg-dark-800;
+  @apply leading-relaxed;
 
   padding: 2px 4px;
 }
@@ -47,8 +39,6 @@ pre[class*="language-"] {
   color: #636f88;
 }
 
-.language-css .token.string,
-.style .token.string,
 .token.boolean,
 .token.constant,
 .token.deleted,

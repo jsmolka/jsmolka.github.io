@@ -23,7 +23,7 @@
         <div class="hidden sm:flex items-center">
           {{ range .Site.Menus.main }}
             <div class="inline-block first:ml-0 last:mr-0 mx-2 z-10">
-              <a class="p-1 accented hover:accent" href="{{ .URL | absURL }}">{{ .Name }}</a>
+              <a class="relative mx-1 p-1 hover:accent" href="{{ .URL | absURL }}">{{ .Name }}</a>
             </div>
           {{ end }}
         </div>
@@ -45,7 +45,7 @@
     <div x-show="menu" style="display: none" class="absolute sm:hidden top-16 z-10 px-2 w-screen bg-dark-900">
       {{ range .Site.Menus.main }}
         <div class="block mt-6 last:mb-6 px-3 py-2 text-center">
-          <a class="p-1 accented hover:accent" href="{{ .URL | absURL }}">{{ .Name }}</a>
+          <a class="relative mx-1 p-1 hover:accent" href="{{ .URL | absURL }}">{{ .Name }}</a>
         </div>
       {{ end }}
     </div>

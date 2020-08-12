@@ -1,0 +1,18 @@
+@variants hover {
+  .accent {
+    @apply text-dark-900;
+
+    &:after {
+      @apply absolute;
+      @apply h-full;
+      @apply bg-blue-300;
+
+      content: "";
+      left: -1px;
+      bottom: -1px;
+      width: 108%;
+      transform: skewX(-16deg) skewY(-2deg);
+      z-index: -1;
+    }
+  }
+}

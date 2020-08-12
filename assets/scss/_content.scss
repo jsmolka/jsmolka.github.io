@@ -1,6 +1,6 @@
-@import "styles";
+@import "accent";
 
-.base {
+.content {
   @apply text-white;
 
   h1, h2, h3, h4, h5, h6 {
@@ -15,7 +15,7 @@
   h6 { @apply text-base; }
 
   a {
-    @apply text-blue-200;
+    @apply text-blue-300;
   }
 
   figcaption {
@@ -23,7 +23,7 @@
     @apply text-sm;
   }
 
-  ul { @apply list-disc; }
+  ul { @apply list-disc;    }
   ol { @apply list-decimal; }
 
   table {
@@ -50,7 +50,8 @@
   }
 
   button {
-    @extend .accented;
+    @apply relative;
+    @apply mx-1;
     @apply p-1;
     @apply font-bold;
 

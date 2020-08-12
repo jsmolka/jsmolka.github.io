@@ -2,15 +2,12 @@
 
 html {
   scroll-behavior: smooth;
-}
-
-body {
   text-rendering: optimizeLegibility;
   font-feature-settings: "calt" 0, "tnum", "case", "rlig", "cv01", "cv02", "cv03", "cv04", "cv07";
 }
 
 ::selection {
-  @apply bg-blue-300;
+  background: rgba($blue-100, 0.25);
 }
 
 ::-webkit-scrollbar {
@@ -24,72 +21,5 @@ body {
 
   &:hover {
     @apply bg-dark-100;
-  }
-}
-
-.glitch {
-  @apply relative;
-  @apply select-none;
-
-  &:before, &:after {
-    @apply absolute;
-    @apply w-full;
-    @apply h-full;
-    @apply bg-dark-900;
-    @apply overflow-hidden;
-
-    content: attr(data-text);
-    left: 3px;
-    animation-duration: 3s;
-    animation-timing-function: linear;
-    animation-delay: 0s;
-    animation-iteration-count: infinite;
-    animation-direction: reverse-alternate;
-  }
-
-  @for $i from 1 through 2 {
-    @keyframes glitch-animation-#{$i} {
-      $steps: 20;
-      @for $j from 0 through $steps {
-        #{percentage($j * (1 / $steps))} {
-          clip: rect(random(150)+px, 9999px, random(150)+px, 0);
-        }
-      }
-    }
-  }
-
-  &:before {
-    text-shadow: -3px 0 $red-100;
-    animation-name: glitch-animation-1;
-  }
-
-  &:after {
-    text-shadow: -3px 0 $blue-100;
-    animation-name: glitch-animation-2;
-  }
-}
-
-.accented {
-  @apply relative;
-  @apply px-1;
-  @apply mx-1;
-}
-
-@variants hover {
-  .accent {
-    @apply text-dark-900;
-
-    &:after {
-      @apply absolute;
-      @apply h-full;
-      @apply bg-blue-300;
-
-      content: "";
-      left: -1px;
-      bottom: -1px;
-      width: 108%;
-      transform: skewX(-16deg) skewY(-2deg);
-      z-index: -1;
-    }
   }
 }

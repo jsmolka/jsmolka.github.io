@@ -1,7 +1,7 @@
-@import "base";
+@import "content";
 
 .single {
-  @extend .base;
+  @extend .content;
   @apply w-full;
 
   h1, h2, h3, h4, h5, h6 {
