@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 
+/* purgecss start ignore */
 @import "accent";
 @import "colors";
 @import "content";
@@ -10,7 +11,10 @@
 @import "prism";
 @import "single";
 @import "styles";
+/* purgecss end ignore */
 
 @tailwind utilities;
 
+/* purgecss start ignore */
 @import "utilities";
+/* purgecss end ignore */
