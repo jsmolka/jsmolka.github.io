@@ -5,7 +5,7 @@
       {{ range .Data.Pages.GroupByDate "2006" }}
         <div class="block sm:flex mt-6 first:mt-0 items-start">
           <div class="flex ml-2 mr-0 sm:mr-10 mb-2 sm:mb-0 text-3xl font-bold">
-            <div class="relative pl-1 accent">{{ .Key }}</div>
+            <div class="relative px-1 accent">{{ .Key }}</div>
           </div>
           <ul class="w-full">
             {{ range .Pages }}
