@@ -102,7 +102,7 @@ void ARM::run(int cycles) {
     switch (state) {
       case 0: dispatch<0>(); break;
       case 1: dispatch<1>(); break;
-      case 2: dispatch<3>(); break;
+      case 2: dispatch<2>(); break;
       // ...
     }
   }
