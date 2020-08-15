@@ -11,7 +11,7 @@
     @apply bg-dark-900;
 
     content: attr(data-text);
-    animation-duration: 10s;
+    animation-duration: 8s;
     animation-timing-function: linear;
     animation-delay: 0s;
     animation-iteration-count: infinite;
@@ -19,7 +19,7 @@
 
   @for $i from 1 through 2 {
     @keyframes glitch-animation-#{$i} {
-      $steps: 25;
+      $steps: 20;
       @for $j from 0 through $steps {
         #{percentage($j * (1 / $steps))} {
           clip: rect(random(150)+px, 9999px, random(150)+px, 0);

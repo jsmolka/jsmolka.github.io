@@ -1,4 +1,4 @@
-<header x-data="{ menu: false }" class="w-full sticky top-0 z-10 select-none">
+<header x-data="{ menu: false }" class="w-full top-0 z-10 select-none">
   <nav class="text-lg font-bold bg-dark-900">
     <div class="max-w-screen-md mx-auto px-2">
       <div class="relative flex items-center justify-between h-16">
@@ -42,7 +42,7 @@
         </div>
       </div>
     </div>
-    <div x-show="menu" style="display: none" class="absolute sm:hidden top-16 z-10 px-4 w-screen bg-dark-900">
+    <div x-show="menu" style="display: none" class="relative sm:hidden top-16 z-10 px-4 w-screen bg-dark-900">
       {{ range .Site.Menus.main }}
         <div class="block mt-6 last:mb-6 px-3 py-2 text-center">
           <a class="relative p-1 hover:accent" href="{{ .URL | absURL }}">{{ .Name }}</a>
