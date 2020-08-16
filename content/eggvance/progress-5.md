@@ -48,9 +48,9 @@ void ARM::execute() {
 }
 ```
 
-It looks much worse than it actually is but you get the idea. Lots of different states require lots of if-else statements. This results in code with many branches, something a modern CPU doesn't like. Emulators are know for their bad branch prediction because the branches don't tend to follow a predictable pattern. Adding more branches to each instructions just aggravates this problem.
+It looks much worse than it actually is but you get the idea. Lots of different states require lots of if-else statements. This results in code with many branches, something a modern CPU doesn't like. Emulators are known for their bad branch prediction because the branches don't tend to follow a predictable pattern. Adding more branches to each instructions just aggravates this problem.
 
-So how can we get around this massive if-else chain and transform it into something faster. Well, most of these states change rather infrequently and don't need constant re-evaluation. Therefore the easiest thing would be storing the current emulator state in a variable and then calling a dispatch function made for that specific state until it changes. This reduces the number of branches to almost zero and reduced their runtime overhead to a minimum.
+So how can we get around this massive if-else chain and transform it into something faster? Well, most of these states change rather infrequently and don't need constant re-evaluation. Therefore the easiest thing would be storing the current emulator state in a variable and then calling a dispatch function made for that specific state until it changes. This reduces the number of branches to almost zero and their runtime overhead to a minimum.
 
 ```cpp
 class ARM {
