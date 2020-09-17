@@ -2,20 +2,29 @@ module.exports = {
   theme: {
     fontFamily: {
       body: [
-        'Inter',
-        'system-ui',
-        '-apple-system',
+        '"Roboto"',
         'sans-serif'
       ],
       mono: [
-        '"JetBrains Mono"',
-        'Consolas',
-        'Monaco',
+        '"Roboto-mono"',
         'monospace'
       ]
     },
     extend: {
       colors: {
+        gray: {
+           50: "#fafafa",
+          100: "#f5f5f5",
+          200: "#eeeeee",
+          300: "#e0e0e0",
+          400: "#bdbdbd",
+          500: "#9e9e9e",
+          600: "#757575",
+          700: "#616161",
+          800: "#424242",
+          900: "#212121"
+        },
+        // Todo: retire
         red: {
           100: '#FF004E',
           200: '#EF0049',
@@ -50,6 +59,9 @@ module.exports = {
           900: '#161823'
         }
       },
+      height: {
+        18: '4.5rem'
+      },
       borderWidth: {
         1: '1px',
         3: '3px'
@@ -63,6 +75,9 @@ module.exports = {
     }
   },
   variants: {
+    textColor: [
+      'hover'
+    ],
     margin: [
       'first',
       'last',
