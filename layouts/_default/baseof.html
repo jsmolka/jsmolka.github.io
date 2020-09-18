@@ -3,7 +3,7 @@
   <head>
     {{ partial "head" . }}
   </head>
-  <body class="flex flex-col min-w-screen min-h-screen m-0 p-0 bg-dark-900 text-white font-body">
+  <body class="flex flex-col min-w-screen min-h-screen m-0 p-0 font-body bg-gray-900">
     {{ partial "header" . }}
 
     <div class="w-full m-auto">
@@ -11,6 +11,6 @@
       {{ end }}
     </div>
 
-    {{ partial "javascript" (dict "context" . "paths" (slice "js/vendor/alpine.js" "js/vendor/prism.js" "js/prism.js") "name" "js/main.js") }}
+    {{ partial "javascript" (dict "context" . "paths" (slice "js/vendor/alpine.js" "js/vendor/headroom.js" "js/vendor/prism.js" "js/headroom.js" "js/prism.js") "name" "js/main.js") }}
   </body>
 </html>

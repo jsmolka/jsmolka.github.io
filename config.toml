@@ -21,7 +21,7 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
     url  = "/about"
 
   [[menu.main]]
-    name = "eggvance"
+    name = "Eggvance"
     url  = "/eggvance"
 
 [markup]
@@ -41,5 +41,5 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
     target = "static"
 
   [[module.mounts]]
-    source = "icon/themes/glitch/web"
+    source = "icon/themes/material/web"
     target = "static"
