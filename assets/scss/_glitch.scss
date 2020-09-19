@@ -1,44 +1,44 @@
 @import "colors";
 
 .glitch {
-  @apply relative;
-  @apply select-none;
+  // @apply relative;
+  // @apply select-none;
 
-  &:before, &:after {
-    @apply absolute;
-    @apply w-full;
-    @apply h-full;
-    @apply bg-dark-900;
+  // &:before, &:after {
+  //   @apply absolute;
+  //   @apply w-full;
+  //   @apply h-full;
+  //   @apply bg-dark-900;
 
-    content: attr(data-text);
-    animation-duration: 8s;
-    animation-timing-function: linear;
-    animation-delay: 0s;
-    animation-iteration-count: infinite;
-  }
+  //   content: attr(data-text);
+  //   animation-duration: 8s;
+  //   animation-timing-function: linear;
+  //   animation-delay: 0s;
+  //   animation-iteration-count: infinite;
+  // }
 
-  @for $i from 1 through 2 {
-    @keyframes glitch-animation-#{$i} {
-      $steps: 20;
-      @for $j from 0 through $steps {
-        #{percentage($j * (1 / $steps))} {
-          clip: rect(random(150)+px, 9999px, random(150)+px, 0);
-        }
-      }
-    }
-  }
+  // @for $i from 1 through 2 {
+  //   @keyframes glitch-animation-#{$i} {
+  //     $steps: 20;
+  //     @for $j from 0 through $steps {
+  //       #{percentage($j * (1 / $steps))} {
+  //         clip: rect(random(150)+px, 9999px, random(150)+px, 0);
+  //       }
+  //     }
+  //   }
+  // }
 
-  &:before {
-    left: 1px;
-    text-shadow: -2px 0 $red-100;
-    animation-name: glitch-animation-1;
-    animation-direction: alternate;
-  }
+  // &:before {
+  //   left: 1px;
+  //   text-shadow: -2px 0 $red-100;
+  //   animation-name: glitch-animation-1;
+  //   animation-direction: alternate;
+  // }
 
-  &:after {
-    left: -1px;
-    text-shadow: -2px 0 $blue-100;
-    animation-name: glitch-animation-2;
-    animation-direction: alternate;
-  }
+  // &:after {
+  //   left: -1px;
+  //   text-shadow: -2px 0 $blue-100;
+  //   animation-name: glitch-animation-2;
+  //   animation-direction: alternate;
+  // }
 }

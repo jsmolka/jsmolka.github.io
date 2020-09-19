@@ -69,6 +69,9 @@ module.exports = {
       fontSize: {
         code: '15px'
       },
+      minHeight: {
+        18: '4.5rem'
+      },
       opacity: {
         60: '0.6'
       }

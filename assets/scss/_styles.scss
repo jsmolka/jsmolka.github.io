@@ -8,20 +8,40 @@ body {
   font-feature-settings: "calt" 0, "tnum", "case", "rlig", "cv01", "cv02", "cv03", "cv04", "cv07";
 }
 
-::selection {
-  background: rgba($blue-100, 0.25);
-}
+// ::selection {
+//   background: rgba($blue-100, 0.25);
+// }
 
 ::-webkit-scrollbar {
   @apply w-2;
   @apply h-2;
-  @apply bg-dark-900;
+  @apply bg-white;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-dark-200;
+  @apply bg-gray-400;
 
   &:hover {
-    @apply bg-dark-100;
+    @apply bg-gray-500;
+  }
+}
+
+.mobile-menu {
+  @apply fixed;
+  @apply z-20;
+
+  top: 4.5rem;
+  max-height: calc(100% - 4.5rem);
+
+  &::-webkit-scrollbar {
+    @apply bg-gray-900;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-gray-500;
+
+    &:hover {
+      @apply bg-gray-400;
+    }
   }
 }
