@@ -1,5 +1,5 @@
 (function() {
-  const header = document.getElementById('header');
+  const header = document.querySelector('header');
   const headroom = new Headroom(header, {
     offset: 64,
     tolerance: 16

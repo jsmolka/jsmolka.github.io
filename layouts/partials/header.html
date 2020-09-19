@@ -1,4 +1,4 @@
-<header id="header" class="fixed top-0 z-10 w-full bg-gray-900 text-white shadow-header select-none">
+<header class="fixed top-0 z-10 w-full bg-gray-900 text-white shadow-header select-none">
   <nav class="flex justify-between max-w-screen-xl mx-auto">
     <div class="mr-5">
       <a class="flex items-center h-18 px-5" href="{{ .Site.BaseURL }}">
@@ -10,7 +10,13 @@
     <div class="ml-5">
       <div class="sm:flex hidden hover:text-gray-500">
         {{ range .Site.Menus.main }}
-          <a class="flex items-center h-18 px-5 hover:text-white" href="{{ .URL | absURL }}">{{ .Name }}</a>
+          <a class="flex items-center h-18 px-5 hover:text-white" href="{{ .URL | absURL }}">
+            {{ $active := hasPrefix (urls.Parse $.Permalink).Path .URL }}
+            <div class="relative inline-flex flex-col justify-center h-full">
+              <span>{{ .Name }}</span>
+              <span class="absolute bottom-0 {{ if $active }}nav-item-animation h-1{{ else }}h-0{{ end }} w-full bg-white"></span>
+            </div>
+          </a>
         {{ end }}
       </div>
       <div class="flex sm:hidden">
@@ -24,7 +30,7 @@
   </nav>
 </header>
 <div class="aboslute top-0 min-h-18 w-full bg-gray-900"></div>
-<div x-show="menu" class="mobile-menu block sm:hidden w-full bg-gray-900 text-white overflow-y-auto shadow-header select-none" style="display: none">
+<div x-cloak x-show="menu" class="mobile-menu block sm:hidden w-full bg-gray-900 text-white overflow-y-auto shadow-header select-none">
   <div class="flex flex-col mb-5 hover:text-gray-500">
     {{ range .Site.Menus.main }}
       <a class="flex justify-center items-center h-18 hover:text-white" href="{{ .URL | absURL }}">{{ .Name }}</a>
