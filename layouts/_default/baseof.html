@@ -11,6 +11,12 @@
       {{ end }}
     </div>
 
-    {{ partial "javascript" (dict "context" . "paths" (slice "js/vendor/alpine.js" "js/vendor/headroom.js" "js/vendor/prism.js" "js/headroom.js" "js/prism.js") "name" "js/main.js") }}
+    {{ $scripts := slice }}
+    {{ $scripts := $scripts | append "js/vendor/alpine.min.js" }}
+    {{ $scripts := $scripts | append "js/vendor/headroom.min.js" }}
+    {{ $scripts := $scripts | append "js/vendor/prism.min.js" }}
+    {{ $scripts := $scripts | append "js/headroom.js" }}
+    {{ $scripts := $scripts | append "js/prism.js" }}
+    {{ partial "javascript" (dict "context" . "paths" $scripts "name" "js/main.js") }}
   </body>
 </html>

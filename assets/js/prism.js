@@ -1,4 +1,4 @@
-function initPrism() {
+(function() {
   Prism.languages.armasm = {
     comment: {
       pattern: /;.*/,
@@ -11,6 +11,4 @@ function initPrism() {
   const keywords = Prism.languages.cpp.keyword.source.split('|');
   keywords.splice(1, 0, 'u8|u16|u32|u64|s8|s16|s32|s64|uint');
   Prism.languages.cpp.keyword = new RegExp(keywords.join('|'));
-}
-
-initPrism();
+})();
