@@ -1,22 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language }}" class="h-full">
+<html lang="{{ .Site.Language }}">
   <head>
     {{ partial "head" . }}
   </head>
-  <body x-data="{ menu: false }" class="h-full flex flex-col min-w-screen min-h-screen m-0 p-0 font-body bg-white" :class="{ 'overflow-hidden': menu }">
+  <body x-data="{ menu: false }" :class="{ 'overflow-hidden': menu }" class="flex flex-col min-w-screen min-h-screen m-0 p-0 font-roboto bg-white text-dark-900">
     {{ partial "header" . }}
-
-    <div class="w-full m-auto">
-      {{ block "main" . }}
-      {{ end }}
-    </div>
-
-    {{ $scripts := slice }}
-    {{ $scripts := $scripts | append "js/vendor/alpine.min.js" }}
-    {{ $scripts := $scripts | append "js/vendor/headroom.min.js" }}
-    {{ $scripts := $scripts | append "js/vendor/prism.min.js" }}
-    {{ $scripts := $scripts | append "js/headroom.js" }}
-    {{ $scripts := $scripts | append "js/prism.js" }}
-    {{ partial "javascript" (dict "context" . "paths" $scripts "name" "js/main.js") }}
+    {{ block "main" . }}
+    {{ end }}
   </body>
 </html>
