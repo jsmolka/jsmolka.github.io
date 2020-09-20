@@ -1,15 +1,5 @@
 module.exports = {
   theme: {
-    fontFamily: {
-      body: [
-        '"Roboto"',
-        'sans-serif'
-      ],
-      mono: [
-        '"Roboto-mono"',
-        'monospace'
-      ]
-    },
     extend: {
       colors: {
         gray: {
@@ -77,6 +67,20 @@ module.exports = {
         60: '0.6'
       }
     }
+  },
+  fontFamily: {
+    body: [
+      '"Roboto"',
+      'sans-serif'
+    ],
+    mono: [
+      '"Roboto-mono"',
+      'monospace'
+    ]
+  },
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true
   },
   variants: {
     textColor: [
