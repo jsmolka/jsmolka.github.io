@@ -5,12 +5,11 @@ body {
 
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
-  font-feature-settings: "calt" 0, "tnum", "case", "rlig", "cv01", "cv02", "cv03", "cv04", "cv07";
 }
 
-// ::selection {
-//   background: rgba($blue-100, 0.25);
-// }
+::selection {
+  background: $blue-300;
+}
 
 ::-webkit-scrollbar {
   @apply w-2;
