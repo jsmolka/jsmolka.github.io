@@ -1,30 +1,32 @@
 {{ define "main" }}
-  <div class="max-w-screen-md mx-auto my-4 px-4">
-    <div class="glitch text-4xl font-bold" data-text="{{ .Title }}">{{ .Title }}</div>
-    <div class="mt-6">
-      {{ range .Data.Pages.GroupByDate "2006" }}
-        <div class="block sm:flex mt-6 first:mt-0 items-start">
-          <div class="flex ml-2 mr-0 sm:mr-10 mb-2 sm:mb-0 text-3xl font-bold">
-            <div class="relative px-1 accent">{{ .Key }}</div>
-          </div>
-          <ul class="w-full">
-            {{ range .Pages }}
-              <li class="py-3 border-b border-dashed border-dark-100">
-                <a class="flex justify-between" href="{{ .Permalink }}">
-                  <span>{{ .Title }}</span>
-                  <span>
-                    {{ if .Site.Params.dateformShort }}
-                      {{ .Date.Format .Site.Params.dateformShort }}
-                    {{ else }}
-                      {{ .Date.Format "Jan 2" }}
-                    {{ end }}
-                  </span>
-                </a>
-              </li>
-            {{ end }}
-          </ul>
-        </div>
-      {{ end }}
+  <div class="w-full px-4 py-8 sm:py-16 bg-gray-900">
+    <div class="flex flex-col text-center">
+      <span class="mb-2 text-gray-50 text-4xl">{{ .Title }}</span>
+      <span class="text-gray-400">{{ .Summary }}</span>
     </div>
+    {{ .Content }}
+  </div>
+  <div class="w-full max-w-screen-md mx-auto px-4 py-8 sm:py-16">
+    {{ range .Data.Pages.GroupByDate "2006" }}
+      <div class="block sm:flex mb-6 last:mb-0">
+        <span class="mr-0 sm:mr-10 mb-2 sm:mb-0 font-bit text-5xl leading-none">{{ .Key }}</span>
+        <ul class="w-full">
+          {{ range .Pages }}
+            <li class="py-3 border-b border-dashed border-gray-500">
+              <a class="flex justify-between" href="{{ .Permalink }}">
+                <span>{{ .Title }}</span>
+                <span>
+                  {{ if .Site.Params.dateformNum }}
+                    {{ .Date.Format .Site.Params.dateformShort }}
+                  {{ else }}
+                    {{ .Date.Format "Jan 2" }}
+                  {{ end }}
+                </span>
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
   </div>
 {{ end }}

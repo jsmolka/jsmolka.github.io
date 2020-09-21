@@ -1,5 +1,20 @@
 module.exports = {
   theme: {
+    fontFamily: {
+      bit: [
+        '"Bit Outline"',
+        '"Roboto"',
+        'sans-serif'
+      ],
+      body: [
+        '"Roboto"',
+        'sans-serif'
+      ],
+      mono: [
+        '"Roboto Mono"',
+        'monospace'
+      ]
+    },
     extend: {
       colors: {
         gray: {
@@ -58,6 +73,8 @@ module.exports = {
         3: '3px'
       },
       fontSize: {
+        '7xl': '5rem',
+        '8xl': '6rem',
         code: '15px'
       },
       minHeight: {
@@ -67,16 +84,6 @@ module.exports = {
         60: '0.6'
       }
     }
-  },
-  fontFamily: {
-    body: [
-      '"Roboto"',
-      'sans-serif'
-    ],
-    mono: [
-      '"Roboto-mono"',
-      'monospace'
-    ]
   },
   future: {
     removeDeprecatedGapUtilities: true,
