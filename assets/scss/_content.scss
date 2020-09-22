@@ -1,7 +1,7 @@
-@import "accent";
+@import "colors";
 
 .content {
-  @apply text-white;
+  @apply text-gray-900;
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold;
@@ -15,7 +15,26 @@
   h6 { @apply text-base; }
 
   a {
-    @apply text-blue-100;
+    @apply relative;
+
+    &:after {
+      @apply absolute;
+      @apply bottom-0;
+
+      content: "";
+      z-index: -1;
+      top: 75%;
+      left: -0.1em;
+      right: -0.1em;
+      transition: top 300ms ease-out;
+      background: rgba($blue-400, 0.4);
+    }
+
+    &:hover {
+      &:after {
+        @apply top-0;
+      }
+    }
   }
 
   figcaption {
@@ -54,10 +73,6 @@
     @apply mx-1;
     @apply p-1;
     @apply font-bold;
-
-    &:hover {
-      @extend .accent;
-    }
 
     &:focus {
       @apply outline-none;
