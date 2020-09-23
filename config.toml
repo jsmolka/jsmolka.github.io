@@ -24,6 +24,10 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
     name = "eggvance"
     url  = "/eggvance"
 
+  [[menu.main]]
+    name = "Posts"
+    url  = "/posts"
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.extensions]
