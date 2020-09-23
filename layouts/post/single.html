@@ -1,9 +1,16 @@
 {{ define "main" }}
-  <div class="max-w-screen-md mx-auto my-4 px-4">
+  <div class="w-full px-4 py-8 sm:py-16 bg-gray-900">
+    <div class="flex flex-col text-center">
+      <span class="mb-2 text-gray-50 text-4xl">{{ .Title }}</span>
+      <span class="text-gray-400">{{ .Summary }}</span>
+    </div>
+  </div>
+  <div class="w-full max-w-screen-md mx-auto px-4 py-8 sm:py-16">
     <div class="single">
-      <h1 class="text-black" data-text="{{ .Title }}">{{ .Title }}</h1>
       {{ .Content }}
     </div>
+  </div>
+  <!-- <div class="max-w-screen-md mx-auto my-4 px-4">
     <div class="flex justify-between my-6 pt-6 text-sm text-dark-100 border-t border-dark-100">
       <div class="flex align-middle">
         <svg class="w-4 h-4 my-auto mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -28,5 +35,5 @@
         <span>Improve</span>
       </a>
     </div>
-  </div>
+  </div> -->
 {{ end }}
