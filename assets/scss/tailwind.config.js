@@ -73,9 +73,9 @@ module.exports = {
         3: '3px'
       },
       fontSize: {
+        'md': '0.95rem',
         '7xl': '5rem',
-        '8xl': '6rem',
-        code: '15px'
+        '8xl': '6rem'
       },
       minHeight: {
         18: '4.5rem'
