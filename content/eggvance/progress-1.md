@@ -17,7 +17,7 @@ After writing a basic [Chip-8](https://github.com/jsmolka/sandbox-cpp/tree/maste
 ### Early Steps
 The first thing I did was implement the CPU, an ARM7TDMI to the precise, which took me a couple months. My main sources for this were the official ARM datasheet and [GBATEK](https://problemkaputt.de/gbatek.htm). The most important thing I did during all that time was to write CPU tests which cover pretty much all common and most of the edge cases. This turned out to be a great time investment because I could rely on my CPU implementation when debugging problems related to other parts of the emulator. The code below shows a simple test for the ARM multiply instruction.
 
-```armasm
+```armv4
 t300:                    ; test 300
     mov     r0, 4        ; r0 = 4
     mov     r1, 8        ; r1 = 8

@@ -1,5 +1,5 @@
 (function() {
-  Prism.languages.armasm = {
+  Prism.languages.armv4 = {
     comment: {
       pattern: /;.*/,
       greedy: true
