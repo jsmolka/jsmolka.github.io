@@ -18,7 +18,9 @@
 {{ $scripts := slice }}
 {{ $scripts := $scripts | append "js/vendor/alpine.min.js" }}
 {{ $scripts := $scripts | append "js/vendor/headroom.min.js" }}
-{{ $scripts := $scripts | append "js/vendor/prism.min.js" }}
 {{ $scripts := $scripts | append "js/headroom.js" }}
-{{ $scripts := $scripts | append "js/prism.js" }}
+{{ if .Site.IsServer }}
+  {{ $scripts := $scripts | append "js/vendor/prism.min.js" }}
+  {{ $scripts := $scripts | append "js/prism.js" }}
+{{ end }}
 {{ partial "javascript" (dict "context" . "paths" $scripts "name" "js/main.js") }}

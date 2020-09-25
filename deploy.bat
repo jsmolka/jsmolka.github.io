@@ -13,6 +13,7 @@ git rm -r *
 
 rem build
 hugo -s .. -d %dir%
+npm run prism
 
 rem commit
 git add .
