@@ -26,14 +26,12 @@
       top: 75%;
       left: -0.1em;
       right: -0.1em;
-      transition: top 200ms cubic-bezier(0, .8, .13, 1);
+      transition: top 200ms cubic-bezier(0, 0.8, 0.13, 1);
       background: rgba($blue-400, 0.4);
     }
 
-    &:hover {
-      &:after {
-        @apply top-0;
-      }
+    &:hover:after {
+      @apply top-0;
     }
   }
 

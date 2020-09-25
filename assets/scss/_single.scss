@@ -4,14 +4,7 @@
   @extend .content;
   @apply w-full;
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply mt-6;
-    @apply mb-4
-  }
-
-  p {
-    @apply my-4;
-
+  * {
     &:first-child {
       @apply mt-0;
     }
@@ -21,9 +14,18 @@
     }
   }
 
+  h1, h2, h3, h4, h5, h6 {
+    @apply mt-6;
+    @apply mb-4
+  }
+
+  p {
+    @apply my-4;
+  }
+
   ul, ol {
     @apply my-4;
-    @apply ml-5;
+    @apply ml-6;
   }
 
   @screen sm {
@@ -50,10 +52,6 @@
   .footnotes {
     hr {
       @apply hidden;
-    }
-
-    p {
-      @apply m-0;
     }
   }
 }

@@ -1,5 +1,3 @@
-@import "colors";
-
 body {
   @apply antialiased;
 
@@ -8,7 +6,8 @@ body {
 }
 
 ::selection {
-  background: $blue-200;
+  @apply text-gray-900;
+  @apply bg-blue-200;
 }
 
 ::-webkit-scrollbar {
