@@ -11,13 +11,13 @@ type: blank
   <input id="save-input" class="hidden" type="file" accept=".sav" onchange="Module.loadSave()">
   <div class="flex max-w-screen-md mt-6">
     <div class="mr-2">
-      <button onclick="inputRom.click()">Load rom</button>
+      <button @click="inputRom.click()">Load rom</button>
     </div>
     <div class="mx-2">
-      <button onclick="inputSave.click()">Load save</button>
+      <button @click="inputSave.click()">Load save</button>
     </div>
     <div class="mx-2">
-      <button onclick="Module.loadDemo()">Load demo</button>
+      <button @click="Module.loadDemo()">Load demo</button>
     </div>
     <div class="ml-2">
       <button @click="controls = !controls" x-text="`${controls ? 'Hide' : 'Show'} controls`"/>
@@ -64,15 +64,16 @@ type: blank
     fs: new FileSystem(),
     canvas: document.getElementById('canvas'),
     onRuntimeInitialized() {
-      FS.writeFile('eggvance.toml', `
+      FS.writeFile('eggvance.ini', `
         [general]
-        save_path = ""
-        bios_file = ""
+        save_path =
+        bios_file = bios.bin
         bios_skip = true
+        bios_hash = true
 
         [cartridge]
-        save_type = "auto"
-        gpio_type = "auto"
+        save_type = auto
+        gpio_type = auto
 
         [framerate]
         custom_1 = 119.474
@@ -80,27 +81,49 @@ type: blank
         custom_3 = 358.442
         custom_4 = 477.896
 
-        [controls]
-        a      = ["U", "B"    ]
-        b      = ["H", "A"    ]
-        up     = ["W", "Up"   ]
-        down   = ["S", "Down" ]
-        left   = ["A", "Left" ]
-        right  = ["D", "Right"]
-        start  = ["G", "Start"]
-        select = ["F", "Back" ]
-        l      = ["Q", "L"    ]
-        r      = ["I", "R"    ]
+        [controls_keyboard]
+        a      = U
+        b      = H
+        up     = W
+        down   = S
+        left   = A
+        right  = D
+        start  = G
+        select = F
+        l      = Q
+        r      = I
 
-        [shortcuts]
-        reset       = ["R", ""]
-        fullscreen  = ["T", ""]
-        fr_hardware = ["1", ""]
-        fr_custom_1 = ["2", ""]
-        fr_custom_2 = ["3", ""]
-        fr_custom_3 = ["4", ""]
-        fr_custom_4 = ["5", ""]
-        fr_unbound  = ["6", ""]
+        [controls_controller]
+        a      = B
+        b      = A
+        up     = DpUp
+        down   = DpDown
+        left   = DpLeft
+        right  = DpRight
+        start  = Start
+        select = Back
+        l      = LeftShoulder
+        r      = RightShoulder
+
+        [shortcuts_keyboard]
+        reset       = R
+        fullscreen  = F11
+        fr_hardware = 1
+        fr_custom_1 = 2
+        fr_custom_2 = 3
+        fr_custom_3 = 4
+        fr_custom_4 = 5
+        fr_unbound  = 6
+
+        [shortcuts_controller]
+        reset       =
+        fullscreen  =
+        fr_hardware =
+        fr_custom_1 =
+        fr_custom_2 =
+        fr_custom_3 =
+        fr_custom_4 =
+        fr_unbound  =
       `);
 
       this.eggvanceSetBackground(0xFFFFFFFF);
