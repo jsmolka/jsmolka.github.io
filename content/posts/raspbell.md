@@ -1,7 +1,7 @@
 ---
 title: "Raspbell"
 author: "Julian Smolka"
-summary: "A short post about raspbell."
+summary: "A useless Raspberry Pi project."
 date: 2020-05-23
 type: post
 ---
@@ -64,4 +64,4 @@ auto window = SDL_CreateWindow(
 ```
 
 ## Conclusion
-That's it. The Pi server is running all day and logging any activity, the client connects once the computer boots and the sound sensor is fine-tuned to the point where it should reliably pick up doorbell sounds. Let's cross fingers and hope it works in real scenarios.
+That's it. The Pi server is running all day and logging any activity, the client connects once the computer boots and the sound sensor is fine-tuned to the point where it should reliably pick up doorbell sounds. Let's cross fingers and hope it works in real scenarios (future me here, I stopped using it and just keep the door open).
