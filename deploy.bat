@@ -1,6 +1,6 @@
 @echo off
 
-set dir=deploy
+set dir=public
 
 rem setup
 rmdir %dir% /s /q
@@ -13,7 +13,7 @@ git rm -r *
 
 rem build
 hugo -s .. -d %dir%
-npm run prism
+cmd /c npm run prism
 
 rem commit
 git add .
