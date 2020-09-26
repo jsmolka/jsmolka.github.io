@@ -9,7 +9,7 @@
   <div class="w-full max-w-screen-md mx-auto px-4 py-8 sm:py-16">
     {{ range .Data.Pages.GroupByDate "2006" }}
       <div class="block sm:flex mb-8 last:mb-0">
-        <div class="mr-0 sm:mr-8 mb-1 sm:mb-0 font-bit text-5xl leading-none">{{ .Key }}</div>
+        <div class="mr-0 sm:mr-8 mt-0 sm:mt-1 mb-1 sm:mb-0 font-bit text-5xl leading-none">{{ .Key }}</div>
         <div class="w-full">
           {{ range .Pages }}
             <div class="border-b border-dashed border-gray-500">
