@@ -11,16 +11,16 @@ type: blank
   <input id="save-input" class="hidden" type="file" accept=".sav" onchange="Module.loadSave()">
   <div class="flex max-w-screen-md mt-6">
     <div class="mr-2">
-      <button @click="inputRom.click()">Load rom</button>
+      <button onclick="inputRom.click()">Load rom</button>
     </div>
     <div class="mx-2">
-      <button @click="inputSave.click()">Load save</button>
+      <button onclick="inputSave.click()">Load save</button>
     </div>
     <div class="mx-2">
-      <button @click="Module.loadDemo()">Load demo</button>
+      <button onclick="Module.loadDemo(this)">Load demo</button>
     </div>
     <div class="ml-2">
-      <button @click="controls = !controls" x-text="`${controls ? 'Hide' : 'Show'} controls`"/>
+      <button onclick="controls = !controls" x-text="`${controls ? 'Hide' : 'Show'} controls`"/>
     </div>
   </div>
   <div class="w-full max-w-screen-md mt-6" :class="{ hidden: !controls }">
@@ -154,9 +154,14 @@ type: blank
       const data = await this.readFile(inputRom);
       this.eggvanceLoadRom(this.fs.write(data));
     },
-    async loadDemo() {
-      const data = await this.readUrl('/roms/celeste.gba');
-      this.eggvanceLoadRom(this.fs.write(data));
+    async loadDemo(button) {
+      button.innerHTML = 'Loading...';
+      try {
+        const data = await this.readUrl('/roms/celeste.gba');
+        this.eggvanceLoadRom(this.fs.write(data));
+      } finally {
+        button.innerHTML = 'Load demo';
+      }
     },
     async loadSave() {
       const data = await this.readFile(inputSave);
