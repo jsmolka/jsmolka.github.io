@@ -45,5 +45,5 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
     target = "static"
 
   [[module.mounts]]
-    source = "icon/eggvance/web"
+    source = "icon/website/web"
     target = "static"
