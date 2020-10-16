@@ -4,7 +4,8 @@
       pattern: /;.*/,
       greedy: true
     },
-    keyword: /\b(?:r(\d+)|pc|lr|sp)\b/,
+    function: /\b(lsl|asr|lsr|ror|bx|b|bl|and|eor|sub|sbc|rsb|add|adc|sbc|rsc|tst|teq|cmp|cmn|orr|mov|bic|mvn|mrs|msr|mla|mul|umull|mulal|smull|smlal|ldr|ldrb|ldrh|str|strb|strh|ldrsb|ldrsh|ldmed|ldmea|ldmfd|ldmfa|stmed|stmea|stmfd|stmfa|swp|swpb|push|pop)s?(eq|ne|cs|cc|mi|pl|vs|vc|hi|ls|ge|lt|gt|le|al|nv)?\b/,
+    keyword: /\b(r0|r1|r2|r3|r4|r5|r6|r7|r8|r9|r10|r11|r12|r13|r14|r15|pc|lr|sp)\b/,
     number: /\b0x[\da-f]+\b|(?:\b\d+\.?\d*|\B\.\d+)(?:e[+-]?\d+)?/i
   };
 
