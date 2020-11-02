@@ -8,7 +8,7 @@ mkdir %dir%
 pushd %dir%
 
 rem clone
-git clone -b master https://github.com/jsmolka/jsmolka.github.io .
+git clone --depth 1 -b master https://github.com/jsmolka/jsmolka.github.io .
 git rm -r *
 
 rem build
