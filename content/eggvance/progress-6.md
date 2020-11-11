@@ -20,4 +20,3 @@ draft: true
   {{<figure src="eggvance/emerald_berry_1.png" caption="">}}
   {{<figure src="eggvance/emerald_berry_2.png" caption="">}}
 {{</figures>}}
-
