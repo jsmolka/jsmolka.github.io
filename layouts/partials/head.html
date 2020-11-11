@@ -24,3 +24,7 @@
   {{ $scripts = $scripts | append "js/prism.js" }}
 {{ end }}
 {{ partial "javascript" (dict "context" . "paths" $scripts "name" "js/main.js") }}
+
+<noscript>
+  This site works best with JavaScript enabled (it's just 10kb).
+</noscript>

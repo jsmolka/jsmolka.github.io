@@ -23,14 +23,23 @@
     @apply my-4;
   }
 
-  ul, ol {
+  ul {
     @apply my-4;
-    @apply ml-6;
+    @apply ml-4;
+  }
+
+  ol {
+    @apply my-4;
+    @apply ml-8;
   }
 
   @screen sm {
-    ul, ol {
-      @apply ml-10;
+    ul {
+      @apply ml-8;
+    }
+
+    ol {
+      @apply ml-12;
     }
   }
 

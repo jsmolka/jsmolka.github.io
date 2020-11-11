@@ -10,13 +10,13 @@ draft: true
 - credit [issue](https://github.com/jsmolka/eggvance/issues/2)
 
 {{<figures>}}
-  {{<figure src="eggvance/sprite_cycles_bug.png" caption="">}}
-  {{<figure src="eggvance/sprite_cycles.png" caption="">}}
+  {{<figure src="eggvance/sprite-cycles-bug.png" caption="">}}
+  {{<figure src="eggvance/sprite-cycles.png" caption="">}}
 {{</figures>}}
 
 ### Real-Time Clock
 
 {{<figures>}}
-  {{<figure src="eggvance/emerald_berry_1.png" caption="">}}
-  {{<figure src="eggvance/emerald_berry_2.png" caption="">}}
+  {{<figure src="eggvance/emerald-berry-1.png" caption="">}}
+  {{<figure src="eggvance/emerald-berry-2.png" caption="">}}
 {{</figures>}}
