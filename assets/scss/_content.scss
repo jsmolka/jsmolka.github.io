@@ -10,7 +10,7 @@
       background: none;
     }
 
-    @screen lg {
+    @screen anchor {
       a:before {
         @apply absolute;
         @apply opacity-60;

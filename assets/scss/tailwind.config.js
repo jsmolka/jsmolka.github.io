@@ -57,6 +57,13 @@ module.exports = {
       },
       opacity: {
         60: '0.6'
+      },
+      screens: {
+        anchor: '832px',
+        'list-body': '384px'
+      },
+      width: {
+        'list-key': '144px'
       }
     }
   },
