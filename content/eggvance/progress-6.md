@@ -31,15 +31,15 @@ draft: true
 - describe steps and what changed
 
 ```diff-cpp
-switch (state) {
-  case State::InitOne:
--   if (port.cs.low() && port.sck.high())
-+   if (port.cs.low())
-      setState(State::InitTwo);
-    break;
+ switch (state) {
+   case State::InitOne:
+-    if (port.cs.low() && port.sck.high())
++    if (port.cs.low())
+       setState(State::InitTwo);
+     break;
 
-  // ...
-}
+   // ...
+ }
 ```
 
 ### Unused ROM Access
