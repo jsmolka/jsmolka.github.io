@@ -9,7 +9,7 @@ I finally reached a point where I am not utterly discontent with the code I wrot
 
 {{<figures>}}
   {{<figure src="eggvance/mew.png" caption="Figure 1 - Oversaturated colors in memory">}}
-  {{<figure src="eggvance/mew_lcd.png" caption="Figure 2 - Corrected colors on the LCD">}}
+  {{<figure src="eggvance/mew-lcd.png" caption="Figure 2 - Corrected colors on the LCD">}}
 {{</figures>}}
 
 This marks the end of the impossible quest for clean code. Now it's time to pour countless hours into the last important features:
