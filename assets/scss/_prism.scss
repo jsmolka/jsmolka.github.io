@@ -65,6 +65,8 @@ pre[class*="language-"] {
 .token.builtin,
 .token.char,
 .token.inserted,
+.token.important,
+.token.regex,
 .token.selector,
 .token.string {
   color: saturate(darken($aurora-3, 10%), 10%);
@@ -75,11 +77,6 @@ pre[class*="language-"] {
 .token.function,
 .token.class-name {
   color: saturate(darken($frost-1, 10%), 10%);
-}
-
-.token.regex,
-.token.important {
-  color: $aurora-2;
 }
 
 .token.bold,
