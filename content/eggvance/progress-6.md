@@ -10,8 +10,8 @@ draft: true
 - credit [issue](https://github.com/jsmolka/eggvance/issues/2)
 
 {{<figures>}}
-  {{<figure src="eggvance/sprite-cycles-bug.png" caption="">}}
-  {{<figure src="eggvance/sprite-cycles.png" caption="">}}
+  {{<figure src="eggvance/gunstar-sprite-cycles-bug.png" caption="">}}
+  {{<figure src="eggvance/gunstar-sprite-cycles.png" caption="">}}
 {{</figures>}}
 
 ### Real-Time Clock
@@ -24,7 +24,7 @@ draft: true
 - credit [issue](https://github.com/fleroviux/NanoboyAdvance/issues/136)
 
 {{<figures>}}
-  {{<figure src="eggvance/sennen-rtc-bad.png" caption="">}}
+  {{<figure src="eggvance/sennen-rtc-bug.png" caption="">}}
   {{<figure src="eggvance/sennen-rtc.png" caption="">}}
 {{</figures>}}
 

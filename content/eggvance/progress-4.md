@@ -11,8 +11,8 @@ Hello there! It has been quite a while since the last progress report, two month
 The GBA has six different background modes which are evenly split into three tile-based and three bitmap modes. One would assume that games utilize bitmaps as much as tiles, but that's not the case in reality. Tiles tend to be faster and easier to understand and are therefore used in most games. One rare example of a game using bitmap modes is DOOM II, which uses them to display the scene created by its internal software renderer. Due to this kind of games being so rare, I didn't notice bugs in the bitmap implementation until very recently, when I was going through some of the demos on [gbadev.org](https://www.gbadev.org/).
 
 {{<figures>}}
-  {{<figure src="eggvance/yeti-demo.png" caption="Figure 1 - Yeti demo">}}
-  {{<figure src="eggvance/yeti-demo-bug.png" caption="Figure 2 - Yeti demo bug">}}
+  {{<figure src="eggvance/yeti-bitmap.png" caption="Figure 1 - Yeti demo">}}
+  {{<figure src="eggvance/yeti-bitmap-bug.png" caption="Figure 2 - Yeti demo bug">}}
 {{</figures>}}
 
 Figure 1 shows the technically impressive Yeti demo. It's a first-person shooter with a custom 3D engine and uses background mode 5 to display the scene. The dimensions of the bitmap are 160x128 (the screens dimensions are 240x160). Figure 2 shows an old version of the emulator which simply copied the bitmap to the screen without further processing. This was incorrect because bitmaps can make use of the rotation / scaling matrix.

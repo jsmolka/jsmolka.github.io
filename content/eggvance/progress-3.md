@@ -55,8 +55,8 @@ void ARM::executeThumb(u16 instr) {
 At some point in development the emulator was able to boot every tested game apart from the Sonic Advance titles. Resolving issues like this usually involves running my emulator against established ones like No$GBA. After two hours of comparing I ended up noticing that a different value of the RCNT register, which is used for multiplayer functionality, caused a chain of events leading to the screen shown in figure 2.
 
 {{<figures>}}
-  {{<figure src="eggvance/sonic-rcnt.png" caption="Figure 2 - Uninitialized RCNT">}}
-  {{<figure src="eggvance/sonic.png" caption="Figure 3 - Initalized RCNT">}}
+  {{<figure src="eggvance/sonic-rcnt-bug.png" caption="Figure 2 - Uninitialized RCNT">}}
+  {{<figure src="eggvance/sonic-rcnt.png" caption="Figure 3 - Initalized RCNT">}}
 {{</figures>}}
 
 This problem was caused by skipping the BIOS and directly jumping inside the ROM. Apart from showing the animated intro sequence, the BIOS also initializes registers like RCNT and DISPCNT to their default value. I knew about this and properly initialized all implemented registers to their post-BIOS state, but RCNT is not, and probably never will be, used in my emulator and was therefore left untouched. Doing a test run with the BIOS could've saved me a couple of hours but that's something I usually don't do during development.
@@ -111,8 +111,8 @@ u32 ARM::adc(u32 op1, u32 op2, bool flags) {
 Using a 64-bit integer to store the second operand with added carry was the first improvement over the standard `add` function. Sadly this didn't fix all the problems. Comparing my results to the expected results of the mGBA test suite made me realize that the carry flag is only taken into consideration for carry detection and is completely ignored for overflow detection. The code above shows my final `adc` function (note the usage of `opc`).
 
 {{<figures>}}
-  {{<figure src="eggvance/carry-tests-fail.png" caption="Figure 4 - Carry tests fail">}}
-  {{<figure src="eggvance/carry-tests-pass.png" caption="Figure 5 - Carry tests pass">}}
+  {{<figure src="eggvance/mgba-carry-fail.png" caption="Figure 4 - Carry tests fail">}}
+  {{<figure src="eggvance/mgba-carry-pass.png" caption="Figure 5 - Carry tests pass">}}
 {{</figures>}}
 
 ### Config

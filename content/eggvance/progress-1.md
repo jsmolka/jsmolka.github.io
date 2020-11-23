@@ -10,8 +10,8 @@ At the end of last year I finished my introduction project to C++. Since then, I
 After writing a basic [Chip-8](https://github.com/jsmolka/sandbox-cpp/tree/master/chip8) emulator and a less than half finished [GB](https://github.com/jsmolka/egg-gb) emulator, I moved on to the GBA because that's what I really wanted to do. Now, exactly seven months after the initial commit, I feel like the emulator is in a state that is worth talking about.
 
 {{<figures>}}
-  {{<figure src="eggvance/pokemon-emerald.png" caption="Figure 1 - Pokemon Emerald">}}
-  {{<figure src="eggvance/yoshis-island.png" caption="Figure 2 - Yoshi's Island">}}
+  {{<figure src="eggvance/emerald-title-screen.png" caption="Figure 1 - Pokemon Emerald">}}
+  {{<figure src="eggvance/yoshi-title-screen.png" caption="Figure 2 - Yoshi's Island">}}
 {{</figures>}}
 
 ### Early Steps
