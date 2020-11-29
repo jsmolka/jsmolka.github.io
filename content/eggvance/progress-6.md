@@ -43,3 +43,37 @@ draft: true
 ```
 
 ### Undefined Behavior
+code in Sapphire
+```c
+void sub_80560AC(struct MapHeader *mapHeader) {
+  int count = mapHeader->connections->count;
+  struct MapConnection *connection = mapHeader->connections->connections;
+  int i;
+
+  gMapConnectionFlags = sDummyConnectionFlags;
+  for (i = 0; i < count; i++, connection++) {
+    // Handle
+  }
+}
+```
+
+> BUG: This results in a null pointer dereference when mapHeader->connections is NULL, causing count to be assigned a garbage value. This garbage value just so happens to have the most significant bit set, so it is treated as negative and the loop below thankfully never executes in this scenario.
+
+code in Emerald
+```c
+static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader) {
+  int count;
+  struct MapConnection *connection;
+  int i;
+
+  if (mapHeader->connections) {
+    count = mapHeader->connections->count;
+    connection = mapHeader->connections->connections;
+    gMapConnectionFlags = sDummyConnectionFlags;
+
+    for (i = 0; i < count; i++, connection++) {
+      // Handle
+    }
+  }
+}
+```
