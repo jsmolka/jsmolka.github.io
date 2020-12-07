@@ -14,6 +14,13 @@ const config = {
           unit: 'week',
           unitStepSize: 1
         }
+      }],
+      yAxes: [{
+        ticks: {
+          callback: function(value, index, values) {
+            return `${value} km`;
+          }
+        }
       }]
     },
     tooltips: {
@@ -124,7 +131,7 @@ function updateConfig(group, unit) {
 
   for (const [year, data] of years.entries()) {
     config.data.datasets.push({
-      label: `km in ${year}`,
+      label: year,
       borderColor: 'rgba(33, 150, 243, 1)',
       backgroundColor: 'rgba(33, 150, 243, 0.1)',
       borderWidth: 1,
