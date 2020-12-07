@@ -156,6 +156,7 @@
     @apply bg-white;
     @apply border;
     @apply border-gray-500;
+    @apply select-none;
 
     &:hover {
       @apply bg-gray-100;
