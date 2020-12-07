@@ -1,5 +1,12 @@
 [
     {
+        "date": "2020-12-07T16:47:02Z",
+        "type": "Ride",
+        "distance": 49022.6,
+        "time": 6238,
+        "elevation": 59.6
+    },
+    {
         "date": "2020-12-05T18:51:56Z",
         "type": "Run",
         "distance": 9105.2,

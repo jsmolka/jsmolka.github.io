@@ -3,130 +3,20 @@ title: "Cycling"
 author: "Julian Smolka"
 summary: "Cycling stats exported from Strava"
 date: 2020-12-06
-type: blank
+type: cycling
 ---
-<div class="w-full flex flex-col flex-1 items-center justify-center max-w-screen-xl mx-auto my-4 px-4 py-8 sm:py-16">
-  <canvas id="chart" class="w-full"></canvas>
+<div class="content relative w-full flex flex-col flex-1 items-center justify-center max-w-screen-xl mx-auto my-4 px-4 py-8 sm:py-16">
+  <canvas id="chart" class="w-full bg-white"></canvas>
+  <div class="flex max-w-screen-xl mt-6">
+    <div class="mr-2">
+      <button onclick="update(groupByDay, 'week')">Group by day</button>
+    </div>
+    <div class="mx-2">
+      <button onclick="update(groupByWeek, 'week')">Group by week</button>
+    </div>
+    <div class="mx-2">
+      <button onclick="update(groupByMonth, 'month')">Group by month</button>
+    </div>
+  </div>
 </div>
-<script src="/js/moment.min.js"></script>
-<script src="/js/chartjs.min.js"></script>
-<script type="text/javascript">
-  function trunc(value) {
-    return Math.trunc(value * 10) / 10;
-  }
 
-  function groupBy(activities, format, date) {
-    const map = new Map();
-    for (const activity of activities) {
-      const key = activity.date.format(format);
-      if (!map.has(key)) {
-        map.set(key, {
-          date: date(activity.date),
-          type: activity.type,
-          time: 0,
-          distance: 0,
-          elevation: 0
-        });
-      }
-
-      const value = map.get(key);
-      value.time += activity.time;
-      value.distance += activity.distance;
-      value.elevation += activity.elevation;
-    }
-    return map.values();
-  }
-
-  function groupByWeek(activities) {
-    return groupBy(activities, 'Y-w', date => {
-      return date.endOf('week');
-    });
-  }
-
-  function groupByMonth(activities) {
-    return groupBy(activities, 'Y-M', date => {
-      return date.endOf('month');
-    });
-  }
-
-  async function fetch(url) {
-    return new Promise(resolve => {
-      const request = new XMLHttpRequest();
-
-      request.open('GET', url);
-      request.responseType = 'json';
-      request.onload = event => {
-        const activities = [];
-        for (const activity of request.response) {
-          if (activity.type !== 'Ride') {
-            continue;
-          }
-          activity.date = moment(activity.date);
-          activity.distance = trunc(activity.distance / 1000);
-          activities.push(activity);
-        }
-        resolve(activities);
-      }
-      request.send();
-    });
-  }
-
-  async function init() {
-    const data = [];
-    for (const activity of groupByWeek(await fetch('/data/strava.json'))) {
-      data.push({
-        x: activity.date,
-        y: activity.distance,
-        activity: activity
-      });
-    }
-
-    const chart = new Chart(document.getElementById('chart').getContext('2d'), {
-      type: 'line',
-      data: {
-        datasets: [{
-          label: 'Distance in km',
-          borderColor: 'rgba(33, 150, 243, 1)',
-          backgroundColor: 'rgba(33, 150, 243, 0.1)',
-          borderWidth: 1,
-          lineTension: 0,
-          pointRadius: 5,
-          pointHitRadius: 15,
-          pointBorderColor: 'rgba(33, 150, 243, 1)',
-          pointBackgroundColor: 'rgb(233, 245, 254, 1)',
-          pointHoverRadius: 5,
-          data: data
-        }]
-      },
-      options: {
-        scales: {
-          xAxes: [{
-            type: 'time',
-            time: {
-              unit: 'week',
-              unitStepSize: 1
-            }
-          }]
-        },
-        tooltips: {
-          displayColors: false,
-          callbacks: {
-            title: function(item, data) {
-              return '';
-            },
-            label: function(item, data) {
-              const activity = data.datasets[item.datasetIndex].data[item.index].activity;
-              return [
-                `Distance: ${trunc(activity.distance)} km`,
-                `Average speed: ${trunc(activity.distance / (activity.time / 3600))} km/h`,
-                `Elevation gain: ${trunc(activity.elevation)} m`
-              ];
-            }
-          }
-        }
-      }
-    });
-  }
-
-  init();
-</script>
