@@ -65,7 +65,7 @@ function groupBy(activities, format, date) {
 }
 
 function groupByDay(activities) {
-  return activities;
+  return groupBy(activities, 'Y-w-D', date => date);
 }
 
 function groupByWeek(activities) {
