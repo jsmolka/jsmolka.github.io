@@ -8,13 +8,6 @@ const config = {
   },
   options: {
     scales: {
-      xAxes: [{
-        type: 'time',
-        time: {
-          unit: 'week',
-          unitStepSize: 1
-        }
-      }],
       yAxes: [{
         ticks: {
           callback: function(value, index, values) {
@@ -30,9 +23,6 @@ const config = {
       cornerRadius: 0,
       displayColors: false,
       callbacks: {
-        title: function(item, data) {
-          return '';
-        },
         label: function(item, data) {
           const activity = data.datasets[item.datasetIndex].data[item.index].activity;
           return [
@@ -89,6 +79,64 @@ function groupByMonth(activities) {
   });
 }
 
+function titleDay(items, data) {
+  const date = data.datasets[items[0].datasetIndex].data[items[0].index].activity.date;
+  return date.format('MMM D, H:mm');
+}
+
+function titleWeek(items, data) {
+  const date = data.datasets[items[0].datasetIndex].data[items[0].index].activity.date;
+  return `${date.startOf('week').format('MMM D')} - ${date.endOf('week').format('MMM D')}`;
+}
+
+function titleMonth(items, data) {
+  const date = data.datasets[items[0].datasetIndex].data[items[0].index].activity.date;
+  return date.format('MMMM');
+}
+
+function updateConfig(group, title, unit) {
+  const years = new Map();
+  for (const activity of group(activities)) {
+    const year = activity.date.year();
+
+    if (!years.has(year)) {
+      years.set(year, []);
+    }
+    years.get(year).push({
+      x: activity.date,
+      y: activity.distance,
+      activity: activity
+    });
+  }
+
+  config.options.scales.xAxes = [{
+    type: 'time',
+    time: {
+      unit: unit,
+      unitStepSize: 1
+    }
+  }];
+
+  config.options.tooltips.callbacks.title = title;
+
+  config.data.datasets.length = 0;
+  for (const [year, data] of years.entries()) {
+    config.data.datasets.push({
+      label: year,
+      borderColor: 'rgba(33, 150, 243, 1)',
+      backgroundColor: 'rgba(33, 150, 243, 0.1)',
+      borderWidth: 1,
+      lineTension: 0,
+      pointRadius: 5,
+      pointHitRadius: 15,
+      pointBorderColor: 'rgba(33, 150, 243, 1)',
+      pointBackgroundColor: 'rgb(233, 245, 254, 1)',
+      pointHoverRadius: 5,
+      data: data
+    });
+  }
+}
+
 async function fetch(url) {
   return new Promise(resolve => {
     const request = new XMLHttpRequest();
@@ -111,43 +159,8 @@ async function fetch(url) {
   });
 }
 
-function updateConfig(group, unit) {
-  const years = new Map();
-  for (const activity of group(activities)) {
-    const year = activity.date.year();
-
-    if (!years.has(year)) {
-      years.set(year, []);
-    }
-    years.get(year).push({
-      x: activity.date,
-      y: activity.distance,
-      activity: activity
-    });
-  }
-
-  config.options.scales.xAxes[0].time.unit = unit;
-  config.data.datasets.length = 0;
-
-  for (const [year, data] of years.entries()) {
-    config.data.datasets.push({
-      label: year,
-      borderColor: 'rgba(33, 150, 243, 1)',
-      backgroundColor: 'rgba(33, 150, 243, 0.1)',
-      borderWidth: 1,
-      lineTension: 0,
-      pointRadius: 5,
-      pointHitRadius: 15,
-      pointBorderColor: 'rgba(33, 150, 243, 1)',
-      pointBackgroundColor: 'rgb(233, 245, 254, 1)',
-      pointHoverRadius: 5,
-      data: data
-    });
-  }
-}
-
 async function init() {
-  moment.updateLocale('en', {
+  moment.updateLocale('de', {
     week: {
       dow: 1  // Because weeks don't start on Sunday...
     }
@@ -155,7 +168,7 @@ async function init() {
 
   activities = await fetch('/data/strava.json');
 
-  updateConfig(groupByWeek, 'week');
+  updateConfig(groupByWeek, titleWeek, 'week');
 
   chart = new Chart(document.getElementById('chart').getContext('2d'), config);
 }

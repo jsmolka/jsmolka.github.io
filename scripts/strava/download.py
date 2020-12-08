@@ -17,7 +17,7 @@ if __name__ == "__main__":
     data = []
     for activity in activities:
         datum = dict()
-        datum["date"] = activity["start_date_local"]
+        datum["date"] = activity["start_date"]
         datum["type"] = activity["type"]
         datum["distance"] = activity["distance"]
         datum["time"] = activity["moving_time"]
