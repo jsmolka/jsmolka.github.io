@@ -1,3 +1,6 @@
+import moment from 'moment';
+import Chart from 'chart.js';
+
 let chart = null;
 let activities = null;
 
@@ -99,7 +102,7 @@ function titleMonth(items, data) {
   return date.format('MMMM');
 }
 
-function updateConfig(group, title, unit) {
+function update(group, title, unit) {
   const years = new Map();
   for (const activity of group(activities)) {
     const year = activity.date.year();
@@ -141,6 +144,14 @@ function updateConfig(group, title, unit) {
       data: data
     });
   }
+
+  if (chart) {
+    chart.update(config);
+  } else {
+    chart = new Chart(document.getElementById('chart').getContext('2d'), config);
+  }
+
+  chart.update(config);
 }
 
 async function fetch(url) {
@@ -174,15 +185,19 @@ async function init() {
 
   activities = await fetch('/data/strava.json');
 
-  updateConfig(groupByWeek, titleWeek, 'week');
+  document.getElementById('btnDay').onclick = () => {
+    update(groupByDay, titleDay, 'week');
+  };
 
-  chart = new Chart(document.getElementById('chart').getContext('2d'), config);
-}
+  document.getElementById('btnWeek').onclick = () => {
+    update(groupByWeek, titleWeek, 'week');
+  };
 
-function update(group, title, unit) {
-  updateConfig(group, title, unit);
+  document.getElementById('btnMonth').onclick = () => {
+    update(groupByMonth, titleMonth, 'month');
+  };
 
-  chart.update(config);
+  update(groupByWeek, titleWeek, 'week');
 }
 
 init();
