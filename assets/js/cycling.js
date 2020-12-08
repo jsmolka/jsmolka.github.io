@@ -8,6 +8,7 @@ const config = {
   },
   options: {
     scales: {
+      xAxes: [],
       yAxes: [{
         ticks: {
           callback: function(value, index, values) {
@@ -109,13 +110,14 @@ function updateConfig(group, title, unit) {
     });
   }
 
-  config.options.scales.xAxes = [{
+  config.options.scales.xAxes.length = 0;
+  config.options.scales.xAxes.push({
     type: 'time',
     time: {
       unit: unit,
       unitStepSize: 1
     }
-  }];
+  });
 
   config.options.tooltips.callbacks.title = title;
 
@@ -173,8 +175,8 @@ async function init() {
   chart = new Chart(document.getElementById('chart').getContext('2d'), config);
 }
 
-function update(group, unit) {
-  updateConfig(group, unit);
+function update(group, title, unit) {
+  updateConfig(group, title, unit);
 
   chart.update(config);
 }
