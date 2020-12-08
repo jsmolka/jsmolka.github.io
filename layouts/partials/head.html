@@ -15,12 +15,11 @@
   {{- end -}}
 </title>
 
-{{ $scripts := slice }}
-{{ $scripts = $scripts | append "js/vendor/alpine.min.js" }}
-{{ $scripts = $scripts | append "js/vendor/headroom.min.js" }}
-{{ $scripts = $scripts | append "js/headroom.js" }}
 {{ if .Site.IsServer }}
+  {{ $scripts := slice }}
   {{ $scripts = $scripts | append "js/vendor/prism.min.js" }}
   {{ $scripts = $scripts | append "js/prism.js" }}
+  {{ partial "javascript" (dict "context" . "paths" $scripts "name" "js/prism.js") }}
 {{ end }}
-{{ partial "javascript" (dict "context" . "paths" $scripts "name" "js/main.js") }}
+
+{{ partial "esbuild" (dict "context" . "path" "js/main.js") }}
