@@ -1,6 +1,10 @@
 let chart = null;
 let activities = null;
 
+function round(value) {
+  return Math.round(value * 10) / 10;
+}
+
 const config = {
   type: 'line',
   data:  {
@@ -26,20 +30,20 @@ const config = {
       callbacks: {
         label: function(item, data) {
           const activity = data.datasets[item.datasetIndex].data[item.index].activity;
+          const duration = moment().startOf('day').add(activity.time, 'seconds');
+          const hours = activity.time / 3600;
+
           return [
-            `Distance: ${trunc(activity.distance)} km`,
-            `Average speed: ${trunc(activity.distance / (activity.time / 3600))} km/h`,
-            `Elevation gain: ${trunc(activity.elevation)} m`
+            `Distance: ${round(activity.distance)} km`,
+            `Moving time: ${duration.format(`${Math.trunc(hours)}:mm:ss`)}`,
+            `Average speed: ${round(activity.distance / hours)} km/h`,
+            `Elevation gain: ${round(activity.elevation)} m`
           ];
         }
       }
     }
   }
 };
-
-function trunc(value) {
-  return Math.trunc(value * 10) / 10;
-}
 
 function groupBy(activities, format, date) {
   const map = new Map();
@@ -152,7 +156,7 @@ async function fetch(url) {
           continue;
         }
         activity.date = moment(activity.date);
-        activity.distance = trunc(activity.distance / 1000);
+        activity.distance = activity.distance / 1000;
         activities.push(activity);
       }
       resolve(activities);
