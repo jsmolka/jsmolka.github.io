@@ -1,4 +1,3 @@
-import 'alpinejs';
 import Headroom from 'headroom.js';
 
 (function() {
