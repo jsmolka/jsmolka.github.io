@@ -1,0 +1,12 @@
+{{ $img := imageConfig (add "/static" (.Destination | safeURL)) }}
+
+<a href="{{ .Destination | safeURL }}">
+  <img
+    class="w-full"
+    src="{{ .Destination | safeURL }}"
+    alt="{{ .Text }}"
+    loading="lazy"
+    width="{{ $img.Width }}"
+    height="{{ $img.Height }}"
+  />
+</a>
