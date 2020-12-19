@@ -6,6 +6,65 @@ date: 2020-11-04
 type: post
 draft: true
 ---
+### Undefined Behavior
+code in [Sapphire](https://github.com/pret/pokeruby/blob/master/src/fieldmap.c#L87)
+```c
+static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader) {
+  int count = mapHeader->connections->count;
+  struct MapConnection *connection = mapHeader->connections->connections;
+  int i;
+
+  gMapConnectionFlags = sDummyConnectionFlags;
+  for (i = 0; i < count; i++, connection++) {
+    // Handle
+  }
+}
+```
+
+> BUG: This results in a null pointer dereference when mapHeader->connections is NULL, causing count to be assigned a garbage value. This garbage value just so happens to have the most significant bit set, so it is treated as negative and the loop below thankfully never executes in this scenario.
+
+code in [Emerald](https://github.com/pret/pokeemerald/blob/master/src/fieldmap.c#L114)
+```c
+static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader) {
+  int count;
+  struct MapConnection *connection;
+  int i;
+
+  if (mapHeader->connections) {
+    count = mapHeader->connections->count;
+    connection = mapHeader->connections->connections;
+    gMapConnectionFlags = sDummyConnectionFlags;
+
+    for (i = 0; i < count; i++, connection++) {
+      // Handle
+    }
+  }
+}
+```
+
+with real BIOS (post SWI)
+```armv4t
+movs      pc, lr          ; addr: 00000188  data: E1B0F00E
+mov       r12, 0x4000000  ; addr: 0000018C  data: E3A0C301
+mov       r2, 0x4         ; addr: 00000190  data: E3A02004
+```
+
+
+with Normmatt BIOS (post SWI)
+
+```armv4t
+movs      pc, lr                ; addr: 000000AC  data: E1B0F00E
+andeq     r1, r0, r4, lsl 0x10  ; addr: 000000B0  data: 00001804
+andeq     r1, r0, r4, lsr 0xA   ; addr: 000000B4  data: 00001524
+```
+
+Fixed by improving the `readUnused` function in [this](https://github.com/jsmolka/eggvance/commit/213c7ab0a18502125b725536c433da3bf90d0b84) commit.
+
+{{<figures>}}
+  {{<figure src="eggvance/sapphire-bad-bios-bug.png" caption="">}}
+  {{<figure src="eggvance/sapphire-bad-bios.png" caption="">}}
+{{</figures>}}
+
 ### Sprite Render Cycles
 - credit [issue](https://github.com/jsmolka/eggvance/issues/2)
 
@@ -42,38 +101,5 @@ draft: true
  }
 ```
 
-### Undefined Behavior
-code in Sapphire
-```c
-void sub_80560AC(struct MapHeader *mapHeader) {
-  int count = mapHeader->connections->count;
-  struct MapConnection *connection = mapHeader->connections->connections;
-  int i;
-
-  gMapConnectionFlags = sDummyConnectionFlags;
-  for (i = 0; i < count; i++, connection++) {
-    // Handle
-  }
-}
-```
-
-> BUG: This results in a null pointer dereference when mapHeader->connections is NULL, causing count to be assigned a garbage value. This garbage value just so happens to have the most significant bit set, so it is treated as negative and the loop below thankfully never executes in this scenario.
-
-code in Emerald
-```c
-static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader) {
-  int count;
-  struct MapConnection *connection;
-  int i;
-
-  if (mapHeader->connections) {
-    count = mapHeader->connections->count;
-    connection = mapHeader->connections->connections;
-    gMapConnectionFlags = sDummyConnectionFlags;
-
-    for (i = 0; i < count; i++, connection++) {
-      // Handle
-    }
-  }
-}
-```
+### Test Coverage
+- DMA bus
