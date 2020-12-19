@@ -138,7 +138,7 @@ import Chart from 'chart.js';
         borderWidth: 1,
         lineTension: 0,
         pointRadius: 5,
-        pointHitRadius: 15,
+        pointHitRadius: 5,
         pointBorderColor: 'rgba(33, 150, 243, 1)',
         pointBackgroundColor: 'rgb(233, 245, 254, 1)',
         pointHoverRadius: 5,
