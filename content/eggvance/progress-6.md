@@ -103,3 +103,8 @@ Fixed by improving the `readUnused` function in [this](https://github.com/jsmolk
 
 ### Test Coverage
 - DMA bus
+- Memory read improvements
+- Interrupt delay
+- Timer delay
+
+<!-- Comparison table -->
