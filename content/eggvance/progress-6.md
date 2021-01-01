@@ -74,7 +74,6 @@ Fixed by improving the `readUnused` function in [this](https://github.com/jsmolk
 {{</figures>}}
 
 ### Real-Time Clock
-
 {{<figures>}}
   {{<figure src="eggvance/emerald-berry-1.png" caption="">}}
   {{<figure src="eggvance/emerald-berry-2.png" caption="">}}
@@ -106,5 +105,24 @@ Fixed by improving the `readUnused` function in [this](https://github.com/jsmolk
 - Memory read improvements
 - Interrupt delay
 - Timer delay
+- Prefetch emulation
 
-<!-- Comparison table -->
+| Test           | eggvance 0.2 | eggvance 0.3 | mGBA 0.8.4 | higan v115 | Total |
+|----------------|--------------|--------------|------------|------------|-------|
+| Memory         | 1456         | 1552         | 1552       | 1552       | 1552  |
+| I/O read       | 123          | 123          | 114        | 123        | 123   |
+| Timing         | 404          | 1496         | 1520       | 1424       | 1660  |
+| Timer count-up | 365          | 496          | 610        | 449        | 936   |
+| Timer IRQ      | 28           | 65           | 70         | 36         | 90    |
+| Shifter        | 140          | 140          | 132        | 132        | 140   |
+| Carry          | 93           | 93           | 93         | 93         | 93    |
+| Multiply long  | 52           | 52           | 52         | 52         | 72    |
+| DMA            | 1048         | 1220         | 1232       | 1136       | 1256  |
+| Edge case      | 1            | 2            | 6          | 1          | 10    |
+
+Performance (Emerald Littleroot Town)
+- 615 eggvance-786-0.2
+- 635 eggvance-880-pre-prefetch
+- 485 eggvance-902-prefetch
+- 575 eggvance-906-inline
+- 580 eggvance-913-0.3
