@@ -43,7 +43,8 @@ module.exports = {
         }
       },
       borderWidth: {
-        3: '3px'
+        3: '3px',
+        6: '6px'
       },
       fontSize: {
         md: '0.95rem',

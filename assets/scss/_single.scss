@@ -44,14 +44,7 @@
   }
 
   blockquote {
-    @apply mx-2;
     @apply my-6;
-  }
-
-  @screen sm {
-    blockquote {
-      @apply m-6;
-    }
   }
 
   a[href^="#fnref:"] {

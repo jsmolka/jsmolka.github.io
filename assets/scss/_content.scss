@@ -141,11 +141,24 @@
   }
 
   blockquote {
-    @apply px-4;
-    @apply text-gray-600;
-    @apply border-l-3;
-    @apply border-gray-600;
+    @apply relative;
+    @apply pl-12;
+    @apply pr-4;
+    @apply py-4;
+    @apply bg-gray-100;
+    @apply border-l-6;
+    @apply border-blue-400;
     @apply border-opacity-60;
+
+    &::before {
+      @apply absolute;
+      @apply text-6xl;
+
+      content: "\201C";
+      color: #82c5f4;
+      left: 12px;
+      top: -8px;
+    }
   }
 
   button {
