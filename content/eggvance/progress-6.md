@@ -2,12 +2,25 @@
 title: "Progress Report #6"
 author: "Julian Smolka"
 summary: "The sixth progress report of the eggvance GBA emulator."
-date: 2020-11-04
+date: 2021-01-09
 type: post
 draft: true
 ---
+<!-- Pokemon é -->
+2020 came to an end and left me with an output of two progress reports and a simple, short release note. That's less than I was hoping for but most time this year went into improving the code base and some peformance tinkering for personal plesure. In my defense the last progress report had much higher quality than the previous ones and I'd like to keep it this way!
+
 ### Undefined Behavior
-code in [Sapphire](https://github.com/pret/pokeruby/blob/master/src/fieldmap.c#L87)
+In that spirit, let's start with an [issue](https://github.com/jsmolka/eggvance/issues/4) which has been reported by fleroviux in June last year. He tried to play Pokemon Sapphire and his game froze right after the intro sequence when the character shrinks in size and then enters the world in a moving truck. The same also happens in Ruby because they are essentially the same game.
+
+{{<figures>}}
+  {{<figure src="eggvance/sapphire-bad-bios-bug.png" caption="Figure 1: Freezing during intro sequence">}}
+  {{<figure src="eggvance/sapphire-bad-bios.png" caption="Figure 2: In the truck where we belong">}}
+{{</figures>}}
+
+He used the bundled replacement BIOS where bugs in games are to be expected. I tried it with the original one and the freezing stopped happening. So I closed the issue and blamed the BIOS for doing some unexpected things but he quickly reassured me that the bug wasn't happening in his emulator or mGBA when using the same BIOS. I verified that and was left scatching my head about the possible origin of this problem.
+
+I figured it had something to do with the BIOS implementation but I couldn't find anything wrong with it. Many failed attemps later GitHub suggested me the [pret](https://github.com/pret) project which is the decompilation of all GB, GBA and even some NDS Pokemon games. I can't believe how people do such things but I'll gladly use their work to fix bugs in my emulator. I skimmed through the into sequence related parts of the code and [this function](https://github.com/pret/pokeruby/blob/master/src/fieldmap.c#L87):
+
 ```c
 static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader) {
   int count = mapHeader->connections->count;
@@ -21,36 +34,39 @@ static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader) {
 }
 ```
 
+At first glance there seems to be nothing wrong this it but this comment doesn't agree:
+
 > BUG: This results in a null pointer dereference when mapHeader->connections is NULL, causing count to be assigned a garbage value. This garbage value just so happens to have the most significant bit set, so it is treated as negative and the loop below thankfully never executes in this scenario.
 
-code in [Emerald](https://github.com/pret/pokeemerald/blob/master/src/fieldmap.c#L114)
-```c
-static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader) {
-  int count;
-  struct MapConnection *connection;
-  int i;
+I never ran into this bug during testing because it has been fixed in [Pokemon Emerald](https://github.com/pret/pokeemerald/blob/master/src/fieldmap.c#L114) and that's the game I usually use for quick testing (and pure nostalgia). The deferenced null pointer returns something they call garbage, which is quite offensive to the poor BIOS in my opinion. Why the BIOS? Because it starts at address 0 and that's where a dereferenced null pointer reads from.
 
-  if (mapHeader->connections) {
-    count = mapHeader->connections->count;
-    connection = mapHeader->connections->connections;
-    gMapConnectionFlags = sDummyConnectionFlags;
-
-    for (i = 0; i < count; i++, connection++) {
-      // Handle
-    }
-  }
-}
+```
+00000000-00003FFF   BIOS - System ROM
+00004000-01FFFFFF   Not used
+02000000-0203FFFF   WRAM - On-board Work RAM
+02040000-02FFFFFF   Not used
+03000000-03007FFF   WRAM - On-chip Work RAM
+03008000-03FFFFFF   Not used
+04000000-040003FE   I/O Registers
+04000400-04FFFFFF   Not used
 ```
 
-with real BIOS (post SWI)
+The BIOS in the Game Boy Advance is read protected to prevent dumping (guess how that turned out). It means that we can only read from the BIOS if the program counter is inside of it. Otherwise it will return the last read value which will the be the one located at address
+
+- 0x0DC+8 after startup
+- 0x188+8 after SWI
+- 0x134+8 during IRQ
+- 0x13C+8 after IRQ
+
+In the case of our dereferenced null pointer we've just returned from a SWI. The code for this in the original BIOS looks like the following:
+
 ```armv4t
 movs      pc, lr          ; addr: 00000188  data: E1B0F00E
 mov       r12, 0x4000000  ; addr: 0000018C  data: E3A0C301
 mov       r2, 0x4         ; addr: 00000190  data: E3A02004
 ```
 
-
-with Normmatt BIOS (post SWI)
+It uses the instruction `movs pc, lr` to move the link register into the program counter. The link register contains the next instruction after a function call so it pretty much acts your typical `return`. Because of the GBAs two staged instruction pipeline we've already fetched the value at address 0x190 and it's value will be returned for future protected BIOS reads (like dereferenced nullpointers). In this case the value has it's sign bit set and the loop is never excuted.
 
 ```armv4t
 movs      pc, lr                ; addr: 000000AC  data: E1B0F00E
@@ -58,12 +74,9 @@ andeq     r1, r0, r4, lsl 0x10  ; addr: 000000B0  data: 00001804
 andeq     r1, r0, r4, lsr 0xA   ; addr: 000000B4  data: 00001524
 ```
 
-Fixed by improving the `readUnused` function in [this](https://github.com/jsmolka/eggvance/commit/213c7ab0a18502125b725536c433da3bf90d0b84) commit.
+Unfortunately the replacement BIOS doesn't reproduce this behavior. Here we return with the same instruction but the prefetched value now is positive and we run the loop 1524 times. Up until this point the emulator did every correctly and the bug hunt ends with an anticlimactic result.
 
-{{<figures>}}
-  {{<figure src="eggvance/sapphire-bad-bios-bug.png" caption="">}}
-  {{<figure src="eggvance/sapphire-bad-bios.png" caption="">}}
-{{</figures>}}
+I fixed the bug when working on something completely different. Reads from unused memory regions return values based on prefetched values in the CPUs pipeline. There were some small issues in that code which were fixed in [this commit](https://github.com/jsmolka/eggvance/commit/213c7ab0a18502125b725536c433da3bf90d0b84). It seems that the game tries to access unused memory regions at some point when running the loop with the wrong loop counter and returnig "proper bad value" fixes the freezing behavior.
 
 ### Sprite Render Cycles
 - credit [issue](https://github.com/jsmolka/eggvance/issues/2)
@@ -105,7 +118,7 @@ Fixed by improving the `readUnused` function in [this](https://github.com/jsmolk
 - Memory read improvements
 - Interrupt delay
 - Timer delay
-- Prefetch emulation
+- Prefetch emulation (not perfect)
 
 | Test           | eggvance 0.2 | eggvance 0.3 | mGBA 0.8.4 | higan v115 | Total |
 |----------------|--------------|--------------|------------|------------|-------|
@@ -126,3 +139,6 @@ Performance (Emerald Littleroot Town)
 - 485 eggvance-902-prefetch
 - 575 eggvance-906-inline
 - 580 eggvance-913-0.3
+
+### Conclusion
+<!-- Roadmap -->
