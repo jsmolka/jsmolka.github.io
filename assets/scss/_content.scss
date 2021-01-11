@@ -90,6 +90,13 @@
     }
   }
 
+  figure {
+    a:after {
+      @apply absolute;
+      @apply inset-0;
+    }
+  }
+
   figcaption {
     @apply mt-1;
     @apply text-sm;
