@@ -179,4 +179,12 @@
       @apply outline-none;
     }
   }
+
+  audio {
+    @apply w-full;
+
+    &:focus {
+      @apply outline-none
+    }
+  }
 }
