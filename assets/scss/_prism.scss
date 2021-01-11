@@ -28,7 +28,9 @@ pre[class*="language-"] {
   @apply text-gray-900;
   @apply bg-gray-100;
 
-  padding: 2px 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-bottom: 2px;
 }
 
 [class*="language-"] .namespace {

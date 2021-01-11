@@ -119,7 +119,7 @@ I fixed the bug when working on something completely different. Reads from unuse
  }
 ```
 
-### DMA Sound
+### Direct Sound
 {{<audio src="tengoku.mp3" caption="Audio 1: Intro sequence of Rhythm Tengoku with some nice stereo">}}
 
 ### Test Coverage
@@ -150,5 +150,4 @@ Performance (Emerald Littleroot Town)
 - 580 eggvance-913-0.3
 
 ### Conclusion
-
 <!-- Roadmap -->
