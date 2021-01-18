@@ -57,6 +57,7 @@ module.exports = {
         18: '4.5rem'
       },
       opacity: {
+        40: '0.4',
         60: '0.6'
       },
       screens: {

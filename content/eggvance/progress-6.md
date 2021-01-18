@@ -82,15 +82,15 @@ I fixed the bug when working on something completely different. Reads from unuse
 - credit [issue](https://github.com/jsmolka/eggvance/issues/2)
 
 {{<figures>}}
-  {{<figure src="eggvance/gunstar-sprite-cycles-bug.png" caption="">}}
-  {{<figure src="eggvance/gunstar-sprite-cycles.png" caption="">}}
+  {{<figure src="eggvance/gunstar-sprite-cycles-bug.png" caption="Figure 3: Gunstar Super Heroes render cycles bad">}}
+  {{<figure src="eggvance/gunstar-sprite-cycles.png" caption="Figure 4: Gunstar Super Heroes render cycles">}}
 {{</figures>}}
 
 ### Real-Time Clock
 
 {{<figures>}}
-  {{<figure src="eggvance/emerald-bad-rtc.png" caption="">}}
-  {{<figure src="eggvance/emerald-bad-flash.png" caption="">}}
+  {{<figure src="eggvance/emerald-bad-rtc.png" caption="Figure 5: Empty battery warning">}}
+  {{<figure src="eggvance/emerald-bad-flash.png" caption="Figure 6: Failed save screen (bonus)">}}
 {{</figures>}}
 
 {{<figures>}}
@@ -122,7 +122,7 @@ I fixed the bug when working on something completely different. Reads from unuse
 ### Direct Sound
 {{<audio src="tengoku.mp3" caption="Audio 1: Intro sequence of Rhythm Tengoku with some nice stereo">}}
 
-### Test Coverage
+### Accuracy
 - DMA bus
 - Memory read improvements
 - Interrupt delay
