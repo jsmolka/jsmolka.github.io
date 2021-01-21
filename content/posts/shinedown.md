@@ -4,6 +4,7 @@ author: "Julian Smolka"
 summary: "A post about the Alter Bridge / Shinedown concert in Leipzig."
 date: 2019-12-14
 type: post
+draft: true
 ---
 Around a month ago I've attended a rock concert at Haus Auensee in Leipzig. I extended my work day by a couple of hours and then took a relaxed 25 minute walk to the location. The headliner of the concert was Alter Bridge with support acts by The Ravens Age and Shinedown.
 

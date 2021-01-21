@@ -4,6 +4,7 @@ author: "Julian Smolka"
 summary: "An approach to customizable static syntax highlighting in Hugo."
 date: 2020-11-23
 type: post
+draft: true
 ---
 Syntax highlighting is a must-have for every programming-related blog and there are many ways to achieve it in a dynamic or static manner. Of course, Hugo comes with its syntax highlighter based on [chroma](https://github.com/alecthomas/chroma). It is more than enough for your everyday programming languages, but lacks the necessary extensibility when working with custom stuff (new grammars need to be added via pull requests if I understood it correctly).
 
