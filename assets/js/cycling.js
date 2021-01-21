@@ -184,7 +184,7 @@ import Chart from 'chart.js';
       }
     });
 
-    activities = await fetch('/data/strava.json');
+    activities = await fetch('/static/data/strava.json');
 
     document.getElementById('btnDay').onclick = () => {
       update(groupByDay, titleDay, 'week');
