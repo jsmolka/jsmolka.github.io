@@ -8,7 +8,7 @@
 
     a {
       @apply relative;
-      @apply border-none;
+      @apply bg-none;
     }
 
     @screen anchor {
@@ -70,8 +70,11 @@
   }
 
   a {
-    @apply border-b-4;
-    @apply border-blue-200;
+    background-image: linear-gradient(to right, $blue-200 0%, $blue-200 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0.25em;
+    background-position: 0 90%;
+    transition: background-size 200ms cubic-bezier(0, 0.8, 0.13, 1);
   }
 
   figure {
