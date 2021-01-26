@@ -79,33 +79,58 @@ Unfortunately the replacement BIOS doesn't reproduce this behavior. Here we retu
 I fixed the bug when working on something completely different. Reads from unused memory regions return values based on prefetched values in the CPUs pipeline. There were some small issues in that code which were fixed in [this commit](https://github.com/jsmolka/eggvance/commit/213c7ab0a18502125b725536c433da3bf90d0b84). It seems that the game tries to access unused memory regions at some point when running the loop with the wrong loop counter and returnig "proper bad value" fixes the freezing behavior.
 
 ### Sprite Render Cycles
-- credit [issue](https://github.com/jsmolka/eggvance/issues/2)
+This [issue](https://github.com/jsmolka/eggvance/issues/2) was quite a simple fix compared to the previous one and has also been reported by fleroviux. The total available render cycles for sprites are 1210 if the H-Blank interval free bit in the display control register is set or 954 otherwise. This means that the amount of sprites per scanline is limited. If you ignore that limit you get something like in figure 3, where the sprite on top overlaps with the status bar.
 
 {{<figures>}}
-  {{<figure src="eggvance/gunstar-sprite-cycles-bug.png" caption="Figure 3: Gunstar Super Heroes render cycles bad">}}
-  {{<figure src="eggvance/gunstar-sprite-cycles.png" caption="Figure 4: Gunstar Super Heroes render cycles">}}
+  {{<figure src="eggvance/gunstar-sprite-cycles-bug.png" caption="Figure 3: Gunstar Super Heroes without render cycles">}}
+  {{<figure src="eggvance/gunstar-sprite-cycles.png" caption="Figure 4: Gunstar Super Heroes with render cycles">}}
 {{</figures>}}
 
+Calculating the amount of cycles it takes to render a sprite is quite easy. It takes `width` cycles for normal and `2 * width + 10` cycles for sprites with affine transformations. Sprites with x-coordinates outside of the screen also affect this quota and programmers should be mindful to explicitly disable sprites instead of moving then outside the screen.
+
 ### Real-Time Clock
+The next thing I wan't to talk about is an actual new feature in the emulator. If you own a third generation Pokemon game and start it, you will notice that it complains about a drained battery. Time based events will no longer work because its internal real-time clock ran dry.
 
 {{<figures>}}
   {{<figure src="eggvance/emerald-bad-rtc.png" caption="Figure 5: Empty battery warning">}}
   {{<figure src="eggvance/emerald-bad-flash.png" caption="Figure 6: Failed save screen (bonus)">}}
 {{</figures>}}
 
+Until now eggvance perfectly emulated old Pokemon cartridges in the sense that both RTCs don't work (it's a feature). The RTC is connected to three of the four GamePak GPIO pins as follows:
+
+- Serial Clock (SCK) at address 0x80000C4
+- Serial Input/Output (SIO) at address 0x80000C5
+- Clock Select (CS) at address 0x80000C6
+
+A typical transfer looks like this:
+
+1. Set CS=0 and SCK=1
+2. Wait for a rising CS edge
+3. Receive command byte (described below)
+4. Send / receive command bytes
+5. Wait for a falling CS edge
+
+Receiving a command byte looks like this:
+
+1. Wait for a rising SCK edge
+2. Read SIO bit
+3. Repeat 1. and 2. until a byte has been transferred
+
+Combining these two flows allows us to implement a functioning RTC. The documentation in GBATEK can be quite confusing in that regard because it first describes the NDS RTC and then the differences to GBA one. Once everything has been put into place I was able to grow berries in the Pokemon Emerald.
+
 {{<figures>}}
-  {{<figure src="eggvance/emerald-berry-1.png" caption="">}}
-  {{<figure src="eggvance/emerald-berry-2.png" caption="">}}
+  {{<figure src="eggvance/emerald-berry-1.png" caption="Figure 7: Berry first stage">}}
+  {{<figure src="eggvance/emerald-berry-2.png" caption="Figure 8: Berry alst stage">}}
 {{</figures>}}
 
-- credit [issue](https://github.com/fleroviux/NanoboyAdvance/issues/136)
+I later stumbled accross a NanoboyAdvance [issue](https://github.com/fleroviux/NanoboyAdvance/issues/136) reported by Robert Peip which mentions that the RTC doesn't work in Sennen Kazoku. The game boots and then show an error screen mentioning "broken clock equipment". I tested it in my emulator and observed the same result.
 
 {{<figures>}}
-  {{<figure src="eggvance/sennen-rtc-bug.png" caption="">}}
-  {{<figure src="eggvance/sennen-rtc.png" caption="">}}
+  {{<figure src="eggvance/sennen-rtc-bug.png" caption="Figure 9: Complaining about a bad RTC">}}
+  {{<figure src="eggvance/sennen-rtc.png" caption="Figure 10: It works!">}}
 {{</figures>}}
 
-- describe steps and what changed
+Debugging the game showed that Sennen Kazoku didn't set SCK high in step one of the transfer sequence. I removed the conditions and then everything worked as expected. Other games with RTCs continued to work with that change so I kept it.
 
 ```diff-cpp
  switch (state) {
@@ -119,10 +144,11 @@ I fixed the bug when working on something completely different. Reads from unuse
  }
 ```
 
-### Direct Sound
-{{<audio src="tengoku.mp3" caption="Audio 1: Intro sequence of Rhythm Tengoku with some nice stereo">}}
+### Accuracy Improvements
+I mentioned three remaining things in the last [release post]({{<relref "release-0.2.md">}}): RTC emulation, improved accuracy and audio. With RTC crossed off the list, there's only one thing left before we can start with audio. Even though eggvance is quite accurate, it has some problems in the timing section because [prefetch](https://mgba.io/2015/06/27/cycle-counting-prefetch/) isn't emulated.
 
-### Accuracy
+Here are some of the accuracy
+
 - DMA bus
 - Memory read improvements
 - Interrupt delay
@@ -148,6 +174,9 @@ Performance (Emerald Littleroot Town)
 - 485 eggvance-902-prefetch
 - 575 eggvance-906-inline
 - 580 eggvance-913-0.3
+
+### ???
+{{<audio src="tengoku.mp3" caption="Audio 1: Intro sequence of Rhythm Tengoku with some nice stereo">}}
 
 ### Conclusion
 <!-- Roadmap -->

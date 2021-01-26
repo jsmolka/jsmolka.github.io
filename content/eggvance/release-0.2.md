@@ -14,7 +14,7 @@ I finally reached a point where I am not utterly discontent with the code I wrot
 
 This marks the end of the impossible quest for clean code. Now it's time to pour countless hours into the last important features:
 - RTC emulation for games like Pokemon
-- prefetch emulation for better overall accuracy
-- audio emulation to break the silence (and my will to live)
+- Prefetch emulation for better overall accuracy
+- Audio emulation to break the silence (and my will to live)
 
 See you in the next progress report!
