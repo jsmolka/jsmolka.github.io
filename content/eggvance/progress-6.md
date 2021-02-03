@@ -2,7 +2,7 @@
 title: "Progress Report #6"
 author: "Julian Smolka"
 summary: "The sixth progress report of the eggvance GBA emulator."
-date: 2021-01-09
+date: 2021-02-03
 type: post
 ---
 2020 came to an end and left me with an output of two progress reports and a simple, short release note. That's less than I was hoping for, but the most time this year went into improving the code base and some performance tinkering for personal pleasure. In my defense, the last progress report had much higher quality than the previous ones, and I'd like to keep it this way!
