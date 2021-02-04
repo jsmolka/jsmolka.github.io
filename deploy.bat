@@ -15,10 +15,14 @@ rem build
 hugo -s .. -d %dir%
 cmd /c npm run prism
 
-rem commit
-git add .
+rem commit and overwrite
+git checkout --orphan newBranch
+git add -A
 git commit -m "update site"
-git push origin master
+git branch -D master
+git branch -m master
+git gc --aggressive --prune=all
+git push -f origin master
 
 rem cleanup
 popd
