@@ -118,7 +118,7 @@ Combining these two flows allows us to implement a functioning RTC. The document
 
 {{<figures>}}
   {{<figure src="eggvance/emerald-berry-1.png" caption="Figure 7: Berry first stage">}}
-  {{<figure src="eggvance/emerald-berry-2.png" caption="Figure 8: Berry alst stage">}}
+  {{<figure src="eggvance/emerald-berry-2.png" caption="Figure 8: Berry last stage">}}
 {{</figures>}}
 
 I later stumbled across a NanoboyAdvance [issue](https://github.com/fleroviux/NanoboyAdvance/issues/136) reported by Robert Peip, which mentions that the RTC doesn't work in Sennen Kazoku. The game boots and then show an error screen mentioning 'broken clock equipment'. I tested it in my emulator and observed the same result.
