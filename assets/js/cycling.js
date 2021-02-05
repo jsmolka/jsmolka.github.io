@@ -32,7 +32,7 @@ import Chart from 'chart.js';
               `Distance: ${activity.formatDistance}`,
               `Moving time: ${activity.formatTime}`,
               `Average speed: ${activity.formatAverage}`,
-              `Elevation gain: ${activity.elevation}`
+              `Elevation gain: ${activity.formatElevation}`
             ];
           }
         }
@@ -136,21 +136,21 @@ import Chart from 'chart.js';
     groupByDay() {
       return this.groupBy(
         activity => activity.date.format('Y-w-D'),
-        activity => activity.date
+        activity => activity.date.clone()
       );
     }
 
     groupByWeek() {
       return this.groupBy(
         activity => activity.date.format('Y-w'),
-        activity => activity.date.endOf('week')
+        activity => activity.date.clone().endOf('week')
       );
     }
 
     groupByMonth() {
       return this.groupBy(
         activity => activity.date.format('Y-M'),
-        activity => activity.date.endOf('month')
+        activity => activity.date.clone().endOf('month')
       );
     }
   }
