@@ -19,7 +19,7 @@
   {{- end -}}
 </title>
 
-{{ if .Site.IsServer }}
+{{ if in (.Site.BaseURL | string) "localhost" }}
   {{ $scripts := slice }}
   {{ $scripts = $scripts | append "js/vendor/prism.min.js" }}
   {{ $scripts = $scripts | append "js/prism.js" }}
