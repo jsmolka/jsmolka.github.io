@@ -8,6 +8,7 @@ import Chart from 'chart.js';
       datasets: []
     },
     options: {
+      legend: {},
       scales: {
         xAxes: [],
         yAxes: [{
@@ -29,10 +30,10 @@ import Chart from 'chart.js';
             const activity = data.datasets[item.datasetIndex].data[item.index].activity;
 
             return [
-              `Distance: ${activity.formatDistance}`,
-              `Moving time: ${activity.formatTime}`,
-              `Average speed: ${activity.formatAverage}`,
-              `Elevation gain: ${activity.formatElevation}`
+              `Distance: ${activity.displayDistance}`,
+              `Moving time: ${activity.displayTime}`,
+              `Average speed: ${activity.displayAverage}`,
+              `Elevation gain: ${activity.displayElevation}`
             ];
           }
         }
@@ -52,7 +53,7 @@ import Chart from 'chart.js';
       return Math.round(value * 10) / 10;
     }
 
-    get formatTime() {
+    get displayTime() {
       // Workaround to show more than 23 hours
       const basis = moment().startOf('day').add(this.time, 'seconds');
       const hours = Math.trunc(this.time / 3600);
@@ -60,17 +61,17 @@ import Chart from 'chart.js';
       return basis.format(`${hours}:mm:ss`);
     }
 
-    get formatDistance() {
+    get displayDistance() {
       return `${this.round(this.distance)} km`;
     }
 
-    get formatAverage() {
+    get displayAverage() {
       const hours = this.time / 3600;
 
       return `${this.round(this.distance / hours)} km/h`;
     }
 
-    get formatElevation() {
+    get displayElevation() {
       return `${this.round(this.elevation)} m`;
     }
 
@@ -114,23 +115,22 @@ import Chart from 'chart.js';
     }
 
     groupBy(keyCallback, dateCallback) {
-      const map = new Map();
+      const grouped = new Map();
       for (const activity of this) {
         const key = keyCallback(activity);
 
-        if (!map.has(key)) {
-          map.set(key, new Activity(
-            dateCallback(activity),
-            0, 0, 0)
-          );
+        if (!grouped.has(key)) {
+          grouped.set(key, new Activity(
+            dateCallback(activity), 0, 0, 0
+          ));
         }
 
-        const value = map.get(key);
+        const value = grouped.get(key);
         value.time += activity.time;
         value.distance += activity.distance;
         value.elevation += activity.elevation;
       }
-      return Array.from(map.values());
+      return Array.from(grouped.values());
     }
 
     groupByDay() {
@@ -156,7 +156,7 @@ import Chart from 'chart.js';
   }
 
   class Dataset {
-    constructor(label, data) {
+    constructor(label, data, hidden) {
       this.label = label;
       this.borderColor = 'rgba(33, 150, 243, 1)';
       this.backgroundColor = 'rgba(33, 150, 243, 0.1)';
@@ -168,30 +168,55 @@ import Chart from 'chart.js';
       this.pointBackgroundColor = 'rgb(233, 245, 254, 1)';
       this.pointHoverRadius = 5;
       this.data = data;
+      this.hidden = hidden;
     }
   }
 
   class Application {
     constructor() {
       this.chart = null;
+      this.hidden = new Set();
       this.config = Object.assign({}, config);
       this.activities = new Activities();
+
+      // Cached update values
+      this.groupCallback = activities => activities.groupByDay();
+      this.titleCallback = activity => activity.titleDay;
+      this.unit = 'week';
     }
 
     async init() {
       await this.activities.fetch('/static/data/strava.json');
 
-      this.update(
-        activity => activity.groupByDay(),
-        activity => activity.titleDay,
-        'week'
-      );
+      this.config.options.legend.onClick = (event, item) => {
+        const year = item.text;
+        if (this.hidden.has(year)) {
+          this.hidden.delete(year);
+        } else {
+          this.hidden.add(year);
+        }
+        this.update();
+      }
+
+      this.update();
     }
 
     update(groupCallback, titleCallback, unit) {
-      const data = [];
-      for (const activity of groupCallback(this.activities)) {
-        data.push({
+      // Used passed or cached values
+      this.groupCallback = groupCallback || this.groupCallback;
+      this.titleCallback = titleCallback || this.titleCallback;
+      this.unit = unit || this.unit;
+
+
+      const years = new Map();
+      for (const activity of this.groupCallback(this.activities)) {
+        const year = activity.date.year();
+
+        if (!years.has(year)) {
+          years.set(year, []);
+        }
+
+        years.get(year).push({
           x: activity.date,
           y: activity.distance,
           activity: activity
@@ -202,19 +227,34 @@ import Chart from 'chart.js';
       this.config.options.scales.xAxes.push({
         type: 'time',
         time: {
-          unit: unit,
+          unit: this.unit,
           unitStepSize: 1
         }
       });
 
       this.config.options.tooltips.callbacks.title = (items, data) => {
-        const activity = data.datasets[items[0].datasetIndex].data[items[0].index].activity;
-        return titleCallback(activity);
+        return this.titleCallback(data.datasets[items[0].datasetIndex].data[items[0].index].activity);
       };
 
+      let lastDataset = null;
+
+      const sortedYears = new Map([...years.entries()].sort());
+
       this.config.data.datasets.length = 0;
-      this.config.data.datasets.push(
-        new Dataset('', data))
+      for (const [year, data] of sortedYears.entries()) {
+        // Connect datasets, first item is latest activity
+        if (lastDataset) {
+          data.push(lastDataset[0])
+        }
+
+        const dataset = new Dataset(year, data, this.hidden.has(year));
+
+        this.config.data.datasets.push(dataset);
+
+        if (!dataset.hidden) {
+          lastDataset = data;
+        }
+      }
 
       if (this.chart) {
         this.chart.update(this.config);
