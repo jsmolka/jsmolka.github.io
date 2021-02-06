@@ -27,7 +27,13 @@ import Chart from 'chart.js';
         displayColors: false,
         callbacks: {
           label: function(item, data) {
-            const activity = data.datasets[item.datasetIndex].data[item.index].activity;
+            const dataset = data.datasets[item.datasetIndex];
+            const activity = dataset.data[item.index].activity;
+
+            // Prevent double info for connection points of datasets
+            if (dataset.label !== activity.date.year()) {
+              return null;
+            }
 
             return [
               `Distance: ${activity.displayDistance}`,
