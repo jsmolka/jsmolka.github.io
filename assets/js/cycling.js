@@ -180,8 +180,8 @@ import Chart from 'chart.js';
       this.activities = new Activities();
 
       // Cached update values
-      this.groupCallback = activities => activities.groupByDay();
-      this.titleCallback = activity => activity.titleDay;
+      this.groupCallback = activities => activities.groupByWeek();
+      this.titleCallback = activity => activity.titleWeek;
       this.unit = 'week';
     }
 
