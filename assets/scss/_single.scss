@@ -3,6 +3,8 @@
 .single {
   @extend .content;
   @apply w-full;
+  @apply text-justify;
+  @apply hyphens-auto;
 
   * {
     &:first-child {
