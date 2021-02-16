@@ -73,7 +73,7 @@
     background-image: linear-gradient(to right, $blue-200 0%, $blue-200 100%);
     background-repeat: no-repeat;
     background-size: 100% 0.25em;
-    background-position: 0 91%;
+    background-position: 0 93%;
     transition: background-size 200ms cubic-bezier(0, 0.8, 0.13, 1);
   }
 
@@ -137,21 +137,26 @@
 
   blockquote {
     @apply relative;
-    @apply pl-12;
-    @apply pr-4;
+    @apply px-4;
     @apply py-4;
     @apply bg-gray-100;
     @apply border-l-6;
     @apply border-blue-200;
+  }
 
-    &::before {
-      @apply absolute;
-      @apply text-6xl;
-      @apply text-blue-200;
+  @screen sm {
+    blockquote {
+      @apply pl-12;
 
-      content: "\201C";
-      top: -8px;
-      left: 12px;
+      &::before {
+        @apply absolute;
+        @apply text-6xl;
+        @apply text-blue-200;
+
+        content: "\201C";
+        top: -8px;
+        left: 12px;
+      }
     }
   }
 

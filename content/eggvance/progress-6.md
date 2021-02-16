@@ -102,17 +102,17 @@ Until now, eggvance perfectly emulated old Pokémon cartridges in the sense that
 
 A typical transfer looks like this:
 
-1. Set CS=0 and SCK=1
-2. Wait for a rising CS edge
-3. Receive command byte (described below)
-4. Send / receive command bytes
-5. Wait for a falling CS edge
+- Set CS=0 and SCK=1
+- Wait for a rising CS edge
+- Receive command byte (described below)
+- Send / receive command bytes
+- Wait for a falling CS edge
 
 Receiving a command byte looks like this:
 
-1. Wait for a rising SCK edge
-2. Read SIO bit
-3. Repeat 1. and 2. until a byte has been transferred
+- Wait for a rising SCK edge
+- Read SIO bit
+- Repeat 1 and 2 until a byte has been transferred
 
 Combining these two flows allows us to implement a functioning RTC. The documentation in GBATEK can be quite confusing in that regard because it first describes the NDS RTC and then the differences to GBA one. Once everything has been put into place, I was able to grow berries in the Pokémon Emerald.
 
