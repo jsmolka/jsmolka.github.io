@@ -56,7 +56,7 @@ The BIOS in the Game Boy Advance is read-protected to prevent dumping (guess how
 - 0x134+8 during IRQ
 - 0x13C+8 after IRQ
 
-In the case of our dereferenced null pointer, we've just returned from an SWI. The code for this in the original BIOS looks like the following:
+In the case of our dereferenced null pointer, we've just returned from a SWI. The code for this in the original BIOS looks like the following:
 
 ```armv4t
 movs      pc, lr          ; addr: 00000188  data: E1B0F00E

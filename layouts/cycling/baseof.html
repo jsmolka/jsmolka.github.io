@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language }}">
+<html lang="{{ .Site.Params.Language }}">
   <head>
     {{ partial "head" . }}
     {{ partial "esbuild-async" (dict "context" . "path" "js/cycling.js") }}

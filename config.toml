@@ -14,6 +14,7 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
   dateformShort   = "Jan 2"
   dateformNum     = "2006-01-02"
   dateformNumTime = "2006-01-02 15:04 -0700"
+  language        = "en-US"
 
 [menu]
   [[menu.main]]
