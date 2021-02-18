@@ -1,0 +1,343 @@
+<!DOCTYPE html><html lang="en-US"><head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Julian Smolka">
+<meta name="description" content="The fourth progress report of the eggvance GBA emulator.">
+<link rel="canonical" href="https://smolka.dev/eggvance/progress-4/">
+
+<link rel="preload" href="/static/font/roboto/roboto-400.woff2" as="font" type="font/woff2" crossorigin="">
+<link rel="preload" href="/static/font/roboto/roboto-700.woff2" as="font" type="font/woff2" crossorigin="">
+<link rel="preload" href="/static/font/roboto-mono/roboto-mono-400.woff2" as="font" type="font/woff2" crossorigin="">
+
+
+<link rel="stylesheet" href="https://smolka.dev/css/main.min.c8e683b5c411ba8932e72eec996baa206a0fe7f54c69e498864b10de0da64898.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#42a5f5">
+<meta name="msapplication-TileColor" content="#42a5f5">
+<meta name="theme-color" content="#212121">
+
+
+<title>Progress Report #4</title>
+
+
+
+
+  
+  <script type="text/javascript" src="https://smolka.dev/js/alpine.js" defer=""></script>
+
+
+
+  
+  <script type="text/javascript" src="https://smolka.dev/js/headroom.js" async=""></script>
+
+
+
+  </head>
+  <body x-data="{ menu: false }" :class="{ 'overflow-hidden': menu }" class="flex flex-col min-w-screen min-h-screen m-0 p-0 font-body bg-white text-gray-900">
+    <header class="fixed top-0 z-10 w-full bg-gray-900 text-gray-50 shadow-header select-none">
+  <nav class="flex justify-between max-w-screen-xl mx-auto">
+    <div class="mr-4">
+      <a class="flex items-center h-18 px-4" href="https://smolka.dev/">
+        <div class="h-8">
+          <svg class="h-full" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 92 16" shape-rendering="crispEdges">
+  <path stroke="#000000" d="M4 0h2M11 0h2M3 1h1M6 1h1M10 1h1M13 1h1M2 2h1M6 2h1M9 2h1M13 2h1M2 3h1M7 3h1M9 3h1M14 3h1M22 3h9M34 3h9M46 3h9M58 3h6M70 3h9M82 3h9M1 4h1M8 4h1M14 4h1M22 4h1M30 4h2M34 4h1M39 4h1M42 4h2M46 4h1M54 4h2M58 4h1M63 4h1M70 4h1M75 4h1M78 4h2M82 4h1M90 4h2M1 5h1M9 5h2M14 5h1M22 5h1M31 5h1M34 5h1M39 5h1M43 5h1M46 5h1M55 5h1M58 5h1M63 5h1M70 5h1M75 5h1M79 5h1M82 5h1M91 5h1M0 6h1M11 6h2M15 6h1M22 6h1M31 6h1M34 6h1M39 6h1M43 6h1M46 6h1M55 6h1M58 6h1M63 6h1M70 6h1M75 6h1M79 6h1M82 6h1M91 6h1M0 7h2M13 7h3M22 7h1M31 7h1M34 7h1M39 7h1M43 7h1M46 7h1M55 7h1M58 7h1M63 7h1M70 7h1M75 7h1M79 7h1M82 7h1M91 7h1M0 8h1M2 8h2M8 8h2M13 8h1M15 8h1M22 8h1M28 8h4M34 8h1M39 8h1M43 8h1M46 8h1M51 8h1M55 8h1M58 8h1M63 8h1M70 8h1M75 8h1M79 8h1M82 8h1M87 8h1M91 8h1M0 9h1M4 9h1M6 9h2M10 9h1M12 9h1M15 9h1M22 9h1M31 9h1M34 9h1M39 9h1M43 9h1M46 9h1M51 9h1M55 9h1M58 9h1M63 9h5M70 9h1M78 9h2M82 9h1M91 9h1M0 10h1M5 10h1M11 10h1M15 10h1M22 10h6M31 10h1M34 10h1M43 10h1M46 10h1M51 10h1M55 10h1M58 10h1M63 10h1M67 10h1M70 10h1M75 10h1M79 10h1M82 10h1M87 10h1M91 10h1M1 11h1M14 11h1M22 11h1M31 11h1M34 11h1M38 11h1M40 11h1M43 11h1M46 11h1M55 11h1M58 11h1M67 11h1M70 11h1M75 11h1M79 11h1M82 11h1M87 11h1M91 11h1M1 12h1M14 12h1M22 12h10M34 12h10M46 12h10M58 12h10M70 12h10M82 12h10M2 13h2M12 13h2M4 14h2M10 14h2M6 15h4"></path>
+  <path stroke="#26C6DA" d="M4 1h2M11 1h2M3 2h3M10 2h3M3 3h1M5 3h2M10 3h1M12 3h2M2 4h2M6 4h2M9 4h2M13 4h1M2 5h1M7 5h2M13 5h1M1 6h2M8 6h3M13 6h2M2 7h1M10 7h3M12 8h1"></path>
+  <path stroke="#3CCCDE" d="M4 3h1M11 3h1M4 4h2M11 4h2M3 5h4M11 5h2M3 6h1M6 6h2M3 7h1M7 7h3M10 8h2M11 9h1"></path>
+  <path stroke="#FAFAFA" d="M23 4h7M35 4h4M40 4h2M47 4h7M59 4h4M71 4h4M76 4h2M83 4h7M23 5h8M35 5h4M40 5h3M47 5h8M59 5h4M71 5h4M76 5h3M83 5h8M23 6h8M35 6h4M40 6h3M47 6h8M59 6h4M71 6h4M76 6h3M83 6h8M23 7h8M35 7h4M40 7h3M47 7h8M59 7h4M71 7h4M76 7h3M83 7h8M23 8h5M35 8h4M40 8h3M47 8h4M52 8h3M59 8h4M71 8h4M76 8h3M83 8h4M88 8h3M23 9h8M35 9h4M40 9h3M47 9h4M52 9h3M59 9h4M71 9h7M83 9h8M28 10h3M35 10h8M47 10h4M52 10h3M59 10h4M64 10h3M71 10h4M76 10h3M83 10h4M88 10h3M23 11h8M35 11h3M39 11h1M41 11h2M47 11h8M59 11h8M71 11h4M76 11h3M83 11h4M88 11h3"></path>
+  <path stroke="#51D1E2" d="M4 6h2M4 7h3M4 8h1M6 8h2"></path>
+  <path stroke="#212121" d="M1 8h1M1 9h3M1 10h4M2 11h3M2 12h3M4 13h2"></path>
+  <path stroke="#67D7E6" d="M5 8h1M5 9h1"></path>
+  <path stroke="#424242" d="M14 8h1M13 9h2M13 10h2"></path>
+  <path stroke="#323232" d="M8 9h2M8 10h3M8 11h3M9 12h2M9 13h3"></path>
+  <path stroke="#292929" d="M6 10h2M5 11h3M5 12h4M6 13h3M6 14h4"></path>
+  <path stroke="#3A3A3A" d="M12 10h1M11 11h3M11 12h3"></path>
+</svg>
+
+        </div>
+      </a>
+    </div>
+    <div class="ml-4">
+      <div class="sm:flex hidden hover:text-gray-500">
+        
+          <a class="flex items-center h-18 px-4 hover:text-gray-50" href="https://smolka.dev/about">
+            
+            <div class="relative inline-flex flex-col justify-center h-full">
+              <span>About</span>
+              <span class="absolute bottom-0 h-0 w-full bg-gray-50"></span>
+            </div>
+          </a>
+        
+          <a class="flex items-center h-18 px-4 hover:text-gray-50" href="https://smolka.dev/cycling">
+            
+            <div class="relative inline-flex flex-col justify-center h-full">
+              <span>Cycling</span>
+              <span class="absolute bottom-0 h-0 w-full bg-gray-50"></span>
+            </div>
+          </a>
+        
+          <a class="flex items-center h-18 px-4 hover:text-gray-50" href="https://smolka.dev/eggvance">
+            
+            <div class="relative inline-flex flex-col justify-center h-full">
+              <span>Eggvance</span>
+              <span class="absolute bottom-0 nav-item-animation h-1 w-full bg-gray-50"></span>
+            </div>
+          </a>
+        
+      </div>
+      <div class="flex sm:hidden">
+        <button :class="{ 'is-active': menu }" @click="menu = !menu" class="hamburger hamburger--squeeze h-18 focus:outline-none">
+          <span class="hamburger-box align-middle">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="aboslute top-0 min-h-18 w-full bg-gray-900"></div>
+<div x-cloak="" x-show="menu" class="mobile-menu block sm:hidden w-full bg-gray-900 text-gray-50 overflow-y-auto shadow-header select-none">
+  <div class="flex flex-col mb-4 hover:text-gray-500">
+    
+      <a class="flex justify-center items-center h-18 hover:text-gray-50" href="https://smolka.dev/about">About</a>
+    
+      <a class="flex justify-center items-center h-18 hover:text-gray-50" href="https://smolka.dev/cycling">Cycling</a>
+    
+      <a class="flex justify-center items-center h-18 hover:text-gray-50" href="https://smolka.dev/eggvance">Eggvance</a>
+    
+  </div>
+</div>
+<noscript class="w-full px-4 py-3 bg-gray-900 text-gray-50 text-center">
+  This site works better with JavaScript enabled (it's just ~10kb).
+</noscript>
+
+    
+  <div class="w-full px-4 py-8 sm:py-16 bg-gray-900">
+    <div class="flex flex-col text-center">
+      <span class="max-w-screen-lg mx-auto mb-2 text-gray-50 text-4xl">Progress Report #4</span>
+      <span class="max-w-screen-sm mx-auto text-gray-400">The fourth progress report of the eggvance GBA emulator.</span>
+    </div>
+  </div>
+  <div class="w-full max-w-screen-md mx-auto px-4 py-8 sm:py-16">
+    <div class="single">
+      <p>Hello there! It has been quite a while since the last progress report, two months to be exact. Development of the emulator has slowed down a little during that time because I started working as a JavaScript developer. Apart from cleaning up my codebase, I also fixed and implemented some things which might be of interest to some people.</p>
+<h3 id="bitmap-modes">
+  <a href="#bitmap-modes">Bitmap Modes</a>
+</h3>
+<p>The GBA has six different background modes which are evenly split into three tile-based and three bitmap modes. One would assume that games utilize bitmaps as much as tiles, but that's not the case in reality. Tiles tend to be faster and easier to understand and are therefore used in most games. One rare example of a game using bitmap modes is DOOM II, which uses them to display the scene created by its internal software renderer. Due to this kind of games being so rare, I didn't notice bugs in the bitmap implementation until very recently, when I was going through some of the demos on <a href="https://www.gbadev.org/" target="_blank" rel="noopener">gbadev.org</a>.</p>
+<div class="flex flex-col sm:flex-row justify-center w-full my-6">
+  
+  
+  
+  
+
+  <figure class="ml-0 mt-6 sm:ml-6 sm:mt-0 first:ml-0 first:mt-0 ">
+    <a href="/static/img/eggvance/yeti-bitmap.png" target="_blank">
+  <img class="w-full" src="/static/img/eggvance/yeti-bitmap.png" alt="Figure 1 - Yeti demo" loading="lazy" width="482" height="352">
+</a>
+    
+      <figcaption>Figure 1 - Yeti demo</figcaption>
+    
+  </figure>
+
+
+  
+  
+  
+
+  <figure class="ml-0 mt-6 sm:ml-6 sm:mt-0 first:ml-0 first:mt-0 ">
+    <a href="/static/img/eggvance/yeti-bitmap-bug.png" target="_blank">
+  <img class="w-full" src="/static/img/eggvance/yeti-bitmap-bug.png" alt="Figure 2 - Yeti demo bug" loading="lazy" width="482" height="352">
+</a>
+    
+      <figcaption>Figure 2 - Yeti demo bug</figcaption>
+    
+  </figure>
+
+
+
+</div>
+
+<p>Figure 1 shows the technically impressive Yeti demo. It's a first-person shooter with a custom 3D engine and uses background mode 5 to display the scene. The dimensions of the bitmap are 160x128 (the screens dimensions are 240x160). Figure 2 shows an old version of the emulator which simply copied the bitmap to the screen without further processing. This was incorrect because bitmaps can make use of the rotation / scaling matrix.</p>
+<pre class=" language-cpp"><code class=" language-cpp"><span class="token keyword">void</span> <span class="token class-name">PPU</span><span class="token operator">::</span><span class="token function">renderBgMode5</span><span class="token punctuation">(</span><span class="token keyword">int</span> bg<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Maximum dimensions of this bitmap</span>
+  <span class="token keyword">static</span> <span class="token keyword">constexpr</span> Dimensions <span class="token function">dims</span><span class="token punctuation">(</span><span class="token number">160</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// Iterate over horizontal screen pixels</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> x <span class="token operator">&lt;</span> SCREEN_W<span class="token punctuation">;</span> <span class="token operator">++</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Map current pixel to bitmap coordiantes</span>
+    <span class="token comment">// Remove fractional portion with shift</span>
+    <span class="token keyword">const</span> <span class="token keyword">auto</span> texture <span class="token operator">=</span> <span class="token function">transform</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> bg<span class="token punctuation">)</span> <span class="token operator">&gt;&gt;</span> <span class="token number">8</span><span class="token punctuation">;</span>
+    <span class="token comment">// Invalid coordinates are transparent</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>dims<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>texture<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      backgrounds<span class="token punctuation">[</span>bg<span class="token punctuation">]</span><span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">=</span> TRANSPARENT<span class="token punctuation">;</span>
+      <span class="token keyword">continue</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// Bitmap offset = 16-bit color * (160 * texture.y + texture.x)</span>
+    <span class="token keyword">int</span> offset <span class="token operator">=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">u16</span><span class="token punctuation">)</span> <span class="token operator">*</span> texture<span class="token punctuation">.</span><span class="token function">offset</span><span class="token punctuation">(</span>dims<span class="token punctuation">.</span>w<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// Read and mask (explained in next section) color</span>
+    backgrounds<span class="token punctuation">[</span>bg<span class="token punctuation">]</span><span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">=</span> mmu<span class="token punctuation">.</span>vram<span class="token punctuation">.</span><span class="token function">readHalfFast</span><span class="token punctuation">(</span>
+      io<span class="token punctuation">.</span>dispcnt<span class="token punctuation">.</span>base_frame <span class="token operator">+</span> offset<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">0x7FFF</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>The fixed version of the renderer applies the <code>transform</code> function to the current pixel, which returns the coordinates inside the bitmap. Those are then used to determine the pixels color. The matrix used in the Yeti demo scales the bitmap by two and thus fills the entire screen. The black pixels on the right are caused by the game and not by the emulator.</p>
+<h3 id="color-masking">
+  <a href="#color-masking">Color Masking</a>
+</h3>
+<p>The GBA uses the BGR555 format to encode colors and stores them in 16-bit units. Most colors are stored in the palette RAM which is a dedicated area in memory with a size of 0x400 bytes. It consists of two halves which are used to store background and sprite colors. The first color in each half can be used to draw transparent pixels. An obvious use case for this are sprites, which aren't always perfect squares. If a pixel has been marked as transparent, the next pixel in the drawing order will be displayed.</p>
+<div class="flex flex-col sm:flex-row justify-center w-full my-6">
+  
+  
+  
+  
+
+  <figure class="ml-0 mt-6 sm:ml-6 sm:mt-0 first:ml-0 first:mt-0 ">
+    <a href="/static/img/eggvance/safety-screen.png" target="_blank">
+  <img class="w-full" src="/static/img/eggvance/safety-screen.png" alt="Figure 3 - Safety screen" loading="lazy" width="482" height="352">
+</a>
+    
+      <figcaption>Figure 3 - Safety screen</figcaption>
+    
+  </figure>
+
+
+  
+  
+  
+
+  <figure class="ml-0 mt-6 sm:ml-6 sm:mt-0 first:ml-0 first:mt-0 ">
+    <a href="/static/img/eggvance/safety-screen-bug.png" target="_blank">
+  <img class="w-full" src="/static/img/eggvance/safety-screen-bug.png" alt="Figure 4 - Safety screen bug" loading="lazy" width="482" height="352">
+</a>
+    
+      <figcaption>Figure 4 - Safety screen bug</figcaption>
+    
+  </figure>
+
+
+
+</div>
+
+<p>Since the drawing process is separated from combining the backgrounds and sprites into the final scene, transparent pixels must be marked as such. Luckily the most significant bit in each color doesn't carry information and can be used for this purpose. This means that transparent pixels are represented by the color 0x8000. This approach worked well until I booted the game Mother 3. Its intro screen uses 0x8000 to display white and messed up my whole system (figure 4).</p>
+<pre class=" language-cpp"><code class=" language-cpp"><span class="token keyword">u16</span> <span class="token class-name">Palette</span><span class="token operator">::</span><span class="token function">colorBGOpaque</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">,</span> <span class="token keyword">int</span> bank<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">readHalfFast</span><span class="token punctuation">(</span><span class="token number">0x20</span> <span class="token operator">*</span> bank <span class="token operator">+</span> <span class="token number">2</span> <span class="token operator">*</span> index<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">0x7FFF</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">u16</span> <span class="token class-name">Palette</span><span class="token operator">::</span><span class="token function">colorBG</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">,</span> <span class="token keyword">int</span> bank<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> index <span class="token operator">==</span> <span class="token number">0</span>
+    <span class="token operator">?</span> TRANSPARENT
+    <span class="token operator">:</span> <span class="token function">colorBGOpaque</span><span class="token punctuation">(</span>index<span class="token punctuation">,</span> bank<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>This problem can be eliminated with a quite simple solution. Every color read from the palette needs to be masked with 0x7FFF in order to clear the most significant bit. This prevents confusing transparent pixels with malformed white pixels (figure 3).</p>
+<h3 id="sprite-tile-restrictions">
+  <a href="#sprite-tile-restrictions">Sprite Tile Restrictions</a>
+</h3>
+<p>This issue is another prime example for the 'most games don't use bitmaps, therefore I can't test them' category. If you compare both figures down below you will notice some strange, colorful pixels in the upper left corner of figure 6. Those are uninitialized sprites (or objects if you listen to Nintendo) which were wrongfully rendered by the emulator.</p>
+<div class="flex flex-col sm:flex-row justify-center w-full my-6">
+  
+  
+  
+  
+
+  <figure class="ml-0 mt-6 sm:ml-6 sm:mt-0 first:ml-0 first:mt-0 ">
+    <a href="/static/img/eggvance/pokemon-series.png" target="_blank">
+  <img class="w-full" src="/static/img/eggvance/pokemon-series.png" alt="Figure 5 - Pokémon series" loading="lazy" width="482" height="352">
+</a>
+    
+      <figcaption>Figure 5 - Pokémon series</figcaption>
+    
+  </figure>
+
+
+  
+  
+  
+
+  <figure class="ml-0 mt-6 sm:ml-6 sm:mt-0 first:ml-0 first:mt-0 ">
+    <a href="/static/img/eggvance/pokemon-series-bug.png" target="_blank">
+  <img class="w-full" src="/static/img/eggvance/pokemon-series-bug.png" alt="Figure 6 - Pokémon series bug" loading="lazy" width="482" height="352">
+</a>
+    
+      <figcaption>Figure 6 - Pokémon series bug</figcaption>
+    
+  </figure>
+
+
+
+</div>
+
+<p>The cause of this problem is best described in Martin Korths <a href="https://problemkaputt.de/gbatek.htm#lcdobjoverview" target="_blank" rel="noopener">GBATEK</a>, which is the most comprehensive and complete reference document for the GBA. This even holds up when comparing against Nintendos official programming manual.</p>
+<blockquote>
+<p>OBJs are always combined of one or more 8x8 pixel Tiles (much like BG Tiles in BG Modes 0-2). However, OBJ Tiles are stored in a separate area in VRAM: 06010000-06017FFF (32 KBytes) in BG Mode 0-2, or 06014000-06017FFF (16 KBytes) in BG Mode 3-5. Depending on the size of the above area (16K or 32K), and on the OBJ color depth (4bit or 8bit), 256-1024 8x8 dots OBJ Tiles can be defined.</p>
+</blockquote>
+<p>The important part here is the one talking about tile address restrictions for different background modes. Bitmap modes (background modes 3 - 5) can't use as many sprite tiles as tiled backgrounds. This is due to the fact that some bitmap modes use multiple frames which occupy the first 0x4000 bytes of the sprite tile memory. The code below shows the calculation of a tile address followed by the necessary check.</p>
+<pre class=" language-cpp"><code class=" language-cpp"><span class="token keyword">u32</span> addr <span class="token operator">=</span> mmu<span class="token punctuation">.</span>vram<span class="token punctuation">.</span><span class="token function">mirror</span><span class="token punctuation">(</span>entry<span class="token punctuation">.</span>base_tile <span class="token operator">+</span> size <span class="token operator">*</span> tile<span class="token punctuation">.</span><span class="token function">offset</span><span class="token punctuation">(</span>tiles<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>addr <span class="token operator">&lt;</span> <span class="token number">0x1'4000</span> <span class="token operator">&amp;&amp;</span> io<span class="token punctuation">.</span>dispcnt<span class="token punctuation">.</span><span class="token function">isBitmap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">continue</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="conclusion">
+  <a href="#conclusion">Conclusion</a>
+</h3>
+<p>That's it with the changes worth writing about and even those were pretty meh. Most of the things I did during the last months were minor accuracy improvements and cleanups in the codebase. Even the DOOM II color problems have been fixed with a rather simple <a href="https://github.com/jsmolka/eggvance/commit/36e2cdd38e795d09a39594353e256b5b83fe9c47" target="_blank" rel="noopener">commit</a>. Another important thing is the addition of <a href="https://github.com/jsmolka/eggvance#linux" target="_blank" rel="noopener">Linux</a> support. Removing Windows dependent code and writing a simple CMake file took more time than I'd like to admit.</p>
+<div class="flex flex-col sm:flex-row justify-center w-full my-6">
+  
+  
+  
+  
+
+  <figure class="ml-0 mt-6 sm:ml-6 sm:mt-0 first:ml-0 first:mt-0 ">
+    <a href="/static/img/eggvance/doom.png" target="_blank">
+  <img class="w-full" src="/static/img/eggvance/doom.png" alt="Figure 7 - DOOM II" loading="lazy" width="482" height="352">
+</a>
+    
+      <figcaption>Figure 7 - DOOM II</figcaption>
+    
+  </figure>
+
+
+  
+  
+  
+
+  <figure class="ml-0 mt-6 sm:ml-6 sm:mt-0 first:ml-0 first:mt-0 ">
+    <a href="/static/img/eggvance/doom-bug-2.png" target="_blank">
+  <img class="w-full" src="/static/img/eggvance/doom-bug-2.png" alt="Figure 8 - DOOM II bug" loading="lazy" width="482" height="352">
+</a>
+    
+      <figcaption>Figure 8 - DOOM II bug</figcaption>
+    
+  </figure>
+
+
+
+</div>
+
+
+    </div>
+    <div class="flex justify-between mt-6 pt-6 text-sm text-gray-500 border-t border-gray-300">
+      <span class="inline-flex items-center">
+        <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zm-2 2H9v2H7V5H4v4h16V5h-3v2h-2V5zm5 6H4v8h16v-8z"></path>
+        </svg>
+        <span>
+          
+            2020-01-07
+          
+        </span>
+      </span>
+      <a class="inline-flex items-center" href="https://github.com/jsmolka/jsmolka.github.io/tree/master/content/eggvance/progress-4.md" target="_blank">
+        <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M7.05 14.121L4.93 16.243l2.828 2.828L19.071 7.757 16.243 4.93 14.12 7.05l1.415 1.414L14.12 9.88l-1.414-1.415-1.414 1.415 1.414 1.414-1.414 1.414-1.414-1.414-1.415 1.414 1.415 1.414-1.415 1.415L7.05 14.12zm9.9-11.313l4.242 4.242a1 1 0 0 1 0 1.414L8.464 21.192a1 1 0 0 1-1.414 0L2.808 16.95a1 1 0 0 1 0-1.414L15.536 2.808a1 1 0 0 1 1.414 0zM14.12 18.363l1.415-1.414 2.242 2.243h1.414v-1.414l-2.242-2.243 1.414-1.414L21 16.757V21h-4.242l-2.637-2.637zM5.636 9.878L2.807 7.05a1 1 0 0 1 0-1.415l2.829-2.828a1 1 0 0 1 1.414 0L9.88 5.635 8.464 7.05 6.343 4.928 4.929 6.343l2.121 2.12-1.414 1.415z"></path>
+        </svg>
+        <span>Improve</span>
+      </a>
+    </div>
+  </div>
+
+  
+
+</body></html>

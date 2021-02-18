@@ -1,0 +1,403 @@
+<!DOCTYPE html><html lang="en-US"><head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Julian Smolka">
+<meta name="description" content="The fifth progress report of the eggvance GBA emulator.">
+<link rel="canonical" href="https://smolka.dev/eggvance/progress-5/">
+
+<link rel="preload" href="/static/font/roboto/roboto-400.woff2" as="font" type="font/woff2" crossorigin="">
+<link rel="preload" href="/static/font/roboto/roboto-700.woff2" as="font" type="font/woff2" crossorigin="">
+<link rel="preload" href="/static/font/roboto-mono/roboto-mono-400.woff2" as="font" type="font/woff2" crossorigin="">
+
+
+<link rel="stylesheet" href="https://smolka.dev/css/main.min.c8e683b5c411ba8932e72eec996baa206a0fe7f54c69e498864b10de0da64898.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#42a5f5">
+<meta name="msapplication-TileColor" content="#42a5f5">
+<meta name="theme-color" content="#212121">
+
+
+<title>Progress Report #5</title>
+
+
+
+
+  
+  <script type="text/javascript" src="https://smolka.dev/js/alpine.js" defer=""></script>
+
+
+
+  
+  <script type="text/javascript" src="https://smolka.dev/js/headroom.js" async=""></script>
+
+
+
+  </head>
+  <body x-data="{ menu: false }" :class="{ 'overflow-hidden': menu }" class="flex flex-col min-w-screen min-h-screen m-0 p-0 font-body bg-white text-gray-900">
+    <header class="fixed top-0 z-10 w-full bg-gray-900 text-gray-50 shadow-header select-none">
+  <nav class="flex justify-between max-w-screen-xl mx-auto">
+    <div class="mr-4">
+      <a class="flex items-center h-18 px-4" href="https://smolka.dev/">
+        <div class="h-8">
+          <svg class="h-full" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 92 16" shape-rendering="crispEdges">
+  <path stroke="#000000" d="M4 0h2M11 0h2M3 1h1M6 1h1M10 1h1M13 1h1M2 2h1M6 2h1M9 2h1M13 2h1M2 3h1M7 3h1M9 3h1M14 3h1M22 3h9M34 3h9M46 3h9M58 3h6M70 3h9M82 3h9M1 4h1M8 4h1M14 4h1M22 4h1M30 4h2M34 4h1M39 4h1M42 4h2M46 4h1M54 4h2M58 4h1M63 4h1M70 4h1M75 4h1M78 4h2M82 4h1M90 4h2M1 5h1M9 5h2M14 5h1M22 5h1M31 5h1M34 5h1M39 5h1M43 5h1M46 5h1M55 5h1M58 5h1M63 5h1M70 5h1M75 5h1M79 5h1M82 5h1M91 5h1M0 6h1M11 6h2M15 6h1M22 6h1M31 6h1M34 6h1M39 6h1M43 6h1M46 6h1M55 6h1M58 6h1M63 6h1M70 6h1M75 6h1M79 6h1M82 6h1M91 6h1M0 7h2M13 7h3M22 7h1M31 7h1M34 7h1M39 7h1M43 7h1M46 7h1M55 7h1M58 7h1M63 7h1M70 7h1M75 7h1M79 7h1M82 7h1M91 7h1M0 8h1M2 8h2M8 8h2M13 8h1M15 8h1M22 8h1M28 8h4M34 8h1M39 8h1M43 8h1M46 8h1M51 8h1M55 8h1M58 8h1M63 8h1M70 8h1M75 8h1M79 8h1M82 8h1M87 8h1M91 8h1M0 9h1M4 9h1M6 9h2M10 9h1M12 9h1M15 9h1M22 9h1M31 9h1M34 9h1M39 9h1M43 9h1M46 9h1M51 9h1M55 9h1M58 9h1M63 9h5M70 9h1M78 9h2M82 9h1M91 9h1M0 10h1M5 10h1M11 10h1M15 10h1M22 10h6M31 10h1M34 10h1M43 10h1M46 10h1M51 10h1M55 10h1M58 10h1M63 10h1M67 10h1M70 10h1M75 10h1M79 10h1M82 10h1M87 10h1M91 10h1M1 11h1M14 11h1M22 11h1M31 11h1M34 11h1M38 11h1M40 11h1M43 11h1M46 11h1M55 11h1M58 11h1M67 11h1M70 11h1M75 11h1M79 11h1M82 11h1M87 11h1M91 11h1M1 12h1M14 12h1M22 12h10M34 12h10M46 12h10M58 12h10M70 12h10M82 12h10M2 13h2M12 13h2M4 14h2M10 14h2M6 15h4"></path>
+  <path stroke="#26C6DA" d="M4 1h2M11 1h2M3 2h3M10 2h3M3 3h1M5 3h2M10 3h1M12 3h2M2 4h2M6 4h2M9 4h2M13 4h1M2 5h1M7 5h2M13 5h1M1 6h2M8 6h3M13 6h2M2 7h1M10 7h3M12 8h1"></path>
+  <path stroke="#3CCCDE" d="M4 3h1M11 3h1M4 4h2M11 4h2M3 5h4M11 5h2M3 6h1M6 6h2M3 7h1M7 7h3M10 8h2M11 9h1"></path>
+  <path stroke="#FAFAFA" d="M23 4h7M35 4h4M40 4h2M47 4h7M59 4h4M71 4h4M76 4h2M83 4h7M23 5h8M35 5h4M40 5h3M47 5h8M59 5h4M71 5h4M76 5h3M83 5h8M23 6h8M35 6h4M40 6h3M47 6h8M59 6h4M71 6h4M76 6h3M83 6h8M23 7h8M35 7h4M40 7h3M47 7h8M59 7h4M71 7h4M76 7h3M83 7h8M23 8h5M35 8h4M40 8h3M47 8h4M52 8h3M59 8h4M71 8h4M76 8h3M83 8h4M88 8h3M23 9h8M35 9h4M40 9h3M47 9h4M52 9h3M59 9h4M71 9h7M83 9h8M28 10h3M35 10h8M47 10h4M52 10h3M59 10h4M64 10h3M71 10h4M76 10h3M83 10h4M88 10h3M23 11h8M35 11h3M39 11h1M41 11h2M47 11h8M59 11h8M71 11h4M76 11h3M83 11h4M88 11h3"></path>
+  <path stroke="#51D1E2" d="M4 6h2M4 7h3M4 8h1M6 8h2"></path>
+  <path stroke="#212121" d="M1 8h1M1 9h3M1 10h4M2 11h3M2 12h3M4 13h2"></path>
+  <path stroke="#67D7E6" d="M5 8h1M5 9h1"></path>
+  <path stroke="#424242" d="M14 8h1M13 9h2M13 10h2"></path>
+  <path stroke="#323232" d="M8 9h2M8 10h3M8 11h3M9 12h2M9 13h3"></path>
+  <path stroke="#292929" d="M6 10h2M5 11h3M5 12h4M6 13h3M6 14h4"></path>
+  <path stroke="#3A3A3A" d="M12 10h1M11 11h3M11 12h3"></path>
+</svg>
+
+        </div>
+      </a>
+    </div>
+    <div class="ml-4">
+      <div class="sm:flex hidden hover:text-gray-500">
+        
+          <a class="flex items-center h-18 px-4 hover:text-gray-50" href="https://smolka.dev/about">
+            
+            <div class="relative inline-flex flex-col justify-center h-full">
+              <span>About</span>
+              <span class="absolute bottom-0 h-0 w-full bg-gray-50"></span>
+            </div>
+          </a>
+        
+          <a class="flex items-center h-18 px-4 hover:text-gray-50" href="https://smolka.dev/cycling">
+            
+            <div class="relative inline-flex flex-col justify-center h-full">
+              <span>Cycling</span>
+              <span class="absolute bottom-0 h-0 w-full bg-gray-50"></span>
+            </div>
+          </a>
+        
+          <a class="flex items-center h-18 px-4 hover:text-gray-50" href="https://smolka.dev/eggvance">
+            
+            <div class="relative inline-flex flex-col justify-center h-full">
+              <span>Eggvance</span>
+              <span class="absolute bottom-0 nav-item-animation h-1 w-full bg-gray-50"></span>
+            </div>
+          </a>
+        
+      </div>
+      <div class="flex sm:hidden">
+        <button :class="{ 'is-active': menu }" @click="menu = !menu" class="hamburger hamburger--squeeze h-18 focus:outline-none">
+          <span class="hamburger-box align-middle">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="aboslute top-0 min-h-18 w-full bg-gray-900"></div>
+<div x-cloak="" x-show="menu" class="mobile-menu block sm:hidden w-full bg-gray-900 text-gray-50 overflow-y-auto shadow-header select-none">
+  <div class="flex flex-col mb-4 hover:text-gray-500">
+    
+      <a class="flex justify-center items-center h-18 hover:text-gray-50" href="https://smolka.dev/about">About</a>
+    
+      <a class="flex justify-center items-center h-18 hover:text-gray-50" href="https://smolka.dev/cycling">Cycling</a>
+    
+      <a class="flex justify-center items-center h-18 hover:text-gray-50" href="https://smolka.dev/eggvance">Eggvance</a>
+    
+  </div>
+</div>
+<noscript class="w-full px-4 py-3 bg-gray-900 text-gray-50 text-center">
+  This site works better with JavaScript enabled (it's just ~10kb).
+</noscript>
+
+    
+  <div class="w-full px-4 py-8 sm:py-16 bg-gray-900">
+    <div class="flex flex-col text-center">
+      <span class="max-w-screen-lg mx-auto mb-2 text-gray-50 text-4xl">Progress Report #5</span>
+      <span class="max-w-screen-sm mx-auto text-gray-400">The fifth progress report of the eggvance GBA emulator.</span>
+    </div>
+  </div>
+  <div class="w-full max-w-screen-md mx-auto px-4 py-8 sm:py-16">
+    <div class="single">
+      <p>Over four months have passed since the last progress report. During that period I invested a lot of time into cleaning up the current codebase, improving performance and adding some nice features. Unfortunately, there were no notable fixes to broken games so please don't expect nice screenshots of before / after comparisons.</p>
+<h3 id="state-dependent-dispatching">
+  <a href="#state-dependent-dispatching">State Dependent Dispatching</a>
+</h3>
+<p>The first topic I want to talk about is something I call 'state dependent dispatching' (even though dispatching is probably the wrong technical term for this situation). Emulators must handle lots of hardware states simultaneously in order to function correctly. Most of them can be changed by writing to an I/O registers or even during the execution of a single instruction. Examples for such states in GBA are:</p>
+<ul>
+<li>Which mode is the processor in?</li>
+<li>Is the CPU halted until the next interrupt?</li>
+<li>Has an interrupt been requested?</li>
+<li>Are timers running?</li>
+<li>Is DMA active?</li>
+</ul>
+<p>This amounts to five invariants which need to be checked before, while or after every executed instruction. The old CPU implementation used a nested if-else chain to evaluate each state and act accordingly. This sounds quite reasonable until you realize that this is the hot path we are talking about. This is where I present to you the innermost CPU loop, the pit of hell and profilers worst nightmare (a shortened pseudo-code skeleton at least):</p>
+<pre class=" language-cpp"><code class=" language-cpp"><span class="token keyword">void</span> <span class="token class-name">ARM</span><span class="token operator">::</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>dma<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Run DMA</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>halted<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>timers<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Run timers until interrupt</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Set cycles to zero</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>interrupted<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Handle interrupt</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>thumb<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token comment">// Execute Thumb instruction</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          <span class="token comment">// Execute ARM instruction</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>timers<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Run timers</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>It looks much worse than it actually is but you get the idea. Lots of different states require lots of if-else statements. This results in code with many branches, something a modern CPU doesn't like. Emulators are known for their bad branch prediction because the branches don't tend to follow a predictable pattern. Adding more branches to each instructions just aggravates this problem.</p>
+<p>So how can we get around this massive if-else chain and transform it into something faster? Well, most of these states change rather infrequently and don't need constant re-evaluation. Therefore the easiest thing would be storing the current emulator state in a variable and then calling a dispatch function made for that specific state until it changes. This reduces the number of branches to almost zero and their runtime overhead to a minimum.</p>
+<pre class=" language-cpp"><code class=" language-cpp"><span class="token keyword">class</span> <span class="token class-name">ARM</span> <span class="token punctuation">{</span>
+  <span class="token keyword">enum</span> <span class="token class-name">State</span> <span class="token punctuation">{</span>
+    kStateThumb <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">0</span><span class="token punctuation">,</span>  <span class="token comment">// Processor mode</span>
+    kStateHalt  <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    kStateIrq   <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">2</span><span class="token punctuation">,</span>
+    kStateDma   <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">3</span><span class="token punctuation">,</span>
+    kStateTimer <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">4</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">uint</span> state<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>I will explain 'state dependent dispatching' for the processor mode. There exists a specific <code>bx</code> instruction (speak branch and exchange) which allows the processor to change its mode. If the lowest bit in the target address is equal to one, the processor changes its mode to Thumb (16-bit). Otherwise it remains in ARM mode (32-bit). The example given below changes the <code>state</code> variable when switching from ARM to Thumb mode. If we want to change back from Thumb to ARM mode we need to clear this flag again.</p>
+<pre class=" language-cpp"><code class=" language-cpp"><span class="token keyword">if</span> <span class="token punctuation">(</span>cpsr<span class="token punctuation">.</span>t <span class="token operator">=</span> addr <span class="token operator">&amp;</span> <span class="token number">0x1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Change processor state to thumb</span>
+  state <span class="token operator">|=</span> kStateThumb<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+  <span class="token comment">// No state changes</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Actions similar to this have to be done at all places which relate to states defined in the <code>State</code> enum. Once we have a functional <code>state</code> variable in place we can start thinking about writing a <code>dispatch</code> function which takes the state into consideration. The five different states require 32 different dispatch functions to be defined (in theory at least, the actual number would be lower). Here we can use C++'s templates to create an optimized dispatch function for each state case without writing more than one function (the current implementation looks like <a href="https://github.com/jsmolka/eggvance/blob/5d36e1067d15bb0d611719d8d7022de567a0488b/eggvance/src/arm/arm.cpp#L69" target="_blank" rel="noopener">this</a>).</p>
+<pre class=" language-cpp"><code class=" language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">uint</span> state<span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token class-name">ARM</span><span class="token operator">::</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>cycles <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">this</span><span class="token operator">-&gt;</span>state <span class="token operator">==</span> state<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>state <span class="token operator">&amp;</span> kStateThumb<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// Execute Thumb instruction</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token comment">// Execute ARM instruction</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>The <code>state &amp; kStateThumb</code> part of the function will be evaluated at compile time and has no runtime cost. All that's left to do is calling the correct dispatch function for the current <code>state</code>. Each <code>dispatch</code> function runs as long as the <code>state</code> remains the same and there are processor cycles to burn through.</p>
+<pre class=" language-cpp"><code class=" language-cpp"><span class="token keyword">void</span> <span class="token class-name">ARM</span><span class="token operator">::</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token keyword">int</span> cycles<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">this</span><span class="token operator">-&gt;</span>cycles <span class="token operator">+=</span> cycles<span class="token punctuation">;</span>
+
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>cycles <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>state<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">case</span> <span class="token number">0</span><span class="token operator">:</span> dispatch<span class="token operator">&lt;</span><span class="token number">0</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token keyword">case</span> <span class="token number">1</span><span class="token operator">:</span> dispatch<span class="token operator">&lt;</span><span class="token number">1</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token keyword">case</span> <span class="token number">2</span><span class="token operator">:</span> dispatch<span class="token operator">&lt;</span><span class="token number">2</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token comment">// ...</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>What would a performance post be without comparing numbers. I originally intended this one to be about multiple improvements but I decided to focus on the most important thing. GPR class removal and instruction template LUTs aren't nearly as interesting and impactful as 'state dependent dispatching' (the second one has also been discussed in a previous <a href="https://smolka.dev/eggvance/progress-3/#optimizing-instruction-execution">progress report</a>). Now take a step back and look at these wonderful results.</p>
+<div class="my-6 overflow-x-auto">
+  <table>
+<thead>
+<tr>
+<th style="text-align:center">Commit</th>
+<th>Improvement</th>
+<th>Pokémon Emerald</th>
+<th>Yoshi's Island</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><span class="font-mono"><a href="https://github.com/jsmolka/eggvance/commit/368955c02f911243aaf2b2e8dfc9ce9d849b8f93">368955c0</a></span></td>
+<td>Baseline</td>
+<td>432.1 fps</td>
+<td>455.0 fps</td>
+</tr>
+<tr>
+<td style="text-align:center"><span class="font-mono"><a href="https://github.com/jsmolka/eggvance/commit/7007ab8a2a9721cf47c437fb20d4f1e2e560fc43">7007ab8a</a></span></td>
+<td>GPR class removed</td>
+<td>460.8 fps</td>
+<td>481.7 fps</td>
+</tr>
+<tr>
+<td style="text-align:center"><span class="font-mono"><a href="https://github.com/jsmolka/eggvance/commit/fc00b845df0963aca0ddfcf4598a5672ac930d8f">fc00b845</a></span></td>
+<td>Instruction template LUTs</td>
+<td>489.4 fps</td>
+<td>511.7 fps</td>
+</tr>
+<tr>
+<td style="text-align:center"><span class="font-mono"><a href="https://github.com/jsmolka/eggvance/commit/a3a8fca2c0ee01024668d77e817e05470b4eac94">a3a8fca2</a></span></td>
+<td>Basic state dispatching</td>
+<td>522.8 fps</td>
+<td>542.1 fps</td>
+</tr>
+<tr>
+<td style="text-align:center"><span class="font-mono"><a href="https://github.com/jsmolka/eggvance/commit/326b4809b398f051807a93b2bc4e9879fef60567">326b4809</a></span></td>
+<td>Improved state dispatching</td>
+<td>556.9 fps</td>
+<td>574.4 fps</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<h3 id="efficient-bit-iteration">
+  <a href="#efficient-bit-iteration">Efficient Bit Iteration</a>
+</h3>
+<p>The block data transfer instructions of the ARM7 encode their transferred registers in a binary register list (<code>rlist</code>). Each set bit in this list represents a register which needs to be transferred during execution. Take <code>0b0111</code> for example, which will transfer registers one to three but not register four.</p>
+<p>Emulating these instructions requires iterating all bits in the <code>rlist</code> and transferring set ones. The code below shows a simple (and naive) example of doing it. In each iteration we shift the bits in the <code>rlist</code> to the right and increase the current bit index <code>x</code> by one. We do this until the <code>rlist</code> equals zero which means that there are no more bits left to transfer. Inside the loop we check if the lowest bit is set and then use the bit index to transfer the correct register.</p>
+<pre class=" language-cpp"><code class=" language-cpp"><span class="token keyword">uint</span> rlist <span class="token operator">=</span> <span class="token number">0b1010'0110'1110'1010</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">uint</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> rlist <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token operator">++</span>x<span class="token punctuation">,</span> rlist <span class="token operator">&gt;&gt;=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>rlist <span class="token operator">&amp;</span> <span class="token number">0x1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Transfer register</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>While this version is more than enough for its use case, it doesn't feel like the end-all and be-all of efficient bit iteration. It lacks in two important areas which are branch prediction and iteration count. The if-statement will cause the host CPUs branch predictor to fail half of the time because emulation date is inherently random. The high iteration count is caused by the fact that we iterate all bits instead of only the set ones which we need.</p>
+<pre class=" language-cpp"><code class=" language-cpp"><span class="token keyword">uint</span> rlist <span class="token operator">=</span> <span class="token number">0b1010'0110'1110'1010</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> rlist <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">;</span> rlist <span class="token operator">&amp;=</span> rlist <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">uint</span> x <span class="token operator">=</span> bits<span class="token operator">::</span><span class="token function">ctz</span><span class="token punctuation">(</span>rlist<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// Transfer register</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>The optimized version might be confusion to people without a deeper understanding of bit operations. It starts with the same <code>rlist</code> like the naive variant and then uses <code>ctz</code> to count the trailing zeros (the ones on the right side) which happen to be the equal to the index of the lowest set bit. <code>ctz</code> can be represented by a single processor instruction on most architectures (like <a href="https://www.felixcloutier.com/x86/bsf" target="_blank" rel="noopener">bsf</a> on x86) and is very efficient. The loop expression <code>rlist &amp;= rlist - 1</code> clears the lowest set bit after each iteration.</p>
+<p>This combination allows efficient and branchless bit iteration, at least if you ignore the loop itself. The whole thing can also be wrapped into C++ language constructs like a <a href="https://github.com/jsmolka/eggvance/blob/9cae4676ed9927064c43a68cd178d265baf7e28b/eggvance/src/base/bits.h#L168" target="_blank" rel="noopener">custom iterator</a> and a range-based for loop to make it look more appealing.</p>
+<pre class=" language-cpp"><code class=" language-cpp"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">uint</span> x <span class="token operator">:</span> bits<span class="token operator">::</span><span class="token function">iter</span><span class="token punctuation">(</span>rlist<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Transfer register</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>In the end this whole section could be titled 'premature optimization'. Implementing efficient bit iteration had a minuscule performance impact on two of many processor instructions and the overall performance impact was barely (if at all) noticable. However it was fun to think about.</p>
+<h3 id="emscripten">
+  <a href="#emscripten">Emscripten</a>
+</h3>
+<p>At some point during the last months porting the emulator to WebAssembly crossed my mind and hooked me for some days. Reading through the <a href="https://emscripten.org/index.html" target="_blank" rel="noopener">emscripten</a> documentation made me realize that there wasn't much left to do to port an SDL2 based application to WebAssembly. I had to remove some platform specific code (which is always a good thing) and add a modified <code>main</code> function. Compiling isn't much different compared to macOS and Linux which were working fine already.</p>
+<p>The included filesystem API is a nice abstraction around the fact that browsers don't have access to the filesystem without special permission by the user. It allows placing data in a buffer and then accessing it like a normal file from within the C++ code.</p>
+<pre class=" language-js"><code class=" language-js"><span class="token keyword">function</span> <span class="token function">loadFile</span><span class="token punctuation">(</span><span class="token parameter">input</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> reader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileReader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  reader<span class="token punctuation">.</span><span class="token function-variable function">onload</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Uint8Array</span><span class="token punctuation">(</span>reader<span class="token punctuation">.</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token constant">FS</span><span class="token punctuation">.</span><span class="token function">writeFile</span><span class="token punctuation">(</span><span class="token string">'rom.gba'</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  reader<span class="token punctuation">.</span><span class="token function">readAsArrayBuffer</span><span class="token punctuation">(</span>input<span class="token punctuation">.</span>files<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>All of this sounds nice until to have to figure out errors. The whole thing can be quite infuriating because debugging isn't an option and <code>emscripten</code> tends to throw cryptic error messages at you. I had to go through all commits to find the one which broke the emulator. It turned out to be the <code>std::filesystem::canonical</code> function which requires a file to exist or it throws an error.</p>
+<p>A demonstration can be found <a href="https://smolka.dev/eggvance/wasm/">here</a>.</p>
+<h3 id="improving-tests">
+  <a href="#improving-tests">Improving Tests</a>
+</h3>
+<p>The last part of this progress report is dedicated to my <a href="https://github.com/jsmolka/gba-suite" target="_blank" rel="noopener">GBA test suite</a>. I developed most of it simultaneously with the eggvance CPU to ensure correctness. The whole thing is writting is pure assembly to have the maximum control over it. This was especially important during the start where lots of instructions weren't implemented yet. At some point I move the suite into its own repository because it became its own project.</p>
+<p>Since then it resulted in some CPU edge case fixes in <a href="https://github.com/mgba-emu/mgba" target="_blank" rel="noopener">mGBA</a> and other open-source emulators. These poor developers had to work with a test suite which was meant for personal usage. It had no user interface at all and stored the number of the first failed test in a register. The only graphical things about it were a green screen on success and a red screen after failing a test. That's why I decided to add a minimal user interface.</p>
+<pre class=" language-cpp"><code class=" language-cpp"><span class="token keyword">u8</span> glpyh<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token number">0b00111100</span><span class="token punctuation">,</span>  <span class="token comment">// ⬜⬜⬛⬛⬛⬛⬜⬜</span>
+  <span class="token number">0b01100110</span><span class="token punctuation">,</span>  <span class="token comment">// ⬜⬛⬛⬜⬜⬛⬛⬜</span>
+  <span class="token number">0b01110110</span><span class="token punctuation">,</span>  <span class="token comment">// ⬜⬛⬛⬜⬛⬛⬛⬜</span>
+  <span class="token number">0b01111110</span><span class="token punctuation">,</span>  <span class="token comment">// ⬜⬛⬛⬛⬛⬛⬛⬜</span>
+  <span class="token number">0b01101110</span><span class="token punctuation">,</span>  <span class="token comment">// ⬜⬛⬛⬛⬜⬛⬛⬜</span>
+  <span class="token number">0b01100110</span><span class="token punctuation">,</span>  <span class="token comment">// ⬜⬛⬛⬜⬜⬛⬛⬜</span>
+  <span class="token number">0b00111100</span><span class="token punctuation">,</span>  <span class="token comment">// ⬜⬜⬛⬛⬛⬛⬜⬜</span>
+  <span class="token number">0b00000000</span>   <span class="token comment">// ⬜⬜⬜⬜⬜⬜⬜⬜</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>The most important problem to solve was rendering text in assembly, which turned out to be much easier than expected. First I extracted a simple font from <a href="http://www.coranac.com/tonc/text/toc.htm" target="_blank" rel="noopener">tonclib</a> where each text glyph is encoded in eight bytes like in the example shown above. Then I wrote an algorithm to render the text itself. It uses the GBAs bitmap background mode and moves each bit in the glyph data into its own byte in video memory. That's it, all text rendering functions were done in merely <a href="https://github.com/jsmolka/gba-suite/blob/b9b17ed487e47c8fbfe30570eb7917b12e606f4e/lib/text.asm" target="_blank" rel="noopener">71 lines of code</a>. These already include setting up certain registers and colors aswell as positioning the text.</p>
+<pre class=" language-armv4t"><code class=" language-armv4t">text_glyph_data:
+        <span class="token comment">; r0:   data, modified</span>
+        <span class="token comment">; r1:   pointer, modified</span>
+        <span class="token function">stmfd</span>   <span class="token keyword">sp</span>!, {<span class="token keyword">r2</span>-<span class="token keyword">r4</span>, <span class="token keyword">lr</span>}        <span class="token comment">; Function prologue</span>
+        <span class="token function">mov</span>     <span class="token keyword">r2</span>, <span class="token number">0</span>                   <span class="token comment">; Loop counter</span>
+.loop:
+        <span class="token function">and</span>     <span class="token keyword">r3</span>, <span class="token keyword">r0</span>, <span class="token number">1</span>               <span class="token comment">; First bit</span>
+        <span class="token function">lsr</span>     <span class="token keyword">r0</span>, <span class="token number">1</span>                   <span class="token comment">; Advance in data</span>
+        <span class="token function">and</span>     <span class="token keyword">r4</span>, <span class="token keyword">r0</span>, <span class="token number">1</span>               <span class="token comment">; Second bit</span>
+        <span class="token function">lsr</span>     <span class="token keyword">r0</span>, <span class="token number">1</span>                   <span class="token comment">; Advance in data</span>
+        <span class="token function">orr</span>     <span class="token keyword">r3</span>, <span class="token keyword">r4</span>, <span class="token function">ror</span> <span class="token number">24</span>          <span class="token comment">; Move second bit</span>
+        <span class="token function">strh</span>    <span class="token keyword">r3</span>, [<span class="token keyword">r1</span>], <span class="token number">2</span>             <span class="token comment">; Write data, advance pointer</span>
+        <span class="token function">add</span>     <span class="token keyword">r2</span>, <span class="token number">2</span>                   <span class="token comment">; Advance loop counter</span>
+        <span class="token function">tst</span>     <span class="token keyword">r2</span>, <span class="token number">7</span>                   <span class="token comment">; Check for glyph line end</span>
+        <span class="token function">addeq</span>   <span class="token keyword">r1</span>, <span class="token number">232</span>                 <span class="token comment">; Move to next line</span>
+        <span class="token function">cmp</span>     <span class="token keyword">r2</span>, <span class="token number">32</span>                  <span class="token comment">; Check for loop end</span>
+        <span class="token function">bne</span>     .loop                   <span class="token comment">; Loop or exit</span>
+        <span class="token function">ldmfd</span>   <span class="token keyword">sp</span>!, {<span class="token keyword">r2</span>-<span class="token keyword">r4</span>, <span class="token keyword">pc</span>}        <span class="token comment">; Function epilogue</span>
+</code></pre>
+<p>With the all text rendering functions in place I was able to add a simple user interface. It shows whether or not the test suite succeeded and also adds the number of the failed test if there was one. This should make it much easier for developers to use the test suite. Of course you still have to refer to the actual source code to understand what the test did but that shouldn't be a problem for most people.</p>
+<div class="flex flex-col sm:flex-row justify-center w-full my-6">
+  
+  
+  
+  
+
+  <figure class="ml-0 mt-6 sm:ml-6 sm:mt-0 first:ml-0 first:mt-0 ">
+    <a href="/static/img/eggvance/suite-passed.png" target="_blank">
+  <img class="w-full" src="/static/img/eggvance/suite-passed.png" alt="Figure 1 - Test suite passed" loading="lazy" width="482" height="352">
+</a>
+    
+      <figcaption>Figure 1 - Test suite passed</figcaption>
+    
+  </figure>
+
+
+  
+  
+  
+
+  <figure class="ml-0 mt-6 sm:ml-6 sm:mt-0 first:ml-0 first:mt-0 ">
+    <a href="/static/img/eggvance/suite-failed.png" target="_blank">
+  <img class="w-full" src="/static/img/eggvance/suite-failed.png" alt="Figure 2 - Test suite failed" loading="lazy" width="482" height="352">
+</a>
+    
+      <figcaption>Figure 2 - Test suite failed</figcaption>
+    
+  </figure>
+
+
+
+</div>
+
+<h3 id="conclusion">
+  <a href="#conclusion">Conclusion</a>
+</h3>
+<p>This whole thing took me much longer than expected. I committed the first draft of the performance table in mid-Feburary and I am finishing the conclusion in early June. Formulating text and walking other people through ideas has never been a strength of mine.</p>
+<p>Anyway, I hope to finish most of the cleanup sometime soon and then write another progress report once I'm ready to release version 0.2. I want it to be as stable and accurate as possible before I devote time to implement more advanced things like audio emulation and CPU prefetching.</p>
+
+    </div>
+    <div class="flex justify-between mt-6 pt-6 text-sm text-gray-500 border-t border-gray-300">
+      <span class="inline-flex items-center">
+        <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zm-2 2H9v2H7V5H4v4h16V5h-3v2h-2V5zm5 6H4v8h16v-8z"></path>
+        </svg>
+        <span>
+          
+            2020-06-06
+          
+        </span>
+      </span>
+      <a class="inline-flex items-center" href="https://github.com/jsmolka/jsmolka.github.io/tree/master/content/eggvance/progress-5.md" target="_blank">
+        <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M7.05 14.121L4.93 16.243l2.828 2.828L19.071 7.757 16.243 4.93 14.12 7.05l1.415 1.414L14.12 9.88l-1.414-1.415-1.414 1.415 1.414 1.414-1.414 1.414-1.414-1.414-1.415 1.414 1.415 1.414-1.415 1.415L7.05 14.12zm9.9-11.313l4.242 4.242a1 1 0 0 1 0 1.414L8.464 21.192a1 1 0 0 1-1.414 0L2.808 16.95a1 1 0 0 1 0-1.414L15.536 2.808a1 1 0 0 1 1.414 0zM14.12 18.363l1.415-1.414 2.242 2.243h1.414v-1.414l-2.242-2.243 1.414-1.414L21 16.757V21h-4.242l-2.637-2.637zM5.636 9.878L2.807 7.05a1 1 0 0 1 0-1.415l2.829-2.828a1 1 0 0 1 1.414 0L9.88 5.635 8.464 7.05 6.343 4.928 4.929 6.343l2.121 2.12-1.414 1.415z"></path>
+        </svg>
+        <span>Improve</span>
+      </a>
+    </div>
+  </div>
+
+  
+
+</body></html>

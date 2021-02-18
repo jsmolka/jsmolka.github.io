@@ -1,0 +1,270 @@
+<!DOCTYPE html><html lang="en-US"><head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Julian Smolka">
+<meta name="description" content="The first progress report of the eggvance GBA emulator.">
+<link rel="canonical" href="https://smolka.dev/eggvance/progress-1/">
+
+<link rel="preload" href="/static/font/roboto/roboto-400.woff2" as="font" type="font/woff2" crossorigin="">
+<link rel="preload" href="/static/font/roboto/roboto-700.woff2" as="font" type="font/woff2" crossorigin="">
+<link rel="preload" href="/static/font/roboto-mono/roboto-mono-400.woff2" as="font" type="font/woff2" crossorigin="">
+
+
+<link rel="stylesheet" href="https://smolka.dev/css/main.min.c8e683b5c411ba8932e72eec996baa206a0fe7f54c69e498864b10de0da64898.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#42a5f5">
+<meta name="msapplication-TileColor" content="#42a5f5">
+<meta name="theme-color" content="#212121">
+
+
+<title>Progress Report #1</title>
+
+
+
+
+  
+  <script type="text/javascript" src="https://smolka.dev/js/alpine.js" defer=""></script>
+
+
+
+  
+  <script type="text/javascript" src="https://smolka.dev/js/headroom.js" async=""></script>
+
+
+
+  </head>
+  <body x-data="{ menu: false }" :class="{ 'overflow-hidden': menu }" class="flex flex-col min-w-screen min-h-screen m-0 p-0 font-body bg-white text-gray-900">
+    <header class="fixed top-0 z-10 w-full bg-gray-900 text-gray-50 shadow-header select-none">
+  <nav class="flex justify-between max-w-screen-xl mx-auto">
+    <div class="mr-4">
+      <a class="flex items-center h-18 px-4" href="https://smolka.dev/">
+        <div class="h-8">
+          <svg class="h-full" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 92 16" shape-rendering="crispEdges">
+  <path stroke="#000000" d="M4 0h2M11 0h2M3 1h1M6 1h1M10 1h1M13 1h1M2 2h1M6 2h1M9 2h1M13 2h1M2 3h1M7 3h1M9 3h1M14 3h1M22 3h9M34 3h9M46 3h9M58 3h6M70 3h9M82 3h9M1 4h1M8 4h1M14 4h1M22 4h1M30 4h2M34 4h1M39 4h1M42 4h2M46 4h1M54 4h2M58 4h1M63 4h1M70 4h1M75 4h1M78 4h2M82 4h1M90 4h2M1 5h1M9 5h2M14 5h1M22 5h1M31 5h1M34 5h1M39 5h1M43 5h1M46 5h1M55 5h1M58 5h1M63 5h1M70 5h1M75 5h1M79 5h1M82 5h1M91 5h1M0 6h1M11 6h2M15 6h1M22 6h1M31 6h1M34 6h1M39 6h1M43 6h1M46 6h1M55 6h1M58 6h1M63 6h1M70 6h1M75 6h1M79 6h1M82 6h1M91 6h1M0 7h2M13 7h3M22 7h1M31 7h1M34 7h1M39 7h1M43 7h1M46 7h1M55 7h1M58 7h1M63 7h1M70 7h1M75 7h1M79 7h1M82 7h1M91 7h1M0 8h1M2 8h2M8 8h2M13 8h1M15 8h1M22 8h1M28 8h4M34 8h1M39 8h1M43 8h1M46 8h1M51 8h1M55 8h1M58 8h1M63 8h1M70 8h1M75 8h1M79 8h1M82 8h1M87 8h1M91 8h1M0 9h1M4 9h1M6 9h2M10 9h1M12 9h1M15 9h1M22 9h1M31 9h1M34 9h1M39 9h1M43 9h1M46 9h1M51 9h1M55 9h1M58 9h1M63 9h5M70 9h1M78 9h2M82 9h1M91 9h1M0 10h1M5 10h1M11 10h1M15 10h1M22 10h6M31 10h1M34 10h1M43 10h1M46 10h1M51 10h1M55 10h1M58 10h1M63 10h1M67 10h1M70 10h1M75 10h1M79 10h1M82 10h1M87 10h1M91 10h1M1 11h1M14 11h1M22 11h1M31 11h1M34 11h1M38 11h1M40 11h1M43 11h1M46 11h1M55 11h1M58 11h1M67 11h1M70 11h1M75 11h1M79 11h1M82 11h1M87 11h1M91 11h1M1 12h1M14 12h1M22 12h10M34 12h10M46 12h10M58 12h10M70 12h10M82 12h10M2 13h2M12 13h2M4 14h2M10 14h2M6 15h4"></path>
+  <path stroke="#26C6DA" d="M4 1h2M11 1h2M3 2h3M10 2h3M3 3h1M5 3h2M10 3h1M12 3h2M2 4h2M6 4h2M9 4h2M13 4h1M2 5h1M7 5h2M13 5h1M1 6h2M8 6h3M13 6h2M2 7h1M10 7h3M12 8h1"></path>
+  <path stroke="#3CCCDE" d="M4 3h1M11 3h1M4 4h2M11 4h2M3 5h4M11 5h2M3 6h1M6 6h2M3 7h1M7 7h3M10 8h2M11 9h1"></path>
+  <path stroke="#FAFAFA" d="M23 4h7M35 4h4M40 4h2M47 4h7M59 4h4M71 4h4M76 4h2M83 4h7M23 5h8M35 5h4M40 5h3M47 5h8M59 5h4M71 5h4M76 5h3M83 5h8M23 6h8M35 6h4M40 6h3M47 6h8M59 6h4M71 6h4M76 6h3M83 6h8M23 7h8M35 7h4M40 7h3M47 7h8M59 7h4M71 7h4M76 7h3M83 7h8M23 8h5M35 8h4M40 8h3M47 8h4M52 8h3M59 8h4M71 8h4M76 8h3M83 8h4M88 8h3M23 9h8M35 9h4M40 9h3M47 9h4M52 9h3M59 9h4M71 9h7M83 9h8M28 10h3M35 10h8M47 10h4M52 10h3M59 10h4M64 10h3M71 10h4M76 10h3M83 10h4M88 10h3M23 11h8M35 11h3M39 11h1M41 11h2M47 11h8M59 11h8M71 11h4M76 11h3M83 11h4M88 11h3"></path>
+  <path stroke="#51D1E2" d="M4 6h2M4 7h3M4 8h1M6 8h2"></path>
+  <path stroke="#212121" d="M1 8h1M1 9h3M1 10h4M2 11h3M2 12h3M4 13h2"></path>
+  <path stroke="#67D7E6" d="M5 8h1M5 9h1"></path>
+  <path stroke="#424242" d="M14 8h1M13 9h2M13 10h2"></path>
+  <path stroke="#323232" d="M8 9h2M8 10h3M8 11h3M9 12h2M9 13h3"></path>
+  <path stroke="#292929" d="M6 10h2M5 11h3M5 12h4M6 13h3M6 14h4"></path>
+  <path stroke="#3A3A3A" d="M12 10h1M11 11h3M11 12h3"></path>
+</svg>
+
+        </div>
+      </a>
+    </div>
+    <div class="ml-4">
+      <div class="sm:flex hidden hover:text-gray-500">
+        
+          <a class="flex items-center h-18 px-4 hover:text-gray-50" href="https://smolka.dev/about">
+            
+            <div class="relative inline-flex flex-col justify-center h-full">
+              <span>About</span>
+              <span class="absolute bottom-0 h-0 w-full bg-gray-50"></span>
+            </div>
+          </a>
+        
+          <a class="flex items-center h-18 px-4 hover:text-gray-50" href="https://smolka.dev/cycling">
+            
+            <div class="relative inline-flex flex-col justify-center h-full">
+              <span>Cycling</span>
+              <span class="absolute bottom-0 h-0 w-full bg-gray-50"></span>
+            </div>
+          </a>
+        
+          <a class="flex items-center h-18 px-4 hover:text-gray-50" href="https://smolka.dev/eggvance">
+            
+            <div class="relative inline-flex flex-col justify-center h-full">
+              <span>Eggvance</span>
+              <span class="absolute bottom-0 nav-item-animation h-1 w-full bg-gray-50"></span>
+            </div>
+          </a>
+        
+      </div>
+      <div class="flex sm:hidden">
+        <button :class="{ 'is-active': menu }" @click="menu = !menu" class="hamburger hamburger--squeeze h-18 focus:outline-none">
+          <span class="hamburger-box align-middle">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="aboslute top-0 min-h-18 w-full bg-gray-900"></div>
+<div x-cloak="" x-show="menu" class="mobile-menu block sm:hidden w-full bg-gray-900 text-gray-50 overflow-y-auto shadow-header select-none">
+  <div class="flex flex-col mb-4 hover:text-gray-500">
+    
+      <a class="flex justify-center items-center h-18 hover:text-gray-50" href="https://smolka.dev/about">About</a>
+    
+      <a class="flex justify-center items-center h-18 hover:text-gray-50" href="https://smolka.dev/cycling">Cycling</a>
+    
+      <a class="flex justify-center items-center h-18 hover:text-gray-50" href="https://smolka.dev/eggvance">Eggvance</a>
+    
+  </div>
+</div>
+<noscript class="w-full px-4 py-3 bg-gray-900 text-gray-50 text-center">
+  This site works better with JavaScript enabled (it's just ~10kb).
+</noscript>
+
+    
+  <div class="w-full px-4 py-8 sm:py-16 bg-gray-900">
+    <div class="flex flex-col text-center">
+      <span class="max-w-screen-lg mx-auto mb-2 text-gray-50 text-4xl">Progress Report #1</span>
+      <span class="max-w-screen-sm mx-auto text-gray-400">The first progress report of the eggvance GBA emulator.</span>
+    </div>
+  </div>
+  <div class="w-full max-w-screen-md mx-auto px-4 py-8 sm:py-16">
+    <div class="single">
+      <p>At the end of last year I finished my introduction project to C++. Since then, I read a couple of books about the language and I really started to like it. Finishing my previous project also meant looking for a new one. The idea of creating a GBA emulator originated in a C++ class where one of my fellow students asked if the emulator I was playing on was the project for the class. I said no but the idea got stuck in my head (thanks Robert).</p>
+<p>After writing a basic <a href="https://github.com/jsmolka/sandbox-cpp/tree/master/chip8" target="_blank" rel="noopener">Chip-8</a> emulator and a less than half finished <a href="https://github.com/jsmolka/egg-gb" target="_blank" rel="noopener">GB</a> emulator, I moved on to the GBA because that's what I really wanted to do. Now, exactly seven months after the initial commit, I feel like the emulator is in a state that is worth talking about.</p>
+<div class="flex flex-col sm:flex-row justify-center w-full my-6">
+  
+  
+  
+  
+
+  <figure class="ml-0 mt-6 sm:ml-6 sm:mt-0 first:ml-0 first:mt-0 ">
+    <a href="/static/img/eggvance/emerald-title-screen.png" target="_blank">
+  <img class="w-full" src="/static/img/eggvance/emerald-title-screen.png" alt="Figure 1 - Pokemon Emerald" loading="lazy" width="482" height="352">
+</a>
+    
+      <figcaption>Figure 1 - Pokemon Emerald</figcaption>
+    
+  </figure>
+
+
+  
+  
+  
+
+  <figure class="ml-0 mt-6 sm:ml-6 sm:mt-0 first:ml-0 first:mt-0 ">
+    <a href="/static/img/eggvance/yoshi-title-screen.png" target="_blank">
+  <img class="w-full" src="/static/img/eggvance/yoshi-title-screen.png" alt="Figure 2 - Yoshi's Island" loading="lazy" width="482" height="352">
+</a>
+    
+      <figcaption>Figure 2 - Yoshi's Island</figcaption>
+    
+  </figure>
+
+
+
+</div>
+
+<h3 id="early-steps">
+  <a href="#early-steps">Early Steps</a>
+</h3>
+<p>The first thing I did was implement the CPU, an ARM7TDMI to the precise, which took me a couple months. My main sources for this were the official ARM datasheet and <a href="https://problemkaputt.de/gbatek.htm" target="_blank" rel="noopener">GBATEK</a>. The most important thing I did during all that time was to write CPU tests which cover pretty much all common and most of the edge cases. This turned out to be a great time investment because I could rely on my CPU implementation when debugging problems related to other parts of the emulator. The code below shows a simple test for the ARM multiply instruction.</p>
+<pre class=" language-armv4t"><code class=" language-armv4t">t300:                    <span class="token comment">; test 300</span>
+    <span class="token function">mov</span>     <span class="token keyword">r0</span>, <span class="token number">4</span>        <span class="token comment">; r0 = 4</span>
+    <span class="token function">mov</span>     <span class="token keyword">r1</span>, <span class="token number">8</span>        <span class="token comment">; r1 = 8</span>
+    <span class="token function">mul</span>     <span class="token keyword">r0</span>, <span class="token keyword">r0</span>, <span class="token keyword">r1</span>   <span class="token comment">; r0 *= r1</span>
+    <span class="token function">cmp</span>     <span class="token keyword">r0</span>, <span class="token number">32</span>       <span class="token comment">; r0 == 32?</span>
+    <span class="token function">bne</span>     f300         <span class="token comment">; exit if false</span>
+    <span class="token function">beq</span>     t301         <span class="token comment">; next test if true</span>
+
+f300:
+    failed  <span class="token number">300</span>
+</code></pre>
+<p>Three months after the initial commit I had a more or less reliable CPU implementation. It was still missing some crucial things like hardware and software interrupts, but those weren’t important for the upcoming goal - implementing graphics. Understanding how they work just by going through GBATEK was near impossible due to its nature of being a reference document. As a result of that I went along TONC’s GBA programming tutorials and reverse engineered all the given examples for graphics, effects, timers, interrupts and DMA (Direct Memory Access). The figures below show examples for affine backgrounds and sprites. Both use matrix transformations to alter the scene shown on the screen.</p>
+<div class="flex flex-col sm:flex-row justify-center w-full my-6">
+  
+  
+  
+  
+
+  <figure class="ml-0 mt-6 sm:ml-6 sm:mt-0 first:ml-0 first:mt-0 ">
+    <a href="/static/img/eggvance/tonc-sbb-aff.png" target="_blank">
+  <img class="w-full" src="/static/img/eggvance/tonc-sbb-aff.png" alt="Figure 3 - Affine tiled background" loading="lazy" width="482" height="352">
+</a>
+    
+      <figcaption>Figure 3 - Affine tiled background</figcaption>
+    
+  </figure>
+
+
+  
+  
+  
+
+  <figure class="ml-0 mt-6 sm:ml-6 sm:mt-0 first:ml-0 first:mt-0 ">
+    <a href="/static/img/eggvance/tonc-obj-aff.png" target="_blank">
+  <img class="w-full" src="/static/img/eggvance/tonc-obj-aff.png" alt="Figure 4 - Affine sprite" loading="lazy" width="482" height="352">
+</a>
+    
+      <figcaption>Figure 4 - Affine sprite</figcaption>
+    
+  </figure>
+
+
+
+</div>
+
+<p>The last thing I did was clean up the memory interface. I implemented things like bus widths, memory mirroring and read / write only registers. This actually fixed some of the bugs I had and allowed me to play through Pokémon Emerald. A precondition for playing through a whole game was implementing cartridge backup types like SRAM, EEPROM and Flash. Finding out which save type to use and wrapping my head around how they all work took some time but I managed to figure it out.</p>
+<h3 id="milestones">
+  <a href="#milestones">Milestones</a>
+</h3>
+<ul>
+<li>30/01/19: Initial commit</li>
+<li>20/04/19: Passes <a href="https://github.com/Emu-Docs/Emu-Docs/tree/master/Game%20Boy%20Advance/test_roms/arm_wrestler" target="_blank" rel="noopener">armwrestler</a> tests</li>
+<li>02/05/19: Displays <a href="https://www.coranac.com/tonc/text/" target="_blank" rel="noopener">tonc</a> bitmap demos</li>
+<li>29/05/19: Displays tonc regular sprite and background demos</li>
+<li>08/06/19: Displays tonc affine sprite and background demos</li>
+<li>27/06/19: Displays tonc graphic effect demos</li>
+<li>03/07/19: Displays tonc interrupt and bios call demos</li>
+<li>11/07/19: Displays tonc mode 7 demos</li>
+<li>14/07/19: Runs Kirby - Nightmare In Dreamland</li>
+<li>16/07/19: Displays the BIOS</li>
+<li>07/08/19: Displays all tonc demos</li>
+<li>17/08/19: Runs Pokémon Emerald</li>
+</ul>
+<h3 id="some-working-games">
+  <a href="#some-working-games">Some Working Games</a>
+</h3>
+<ul>
+<li>Advance Wars</li>
+<li>Castlevania - Aria of Sorrow</li>
+<li>Mario Kart - Super Circuit</li>
+<li>Mega Man Zero</li>
+<li>Metroid Fusion</li>
+<li>Pokémon - Emerald</li>
+<li>Pokémon Mystery Dungeon - Red Rescue Team</li>
+<li>Super Mario Advance 3 - Yoshi's Island</li>
+<li>The Legend of Zelda - A Link To The Past &amp; Four Swords</li>
+</ul>
+<h3 id="conclusion">
+  <a href="#conclusion">Conclusion</a>
+</h3>
+<p>All of this progress sounds great. Sadly you can't hear it because there is no audio implementation just yet. That's the last thing I'll do. Before that I need to improve accuracy and performance (it's not bad but I could be better) of the emulator. This report will serve as a baseline and I'll make more of those with specific progress information in the future.</p>
+
+    </div>
+    <div class="flex justify-between mt-6 pt-6 text-sm text-gray-500 border-t border-gray-300">
+      <span class="inline-flex items-center">
+        <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zm-2 2H9v2H7V5H4v4h16V5h-3v2h-2V5zm5 6H4v8h16v-8z"></path>
+        </svg>
+        <span>
+          
+            2019-08-31
+          
+        </span>
+      </span>
+      <a class="inline-flex items-center" href="https://github.com/jsmolka/jsmolka.github.io/tree/master/content/eggvance/progress-1.md" target="_blank">
+        <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M7.05 14.121L4.93 16.243l2.828 2.828L19.071 7.757 16.243 4.93 14.12 7.05l1.415 1.414L14.12 9.88l-1.414-1.415-1.414 1.415 1.414 1.414-1.414 1.414-1.414-1.414-1.415 1.414 1.415 1.414-1.415 1.415L7.05 14.12zm9.9-11.313l4.242 4.242a1 1 0 0 1 0 1.414L8.464 21.192a1 1 0 0 1-1.414 0L2.808 16.95a1 1 0 0 1 0-1.414L15.536 2.808a1 1 0 0 1 1.414 0zM14.12 18.363l1.415-1.414 2.242 2.243h1.414v-1.414l-2.242-2.243 1.414-1.414L21 16.757V21h-4.242l-2.637-2.637zM5.636 9.878L2.807 7.05a1 1 0 0 1 0-1.415l2.829-2.828a1 1 0 0 1 1.414 0L9.88 5.635 8.464 7.05 6.343 4.928 4.929 6.343l2.121 2.12-1.414 1.415z"></path>
+        </svg>
+        <span>Improve</span>
+      </a>
+    </div>
+  </div>
+
+  
+
+</body></html>
