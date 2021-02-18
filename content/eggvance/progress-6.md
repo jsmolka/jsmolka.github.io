@@ -112,7 +112,7 @@ Receiving a command byte looks like this:
 
 - Wait for a rising SCK edge
 - Read SIO bit
-- Repeat 1 and 2 until a byte has been transferred
+- Repeat until a byte has been transferred
 
 Combining these two flows allows us to implement a functioning RTC. The documentation in GBATEK can be quite confusing in that regard because it first describes the NDS RTC and then the differences to GBA one. Once everything has been put into place, I was able to grow berries in the Pokémon Emerald.
 

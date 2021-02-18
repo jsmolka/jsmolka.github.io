@@ -8,7 +8,7 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
 
 [params]
   description     = "Mediocre posts about emulation and micro optimizations."
-  contentUrl      = "https://github.com/jsmolka/jsmolka.github.io/tree/source/content"
+  contentUrl      = "https://github.com/jsmolka/jsmolka.github.io/tree/master/content"
   birthDate       = "1998-05-11"
   dateform        = "Jan 2, 2006"
   dateformShort   = "Jan 2"
